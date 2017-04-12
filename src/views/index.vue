@@ -1,22 +1,24 @@
 <template>
   <div class="wrap">
-    <h1>{{msg}}</h1>
+    <h1>
+      {{msg}}
+    </h1>
   </div>
 </template>
 <script>
-  export default {
-    data(){
+  export default{
+    data () {
       return {
-        msg: "首页"
+        msg: process.env.NODE_ENV
       }
     }
   }
 </script>
 <style lang="sass" scoped>
-.wrap{
-  h1{
-    font-size: 10px;
+@import '../css/index.css';
+  .wrap{
+    h1{
+      font-size: 10px;
+    }
   }
-}
-
 </style>
