@@ -1,5 +1,5 @@
 # 简介
-一个vue+webpack+eslint框架
+一个vue2.0+ webpack2.0+ eslint框架
 
 # 安装
 npm install
@@ -20,6 +20,7 @@ npm run build
 * src 里面就是项目的源文件
 * webpack.config.js webpack配置文件
 * .eslintrc.js ESLINT配置文件
+* postcss.config.js postcss配置文件 配置自动补全css前缀
 
 # 源码文件src详解
 * views vue模板存放文件夹
@@ -28,4 +29,3 @@ npm run build
 * router 路由配置文件
 * components 组件存放文件夹
 * sass sass文件存放文件夹
-* css css文件存放文件夹

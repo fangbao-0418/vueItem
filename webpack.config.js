@@ -75,7 +75,17 @@ module.exports = {
           loaders: {
             sass: ExtractTextPlugin.extract({
               fallback: 'vue-style-loader',
-              use: ['css-loader','sass-loader'],
+              use: [
+                {
+                  loader:'css-loader'
+                },
+                {
+                  loader:'sass-loader',
+                  options: {
+                    indentedSyntax: true
+                  }
+                }
+              ],
             })
           }
         }
@@ -94,7 +104,7 @@ module.exports = {
             'css-loader',
             'postcss-loader',
             {
-              loader: 'sass-loader?indentedSyntax',
+              loader: 'sass-loader',
               options: {
                 indentedSyntax: true
               }
@@ -107,7 +117,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: '/static/imgs/[name].[hash:7].[ext]'
+          name: isPro ? '/static/imgs/[name].[hash:7].[ext]' : '[name].[hash:7].[ext]'
         }
       },
       {
@@ -115,7 +125,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: '/static/fonts/[name].[hash:7].[ext]'
+          name: isPro ? '/static/fonts/[name].[hash:7].[ext]' : '[name].[hash:7].[ext]'
         }
       }
 		]
@@ -143,5 +153,5 @@ module.exports = {
   	}
 	},
 	plugins: plugins,
-	devtool: isPro ? false : '#cheap-module-eval-source-map'
+	devtool: isPro ? '#source-map' : '#cheap-module-eval-source-map'
 }
