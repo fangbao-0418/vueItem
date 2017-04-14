@@ -1,0 +1,36 @@
+html
+	user-select: none
+@keyframes toBig
+	0%
+		transform: rotateY(0deg) scale(1) translateY(0px)
+	50%
+		transform: rotateY(0deg) scale(1) translateY(-80px)
+	100%
+		transform: rotateY(0deg) scale(1) translateY(0px)
+.box
+	width: 200px
+	height: 200px
+	background: #efefef url('../imgs/ic_p9_xz_jnz.png') no-repeat
+	background-size: auto 100%
+	img
+		display: none
+.wrap
+	position: absolute
+	left: 0
+	right: 0
+	top: 0
+	bottom: 0
+	margin: auto
+	border: 1px solid #ccc
+	border-radius: 30px
+	animation: toBig 4s ease-out infinite
+	width: 100px
+	height: 30px
+	line-height: 30px
+	background: #efefef
+	h1
+		padding: 0
+		margin: 0
+		text-align: center
+		font-size: 10px
+		transform: perspective(1000) scale(1.2)

@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "set NODE_ENV=development && node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --inline --progress",
+    "start": "set NODE_ENV=development && node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --inline --progress --watch --colors",
     "dev-help": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --help",
     "lint": "eslint --color --ext .js,.vue src",
-    "build": "rimraf dist && set NODE_ENV=production &&webpack --color"
+    "build": "rimraf dist && set NODE_ENV=production &&webpack --progress --colors"
   },
   "author": "fangbao",
   "license": "ISC",
   "devDependencies": {
+    "autoprefixer": "^6.7.7",
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.2.1",
     "babel-loader": "^6.4.1",
@@ -28,10 +29,14 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.1",
     "html-webpack-plugin": "^2.28.0",
+    "optimize-css-assets-webpack-plugin": "^1.3.0",
+    "postcss-loader": "^1.3.3",
     "rimraf": "^2.6.1",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.14.0",
+    "url-loader": "^0.5.8",
     "vue-loader": "^11.3.4",
     "vue-style-loader": "^2.0.5",
     "vue-template-compiler": "^2.2.6",

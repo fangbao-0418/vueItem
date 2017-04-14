@@ -1,9 +1,14 @@
 <template>
+<div class="container">
   <div class="wrap">
     <h1>
       {{msg}}
     </h1>
   </div>
+  <div class="box">
+    <img src="../imgs/ic_p6_hb.png" />
+  </div>
+</div>
 </template>
 <script>
   export default{
@@ -15,10 +20,7 @@
   }
 </script>
 <style lang="sass" scoped>
-@import '../css/index.css';
   .wrap{
-    h1{
-      font-size: 10px;
-    }
+
   }
 </style>
