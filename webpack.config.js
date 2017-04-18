@@ -134,17 +134,18 @@ module.exports = {
 		contentBase: "build",
 		//热替换的区别就在于，当前端代码变动时，无需刷新整个页面，只把变化的部分替换掉。
 		//自动刷新整个页面刷新
-		inline:true,
+		inline: true,
 		//stats(string or object) errors-only|minimal|none|normal|verbose(输出所有)
 		stats:{
 			//context: "./src/",
 			//assets: true,
-			colors:true,
-			errors:true
+			colors: true,
+			errors: true
 		},
 		//启用gzip压缩一切服务:
 		//compress: true,
-		host:"0.0.0.0",
+		host: "0.0.0.0",
+    port: "3001"
 	},
 	resolve: {
 		extensions: ['.vue','.js','.css','.sass'],
