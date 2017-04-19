@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routerConfig from './router' // 路由配置文件
+import './sass/normalize'
 import './sass/index'
-import Jsonrpc from './util/jsonrpc.js'
+import './util/reset'
+import Jsonrpc from './util/jsonrpc'
 console.log(Jsonrpc)
 Vue.use(Jsonrpc)
 Vue.use(VueRouter)

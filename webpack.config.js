@@ -148,7 +148,7 @@ module.exports = {
     port: "3001"
 	},
 	resolve: {
-		extensions: ['.vue','.js','.css','.sass'],
+		extensions: ['.vue','.js','.css','.sass','.scss'],
 		alias: {
     	'vue$': 'vue/dist/vue.esm.js',
   	}
