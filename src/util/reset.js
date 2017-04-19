@@ -9,7 +9,7 @@
     // if(clientWidth >= 750){
     //   clientWidth=640;
     // }
-    docEl.style.fontSize = 20 * (clientWidth / 750) + 'px'
+    docEl.style.fontSize = 100 * (clientWidth / 750) + 'px'
     // console.log("1+   "+docEl.style.fontSize);
   }
   if (!doc.addEventListener) return
