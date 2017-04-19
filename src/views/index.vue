@@ -1,18 +1,6 @@
 <template>
-<div class="container">
-    <!--
-  <div class="wrap">
-    <h1>
-      {{msg}}
-    </h1>
-  </div>
-  <div class="box">
-    <img src="../imgs/ic_p6_hb.png" />
-  </div>
-  -->
-    <div class="message" contentEditable="true" ref="profile">
-    </div>
-    <div class="btn" @click="sub">提交</div>
+<div class="view">
+
 </div>
 </template>
 <script>
