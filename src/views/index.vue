@@ -1,6 +1,15 @@
 <template>
 <div class="view">
-
+  <div class="user">
+    <div class="user-avatar">
+      <img src="" />
+    </div>
+    <p class="user-nick">方宝</p>
+    <div class="user-remind">
+      <p>还有99999元体验金未领取 |</p>
+      <span>去领取</span>
+    </div>
+  </div>
 </div>
 </template>
 <script>
@@ -40,6 +49,12 @@ export default {
 }
 </script>
 <style lang="sass" scoped>
-.wrap
-  width: 100px
+.user
+  width: 100%
+  height: 12rem
+  .user-nick
+    background-color: red
+    font-size: 1.4rem
+    height: 2rem
+    line-height: 2rem
 </style>

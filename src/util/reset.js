@@ -4,6 +4,7 @@
   var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize'
   var recalc = function () {
     var clientWidth = docEl.clientWidth
+    console.log(clientWidth)
     if (!clientWidth) return
     // if(clientWidth >= 750){
     //   clientWidth=640;
