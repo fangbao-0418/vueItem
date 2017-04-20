@@ -1,16 +1,14 @@
 <template>
 <div class="view">
-
+  <user-briefly-show></user-briefly-show>
 </div>
 </template>
 <script>
-import axios from 'axios'
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+import userBrieflyShow from '../components/user-briefly-show'
 export default {
   data () {
     return {
-      msg: process.env.NODE_ENV,
-      commentData: '222'
+      msg: process.env.NODE_ENV
     }
   },
   created () {
@@ -31,6 +29,9 @@ export default {
       console.log(res1, res2)
     })
   },
+  components: {
+    userBrieflyShow
+  },
   methods: {
     sub () {
       console.log(this.$refs.profile.innerText)
@@ -40,6 +41,5 @@ export default {
 }
 </script>
 <style lang="sass" scoped>
-.wrap
-  width: 100px
+
 </style>
