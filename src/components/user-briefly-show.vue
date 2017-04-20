@@ -8,7 +8,7 @@
     </div>
     <p class="user-nick">方宝</p>
     <div class="user-remind">
-      <p>还有99999元体验金未领取|</p><span>去领取</span>
+      <p>还有99999元体验金未领取 |</p><span> 去领取</span>
     </div>
   </div>
 </templatE>
@@ -39,12 +39,12 @@
       display: inline-block
       font-family: PingFangSC-Light
       font-size: .24rem
-      color: #030000
+      color: #A1AFB4
       letter-spacing: 0
     span
       font-family: PingFangSC-Light
       font-size: .24rem
-      color: #A1AFB4
+      color: #12A5E2
       letter-spacing: 0
       line-height: .33rem
 </style>

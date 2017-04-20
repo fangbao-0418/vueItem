@@ -1,14 +1,20 @@
 <template>
 <div class="view">
+  <wlb-header></wlb-header>
   <user-briefly-show></user-briefly-show>
+  <div class="container mt-20">
+    <wlb-tab-container></wlb-tab-container>
+  </div>
 </div>
 </template>
 <script>
-import userBrieflyShow from '../components/user-briefly-show'
+import { UserBrieflyShow, WlbHeader, WlbTabContainer } from '../components'
+import { TabContainer, TabContainerItem } from 'mint-ui'
 export default {
   data () {
     return {
-      msg: process.env.NODE_ENV
+      msg: process.env.NODE_ENV,
+      active: 'tab-container1'
     }
   },
   created () {
@@ -30,7 +36,11 @@ export default {
     })
   },
   components: {
-    userBrieflyShow
+    WlbHeader,
+    UserBrieflyShow,
+    WlbTabContainer,
+    TabContainer,
+    TabContainerItem
   },
   methods: {
     sub () {

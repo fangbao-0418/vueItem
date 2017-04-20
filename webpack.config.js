@@ -2,10 +2,11 @@ var webpack = require('webpack');
 var path = require('path');// NodeJS中的Path对象，用于处理目录的对象。
 var HtmlWebpackPlugin = require('html-webpack-plugin');//html模板插入代码。
 var ExtractTextPlugin = require("extract-text-webpack-plugin");//将组件中的样式提取出来。
-var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 function resolve (dir) {
-  return path.resolve(__dirname, dir)
+  return path.resolve(__dirname, dir);
 }
+
 var isPro = process.env.NODE_ENV.trim() === 'production';
 
 var plugins = [
@@ -66,7 +67,8 @@ module.exports = {
         test: /\.(js|vue)$/,
         use: 'eslint-loader',
         enforce: 'pre', // 在babel-loader对源码进行编译前进行lint的检查
-        include: [resolve('src')]
+        include: [resolve('src')],
+        exclude: [/(node_modules)/]
       },
 			{
         test: /\.vue$/,
@@ -113,11 +115,20 @@ module.exports = {
         })
       },
       {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader'
+          ]
+        })
+      },
+      {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: isPro ? '/static/imgs/[name].[hash:7].[ext]' : '[name].[hash:7].[ext]'
+          name: isPro ? './static/imgs/[name].[hash:7].[ext]' : '[name].[hash:7].[ext]'
         }
       },
       {
@@ -125,7 +136,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: isPro ? '/static/fonts/[name].[hash:7].[ext]' : '[name].[hash:7].[ext]'
+          name: isPro ? './static/fonts/[name].[hash:7].[ext]' : '[name].[hash:7].[ext]'
         }
       }
 		]
