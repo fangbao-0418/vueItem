@@ -1,28 +1,20 @@
 <template>
-<div class="container">
-    <!--
-  <div class="wrap">
-    <h1>
-      {{msg}}
-    </h1>
+<div class="view">
+  <wlb-header></wlb-header>
+  <user-briefly-show></user-briefly-show>
+  <div class="container mt-20">
+    <wlb-tab-container></wlb-tab-container>
   </div>
-  <div class="box">
-    <img src="../imgs/ic_p6_hb.png" />
-  </div>
-  -->
-    <div class="message" contentEditable="true" ref="profile">
-    </div>
-    <div class="btn" @click="sub">提交</div>
 </div>
 </template>
 <script>
-import axios from 'axios'
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+import { UserBrieflyShow, WlbHeader, WlbTabContainer } from '../components'
+import { TabContainer, TabContainerItem } from 'mint-ui'
 export default {
   data () {
     return {
       msg: process.env.NODE_ENV,
-      commentData: '222'
+      active: 'tab-container1'
     }
   },
   created () {
@@ -43,6 +35,13 @@ export default {
       console.log(res1, res2)
     })
   },
+  components: {
+    WlbHeader,
+    UserBrieflyShow,
+    WlbTabContainer,
+    TabContainer,
+    TabContainerItem
+  },
   methods: {
     sub () {
       console.log(this.$refs.profile.innerText)
@@ -52,6 +51,5 @@ export default {
 }
 </script>
 <style lang="sass" scoped>
-.wrap
-  width: 100px
+
 </style>
