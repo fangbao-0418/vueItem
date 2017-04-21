@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routerConfig from './router' // 路由配置文件
 import './sass/app'
+import 'mint-ui/lib/style'
 import './util/reset'
 import Jsonrpc from './util/jsonrpc'
 console.log(Jsonrpc)
