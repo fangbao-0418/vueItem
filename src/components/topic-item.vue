@@ -16,7 +16,7 @@
         </p>
       </div>
       <div class="topic-foot mt-30">
-        <span class="topic-show-more">查看更多评论</span>
+        <router-link :to="{name: 'topicDetail', params: {id: 1}}" class="topic-show-more" tag="span">查看更多评论</router-link>
         <p class="fr">
           <span class="topic-hits">查看(18)</span>
           <span class="topic-comment-num">评论(28)</span>

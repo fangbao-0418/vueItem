@@ -1,12 +1,25 @@
 <template>
   <div class="nav-bar bg-color-white">
     <ul>
-      <li class="active"><span>聊点闲话</span><i class="line"></i></li>
-      <li class=""><span>又问有答</span><i class="line"></i></li>
-      <li><span>网利活动</span></li>
+      <li v-for="(item, index) in navBarOptions" :class="{active: item.checked}" @click="checked(index)"><span>{{item.title}}</span><i class="line"></i></li>
     </ul>
   </div>
 </template>
+<script>
+  export default {
+    props: {
+      navBarOptions: {
+        type: Array,
+        required: true
+      }
+    },
+    methods: {
+      checked (index) {
+        alert(index)
+      }
+    }
+  }
+</script>
 <style media="screen" lang="sass" scope>
 .nav-bar
   width: 100%

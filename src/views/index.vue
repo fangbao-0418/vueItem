@@ -3,18 +3,29 @@
   <wlb-header></wlb-header>
   <user-briefly-show></user-briefly-show>
   <div class="container mt-20">
-    <wlb-tab-container></wlb-tab-container>
+    <wlb-tab-container :initial-nav-bar-options="initailNavBarOptions" initial-active="tab-container1">
+      <tab-container-item id="tab-container1">
+        <topic-item></topic-item>
+        <topic-item></topic-item>
+        <topic-item></topic-item>
+      </tab-container-item>
+      <tab-container-item id="tab-container2">
+        <topic-item></topic-item>
+      </tab-container-item>
+      <tab-container-item id="tab-container3">
+        <topic-item></topic-item>
+      </tab-container-item>
+    </wlb-tab-container>
   </div>
 </div>
 </template>
 <script>
-import { UserBrieflyShow, WlbHeader, WlbTabContainer } from '../components'
-import { TabContainer, TabContainerItem } from 'mint-ui'
+import { UserBrieflyShow, WlbHeader, WlbTabContainer, TopicItem } from '../components'
+import { TabContainerItem } from 'mint-ui'
 export default {
   data () {
     return {
-      msg: process.env.NODE_ENV,
-      active: 'tab-container1'
+      initailNavBarOptions: [{title: '聊点闲话', checked: true}, {title: '有问有答', checked: false}, {title: '网利活动', checked: false}]
     }
   },
   created () {
@@ -39,8 +50,8 @@ export default {
     WlbHeader,
     UserBrieflyShow,
     WlbTabContainer,
-    TabContainer,
-    TabContainerItem
+    TabContainerItem,
+    TopicItem
   },
   methods: {
     sub () {
