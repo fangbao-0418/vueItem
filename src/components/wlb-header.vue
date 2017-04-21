@@ -14,7 +14,7 @@
 </template>
 <style media="screen" lang="sass" scoped>
 .box
-  margin-bottom: .96rem
+  margin-top: .96rem
   .header
     position: fixed
     z-index: 999
