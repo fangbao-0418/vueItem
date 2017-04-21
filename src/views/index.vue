@@ -1,6 +1,8 @@
 <template>
 <div class="view">
-  <wlb-header></wlb-header>
+  <wlb-header>
+    <span slot="title">网利社区</span>
+  </wlb-header>
   <user-briefly-show></user-briefly-show>
   <div class="container mt-20">
     <wlb-tab-container :initial-nav-bar-options="initailNavBarOptions" initial-active="tab-container1">

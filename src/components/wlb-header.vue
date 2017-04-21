@@ -5,16 +5,27 @@
 <div class="box">
   <div class="header">
     <div class="header-button">
-      <div class="goback"></div>
+      <div class="goback" @click="goback"></div>
     </div>
-    <div class="header-title">网利社区</div>
+    <div class="header-title">
+      <slot name="title"></slot>
+    </div>
     <div class="header-button"></div>
   </div>
 </div>
 </template>
+<script type="text/javascript">
+  export default {
+    methods: {
+      goback () {
+        this.$router.go(-1)
+      }
+    }
+  }
+</script>
 <style media="screen" lang="sass" scoped>
 .box
-  margin-top: .96rem
+  height: .96rem
   .header
     position: fixed
     z-index: 999
