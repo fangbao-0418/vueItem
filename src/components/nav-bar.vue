@@ -6,6 +6,7 @@
   </div>
 </template>
 <script>
+  import bus from '../bus'
   export default {
     props: {
       navBarOptions: {
@@ -15,7 +16,7 @@
     },
     methods: {
       checked (index) {
-        alert(index)
+        bus.$emit('navbar-id-selected', index)
       }
     }
   }

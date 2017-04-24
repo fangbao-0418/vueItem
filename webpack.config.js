@@ -156,7 +156,7 @@ module.exports = {
 		//启用gzip压缩一切服务:
 		//compress: true,
 		host: "0.0.0.0",
-    port: "3001"
+    port: "3002"
 	},
 	resolve: {
 		extensions: ['.vue','.js','.css','.sass','.scss'],

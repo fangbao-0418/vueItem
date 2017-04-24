@@ -2,12 +2,13 @@
 <template>
   <div class="tab-container">
     <nav-bar :navBarOptions="navBarOptions"></nav-bar>
-    <tab-container v-model="active" :swipeable="true" class="mt-20 bg-color-white" ref="tab-container">
+    <tab-container v-model="active" :swipeable="swipeable" class="mt-20 bg-color-white" ref="tab-container">
       <slot></slot>
     </tab-container>
   </div>
 </template>
 <script>
+  import bus from '../bus'
   import Index from '../components'
   import NavBar from './nav-bar'
   import TopicItem from './topic-item'
@@ -26,14 +27,19 @@
     },
     data () {
       return {
+        swipeable: true,
         active: this.initialActive,
         navBarOptions: this.initialNavBarOptions
       }
     },
     computed: {
     },
+    created () {
+      bus.$on('navbar-id-selected', (id) => {
+        this.changeSelected(id)
+      })
+    },
     mounted () {
-      // console.log(this.active)
     },
     watch: {
       active (val) {
@@ -45,6 +51,12 @@
           }
         }
         // console.log(val)
+      }
+    },
+    methods: {
+      changeSelected (index) {
+        var nodes = this.$refs['tab-container'].$children
+        this.active = nodes[index].id
       }
     },
     components: {

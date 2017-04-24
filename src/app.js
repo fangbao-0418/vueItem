@@ -4,7 +4,9 @@ import routerConfig from './router' // 路由配置文件
 import './sass/app'
 import 'mint-ui/lib/style'
 import './util/reset'
+import util from './util'
 import Jsonrpc from './util/jsonrpc'
+Vue.use(util)
 console.log(Jsonrpc)
 Vue.use(Jsonrpc)
 Vue.use(VueRouter)
