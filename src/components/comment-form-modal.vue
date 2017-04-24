@@ -40,14 +40,16 @@
   }
 </script>
 <style lang="sass" scoped>
+.fade-enter-active
+  transition: all .3s ease
+.fade-leave-active
+  transition: all .3s ease
 .fade-enter
   transform: translateY(4.4rem)
 .fade-leave-active
   transform: translateY(4.4rem)
 .fade-leave
   transform: translateY(0)
-.fade-enter-active, .fade-leave-active
-  transition: all .3s ease
 .view
   // width: 100%
   // height: 100%
