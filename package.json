@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "axios": "^0.16.1",
+    "jquery": "^3.2.1",
     "mint-ui": "^2.2.4",
     "vue": "^2.2.6",
     "vue-router": "^2.4.0"

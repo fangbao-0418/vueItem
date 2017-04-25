@@ -14,6 +14,7 @@
         required: true
       }
     },
+    mounted () {},
     methods: {
       checked (index) {
         bus.$emit('navbar-id-selected', index)

@@ -19,10 +19,11 @@
       </tab-container-item>
     </wlb-tab-container>
   </div>
+  <public-comment-icon></public-comment-icon>
 </div>
 </template>
 <script>
-import { UserBrieflyShow, WlbHeader, WlbTabContainer, TopicItem } from '../components'
+import { UserBrieflyShow, WlbHeader, WlbTabContainer, TopicItem, PublicCommentIcon } from '../components'
 import { TabContainerItem } from 'mint-ui'
 export default {
   data () {
@@ -53,6 +54,7 @@ export default {
     UserBrieflyShow,
     WlbTabContainer,
     TabContainerItem,
+    PublicCommentIcon,
     TopicItem
   },
   methods: {

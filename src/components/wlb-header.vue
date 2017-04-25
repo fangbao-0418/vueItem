@@ -2,20 +2,44 @@
  * [头部]
  */
 <template>
-<div class="box">
-  <div class="header">
-    <div class="header-button">
-      <div class="goback" @click="goback"></div>
+<div>
+  <div class="box">
+    <div class="header">
+      <div class="header-button">
+        <div class="goback" @click="goback"></div>
+      </div>
+      <div class="header-title">
+        <slot name="title"></slot>
+      </div>
+      <div class="header-button"></div>
     </div>
-    <div class="header-title">
-      <slot name="title"></slot>
-    </div>
-    <div class="header-button"></div>
+  </div>
+  <div class="float-block">
+    <to-top-icon :show="toTopIconShowState"></to-top-icon>
   </div>
 </div>
 </template>
 <script type="text/javascript">
+  import ToTopIcon from './to-top-icon'
   export default {
+    data () {
+      return {
+        toTopIconShowState: false
+      }
+    },
+    mounted () {
+      window.onscroll = () => {
+        var fontSize = parseFloat(document.documentElement.style['font-size'])
+        if (document.body.scrollTop > 2.4 * fontSize) {
+          this.toTopIconShowState = true
+        } else {
+          this.toTopIconShowState = false
+        }
+      }
+    },
+    components: {
+      ToTopIcon
+    },
     methods: {
       goback () {
         this.$router.go(-1)

@@ -33,6 +33,11 @@ var plugins = [
     collapseWhitespace:true,
     // hash:true
   }),
+  new webpack.ProvidePlugin({
+    $: 'jquery',
+    jQuery: 'jquery',
+    "window.jQuery": "jquery"
+  })
 ];
 
 if(isPro){

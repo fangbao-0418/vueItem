@@ -134,8 +134,7 @@
     },
     components: {
       WlbHeader,
-      CommentFormModal,
-      show: false
+      CommentFormModal
     }
   }
 </script>
