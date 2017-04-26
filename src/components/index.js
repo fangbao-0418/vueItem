@@ -8,6 +8,7 @@ import PublicCommentIcon from './public-comment-icon'
 import ToTopIcon from './to-top-icon'
 import SectionItem from './section-item'
 import NewsItem from './news-item'
+import PostItem from './post-item'
 export {
   WlbHeader,
   UserBrieflyShow,
@@ -18,5 +19,6 @@ export {
   PublicCommentIcon,
   ToTopIcon,
   SectionItem,
-  NewsItem
+  NewsItem,
+  PostItem
 }

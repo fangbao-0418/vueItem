@@ -1,6 +1,8 @@
 <template>
   <div class="view">
-    <wlb-header></wlb-header>
+    <wlb-header>
+      <span slot="title">个人中心</span>
+    </wlb-header>
     <user-briefly-show></user-briefly-show>
     <div class="section mt-20">
       <section-item v-for="item in items" :key="item.code">

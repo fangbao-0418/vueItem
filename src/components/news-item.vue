@@ -1,47 +1,34 @@
 <template>
   <div class="news-content">
-    <div class="news-box bg-color-white mt-20">
+    <div v-if="item.type == 'normal'" class="news-box bg-color-white mt-20">
       <div class="item-title">
         {{item.name}}
         <span class="fixed-text">评论了你的帖子</span>
         {{item.title}}
       </div>
-      <div class="item-content">
-        网利宝交易额突破100亿网利宝交易额突破亿网利宝交易额突破100亿网利宝交易额突破100亿,网利宝交易额突破100亿网利宝交易额突破100亿
-      </div>
-      <div class="item-time fr">
-        2017-03-31 14:29
-      </div>
+      <div class="item-content" v-text="item.content"></div>
+      <div class="item-time fr" v-text="item.time"></div>
     </div>
-    <div class="news-box bg-color-white mt-20">
-      <div class="item-title">
-        {{item.name}}
-        <span class="fixed-text">评论了你的帖子</span>
-        {{item.title}}
+    <div v-else class="news-delete news-box bg-color-white mt-20">
+      <div class="delete-con">
+        <span>发表的评论</span>
+        <span class="delete-title">{{item.title}}</span>
+        <span>因政治敏感被管理员删除</span>
       </div>
-      <div class="item-content">
-        网利宝交易额突破100亿网利宝交易额突破亿网利宝交易额突破100亿网利宝交易额突破100亿,网利宝交易额突破100亿网利宝交易额突破100亿
-      </div>
-      <div class="item-time fr">
-        2017-03-31 14:29
-      </div>
-    </div>
-    <div class="news-delete news-box bg-color-white mt-20">
-      <span>发表的评论</span>
-      <span class="delete-title">{{item.title}}</span>
-      <span>因政治敏感被管理员删除</span>
+      <div class="item-time fr" v-text="item.time"></div>
     </div>
   </div>
 </template>
 <script>
 export default {
-  data () {
-    return {
-      item: {
-        name: 'EMBA',
-        title: '网利宝交易额突破100亿网利宝交易额突破100亿'
-      }
+  props: {
+    item: {
+      type: Object,
+      required: true
     }
+  },
+  data () {
+    return {}
   }
 }
 </script>
@@ -75,6 +62,8 @@ export default {
   .news-delete
     font-size: .3rem
     color: #666
+    .delete-con
+      overflow: hidden
     span
       float: left
     .delete-title

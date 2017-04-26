@@ -1,6 +1,8 @@
 <template>
   <div class="view">
-    <wlb-header></wlb-header>
+    <wlb-header>
+      <span slot="title">个人中心</span>
+    </wlb-header>
     <div class="edit-section">
       <section-item>
         <span class="photo-title">头像</span>

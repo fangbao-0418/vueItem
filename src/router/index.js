@@ -5,6 +5,7 @@ const TopicAdd = resolve => require(['../views/topicAdd'], resolve)
 const Person = resolve => require(['../views/person'], resolve)
 const PersonEdit = resolve => require(['../views/personEdit'], resolve)
 const PersonNews = resolve => require(['../views/personNews'], resolve)
+const PersonPost = resolve => require(['../views/personPost'], resolve)
 export default {
 // mode: 'history',
   routes: [
@@ -13,6 +14,7 @@ export default {
     {path: '/topic/detail/:id', name: 'topicDetail', component: TopicDetail},
     {path: '/person', name: 'person', component: Person},
     {path: '/person/edit', name: 'personEdit', component: PersonEdit},
-    {path: '/person/news', name: 'personNews', component: PersonNews}
+    {path: '/person/news', name: 'personNews', component: PersonNews},
+    {path: '/personPost', name: 'personPost', component: PersonPost}
   ]
 }
