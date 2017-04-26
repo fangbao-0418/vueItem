@@ -1,5 +1,9 @@
 <template>
-  <div class="topic-item">
+  <div class="topic-item bg-color-white">
+    <div class="tags">
+      <span class="tag-essence"></span>
+      <span class="tag-stick"></span>
+    </div>
     <div class="topic-avatar"><img src="../imgs/avatar_small.png" /></div>
     <div class="topic-main">
       <p class="topic-tit">理财小子</p>
@@ -29,6 +33,23 @@
 .topic-item
   padding: .3rem
   display: table
+  position: relative
+  width: 6.9rem
+  .tags
+    position: absolute
+    top: 0
+    right: 0.3rem
+    span
+      margin-left: .18rem
+      width: .4rem
+      height: .46rem
+      float: left
+    .tag-essence
+      background: url('../imgs/tag_ssence.png') no-repeat
+      background-size: 100% 100%
+    .tag-stick
+      background: url('../imgs/tag_top.png') no-repeat
+      background-size: 100% 100%
   .topic-avatar
     float: left
     img

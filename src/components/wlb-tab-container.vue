@@ -2,7 +2,7 @@
 <template>
   <div class="tab-container">
     <nav-bar :navBarOptions="navBarOptions"></nav-bar>
-    <tab-container v-model="active" :swipeable="swipeable" class="mt-20 bg-color-white" ref="tab-container">
+    <tab-container v-model="active" :swipeable="swipeable" class="mt-20" ref="tab-container">
       <slot></slot>
     </tab-container>
   </div>
@@ -43,18 +43,21 @@
     },
     watch: {
       active (val) {
+        console.log(this.$refs['tab-container'], 'tab-container')
         var nodes = this.$refs['tab-container'].$children
+        // console.log(nodes)
         for (let i in nodes) {
           this.navBarOptions[i]['checked'] = false
           if (nodes[i]['id'] === val) {
             this.navBarOptions[i]['checked'] = true
           }
         }
-        // console.log(val)
+        console.log(val)
       }
     },
     methods: {
       changeSelected (index) {
+        console.log(index)
         var nodes = this.$refs['tab-container'].$children
         this.active = nodes[index].id
       }
@@ -64,6 +67,9 @@
       TopicItem,
       TabContainer,
       TabContainerItem
+    },
+    destroyed () {
+      bus.$off('navbar-id-selected')
     }
   }
 </script>

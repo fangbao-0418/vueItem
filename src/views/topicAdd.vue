@@ -9,8 +9,8 @@
     <p class="residue">你还可以输入500字</p>
     <div class="topic-edit-foot">
       <div class="topic-edit-type">
-        <span class="topic-edit-type-chat active">闲聊</span>
-        <span class="topic-edit-type-ask">问答</span>
+        <span :class="['topic-edit-type-chat', {active:active}]" @click="checkType(1)">闲聊</span>
+        <span :class="['topic-edit-type-ask', {active:!active}]" @click="checkType(0)">问答</span>
       </div>
       <span class="topic-edit-sub">发表</span>
     </div>
@@ -19,6 +19,17 @@
 <script type="text/javascript">
   import { WlbHeader } from '../components'
   export default {
+    data () {
+      return {
+        active: true
+      }
+    },
+    methods: {
+      checkType (type) {
+        this.active = type
+        console.log(this.active)
+      }
+    },
     components: {
       WlbHeader
     }
@@ -58,17 +69,17 @@
     .topic-edit-type
       width: 2.36rem
       height: .52rem
-      border: 1px solid #D7D7D7
+      border: .01rem solid #D7D7D7
       border-radius: 100px
       overflow: hidden
       float: left
-      margin-top: .14rem
-      box-sizing: border-box
+      margin-top: .12rem
       span
         float: left
-        width: 1.15rem
+        width: 1.18rem
         text-align: center
-        line-height: .50rem
+        height: .52rem
+        line-height: .52rem
         color: #12A5E2
         font-family: PingFangSC-Regular
         font-size: .24rem

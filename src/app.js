@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import routerConfig from './router' // 路由配置文件
 import './sass/app'
 import 'mint-ui/lib/style'
+import 'swiper/dist/css/swiper'
 import './util/reset'
 import util from './util'
 import Jsonrpc from './util/jsonrpc'
