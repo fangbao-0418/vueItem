@@ -27,7 +27,7 @@
     },
     data () {
       return {
-        swipeable: true,
+        swipeable: false,
         active: this.initialActive,
         navBarOptions: this.initialNavBarOptions
       }

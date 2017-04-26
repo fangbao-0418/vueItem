@@ -7,8 +7,6 @@
   <div class="container mt-20">
     <wlb-tab-container :initial-nav-bar-options="initailNavBarOptions" initial-active="tab-container1">
       <tab-container-item id="tab-container1">
-        <title-bar-one :options="{title:'精选问答', more: '更多问答', targetUrl: {name: 'topicAdd'}}"></title-bar-one>
-        <slider-block-one></slider-block-one>
         <topic-item></topic-item>
         <topic-item></topic-item>
         <topic-item></topic-item>

@@ -1,8 +1,7 @@
 <template>
-  <div class="topic-item bg-color-white">
+  <div class="topic-item bg-color-white mb-20">
     <div class="tags">
-      <span class="tag-essence"></span>
-      <span class="tag-stick"></span>
+      <topic-tags></topic-tags>
     </div>
     <div class="topic-avatar"><img src="../imgs/avatar_small.png" /></div>
     <div class="topic-main">
@@ -29,6 +28,14 @@
     </div>
   </div>
 </template>
+<script>
+  import TopicTags from './topic-tags'
+  export default {
+    components: {
+      TopicTags
+    }
+  }
+</script>
 <style media="screen" lang="sass" scoped>
 .topic-item
   padding: .3rem
@@ -39,17 +46,6 @@
     position: absolute
     top: 0
     right: 0.3rem
-    span
-      margin-left: .18rem
-      width: .4rem
-      height: .46rem
-      float: left
-    .tag-essence
-      background: url('../imgs/tag_ssence.png') no-repeat
-      background-size: 100% 100%
-    .tag-stick
-      background: url('../imgs/tag_top.png') no-repeat
-      background-size: 100% 100%
   .topic-avatar
     float: left
     img
