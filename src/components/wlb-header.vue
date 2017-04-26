@@ -11,7 +11,9 @@
       <div class="header-title">
         <slot name="title"></slot>
       </div>
-      <div class="header-button"></div>
+      <div class="header-button">
+        <share-icon v-if="type == 'share'"></share-icon>
+      </div>
     </div>
   </div>
   <div class="float-block">
@@ -21,7 +23,14 @@
 </template>
 <script type="text/javascript">
   import ToTopIcon from './to-top-icon'
+  import ShareIcon from './share-icon'
   export default {
+    props: {
+      type: {
+        type: String,
+        default: ''
+      }
+    },
     data () {
       return {
         toTopIconShowState: false
@@ -38,7 +47,8 @@
       }
     },
     components: {
-      ToTopIcon
+      ToTopIcon,
+      ShareIcon
     },
     methods: {
       goback () {
@@ -66,7 +76,7 @@
         background: url('../imgs/navbar_back.png') no-repeat
         width: .4rem
         height: .4rem
-        background-size: 100% 100%
+        background-size: 100% 100%      
     .header-title
       flex: 1
       font-family: PingFangSC-Regular

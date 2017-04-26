@@ -94,6 +94,7 @@
         width: 4.5rem
         height: 1.8rem
         position: relative
+        overflow: hidden
         .tags
           position: absolute
           left: -.08rem

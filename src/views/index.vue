@@ -1,6 +1,6 @@
 <template>
 <div class="view">
-  <wlb-header>
+  <wlb-header type="share">
     <span slot="title">网利社区</span>
   </wlb-header>
   <user-briefly-show></user-briefly-show>
@@ -17,7 +17,7 @@
         <topic-item></topic-item>
       </tab-container-item>
       <tab-container-item id="tab-container3">
-        <title-bar-one :options="{title:'网利活动', more: '更多活动', targetUrl: {name: 'topicAdd'}}"></title-bar-one>
+        <title-bar-one :options="{title:'网利活动', more: '更多活动', targetUrl: {name: 'activities'}}"></title-bar-one>
         <slider-block-one></slider-block-one>
         <topic-item></topic-item>
       </tab-container-item>
