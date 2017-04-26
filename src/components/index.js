@@ -9,6 +9,7 @@ import ToTopIcon from './to-top-icon'
 import SectionItem from './section-item'
 import NewsItem from './news-item'
 import PostItem from './post-item'
+import TaskItem from './task-item'
 export {
   WlbHeader,
   UserBrieflyShow,
@@ -20,5 +21,6 @@ export {
   ToTopIcon,
   SectionItem,
   NewsItem,
-  PostItem
+  PostItem,
+  TaskItem
 }
