@@ -6,6 +6,8 @@ import TopicItem from './topic-item' // 帖子单元
 import CommentFormModal from './comment-form-modal'
 import PublicCommentIcon from './public-comment-icon'
 import ToTopIcon from './to-top-icon'
+import SectionItem from './section-item'
+import NewsItem from './news-item'
 export {
   WlbHeader,
   UserBrieflyShow,
@@ -14,5 +16,7 @@ export {
   TopicItem,
   CommentFormModal,
   PublicCommentIcon,
-  ToTopIcon
+  ToTopIcon,
+  SectionItem,
+  NewsItem
 }
