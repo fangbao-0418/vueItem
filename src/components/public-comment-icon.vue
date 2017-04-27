@@ -13,4 +13,5 @@
     position: fixed
     right: .3rem
     bottom: 3.02rem
+    z-index: 10
 </style>

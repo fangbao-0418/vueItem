@@ -8,7 +8,9 @@ import PublicCommentIcon from './public-comment-icon'
 import ToTopIcon from './to-top-icon'
 import SectionItem from './section-item'
 import NewsItem from './news-item'
-import PostItem from './post-item'
+import MyTopicItem from './my-topic-item'
+import TitleBarOne from './title-bar-one'
+import SliderBlockOne from './slider-block-one'
 export {
   WlbHeader,
   UserBrieflyShow,
@@ -20,5 +22,7 @@ export {
   ToTopIcon,
   SectionItem,
   NewsItem,
-  PostItem
+  MyTopicItem,
+  TitleBarOne,
+  SliderBlockOne
 }

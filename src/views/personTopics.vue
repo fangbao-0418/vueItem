@@ -3,11 +3,11 @@
     <wlb-header>
       <span slot="title">我的帖子</span>
     </wlb-header>
-    <post-item :post-item="postItem" :index="index" v-for="(postItem, index) in postItems" :key="postItem.title"></post-item>
+    <my-topic-item :post-item="postItem" :index="index" v-for="(postItem, index) in postItems" :key="postItem.title"></my-topic-item>
   </div>
 </template>
 <script>
-import { WlbHeader, PostItem } from '../components'
+import { WlbHeader, MyTopicItem } from '../components'
 export default {
   data () {
     return {
@@ -34,7 +34,7 @@ export default {
   },
   components: {
     WlbHeader,
-    PostItem
+    MyTopicItem
   }
 }
 </script>

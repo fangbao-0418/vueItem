@@ -2,7 +2,7 @@
  * [帖子详情页面]
  */
 <template>
-  <div class="view">
+  <div class="view" type="share">
     <wlb-header>
       <span slot="title">帖子详情</span>
     </wlb-header>

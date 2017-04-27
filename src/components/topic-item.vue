@@ -1,5 +1,8 @@
 <template>
-  <div class="topic-item">
+  <div class="topic-item bg-color-white mb-20">
+    <div class="tags">
+      <topic-tags></topic-tags>
+    </div>
     <div class="topic-avatar"><img src="../imgs/avatar_small.png" /></div>
     <div class="topic-main">
       <p class="topic-tit">理财小子</p>
@@ -25,10 +28,24 @@
     </div>
   </div>
 </template>
+<script>
+  import TopicTags from './topic-tags'
+  export default {
+    components: {
+      TopicTags
+    }
+  }
+</script>
 <style media="screen" lang="sass" scoped>
 .topic-item
   padding: .3rem
   display: table
+  position: relative
+  width: 6.9rem
+  .tags
+    position: absolute
+    top: 0
+    right: 0.3rem
   .topic-avatar
     float: left
     img
