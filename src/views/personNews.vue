@@ -3,7 +3,10 @@
     <wlb-header>
       <span slot="title">我的消息</span>
     </wlb-header>
-    <news-item :item="item" v-for="item in news" :key="item.name"></news-item>
+    <news-item :item="item" :index="index" v-for="(item, index) in news" :key="item.name"></news-item>
+    <div v-if="! news.length" class="empty">
+      <div>还没有消息哦</div>
+    </div>
   </div>
 </template>
 <script>
@@ -11,6 +14,7 @@ import { WlbHeader, NewsItem } from '../components'
 export default {
   data () {
     return {
+//      news: []
       news: [{
         type: 'normal',
         name: 'EMAD',
@@ -37,5 +41,18 @@ export default {
 }
 </script>
 <style media="screen" lang="sass" scoped>
-
+.empty
+  position: absolute
+  top: 50%
+  margin-top: -1.5rem
+  width: 100%
+  height: 3rem
+  text-align: center
+  background: url('../imgs/message_defult.png') no-repeat center 0/ 3rem 3rem
+  div
+    padding-top: 2.7rem
+    font-family: PingFangSC-Light
+    font-size: .24rem
+    color: #999
+    letter-spacing: 0.01re
 </style>

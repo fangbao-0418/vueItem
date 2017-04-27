@@ -20,8 +20,8 @@ export default {
     {path: '/activities', name: 'activities', component: Activities},
     {path: '/person', name: 'person', component: Person},
     {path: '/person/news', name: 'personNews', component: PersonNews},
-    {path: '/personTopics', name: 'personTopics', component: PersonTopics},
-    {path: '/personTask', name: 'personTask', component: PersonTask},
+    {path: '/person/topics', name: 'personTopics', component: PersonTopics},
+    {path: '/person/task', name: 'personTask', component: PersonTask},
     {path: '/person/infoedit', name: 'personInfoEdit', component: PersonInfoEdit}
   ]
 }

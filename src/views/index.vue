@@ -54,6 +54,15 @@ export default {
     // })
   },
   mounted () {
+    this.http({
+      url: this.api.api_list,
+      method: 'getBbsThreadList',
+      params: [{
+        id: 1
+      }]
+    }).then((res) => {
+      console.log(res)
+    })
   },
   components: {
     WlbHeader,

@@ -9,9 +9,12 @@ import ToTopIcon from './to-top-icon'
 import SectionItem from './section-item'
 import NewsItem from './news-item'
 import MyTopicItem from './my-topic-item'
+import TaskItem from './task-item'
 import TitleBarOne from './title-bar-one'
 import SliderBlockOne from './slider-block-one' // 滑动图片
 import SelectAvatar from './select-avatar' // 选择头像
+import TaskPlan from './task-plan' // 任务进度
+import RuleModal from './rule-modal'
 export {
   WlbHeader,
   UserBrieflyShow,
@@ -24,7 +27,10 @@ export {
   SectionItem,
   NewsItem,
   MyTopicItem,
+  TaskItem,
   TitleBarOne,
   SliderBlockOne,
-  SelectAvatar
+  SelectAvatar,
+  TaskPlan,
+  RuleModal
 }
