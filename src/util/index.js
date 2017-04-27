@@ -1,3 +1,5 @@
+import Plugins from '../plugins'
+
 function cOn (type, fn) {
   const el = this.$el
   if (el.attachEvent) {
@@ -9,5 +11,6 @@ function cOn (type, fn) {
 export default {
   install (Vue, options) {
     Vue.prototype.c_on = cOn
+    Vue.prototype.$rulemodal = Plugins['RuleModal']
   }
 }

@@ -6,7 +6,7 @@
     <div class="task-container bg-color-white">
       <div class="task-title mt-30">
         <div class="day-task title">今日任务</div>
-        <span class="rule">任务规则</span>
+        <span class="rule" @click="showRule()">任务规则</span>
       </div>
       <task-item>
         <span class="task-image-1" slot="image"></span>
@@ -40,8 +40,7 @@
   </div>
 </template>
 <script>
-import { WlbHeader, TaskItem, TaskPlan, RuleModal } from '../components'
-
+import { WlbHeader, TaskItem, TaskPlan } from '../components'
 export default {
   data () {
     return {}
@@ -53,8 +52,10 @@ export default {
   },
   methods: {
     showRule () {
-      console.log('showRule')
-      console.log(RuleModal)
+      this.$rulemodal.show({
+        title: '活动规则',
+        content: '新华社北京4月26日电 中共中央政治局4月25日下午就维护国家金融安全进行第四十次集体学习。中共中央总书记习近平在主持学习时强调，金融安全是国家安全的重要组成部分，是经济平稳健康发展的重要基础。维护金融安全，是关系我国经济社会发展全局的一件带有战略性、根本性的大事。金融活，经济活；金融稳，经济稳。必须充分认识金融在经济发展和社会生活中的重要地位和作用，切实把维护金融安全作为治国理政的一件大事，扎扎实实把金融工作做好。'
+      })
     }
   }
 }
