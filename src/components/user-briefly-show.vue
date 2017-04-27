@@ -8,7 +8,7 @@
     </div>
     <p class="user-nick">方宝</p>
     <div class="user-remind">
-      <p>还有99999元体验金未领取 |</p><span> 去领取</span>
+      <p>还有99999元体验金未领取 |</p><router-link :to="{name: 'personTask'}" tag="span"> 去领取</router-link>
     </div>
   </router-link>
 </templatE>

@@ -95,13 +95,14 @@
         width: .4rem
         height: .4rem
         background-size: 100% 100%
-        display: inline-block
+        float: left
       .cancel
         background: url('../imgs/navbar_closed.png') no-repeat
         width: .4rem
         height: .4rem
         background-size: 100% 100%
-        display: inline-block
+        float: left
+        margin-left: .4rem
       .header-right-icon
         float: left
         margin-left: .1rem

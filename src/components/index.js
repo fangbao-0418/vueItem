@@ -10,7 +10,8 @@ import SectionItem from './section-item'
 import NewsItem from './news-item'
 import MyTopicItem from './my-topic-item'
 import TitleBarOne from './title-bar-one'
-import SliderBlockOne from './slider-block-one'
+import SliderBlockOne from './slider-block-one' // 滑动图片
+import SelectAvatar from './select-avatar' // 选择头像
 export {
   WlbHeader,
   UserBrieflyShow,
@@ -24,5 +25,6 @@ export {
   NewsItem,
   MyTopicItem,
   TitleBarOne,
-  SliderBlockOne
+  SliderBlockOne,
+  SelectAvatar
 }

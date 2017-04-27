@@ -2,7 +2,7 @@
   <div class="view">
     <wlb-header><span slot="title">个人中心</span></wlb-header>
     <div class="edit-section">
-      <div class="item">
+      <div class="item" @click="editAvatar()">
         <span class="photo-title">头像</span>
         <span class="photo-right">
           <span class="right"></span>
@@ -17,16 +17,22 @@
     <div class="edit-btn">
       <button class="btn">保存</button>
     </div>
+    <select-avatar></select-avatar>
   </div>
 </template>
 <script>
-import { WlbHeader } from '../components'
+import { WlbHeader, SelectAvatar } from '../components'
+import bus from '../bus'
 export default {
-  data () {
-    return {}
-  },
   components: {
-    WlbHeader
+    WlbHeader,
+    SelectAvatar
+  },
+  methods: {
+    editAvatar () {
+      bus.$emit('select-avatar')
+      console.log('emit')
+    }
   }
 }
 </script>
