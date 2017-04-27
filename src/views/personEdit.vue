@@ -1,18 +1,18 @@
 <template>
   <div class="view">
-    <wlb-header></wlb-header>
+    <wlb-header><span slot="title">个人中心</span></wlb-header>
     <div class="edit-section">
-      <section-item>
+      <div class="item">
         <span class="photo-title">头像</span>
         <span class="photo-right">
           <span class="right"></span>
           <span class="photo"></span>
         </span>
-      </section-item>
-      <section-item>
+      </div>
+      <div class="item">
         <span class="name-title">昵称</span>
         <span class="name-right">迪丽热巴</span>
-      </section-item>
+      </div>
     </div>
     <div class="edit-btn">
       <button class="btn">保存</button>
@@ -34,6 +34,10 @@ export default {
 <style media="screen" lang="sass" scoped>
 .edit-section
   background: #fff
+  .item
+    border-bottom: 1px solid #e5e5e5
+    padding: .3rem .3rem .3rem .4rem
+    overflow: hidden
   .photo-title
     float: left
     height: .8rem

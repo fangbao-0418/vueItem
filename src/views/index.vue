@@ -1,15 +1,15 @@
 <template>
 <div class="view">
-  <wlb-header type="share">
-    <span slot="title">网利社区</span>
-  </wlb-header>
+  <wlb-header :options="{title:'网利社区',rightConfigs:[{type:'share'}]}"></wlb-header>
   <user-briefly-show></user-briefly-show>
   <div class="container mt-20">
     <wlb-tab-container :initial-nav-bar-options="initailNavBarOptions" initial-active="tab-container1">
       <tab-container-item id="tab-container1">
-        <topic-item></topic-item>
-        <topic-item></topic-item>
-        <topic-item></topic-item>
+        <loadmore :top-method="loadTop" :bottom-method="loadBottom" ref="loadmore">
+          <topic-item></topic-item>
+          <topic-item></topic-item>
+          <topic-item></topic-item>
+        </loadmore>
       </tab-container-item>
       <tab-container-item id="tab-container2">
         <title-bar-one :options="{title:'精选问答', more: '更多问答', targetUrl: {name: 'topicAdd'}}"></title-bar-one>
@@ -28,7 +28,7 @@
 </template>
 <script>
 import { UserBrieflyShow, WlbHeader, WlbTabContainer, TopicItem, PublicCommentIcon, TitleBarOne, SliderBlockOne } from '../components'
-import { TabContainerItem } from 'mint-ui'
+import { TabContainerItem, Loadmore } from 'mint-ui'
 export default {
   data () {
     return {
@@ -63,12 +63,22 @@ export default {
     PublicCommentIcon,
     TopicItem,
     TitleBarOne,
-    SliderBlockOne
+    SliderBlockOne,
+    Loadmore
   },
   methods: {
     sub () {
       console.log(this.$refs.profile.innerText)
       alert(this.$refs.profile.innerText)
+    },
+    loadTop () {
+      // 加载更多数据
+      this.$refs.loadmore.onTopLoaded()
+    },
+    loadBottom () {
+      // 加载更多数据
+      // this.allLoaded = true // 若数据已全部获取完毕
+      this.$refs.loadmore.onBottomLoaded()
     }
   }
 }

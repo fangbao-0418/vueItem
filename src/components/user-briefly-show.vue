@@ -2,7 +2,7 @@
  * 用户简要信息
  */
 <template>
-  <div class="user bg-color-white">
+  <router-link :to="{name: 'person'}" class="user bg-color-white" tag="div">
     <div class="user-avatar">
       <img src="../imgs/avatar_big.png" />
     </div>
@@ -10,7 +10,7 @@
     <div class="user-remind">
       <p>还有99999元体验金未领取 |</p><span> 去领取</span>
     </div>
-  </div>
+  </router-link>
 </templatE>
 <style lang="sass" scoped>
 .user

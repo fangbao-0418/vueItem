@@ -17,7 +17,7 @@ export default {
     {path: '/topic/detail/:id', name: 'topicDetail', component: TopicDetail},
     {path: '/activities', name: 'activities', component: Activities},
     {path: '/person', name: 'person', component: Person},
-    {path: '/person/edit', name: 'personEdit', component: PersonEdit},
+    {path: '/person/edit', name: 'personInfoEdit', component: PersonEdit},
     {path: '/person/news', name: 'personNews', component: PersonNews}
   ]
 }

@@ -1,12 +1,15 @@
 <template>
   <div class="view">
-    <wlb-header></wlb-header>
+    <wlb-header>
+      <span slot="title">个人中心</span>
+      <router-link slot="right" class="person-info-eidt-icon" :to="{name: 'personInfoEdit'}"></router-link>
+    </wlb-header>
     <user-briefly-show></user-briefly-show>
     <div class="section mt-20">
-      <section-item v-for="item in items" :key="item.code">
-        <span sloat="image" class="list-img" :class="item.flag"></span>
-        <span class="list-des" v-text="item.title" v-cloak></span>
-      <span sloat="right" class="list-right">
+      <section-item v-for="item in items" :key="item.code" :to="item.to">
+        <span slot="image" :class="['list-img', item.flag]"></span>
+        <span class="list-des" v-text="item.title"></span>
+      <span slot="right" class="list-right">
         <span class="right-icon"></span>
         <!--当是我的消息且有新消息显示点-->
         <span class="right-news" v-if="item.code == 'MY-NEWS' && isNew"></span>
@@ -25,17 +28,17 @@ export default {
         code: 'MY-NEWS',
         title: '我的消息',
         flag: 'my-message',
-        routerName: 'my-message'
+        to: {name: 'personNews'}
       }, {
         code: 'MY-POST',
         title: '我的帖子',
         flag: 'my-post',
-        routerName: 'my-post'
+        to: {name: 'personNews'}
       }, {
         code: 'MY-TASK',
         title: '我的任务',
         flag: 'my-task',
-        routerName: 'my-task'
+        to: {name: 'personNews'}
       }]
     }
   },
@@ -47,6 +50,12 @@ export default {
 }
 </script>
 <style media="screen" lang="sass" scoped>
+.person-info-eidt-icon
+  background: url('../imgs/navbar_edit.png') no-repeat
+  width: .42rem
+  height: .42rem
+  background-size: 100% 100%
+  float: right
 .section
   background: #fff
   .list-img
@@ -54,7 +63,6 @@ export default {
     display: inline-block
     width: .44rem
     height: .44rem
-    background: url('../imgs/icon_message.png') no-repeat 0 0 / .44rem .44rem
   .list-des
     float: left
     padding-left: .33rem

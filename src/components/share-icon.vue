@@ -2,13 +2,13 @@
 	<span class="share-icon" @click="share"></span>
 </template>
 <script>
-	export default {
-		methods: {
-			share () {
-				alert("分享成功")
-			}
-		}
-	}
+export default {
+  methods: {
+    share () {
+      alert('分享成功')
+    }
+  }
+}
 </script>
 <style lang="sass" scoped>
 	.share-icon

@@ -1,8 +1,6 @@
 <template>
 	<div class="view">
-		<wlb-header type="share">
-		    <span slot="title">热门活动</span>
-		</wlb-header>
+		<wlb-header :options="{title:'网利活动',rightConfigs:[{type:'share'}]}"></wlb-header>
 		<div class="activities">
 			<div class="activity-item">
 				<img src="../imgs/banner1.png">

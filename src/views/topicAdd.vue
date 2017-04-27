@@ -1,8 +1,6 @@
 <template>
   <div class="view">
-    <wlb-header>
-      <span slot="title">有问有答</span>
-    </wlb-header>
+    <wlb-header :options="{title:'有问有答',rightConfigs:[{type:'share'}]}"></wlb-header>
     <div class="topic-text-content" contenteditable=true>
       写点什么吧
     </div>
