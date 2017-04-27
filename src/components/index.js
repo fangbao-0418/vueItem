@@ -9,6 +9,7 @@ import ToTopIcon from './to-top-icon'
 import SectionItem from './section-item'
 import NewsItem from './news-item'
 import MyTopicItem from './my-topic-item'
+import TaskItem from './task-item'
 import TitleBarOne from './title-bar-one'
 import SliderBlockOne from './slider-block-one'
 export {
@@ -23,6 +24,7 @@ export {
   SectionItem,
   NewsItem,
   MyTopicItem,
+  TaskItem,
   TitleBarOne,
   SliderBlockOne
 }

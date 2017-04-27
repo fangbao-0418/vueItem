@@ -1,6 +1,6 @@
 <template>
   <div class="news-content">
-    <div v-if="item.type == 'normal'" class="news-box bg-color-white mt-20">
+    <div v-if="item.type == 'normal'" class="news-box bg-color-white mt-20" :class="{'mt':index == 0}">
       <div class="item-title">
         {{item.name}}
         <span class="fixed-text">评论了你的帖子</span>
@@ -13,7 +13,7 @@
       <div class="delete-con">
         <span>发表的评论</span>
         <span class="delete-title">{{item.title}}</span>
-        <span>因政治敏感被管理员删除</span>
+        因政治敏感被管理员删除
       </div>
       <div class="item-time fr" v-text="item.time"></div>
     </div>
@@ -21,12 +21,7 @@
 </template>
 <script>
 export default {
-  props: {
-    item: {
-      type: Object,
-      required: true
-    }
-  },
+  props: ['item', 'index'],
   data () {
     return {}
   }
@@ -34,6 +29,8 @@ export default {
 </script>
 <style media="screen" lang="sass" scoped>
 .news-content
+  .mt
+    margin: 0
   .news-box
     padding: .3rem .3rem .2rem
     overflow: hidden
@@ -67,7 +64,7 @@ export default {
     span
       float: left
     .delete-title
-      width: 3.5rem
+      width: 2.5rem
       white-space: nowrap
       overflow: hidden
       text-overflow: ellipsis

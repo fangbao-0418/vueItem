@@ -2,17 +2,17 @@
   <div class="view">
     <wlb-header>
       <span slot="title">个人中心</span>
-      <router-link slot="right" class="person-info-eidt-icon" :to="{name: 'personInfoEdit'}"></router-link>
+      <router-link slot="right" class="person-info-eidt-icon fr" :to="{name: 'personInfoEdit'}"></router-link>
     </wlb-header>
     <user-briefly-show></user-briefly-show>
-    <div class="section mt-20">
+    <div class="section mt-20 bg-color-white">
       <section-item v-for="item in items" :key="item.code" :to="item.to">
-        <span slot="image" :class="['list-img', item.flag]"></span>
-        <span class="list-des" v-text="item.title"></span>
-      <span slot="right" class="list-right">
-        <span class="right-icon"></span>
+        <span slot="image" class="fl" :class="['list-img', item.flag]"></span>
+        <span class="list-des fl" v-text="item.title"></span>
+      <span slot="right" class="list-right fr">
+        <span class="right-icon fr"></span>
         <!--当是我的消息且有新消息显示点-->
-        <span class="right-news" v-if="item.code == 'MY-NEWS' && isNew"></span>
+        <span class="right-news fr" v-if="item.code == 'MY-NEWS' && isNew"></span>
       </span>
       </section-item>
     </div>
@@ -55,26 +55,20 @@ export default {
   width: .42rem
   height: .42rem
   background-size: 100% 100%
-  float: right
 .section
-  background: #fff
   .list-img
-    float: left
     display: inline-block
     width: .44rem
     height: .44rem
   .list-des
-    float: left
     padding-left: .33rem
     font-size: .3rem
     color: #666
     line-height: .44rem
   .list-right
-    float: right
     height: .44rem
     line-height: .44rem
     .right-icon
-      float: right
       display: inline-block
       margin-top: .09rem
       width: .26rem
@@ -82,7 +76,6 @@ export default {
       background: url('../imgs/arrow_right.png') no-repeat
       background-size: .26rem .26rem
     .right-news
-      float: right
       display: inline-block
       margin-right: .25rem
       margin-top: .14rem
