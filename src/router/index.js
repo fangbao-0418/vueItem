@@ -6,7 +6,7 @@ const TopicDetail = resolve => require.ensure([], () => resolve(require('../view
 // require.ensure的第一个参数为所需依赖 第三个参数为chunk命名
 const TopicAdd = resolve => require.ensure([], () => resolve(require('../views/TopicAdd')), 'index')
 const Person = resolve => require(['../views/person'], resolve)
-const PersonEdit = resolve => require(['../views/personEdit'], resolve)
+const PersonInfoEdit = resolve => require(['../views/personInfoEdit'], resolve)
 const PersonNews = resolve => require(['../views/personNews'], resolve)
 const Activities = resolve => require(['../views/activityList'], resolve)
 export default {
@@ -17,7 +17,7 @@ export default {
     {path: '/topic/detail/:id', name: 'topicDetail', component: TopicDetail},
     {path: '/activities', name: 'activities', component: Activities},
     {path: '/person', name: 'person', component: Person},
-    {path: '/person/edit', name: 'personInfoEdit', component: PersonEdit},
+    {path: '/person/infoedit', name: 'personInfoEdit', component: PersonInfoEdit},
     {path: '/person/news', name: 'personNews', component: PersonNews}
   ]
 }
