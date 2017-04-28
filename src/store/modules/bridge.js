@@ -1,5 +1,5 @@
 import * as types from '../mutation-types'
-import wlb from '../../util/webview'
+import { wlb } from '../../util'
 // initial state
 const state = {
   isApp: false,
@@ -11,15 +11,31 @@ const getters = {
 }
 
 const actions = {
-  fetchBridgeInfo ({ commit }, payload) {
-    commit(types.FETCH_BRIDGE_INFO, { isApp: true })
+  fetchBridgeInfo ({ commit }, cb) {
+    try {
+      wlb.ready({
+        app (mixins) {
+          commit(types.FETCH_BRIDGE_INFO, { mixinList: mixins, isApp: true })
+          cb && cb()
+        },
+        other () {
+          commit(types.FETCH_BRIDGE_INFO, { isWeb: true })
+          cb && cb()
+        }
+      })
+    } catch (e) {
+      throw e
+    } finally {
+    }
   }
 }
 
 const mutations = {
   [types.FETCH_BRIDGE_INFO] (state, payload) {
-    console.log(state, payload)
-    // state.isApp = payload['isApp']
+    state.isWeb = payload['isWeb']
+    state.isApp = payload['isApp']
+    state.MixinList = payload['MixinList']
+    // console.log(state)
   }
 }
 

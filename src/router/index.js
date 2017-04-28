@@ -1,4 +1,5 @@
 import store from '../store'
+import cookie from 'js-cookie'
 
 const Index = resolve => require.ensure([], () => resolve(require('../views/index')), 'index')
 // import Index from '../views/index.vue' // 普通路由加载
@@ -14,11 +15,30 @@ const PersonTopics = resolve => require(['../views/personTopics'], resolve)
 const PersonTask = resolve => require(['../views/personTask'], resolve)
 const Activities = resolve => require(['../views/activityList'], resolve)
 
-console.log(store)
-store.dispatch('fetchBridgeInfo')
-console.log(store.bridge)
 function requireAuth (to, from, next) {
-  next()
+  store.dispatch('fetchBridgeInfo', () => {
+    const { mixinList, isApp } = store.state.bridge
+    console.log(isApp, 'isApp')
+    if (isApp) {
+      mixinList.sendUserInfo((result) => {
+        const sessionid = result.sessionid
+        const splitArray = sessionid.split(';')
+        for (let key in splitArray) {
+          let split = splitArray[key].split('=')
+          cookie.set(split[0], split[1], { path: '/', domain: '.wanglibao.com' })
+        }
+      })
+      return next()
+    } else {
+      store.dispatch('fetchLoginStatus', () => {
+        const { loginStatus } = store.state.profile
+        if (loginStatus) {
+          return next()
+        }
+      })
+      return next()
+    }
+  })
 }
 
 export default {

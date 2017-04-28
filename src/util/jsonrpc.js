@@ -8,17 +8,8 @@
  * @return Promise
  */
 import axios from 'axios'
-import api from './api'
 var isPro = process.env.NODE_ENV === 'production'
-console.log(isPro)
-var Jsonrpc = {
-  install (Vue, options) {
-    Vue.prototype.http = service
-    Vue.prototype.$ajax = axios
-    Vue.prototype.api = api
-  }
-}
-function service () {
+function http () {
   if (arguments[0] instanceof Array) {
     var resultArr = []
     for (let i in arguments[0]) {
@@ -34,6 +25,7 @@ function service () {
   }
 }
 function fetchData (params) {
+  params['params'] = params['params'] ? params['params'] : []
   let jsonObj = {
     jsonrpc: '2.0',
     method: params['method'],
@@ -41,7 +33,7 @@ function fetchData (params) {
     id: 1
   }
   let json = JSON.stringify(jsonObj)
-  console.log(json)
+  // console.log(json)
   return axios({
     url: params.url,
     method: 'post',
@@ -50,4 +42,4 @@ function fetchData (params) {
     withCredentials: !isPro
   })
 }
-export default Jsonrpc
+export default http

@@ -5,11 +5,9 @@ import './sass/app'
 import 'mint-ui/lib/style'
 import 'swiper/dist/css/swiper'
 import './util/reset'
-import util from './util'
-import Jsonrpc from './util/jsonrpc'
+import plugins from './plugins/install'
 import store from './store'
-Vue.use(util)
-Vue.use(Jsonrpc)
+Vue.use(plugins)
 Vue.use(VueRouter)
 const router = new VueRouter(routerConfig)
 new Vue({

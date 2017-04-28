@@ -162,7 +162,7 @@ module.exports = {
 		//compress: true,
 		host: "0.0.0.0",
     // host: "192.168.10.123",
-    port: "3002"
+    port: "3001"
 	},
 	resolve: {
 		extensions: ['.vue','.js','.css','.sass','.scss'],
