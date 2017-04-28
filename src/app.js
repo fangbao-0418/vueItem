@@ -7,11 +7,12 @@ import 'swiper/dist/css/swiper'
 import './util/reset'
 import util from './util'
 import Jsonrpc from './util/jsonrpc'
+import store from './store'
 Vue.use(util)
-console.log(Jsonrpc)
 Vue.use(Jsonrpc)
 Vue.use(VueRouter)
 const router = new VueRouter(routerConfig)
 new Vue({
-  router
+  router,
+  store
 }).$mount('#root')

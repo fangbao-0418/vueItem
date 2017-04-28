@@ -1,3 +1,5 @@
+import store from '../store'
+
 const Index = resolve => require.ensure([], () => resolve(require('../views/index')), 'index')
 // import Index from '../views/index.vue' // 普通路由加载
 // const TopicDetail = resolve => require(['../views/topicDetail'], resolve) // AMD风格代码分块语法
@@ -11,6 +13,14 @@ const PersonNews = resolve => require(['../views/personNews'], resolve)
 const PersonTopics = resolve => require(['../views/personTopics'], resolve)
 const PersonTask = resolve => require(['../views/personTask'], resolve)
 const Activities = resolve => require(['../views/activityList'], resolve)
+
+console.log(store)
+store.dispatch('fetchBridgeInfo')
+console.log(store.bridge)
+function requireAuth (to, from, next) {
+  next()
+}
+
 export default {
 // mode: 'history',
   routes: [
@@ -18,7 +28,7 @@ export default {
     {path: '/topic/add', name: 'topicAdd', component: TopicAdd},
     {path: '/topic/detail/:id', name: 'topicDetail', component: TopicDetail},
     {path: '/activities', name: 'activities', component: Activities},
-    {path: '/person', name: 'person', component: Person},
+    {path: '/person', name: 'person', component: Person, beforeEnter: requireAuth},
     {path: '/person/news', name: 'personNews', component: PersonNews},
     {path: '/person/topics', name: 'personTopics', component: PersonTopics},
     {path: '/person/task', name: 'personTask', component: PersonTask},
