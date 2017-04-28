@@ -1,7 +1,7 @@
 import * as types from '../mutation-types'
 import { api, http } from '../../util'
 const state = {
-  // loginState: false
+  loginStatus: false
 }
 
 const actions = {
@@ -10,10 +10,11 @@ const actions = {
       url: api.api_account,
       method: 'loginStatus'
     }).then((res) => {
+      console.log(res.data)
       if (res.data.result.status === 1) {
         commit(types.FETCH_LOGIN_STATUS, true)
       } else {
-        commit(types.FETCH_LOGIN_STATUS, false)
+        // commit(types.FETCH_LOGIN_STATUS, false)
       }
     })
     cb && cb()
@@ -22,7 +23,8 @@ const actions = {
 
 const mutations = {
   [types.FETCH_LOGIN_STATUS] (state, res) {
-    state.loginStatus = res
+    console.log(res)
+    state.loginStatus = true
   }
 }
 

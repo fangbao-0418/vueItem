@@ -4,7 +4,7 @@ import * as actions from './actions'
 import * as getters from './getters'
 import bridge from './modules/bridge'
 import profile from './modules/profile'
-// import createLogger from '../plugins/logger'
+import createLogger from 'vuex/dist/logger'
 
 Vue.use(Vuex)
 export default new Vuex.Store({
@@ -13,5 +13,6 @@ export default new Vuex.Store({
   modules: {
     bridge,
     profile
-  }
+  },
+  plugins: [createLogger()]
 })

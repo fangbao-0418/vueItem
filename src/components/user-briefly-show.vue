@@ -20,18 +20,13 @@
 </template>
 <script>
   export default {
-    data () {
-      return {
-        loginStatus: false
+    computed: {
+      loginStatus () {
+        return this.$store.state.profile.loginStatus
       }
     },
-    mounted () {
-      console.log(this.$store.state.profile)
-      this.$store.dispatch('fetchLoginStatus', () => {
-        setTimeout(() => {
-          this.loginStatus = this.$store.state.profile.loginStatus
-        }, 10)
-      })
+    created () {
+      this.$store.dispatch('fetchLoginStatus')
     }
   }
 </script>
