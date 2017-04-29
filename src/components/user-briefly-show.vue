@@ -27,6 +27,7 @@
     },
     created () {
       this.$store.dispatch('fetchLoginStatus')
+      // console.log(this.$store.state.loading, 'loading')
     }
   }
 </script>

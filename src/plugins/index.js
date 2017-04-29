@@ -1,4 +1,6 @@
-import RuleModal from './RuleModal'
-export default {
-  RuleModal
+import ruleModal from './ruleModal'
+import loading from './loading'
+export {
+  ruleModal,
+  loading
 }

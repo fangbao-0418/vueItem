@@ -15,6 +15,7 @@ import SliderBlockOne from './slider-block-one' // 滑动图片
 import SelectAvatar from './select-avatar' // 选择头像
 import TaskPlan from './task-plan' // 任务进度
 import RuleModal from './rule-modal'
+import loading from './loading'
 export {
   WlbHeader,
   UserBrieflyShow,
@@ -32,5 +33,6 @@ export {
   SliderBlockOne,
   SelectAvatar,
   TaskPlan,
-  RuleModal
+  RuleModal,
+  loading
 }
