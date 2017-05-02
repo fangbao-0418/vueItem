@@ -8,7 +8,23 @@
  * @return Promise
  */
 import axios from 'axios'
+import { loading } from '../plugins'
 var isPro = process.env.NODE_ENV === 'production'
+axios.interceptors.request.use(function (config) {
+  loading.show(true)
+  return config
+}, function (error) {
+  return Promise.reject(error)
+})
+axios.interceptors.response.use(function (response) {
+  loading.show(false)
+  console.log(response, 'res')
+  return response
+}, function (error) {
+  loading.show(false)
+  alert('error')
+  return Promise.reject(error)
+})
 function http () {
   if (arguments[0] instanceof Array) {
     var resultArr = []
@@ -16,9 +32,7 @@ function http () {
       resultArr.push(fetchData(arguments[0][i]))
     }
     console.log(resultArr)
-    return axios.all(resultArr).catch((e) => {
-      console.log(e)
-    })
+    return axios.all(resultArr)
   } else {
     let params = arguments[0]
     return fetchData(params)

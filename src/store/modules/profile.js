@@ -1,6 +1,6 @@
 import * as types from '../mutation-types'
 import { api, http } from '../../util'
-import { loading } from '../../plugins'
+// import { loading } from '../../plugins'
 
 const state = {
   loginStatus: false
@@ -9,7 +9,7 @@ const state = {
 const actions = {
   fetchLoginStatus (context, cb) {
     const { commit } = context
-    loading.show(true)
+    // loading.show(true)
     http({
       url: api.api_account,
       method: 'loginStatus'
@@ -20,7 +20,8 @@ const actions = {
       } else {
         // commit(types.FETCH_LOGIN_STATUS, false)
       }
-      loading.show(false)
+      console.log('fetchLoginStatus')
+      // loading.show(false)
     })
     cb && cb()
   }

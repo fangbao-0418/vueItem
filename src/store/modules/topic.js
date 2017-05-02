@@ -1,7 +1,6 @@
 /* 茄子相关数据 */
 import * as types from '../mutation-types'
 import { http, api } from '../../util'
-import { loading } from '../../plugins'
 const state = {
   topicBoards: [],
   navbar_select_id: 0,
@@ -33,24 +32,34 @@ const getters = {
 }
 const actions = {
   fetchTopicBoards ({ commit }, callback) {
-    loading.show(true)
     http({
-      url: api.api_list,
-      method: 'getBbsThreadSectionList',
-      params: [{}]
+      url: api.api_account,
+      method: 'loginStatus'
     }).then((res) => {
-      loading.show(false)
-      commit(types.NAVBAR_SELECT, res.data.result.data[0]['id'])
-      commit(types.FETCH_TOPIC_BOARDS, res.data.result.data)
+      if (res.data.result.status === 1) {
+        commit(types.FETCH_LOGIN_STATUS, true)
+      } else {
+        // commit(types.FETCH_LOGIN_STATUS, false)
+      }
       callback && callback()
     })
+    // http({
+    //   url: api.api_list,
+    //   method: 'getBbsThreadSectionList',
+    //   params: [{}]
+    // }).then((res) => {
+    //   loading.show(false)
+    //   commit(types.NAVBAR_SELECT, res.data.result.data[0]['id'])
+    //   commit(types.FETCH_TOPIC_BOARDS, res.data.result.data)
+    //   callback && callback()
+    // })
   },
   navbarSelect ({ commit }, id) {
     commit(types.NAVBAR_SELECT, id)
   },
   fetchHomeData ({ state, commit, dispatch }) {
     dispatch('fetchTopicBoards', () => {
-      console.log(state.navbar_select_id)
+      console.log('fetchTopicBoards')
       http({
         url: api.api_list,
         method: 'getBbsThreadTopListarray',
