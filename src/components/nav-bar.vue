@@ -1,12 +1,11 @@
 <template>
   <div class="nav-bar bg-color-white">
     <ul>
-      <li v-for="(item, index) in navBarOptions" :class="{active: item.checked}" @click="checked(index)"><span>{{item.title}}</span><i class="line" v-if="index < navBarOptions.length - 1"></i></li>
+      <li v-for="(item, index) in navBarOptions" :class="{active: item.checked}" @click="checked(item.id)"><span>{{item.title}}</span><i class="line" v-if="index < navBarOptions.length - 1"></i></li>
     </ul>
   </div>
 </template>
 <script>
-  import bus from '../bus'
   export default {
     props: {
       navBarOptions: {
@@ -14,10 +13,11 @@
         required: true
       }
     },
-    mounted () {},
+    mounted () {
+    },
     methods: {
       checked (index) {
-        bus.$emit('navbar-id-selected', index)
+        this.$store.dispatch('navbarSelect', index)
       }
     }
   }

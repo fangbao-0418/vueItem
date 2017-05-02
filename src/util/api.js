@@ -4,6 +4,7 @@ if (Location.hostname.indexOf('wanglibao.com') > -1) {
   host = Location.host
 }
 var api = {
+  host: host,
   api_list: host + '/yunying/rpc',
   api_account: host + '/passport/service.php?c=account'
 }

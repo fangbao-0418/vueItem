@@ -200,6 +200,12 @@ const wlb = (function () {
       this.bridge.callHandler('jumpToAccount', function (response) {
         callback && callback(response)
       })
+    },
+    /* 关闭页面 */
+    touchClose: function (callback) {
+      this.bridge.callHandler('touchClose', function (response) {
+        callback && callback(response)
+      })
     }
   }
 

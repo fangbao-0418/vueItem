@@ -44,7 +44,7 @@ function requireAuth (to, from, next) {
 export default {
 // mode: 'history',
   routes: [
-    {path: '/', component: Index},
+    {path: '/', name: 'index', component: Index},
     {path: '/topic/add', name: 'topicAdd', component: TopicAdd},
     {path: '/topic/detail/:id', name: 'topicDetail', component: TopicDetail},
     {path: '/activities', name: 'activities', component: Activities},

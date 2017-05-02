@@ -9,7 +9,7 @@
     <div class="header">
       <div class="header-button">
         <div class="goback" @click="goback"></div>
-        <div class="cancel" @click="cancel"></div>
+        <div class="cancel" @click="cancel" v-if="isAndroid"></div>
       </div>
       <div class="header-title">
         <span>{{options.title}}</span>
@@ -34,6 +34,7 @@
 <script type="text/javascript">
   import ToTopIcon from './to-top-icon'
   import ShareIcon from './share-icon'
+  import { wlb } from '../util'
   export default {
     props: {
       options: {
@@ -49,6 +50,15 @@
     data () {
       return {
         toTopIconShowState: false
+      }
+    },
+    computed: {
+      isAndroid () {
+        var u = navigator.userAgent
+        return u.indexOf('Android') > -1 || u.indexOf('Adr') > -1
+      },
+      isIndex () {
+        return this.$route.name === 'index'
       }
     },
     mounted () {
@@ -67,12 +77,17 @@
     },
     methods: {
       goback () {
-        this.$router.go(-1)
+        if (this.$route.name === 'index') {
+          this.cancel()
+        } else {
+          this.$router.go(-1)
+        }
       },
       cancel () {
-        this.$rulemodal.show({
-          title: '活动规则',
-          content: '新华社北京4月26日电 中共中央政治局4月25日下午就维护国家金融安全进行第四十次集体学习。中共中央总书记习近平在主持学习时强调，金融安全是国家安全的重要组成部分，是经济平稳健康发展的重要基础。维护金融安全，是关系我国经济社会发展全局的一件带有战略性、根本性的大事。金融活，经济活；金融稳，经济稳。必须充分认识金融在经济发展和社会生活中的重要地位和作用，切实把维护金融安全作为治国理政的一件大事，扎扎实实把金融工作做好。'
+        wlb.ready({
+          app: function (mixins) {
+            mixins.touchClose()
+          }
         })
       }
     }
@@ -99,13 +114,14 @@
         height: .4rem
         background-size: 100% 100%
         float: left
+        margin-right: .4rem
       .cancel
         background: url('../imgs/navbar_closed.png') no-repeat
         width: .4rem
         height: .4rem
         background-size: 100% 100%
         float: left
-        margin-left: .4rem
+        margin-right: .4rem
       .header-right-icon
         float: left
         margin-left: .1rem

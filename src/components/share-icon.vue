@@ -2,13 +2,24 @@
 	<span class="share-icon" @click="share"></span>
 </template>
 <script>
-export default {
-  methods: {
-    share () {
-      alert('分享成功')
+  import { wlb } from '../util'
+  export default {
+    methods: {
+      share () {
+        wlb.ready({
+          app: function (mixins) {
+            mixins.firstLoadWebView({ name: 'wanglishequ' })
+            mixins.touchShare({
+              title: '网利社区',
+              content: '网利宝',
+              shareUrl: window.location.href,
+              image: 'https://www.wanglibao.com/images/logo.png'
+            })
+          }
+        })
+      }
     }
   }
-}
 </script>
 <style lang="sass" scoped>
 	.share-icon

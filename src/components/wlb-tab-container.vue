@@ -9,11 +9,9 @@
 </template>
 <script>
   import bus from '../bus'
-  import Index from '../components'
   import NavBar from './nav-bar'
   import TopicItem from './topic-item'
   import { TabContainer, TabContainerItem } from 'mint-ui'
-  console.log(Index)
   export default {
     props: {
       initialActive: {
@@ -28,11 +26,13 @@
     data () {
       return {
         swipeable: false,
-        active: this.initialActive,
-        navBarOptions: this.initialNavBarOptions
+        active: this.initialActive
       }
     },
     computed: {
+      navBarOptions () {
+        return this.initialNavBarOptions
+      }
     },
     created () {
       bus.$on('navbar-id-selected', (id) => {

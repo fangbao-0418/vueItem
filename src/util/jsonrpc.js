@@ -38,7 +38,7 @@ function fetchData (params) {
     url: params.url,
     method: 'post',
     data: json,
-    timeout: 1000,
+    // timeout: 1000,
     withCredentials: !isPro
   })
 }

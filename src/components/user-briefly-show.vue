@@ -13,12 +13,13 @@
       </div>
     </router-link>
     <div v-else class="user bg-color-white">
-      <div class="login-btn"><span>登录</span></div>
+      <div class="login-btn" @click="login"><span>登录</span></div>
       <p class="remind-msg">做任务的体验金</p>
     </div>
   </div>
 </template>
 <script>
+  import { wlb, api } from '../util'
   export default {
     computed: {
       loginStatus () {
@@ -27,7 +28,18 @@
     },
     created () {
       this.$store.dispatch('fetchLoginStatus')
-      // console.log(this.$store.state.loading, 'loading')
+    },
+    methods: {
+      login () {
+        wlb.ready({
+          app: function (mixins) {
+            mixins.loginApp({ refresh: 1, url: '' })
+          },
+          other: function () {
+            window.location.href = api.host + '/wechat/verify'
+          }
+        })
+      }
     }
   }
 </script>
