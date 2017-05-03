@@ -1,7 +1,7 @@
 {
-  "name": "wanglibao",
+  "name": "wanglibao_BBS",
   "version": "1.0.0",
-  "description": "",
+  "description": "网利社区",
   "main": "index.js",
   "scripts": {
     "start": "set NODE_ENV=development && node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --inline --progress --watch --colors",
