@@ -40,9 +40,9 @@ function requireAuth (to, from, next) {
     }
   })
 }
-
+const isPro = process.env.NODE_ENV.trim() === 'production'
 export default {
-// mode: 'history',
+  mode: isPro ? 'history' : 'hash',
   routes: [
     {path: '/', name: 'index', component: Index},
     {path: '/topic/add', name: 'topicAdd', component: TopicAdd},
