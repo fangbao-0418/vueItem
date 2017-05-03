@@ -25,7 +25,7 @@
     },
     data () {
       return {
-        swipeable: false,
+        swipeable: true,
         active: this.initialActive
       }
     },
@@ -35,24 +35,25 @@
       }
     },
     created () {
-      bus.$on('navbar-id-selected', (id) => {
-        this.changeSelected(id)
-      })
     },
     mounted () {
+      console.log(this.$on)
+      this.$on('touchmove', function (e) {
+        console.log(e)
+      })
     },
     watch: {
+      initialActive (val) {
+        this.active = val
+      },
       active (val) {
-        console.log(this.$refs['tab-container'], 'tab-container')
-        var nodes = this.$refs['tab-container'].$children
-        // console.log(nodes)
-        for (let i in nodes) {
-          this.navBarOptions[i]['checked'] = false
-          if (nodes[i]['id'] === val) {
-            this.navBarOptions[i]['checked'] = true
+        var node = this.$refs['tab-container'].$children
+        for (var i in node) {
+          if (val === node[i]['id']) {
+            this.$store.dispatch('navbarSelect', i)
+            this.$store.dispatch('updateTopicListData', i)
           }
         }
-        console.log(val)
       }
     },
     methods: {

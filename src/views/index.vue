@@ -3,8 +3,8 @@
   <wlb-header :options="{title:'网利社区',rightConfigs:[{type:'share'}]}"></wlb-header>
   <user-briefly-show></user-briefly-show>
   <div class="container mt-20">
-    <wlb-tab-container :initial-nav-bar-options="initailNavBarOptions" :initial-active="initialActive">
-      <tab-container-item :id="'tab-container'+(index+1)" v-for="(item, index) in initailNavBarOptions">
+    <wlb-tab-container :initial-nav-bar-options="initialNavBarOptions" :initial-active="initialActive">
+      <tab-container-item :key="index" :id="tabId(index)" :class="'tab-container'+parseInt(parseInt(index)+1)" v-for="(item, index) in initialNavBarOptions">
         <loadmore :top-method="loadTop" :bottom-method="loadBottom" ref="loadmore">
           <title-bar-one :options="{title:item.title, more: '更多', targetUrl: {name: 'topicAdd'}}"></title-bar-one>
           <slider-block-one></slider-block-one>
@@ -33,14 +33,17 @@ import { UserBrieflyShow, WlbHeader, WlbTabContainer, TopicItem, PublicCommentIc
 import { TabContainerItem, Loadmore } from 'mint-ui'
 import { mapGetters } from 'vuex'
 export default {
-  computed: mapGetters({
-    initailNavBarOptions: 'doneTopicBoards',
-    initialActive: 'initialActive'
-  }),
+  computed: {
+    ...mapGetters({
+      initialNavBarOptions: 'doneTopicBoards',
+      initialActive: 'initialActive'
+    })
+  },
   created () {
     this.$store.dispatch('fetchHomeData')
   },
   mounted () {
+    console.log(this.$refs.loadmore, 'loadmore')
   },
   components: {
     WlbHeader,
@@ -58,14 +61,21 @@ export default {
       console.log(this.$refs.profile.innerText)
       alert(this.$refs.profile.innerText)
     },
+    tabId (index) {
+      return 'tab-container' + (parseInt(index) + 1)
+    },
     loadTop () {
       // 加载更多数据
-      this.$refs.loadmore.onTopLoaded()
+      var index = this.$store.state.topic['navbar_select_index']
+      if (this.$refs.loadmore) {
+        console.log(this.$refs.loadmore)
+        this.$refs.loadmore[index].onTopLoaded()
+      }
     },
     loadBottom () {
       // 加载更多数据
       // this.allLoaded = true // 若数据已全部获取完毕
-      this.$refs.loadmore.onBottomLoaded()
+      // this.$refs.loadmore.onBottomLoaded()
     }
   }
 }

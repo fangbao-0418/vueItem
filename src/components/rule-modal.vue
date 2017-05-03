@@ -3,7 +3,7 @@
     <div class="view" v-if="visible" @click="close()">
       <div class="container" @click.stop="">
         <div class="title">{{title}}</div>
-        <div class="content">
+        <div class="content" :style="style">
           {{content}}
         </div>
         <div class="footer" @click="close()">
@@ -19,7 +19,8 @@
       return {
         visible: false,
         title: '',
-        content: ''
+        content: '',
+        style: ''
       }
     },
     watch: {
@@ -41,6 +42,22 @@
   }
 </script>
 <style lang="sass" scoped>
+  @keyframes elasticity-in
+    0%
+      transform: translateY(-50%) scale(1.2)
+    100%
+      transform: translateY(-50%) scale(1)
+  @keyframes elasticity-out
+    0%
+      transform: translateY(-50%) scale(1)
+    100%
+      transform: translateY(-50%) scale(1.2)
+  .fade-enter-active
+    .container
+      animation: elasticity-in .3s ease-out
+  .fade-leave-active
+    .container
+      animation: elasticity-out .3s ease-out
   .view
     position: fixed
     top: 0
@@ -48,7 +65,8 @@
     width: 100%
     height: 100%
     z-index: 999999
-    background: rgba(0,0,0,0.4)
+    transition: all .3s ease
+    background: rgba(0,0,0,.4)
     .container
       width: 5.4rem
       background: #fff

@@ -8,7 +8,7 @@
  * @return Promise
  */
 import axios from 'axios'
-import { loading } from '../plugins'
+import { loading, ruleModal } from '../plugins'
 var isPro = process.env.NODE_ENV === 'production'
 axios.interceptors.request.use(function (config) {
   loading.show(true)
@@ -22,7 +22,7 @@ axios.interceptors.response.use(function (response) {
   return response
 }, function (error) {
   loading.show(false)
-  alert('error')
+  ruleModal.show({ title: '系统提示', content: '网络异常，获取数据失败', style: 'text-align: center' })
   return Promise.reject(error)
 })
 function http () {

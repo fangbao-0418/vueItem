@@ -1,5 +1,5 @@
 <template>
-<div class="loading-page" v-if="visible">
+<div class="loading-page" v-if="visible" :style="style">
   <div class="loading-box"></div>
 </div>
 </template>
@@ -7,7 +7,8 @@
   export default {
     data () {
       return {
-        visible: false
+        visible: false,
+        style: 'background: transparent'
       }
     },
     watch: {
@@ -48,7 +49,7 @@
   height: 100%
   position: fixed
   top: 0
-  background: #f5f5f5
+  // background: #f5f5f5
   z-index: 9999
   .loading-box
     width: 1rem

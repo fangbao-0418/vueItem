@@ -10,6 +10,7 @@ Instance.show = function (options) {
   this.visible = true
   this.title = options['title']
   this.content = options['content']
+  this.style = options['style']
 }
 document.body.appendChild(Instance.$el)
 export default Instance
