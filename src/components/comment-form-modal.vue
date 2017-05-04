@@ -6,9 +6,7 @@
         <span class="comment-cancel fl" @click="cancel">取消</span>
         <span class="comment-sub fr">发表</span>
       </div>
-      <div class="comment-text-content" contenteditable="true">
-        说点什么吧...
-      </div>
+      <textarea class="comment-text-content" v-model="content" placeholder="说点什么吧..."></textarea>
     </div>
   </div>
 </transition>
@@ -22,12 +20,23 @@
         default: false
       }
     },
+    data () {
+      return {
+        content: ''
+      }
+    },
     mounted () {
       console.log(this.show)
     },
     watch: {
       show (val) {
-        console.log(val)
+        if (val) {
+          $(document).on('touchmove', function (e) {
+            e.preventDefault()
+          })
+        } else {
+          $(document).off('touchmove')
+        }
       }
     },
     methods: {
@@ -80,7 +89,10 @@
         color: #12A5E2
         letter-spacing: 0
     .comment-text-content
-      padding: .1rem .3rem
+      padding: 0 .3rem
+      width: 6.9rem
+      border: 0
+      margin: .1rem 0
       font-family: PingFangSC-Light
       font-size: .3rem
       color: #A1AFB4

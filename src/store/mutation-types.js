@@ -8,3 +8,4 @@ export const FETCH_BBS_HOME_DATA = 'FETCH_BBS_HOME_DATA' // 获取社区首页�
 // 个人中心部分
 export const CHANGE_UNREAD_STATUS = 'CHANGE_UNREAD_STATUS' // 消息未读状态更改
 export const FETCH_BBS_USER_INFO = 'FETCH_BBS_USER_INFO' // 获取社区用户信息
+export const FETCH_BBS_USER_THREAD = 'FETCH_BBS_USER_THREAD' // 获取用户帖子

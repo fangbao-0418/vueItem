@@ -46,12 +46,25 @@ const actions = {
       }
     ]).then((res) => {
       loading.show(false)
-      console.log(res[2])
       commit(types.FETCH_LOGIN_STATUS, res[0].data.result.status === 1)
       commit(types.CHANGE_UNREAD_STATUS, res[1].data.result.data.num > 0)
       commit(types.FETCH_BBS_USER_INFO, res[2].data.result.data)
     })
+  },
+  // 获取用户帖子
+  fetchBbsUserThread ({ commit }, page) {
+    http({
+      url: api.api_list,
+      method: 'getBbsUserThread',
+      params: [{
+        pageNum: 5,
+        page: page
+      }]
+    }).then((res) => {
+      console.log(res)
+    })
   }
+  // 获取我的任务
 }
 
 const mutations = {
