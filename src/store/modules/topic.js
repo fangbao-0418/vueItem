@@ -1,6 +1,7 @@
 /* 茄子相关数据 */
 import * as types from '../mutation-types'
 import { http, api } from '../../util'
+import { loading } from '../../plugins'
 const state = {
   topicBoards: [],
   navbar_select_index: 0, // navbar 初始index
@@ -42,7 +43,10 @@ const actions = {
     commit(types.NAVBAR_SELECT, id)
   },
   // 获取社区首页数据
-  fetchHomeData ({ state, commit, dispatch }) {
+  fetchBbsHomeData ({ state, commit, dispatch }) {
+    loading.show(true, 'full')
+    dispatch('fetchLoginStatus') // 获取登录状态
+    // 获取板块
     dispatch('fetchTopicBoards', () => {
       http([
         {
@@ -68,13 +72,14 @@ const actions = {
           ThreadTopList,
           ThreadList
         }
-        commit(types.FETCH_HOME_DATA, data)
+        commit(types.FETCH_BBS_HOME_DATA, data)
+        loading.show(false)
       })
     })
   },
   // 更新帖子列表数据
   updateTopicListData ({ state, commit }, id) {
-    console.log(state.topicBoards[state.navbar_select_index]['id'], 'id')
+    loading.show(true)
     http([
       {
         url: api.api_list,
@@ -99,7 +104,8 @@ const actions = {
         ThreadTopList,
         ThreadList
       }
-      commit(types.FETCH_HOME_DATA, data)
+      commit(types.FETCH_BBS_HOME_DATA, data)
+      loading.show(false)
     })
   }
 }
@@ -111,7 +117,7 @@ const mutations = {
     state.navbar_select_index = index
     state.initial_active = 'tab-container' + (parseInt(index) + 1)
   },
-  [types.FETCH_HOME_DATA] (state, data) {
+  [types.FETCH_BBS_HOME_DATA] (state, data) {
     console.log(data, 'data')
     state.ThreadTopList = data['ThreadTopList']
     state.ThreadList = data['ThreadList']

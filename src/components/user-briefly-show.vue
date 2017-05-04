@@ -27,7 +27,6 @@
       }
     },
     created () {
-      this.$store.dispatch('fetchLoginStatus')
     },
     methods: {
       login () {

@@ -8,7 +8,12 @@
     data () {
       return {
         visible: false,
-        style: 'background: transparent'
+        type: ''
+      }
+    },
+    computed: {
+      style () {
+        return this.type === 'full' ? 'background: #f5f5f5' : ''
       }
     },
     watch: {

@@ -8,7 +8,7 @@
         <loadmore :top-method="loadTop" :bottom-method="loadBottom" ref="loadmore">
           <title-bar-one :options="{title:item.title, more: '更多', targetUrl: {name: 'topicAdd'}}"></title-bar-one>
           <slider-block-one :data="ThreadTopList[index]"></slider-block-one>
-          <topic-item :data="ThreadList[index]"></topic-item>        
+          <topic-item :data="ThreadList[index]"></topic-item>
         </loadmore>
       </tab-container-item>
       <!-- <tab-container-item id="tab-container2">
@@ -48,10 +48,9 @@ export default {
     })
   },
   created () {
-    this.$store.dispatch('fetchHomeData')
+    this.$store.dispatch('fetchBbsHomeData')
   },
   mounted () {
-    console.log(this.$refs.loadmore, 'loadmore')
   },
   components: {
     WlbHeader,

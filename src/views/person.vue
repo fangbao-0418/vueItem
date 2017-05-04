@@ -12,7 +12,7 @@
       <span slot="right" class="list-right fr">
         <span class="right-icon fr"></span>
         <!--当是我的消息且有新消息显示点-->
-        <span class="right-news fr" v-if="item.code == 'MY-NEWS' && isNew"></span>
+        <span class="right-news fr" v-if="item.code === 'MY-NEWS' && unreadStatus"></span>
       </span>
       </section-item>
     </div>
@@ -20,10 +20,10 @@
 </template>
 <script>
 import { UserBrieflyShow, WlbHeader, SectionItem } from '../components'
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      isNew: true,
       items: [{
         code: 'MY-NEWS',
         title: '我的消息',
@@ -41,6 +41,16 @@ export default {
         to: {name: 'personTask'}
       }]
     }
+  },
+  created () {
+    this.$store.dispatch('fetchPersonPageData')
+  },
+  computed: {
+    ...mapState({
+      unreadStatus (state) {
+        return state.profile.unreadStatus
+      }
+    })
   },
   components: {
     WlbHeader,

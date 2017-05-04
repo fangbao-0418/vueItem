@@ -7,21 +7,19 @@
  * @params Array params [jsonrpc中的params]
  * @return Promise
  */
+
 import axios from 'axios'
-import { loading, ruleModal } from '../plugins'
+import { ruleModal } from '../plugins'
 var isPro = process.env.NODE_ENV === 'production'
+var isCrossDomain = window.location.hostname.indexOf('wanglibao.com') === -1
 axios.interceptors.request.use(function (config) {
-  loading.show(true)
   return config
 }, function (error) {
   return Promise.reject(error)
 })
 axios.interceptors.response.use(function (response) {
-  loading.show(false)
-  console.log(response, 'res')
   return response
 }, function (error) {
-  loading.show(false)
   ruleModal.show({ title: '系统提示', content: '网络异常，获取数据失败', style: 'text-align: center' })
   return Promise.reject(error)
 })
@@ -53,7 +51,7 @@ function fetchData (params) {
     method: 'post',
     data: json,
     // timeout: 1000,
-    withCredentials: !isPro
+    withCredentials: isCrossDomain || !isPro
   })
 }
 export default http

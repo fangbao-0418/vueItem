@@ -23,10 +23,20 @@
 <script>
 import { WlbHeader, SelectAvatar } from '../components'
 import bus from '../bus'
+import { mapState } from 'vuex'
 export default {
   components: {
     WlbHeader,
     SelectAvatar
+  },
+  created () {
+  },
+  computed: {
+    ...mapState({
+      userInfo (state) {
+        return state.profile.bbsUserInfo
+      }
+    })
   },
   methods: {
     editAvatar () {
