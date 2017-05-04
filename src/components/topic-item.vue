@@ -1,29 +1,31 @@
 <template>
-  <div class="topic-item bg-color-white mb-20">
-    <div class="tags">
-      <topic-tags></topic-tags>
-    </div>
-    <div class="topic-avatar"><img src="../imgs/avatar_small.png" /></div>
-    <div class="topic-main">
-      <p class="topic-tit">理财小子</p>
-      <p class="topic-ago">12分钟前</p>
-      <p class="topic-content">在经济增长趋缓和去杠杆的大背景下，利润增速下滑实属正常，不必过度解读。” 中国社科院金融所银行研究室主任曾刚说，这几年，我国银行业已经走出高增长的“黄金时代”，步入平稳增长阶段。考虑到实体经济仍然处于调整期，这一趋势还将延续，但即便如此，银行的绝对盈利额还是很大的。</p>
-      <div class="topic-comment">
-        <p class="topic-comment-item mt-20">
-          <span>人民日报</span><em>:</em>
-          是经济下行压力加大，企业的有效信贷需求是经济下行压力加大，企业的有效信贷需求
-        </p>
-        <p class="topic-comment-item mt-20">
-          <span>不二之选</span><em>:</em>
-          是经济下行压力加大，企业的有效信贷需求是经济下行压力加大，企业的有效信贷需求
-        </p>
+  <div>
+    <div class="topic-item bg-color-white mb-20" v-for="(item, index) in data">
+      <div class="tags">
+        <topic-tags></topic-tags>
       </div>
-      <div class="topic-foot mt-30">
-        <router-link :to="{name: 'topicDetail', params: {id: 1}}" class="topic-show-more" tag="span">查看更多评论</router-link>
-        <p class="fr">
-          <span class="topic-hits">查看(18)</span>
-          <span class="topic-comment-num">评论(28)</span>
-        </p>
+      <div class="topic-avatar"><img src="../imgs/avatar_small.png" /></div>
+      <div class="topic-main">
+        <p class="topic-tit">{{item.title}}</p>
+        <p class="topic-ago">12分钟前</p>
+        <p class="topic-content">{{item.content}}</p>
+        <div class="topic-comment">
+          <p class="topic-comment-item mt-20">
+            <span>人民日报</span><em>:</em>
+            是经济下行压力加大，企业的有效信贷需求是经济下行压力加大，企业的有效信贷需求
+          </p>
+          <p class="topic-comment-item mt-20">
+            <span>不二之选</span><em>:</em>
+            是经济下行压力加大，企业的有效信贷需求是经济下行压力加大，企业的有效信贷需求
+          </p>
+        </div>
+        <div class="topic-foot mt-30">
+          <router-link :to="{name: 'topicDetail', params: {id: 1}}" class="topic-show-more" tag="span">查看更多评论</router-link>
+          <p class="fr">
+            <span class="topic-hits">查看({{item.views}})</span>
+            <span class="topic-comment-num">评论({{item.comment_num}})</span>
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -31,6 +33,11 @@
 <script>
   import TopicTags from './topic-tags'
   export default {
+    props: {
+      data: {
+        type: Array
+      }
+    },
     components: {
       TopicTags
     }

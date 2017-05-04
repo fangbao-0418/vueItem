@@ -7,10 +7,8 @@
       <tab-container-item :key="index" :id="tabId(index)" :class="'tab-container'+parseInt(parseInt(index)+1)" v-for="(item, index) in initialNavBarOptions">
         <loadmore :top-method="loadTop" :bottom-method="loadBottom" ref="loadmore">
           <title-bar-one :options="{title:item.title, more: '更多', targetUrl: {name: 'topicAdd'}}"></title-bar-one>
-          <slider-block-one></slider-block-one>
-          <topic-item></topic-item>
-          <topic-item></topic-item>
-          <topic-item></topic-item>
+          <slider-block-one :data="ThreadTopList[index]"></slider-block-one>
+          <topic-item :data="ThreadList[index]"></topic-item>        
         </loadmore>
       </tab-container-item>
       <!-- <tab-container-item id="tab-container2">
@@ -31,12 +29,22 @@
 <script>
 import { UserBrieflyShow, WlbHeader, WlbTabContainer, TopicItem, PublicCommentIcon, TitleBarOne, SliderBlockOne } from '../components'
 import { TabContainerItem, Loadmore } from 'mint-ui'
-import { mapGetters } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
       initialNavBarOptions: 'doneTopicBoards',
       initialActive: 'initialActive'
+    }),
+    ...mapState({
+      ThreadTopList (state) {
+        console.log(state.topic['ThreadTopList'], 'ThreadTopList')
+        return state.topic['ThreadTopList']
+      },
+      ThreadList (state) {
+        console.log(state.topic['ThreadList'], 'ThreadList')
+        return state.topic['ThreadList']
+      }
     })
   },
   created () {

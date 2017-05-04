@@ -81,7 +81,7 @@
       line-height: .33rem
   .login-btn
     position: absolute
-    border: .02rem solid #03B0E8
+    border: 1px solid #03B0E8
     border-radius: .04rem
     width: 1.67rem
     height: .58rem

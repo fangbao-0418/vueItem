@@ -51,7 +51,7 @@
         for (var i in node) {
           if (val === node[i]['id']) {
             this.$store.dispatch('navbarSelect', i)
-            this.$store.dispatch('updateTopicListData', i)
+            this.$store.dispatch('updateTopicListData')
           }
         }
       }

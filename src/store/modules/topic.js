@@ -5,7 +5,9 @@ const state = {
   topicBoards: [],
   navbar_select_index: 0, // navbar 初始index
   initial_active: 'tab-container1',
-  home_data: []
+  home_data: [],
+  ThreadTopList: [],
+  ThreadList: []
 }
 const getters = {
   doneTopicBoards (state) {
@@ -42,27 +44,62 @@ const actions = {
   // 获取社区首页数据
   fetchHomeData ({ state, commit, dispatch }) {
     dispatch('fetchTopicBoards', () => {
-      http({
-        url: api.api_list,
-        method: 'getBbsThreadTopList',
-        params: [{
-          id: state.topicBoards[state.navbar_select_index]['id']
-        }]
-      }).then((res) => {
-        console.log(res)
+      http([
+        {
+          url: api.api_list,
+          method: 'getBbsThreadTopList',
+          params: [{
+            id: state.topicBoards[state.navbar_select_index]['id']
+          }]
+        },
+        {
+          url: api.api_list,
+          method: 'getBbsThreadList',
+          params: [{
+            id: state.topicBoards[state.navbar_select_index]['id']
+          }]
+        }
+      ]).then((res) => {
+        var ThreadTopList = []
+        var ThreadList = []
+        ThreadTopList[state.navbar_select_index] = res[0].data.result.data
+        ThreadList[state.navbar_select_index] = res[1].data.result.data.list
+        var data = {
+          ThreadTopList,
+          ThreadList
+        }
+        commit(types.FETCH_HOME_DATA, data)
       })
     })
   },
   // 更新帖子列表数据
   updateTopicListData ({ state, commit }, id) {
-    http({
-      url: api.api_list,
-      method: 'getBbsThreadTopList',
-      params: [{
-        id: id || state.topicBoards[state.navbar_select_index]['id']
-      }]
-    }).then((res) => {
-      console.log(res)
+    console.log(state.topicBoards[state.navbar_select_index]['id'], 'id')
+    http([
+      {
+        url: api.api_list,
+        method: 'getBbsThreadTopList',
+        params: [{
+          id: id || state.topicBoards[state.navbar_select_index]['id']
+        }]
+      },
+      {
+        url: api.api_list,
+        method: 'getBbsThreadList',
+        params: [{
+          id: id || state.topicBoards[state.navbar_select_index]['id']
+        }]
+      }
+    ]).then((res) => {
+      var ThreadTopList = []
+      var ThreadList = []
+      ThreadTopList[state.navbar_select_index] = res[0].data.result.data
+      ThreadList[state.navbar_select_index] = res[1].data.result.data.list
+      var data = {
+        ThreadTopList,
+        ThreadList
+      }
+      commit(types.FETCH_HOME_DATA, data)
     })
   }
 }
@@ -74,8 +111,10 @@ const mutations = {
     state.navbar_select_index = index
     state.initial_active = 'tab-container' + (parseInt(index) + 1)
   },
-  [types.FETCH_HOME_DATA] (state) {
-
+  [types.FETCH_HOME_DATA] (state, data) {
+    console.log(data, 'data')
+    state.ThreadTopList = data['ThreadTopList']
+    state.ThreadList = data['ThreadList']
   }
 }
 export default {

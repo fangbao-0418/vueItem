@@ -2,7 +2,8 @@
   <div class="slide-block bg-color-white mb-20">
     <div :class="['swiper-container', swiperClassName]">
       <div class="swiper-wrapper">
-        <div class="swiper-slide">
+
+        <div class="swiper-slide" v-for="(item, index) in data">
           <div class="banner">
             <div class="tags">
               <topic-tags></topic-tags>
@@ -10,30 +11,7 @@
             <img src="../imgs/banner1.png" />
           </div>
         </div>
-        <div class="swiper-slide">
-          <div class="banner">
-            <div class="tags">
-              <topic-tags></topic-tags>
-            </div>
-            <img src="../imgs/banner1.png" />
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="banner">
-            <div class="tags">
-              <topic-tags></topic-tags>
-            </div>
-            <img src="../imgs/banner1.png" />
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="banner">
-            <div class="tags">
-              <topic-tags></topic-tags>
-            </div>
-            <img src="../imgs/banner1.png" />
-          </div>
-        </div>
+
       </div>
     </div>
   </div>
@@ -42,6 +20,11 @@
   import Swiper from 'swiper'
   import TopicTags from './topic-tags'
   export default {
+    props: {
+      data: {
+        type: Array
+      }
+    },
     data () {
       return {
         swiperClassName: 'swiper-container' + this._uid
