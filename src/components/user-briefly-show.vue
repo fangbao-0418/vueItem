@@ -5,9 +5,9 @@
   <div>
     <router-link :to="{name: 'person'}" class="user bg-color-white" tag="div" v-if="loginStatus">
       <div class="user-avatar">
-        <img src="../imgs/avatar_big.png" />
+        <img :src="userInfo.head_img" />
       </div>
-      <p class="user-nick">方宝</p>
+      <p class="user-nick">{{userInfo.nickname}}</p>
       <div class="user-remind">
         <p>还有99999元体验金未领取 |</p><router-link :to="{name: 'personTask'}" tag="span"> 去领取</router-link>
       </div>
@@ -24,6 +24,10 @@
     computed: {
       loginStatus () {
         return this.$store.state.profile.loginStatus
+      },
+      userInfo () {
+        console.log(this.$store.state.profile.bbsUserInfo)
+        return this.$store.state.profile.bbsUserInfo
       }
     },
     created () {

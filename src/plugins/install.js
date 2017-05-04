@@ -12,7 +12,7 @@ export default {
   install (Vue, options) {
     Vue.prototype.v_on = on
     Vue.prototype.$rulemodal = ruleModal
-    Vue.prototype.http = http
-    Vue.prototype.api = api
+    Vue.prototype.$http = http
+    Vue.prototype.$api = api
   }
 }

@@ -6,43 +6,112 @@
         <span class="photo-title">头像</span>
         <div class="photo-right fr">
           <span class="right fr"></span>
-          <span class="photo fr"></span>
+          <img :src="userInfo.head_img" class="photo fr">
         </div>
       </div>
       <div class="item">
         <span class="name-title fl">昵称</span>
-        <span class="name-right fr">迪丽热巴</span>
+        <input class="name-right fr" v-model="userInfo.nickname">
       </div>
     </div>
     <div class="edit-btn">
-      <button class="btn">保存</button>
+      <button :class="['btn', {changed}]" @click="save">保存</button>
     </div>
-    <select-avatar></select-avatar>
+    <select-avatar :data="allHeadImgs"></select-avatar>
   </div>
 </template>
 <script>
 import { WlbHeader, SelectAvatar } from '../components'
+import { loading, ruleModal } from '../plugins'
 import bus from '../bus'
-import { mapState } from 'vuex'
 export default {
   components: {
     WlbHeader,
     SelectAvatar
   },
-  created () {
+  data () {
+    return {
+      userInfo: {},
+      allHeadImgs: {},
+      nickname: '',
+      changed: false,
+      index: 1
+    }
   },
   computed: {
-    ...mapState({
-      userInfo (state) {
-        return state.profile.bbsUserInfo
+  },
+  created () {
+    loading.show(true, 'full')
+    this.$http([
+      {
+        url: this.$api.api_list,
+        method: 'getBbsUserInfo',
+        params: [{}]
+      },
+      {
+        url: this.$api.api_list,
+        method: 'getBbsUserAllHeadImg',
+        params: [{}]
       }
+    ]).then((res) => {
+      this.userInfo = res[0].data.result.data
+      this.allHeadImgs = res[1].data.result.data
+      setTimeout(() => {
+        this.changed = false
+      }, 0)
+      loading.show(false)
     })
+  },
+  mounted () {
+    bus.$on('select-avatar', (index) => {
+      this.userInfo['head_img'] = this.allHeadImgs[index]
+      this.index = index
+    })
+  },
+  watch: {
+    userInfo: {
+      deep: true,
+      handler (val) {
+        this.changed = true
+      }
+    }
   },
   methods: {
     editAvatar () {
-      bus.$emit('select-avatar')
-      console.log('emit')
+      bus.$emit('show-select-avatar-page')
+    },
+    save () {
+      if (!this.changed) {
+        return
+      }
+      this.changed = false
+      loading.show(true)
+      this.$http([
+        {
+          url: this.$api.api_list,
+          method: 'updateBbsUserHeadimg',
+          params: [{
+            head_img: this.index
+          }]
+        },
+        {
+          url: this.$api.api_list,
+          method: 'updateBbsUserNickname',
+          params: [{
+            nickname: this.userInfo['nickname']
+          }]
+        }
+      ]).then((res) => {
+        loading.show(false)
+        ruleModal.show({
+          content: '信息修改成功',
+          style: 'text-align: center'
+        })
+      })
     }
+  },
+  destroyed () {
+    bus.$off('show-select-avatar-page')
   }
 }
 </script>
@@ -66,7 +135,6 @@ export default {
         margin-right: .26rem
         width: .8rem
         height: .8rem
-        background: url('../imgs/avatar_big.png') no-repeat 0 0 / .8rem .8rem
       .right
         margin-top: .27rem
         width: .26rem
@@ -83,6 +151,8 @@ export default {
       line-height: .42rem
       font-size: .3rem
       color: #9b9b9b
+      border: 0
+      text-align: right
   .edit-btn
     padding-top: 1.74rem
     text-align: center
@@ -97,4 +167,6 @@ export default {
       border-radius: 100px
       font-size: .3rem
       color: #fff
+    .changed
+      background: #5db5f2
 </style>

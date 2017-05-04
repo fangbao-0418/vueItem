@@ -34,9 +34,12 @@ function requireAuth (to, from, next) {
         const { loginStatus } = store.state.profile
         if (loginStatus) {
           return next()
+        } else {
+          return next({
+            name: 'index'
+          })
         }
       })
-      return next()
     }
   })
 }
@@ -49,9 +52,9 @@ export default {
     {path: '/topic/detail/:id', name: 'topicDetail', component: TopicDetail},
     {path: '/activities', name: 'activities', component: Activities},
     {path: '/person', name: 'person', component: Person, beforeEnter: requireAuth},
-    {path: '/person/news', name: 'personNews', component: PersonNews},
-    {path: '/person/topics', name: 'personTopics', component: PersonTopics},
-    {path: '/person/task', name: 'personTask', component: PersonTask},
-    {path: '/person/infoedit', name: 'personInfoEdit', component: PersonInfoEdit}
+    {path: '/person/news', name: 'personNews', component: PersonNews, beforeEnter: requireAuth},
+    {path: '/person/topics', name: 'personTopics', component: PersonTopics, beforeEnter: requireAuth},
+    {path: '/person/task', name: 'personTask', component: PersonTask, beforeEnter: requireAuth},
+    {path: '/person/infoedit', name: 'personInfoEdit', component: PersonInfoEdit, beforeEnter: requireAuth}
   ]
 }

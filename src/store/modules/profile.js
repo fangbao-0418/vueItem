@@ -16,16 +16,15 @@ const actions = {
       url: api.api_account,
       method: 'loginStatus'
     }).then((res) => {
-      console.log(res.data)
+      // console.log(res.data.result.status === 1, 'loginStatus')
       if (res.data.result.status === 1) {
         commit(types.FETCH_LOGIN_STATUS, true)
       } else {
-        // commit(types.FETCH_LOGIN_STATUS, false)
+        console.log(res.data.result.status === 1, 'no login')
+        commit(types.FETCH_LOGIN_STATUS, false)
       }
-      console.log('fetchLoginStatus')
-      // loading.show(false)
+      cb && cb()
     })
-    cb && cb()
   },
   // 获取个人中心数据
   fetchPersonPageData ({ commit }) {
@@ -57,7 +56,7 @@ const actions = {
 
 const mutations = {
   [types.FETCH_LOGIN_STATUS] (state, res) {
-    state.loginStatus = true
+    state.loginStatus = res
   },
   [types.CHANGE_UNREAD_STATUS] (state, res) {
     state.unreadStatus = res

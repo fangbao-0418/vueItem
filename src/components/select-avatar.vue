@@ -6,14 +6,14 @@
         <span class="cancel" @click="cancel()">取消</span>
       </div>
       <div class="avatar-items">
-        <div class="avatar-item" v-for="i in 9">
+        <div class="avatar-item" v-for="(item, i) in data">
           <div :class="{selected: index(i)}" @click="selected(i)">
-            <img src="../imgs/avatar_big.png" />
+            <img :src="item" />
             <i></i>
           </div>
         </div>
       </div>
-      <div class="affirm-btn">
+      <div class="affirm-btn" @click="ok">
         <span>就选它了</span>
       </div>
     </div>
@@ -22,6 +22,11 @@
 <script>
 import bus from '../bus'
 export default {
+  props: {
+    data: {
+      type: Object
+    }
+  },
   data () {
     return {
       myIndex: 1,
@@ -29,9 +34,8 @@ export default {
     }
   },
   mounted () {
-    bus.$on('select-avatar', () => {
+    bus.$on('show-select-avatar-page', () => {
       this.show = true
-      console.log(this.show)
     })
   },
   methods: {
@@ -43,7 +47,14 @@ export default {
     },
     cancel () {
       this.show = false
+    },
+    ok () {
+      bus.$emit('select-avatar', this.myIndex)
+      this.show = false
     }
+  },
+  destroyed () {
+    bus.$off('select-avatar')
   }
 }
 </script>
