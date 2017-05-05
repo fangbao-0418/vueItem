@@ -9,7 +9,7 @@
  */
 
 import axios from 'axios'
-import { ruleModal } from '../plugins'
+import { ruleModal, loading } from '../plugins'
 var isPro = process.env.NODE_ENV === 'production'
 var isCrossDomain = window.location.hostname.indexOf('wanglibao.com') === -1
 axios.interceptors.request.use(function (config) {
@@ -20,13 +20,20 @@ axios.interceptors.request.use(function (config) {
 axios.interceptors.response.use(function (response) {
   console.log(response, 'response')
   if (response.data.error) {
+    loading.show(false)
     var code = response.data.error.code
+    console.log(code, 'code')
     if (code === 4004) {
       ruleModal.show({ title: '系统提示', content: '用户未登录', style: 'text-align: center' })
+    } else if (code === '42S22') {
+      ruleModal.show({ title: '系统提示', content: '请求服务异常，错误码‘42S22’', style: 'text-align: center' })
+    } else {
+      ruleModal.show({ title: '系统提示', content: '请求服务异常，错误未知', style: 'text-align: center' })
     }
   }
   return response
 }, function (error) {
+  loading.show(false)
   ruleModal.show({ title: '系统提示', content: '网络异常，获取数据失败', style: 'text-align: center' })
   return Promise.reject(error)
 })

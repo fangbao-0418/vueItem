@@ -1,3 +1,6 @@
+/**
+ * [用户帖子发布页]
+ */
 <template>
   <div class="view">
     <wlb-header :options="{title:'有问有答',rightConfigs:[{type:'share'}]}"></wlb-header>

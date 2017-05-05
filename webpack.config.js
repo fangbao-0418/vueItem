@@ -36,25 +36,27 @@ var plugins = [
     $: 'jquery',
     jQuery: 'jquery',
     "window.jQuery": "jquery"
+  }),
+  // 将node_modules打入vendor
+  new webpack.optimize.CommonsChunkPlugin({
+    name: 'vendor',
+    minChunks: function (module) {
+      // this assumes your vendor imports exist in the node_modules directory
+      return module.context && module.context.indexOf('node_modules') !== -1;
+    }
+  }),
+  // To extract the webpack bootstrap logic into a separate file
+  // 其他打入清单
+  new webpack.optimize.CommonsChunkPlugin({
+    names: 'manifest'
   })
-
-  // new webpack.optimize.CommonsChunkPlugin({
-  //   name: 'manifest',
-  //   minChunks: Infinity
-  // })
 ];
 
 if(isPro){
   plugins = Array.prototype.concat.call(plugins,[
     new OptimizeCSSPlugin({
       cssProcessorOptions: {
-            safe: true
-          }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: function(module){
-        return module.context && module.context.indexOf("node_modules") !== -1;
+        safe: true
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
@@ -71,13 +73,12 @@ if(isPro){
 
 module.exports = {
 	entry: {
-    index: resolve("src/app.js"),
-    vendor: ['vue', 'jquery', 'vue-router']
+    index: resolve("src/app.js")
   },
 	output:{
 		path: isPro ? resolve("dist/assets") : resolve("dist"),
     publicPath: isPro ? "/assets/" : "",
-    filename: isPro ? 'js/[name].[chunkhash].js' : '[name].[chunkhash].js',
+    filename: isPro ? 'js/[name].[chunkhash].js' : '[name].[hash].js',
     chunkFilename: isPro ? 'js/[name].[chunkhash].js' : '[name].[chunkhash].js'
 	},
 	module:{

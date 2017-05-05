@@ -1,6 +1,6 @@
 <template>
 <div class="view">
-  <wlb-header :options="{title:'网利社区',rightConfigs:[{type:'share'}]}"></wlb-header>
+  <wlb-header :options="{title:'网利社区22222',rightConfigs:[{type:'share'}]}"></wlb-header>
   <user-briefly-show></user-briefly-show>
   <div class="container mt-20">
     <wlb-tab-container :initial-nav-bar-options="initialNavBarOptions" :initial-active="initialActive">
