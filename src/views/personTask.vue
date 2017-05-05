@@ -50,6 +50,15 @@ export default {
     TaskItem,
     TaskPlan
   },
+  created () {
+    this.$http({
+      url: this.$api.api_list,
+      method: 'queryBbsUserTask',
+      params: [{}]
+    }).then((res) => {
+      console.log(res)
+    })
+  },
   methods: {
     showRule () {
       this.$rulemodal.show({

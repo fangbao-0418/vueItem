@@ -20,6 +20,7 @@ function requireAuth (to, from, next) {
     const { mixinList, isApp } = store.state.bridge
     console.log(isApp, 'isApp')
     if (isApp) {
+      console.log(to.meta.name, 'to')
       mixinList.sendUserInfo((result) => {
         const sessionid = result.sessionid
         const splitArray = sessionid.split(';')
@@ -27,6 +28,19 @@ function requireAuth (to, from, next) {
           let split = splitArray[key].split('=')
           cookie.set(split[0], split[1], { path: '/', domain: '.wanglibao.com' })
         }
+        // 数据埋点
+        mixinList.firstLoadWebView({ name: to.meta.name })
+        store.dispatch('fetchLoginStatus', () => {
+          const { loginStatus } = store.state.profile
+          console.log(loginStatus)
+          if (loginStatus) {
+            return next()
+          } else {
+            return next({
+              name: 'index'
+            })
+          }
+        })
       })
       return next()
     } else {
@@ -48,13 +62,14 @@ export default {
   mode: isPro ? 'history' : 'hash',
   routes: [
     {path: '/', name: 'index', component: Index},
-    {path: '/topic/add', name: 'topicAdd', component: TopicAdd},
+    {path: '/topic/add', name: 'topicAdd', meta: { name: '新建帖子' }, component: TopicAdd, beforeEnter: requireAuth},
     {path: '/topic/detail/:id', name: 'topicDetail', component: TopicDetail},
-    {path: '/activities', name: 'activities', component: Activities},
+    {path: '/activities/:id', name: 'activities', component: Activities},
     {path: '/person', name: 'person', component: Person, beforeEnter: requireAuth},
     {path: '/person/news', name: 'personNews', component: PersonNews, beforeEnter: requireAuth},
     {path: '/person/topics', name: 'personTopics', component: PersonTopics, beforeEnter: requireAuth},
     {path: '/person/task', name: 'personTask', component: PersonTask, beforeEnter: requireAuth},
-    {path: '/person/infoedit', name: 'personInfoEdit', component: PersonInfoEdit, beforeEnter: requireAuth}
+    {path: '/person/infoedit', name: 'personInfoEdit', component: PersonInfoEdit, beforeEnter: requireAuth},
+    {path: '*', redirect: { name: 'index' }}
   ]
 }

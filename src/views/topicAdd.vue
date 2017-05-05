@@ -2,13 +2,13 @@
   <div class="view">
     <wlb-header :options="{title:'有问有答',rightConfigs:[{type:'share'}]}"></wlb-header>
     <textarea class="topic-text-content" v-model="content" placeholder="说点什么吧..."></textarea>
-    <p class="residue">你还可以输入500字</p>
+    <p class="residue">你还可以输入{{num}}字</p>
     <div class="topic-edit-foot">
       <div class="topic-edit-type">
         <span :class="['topic-edit-type-chat', {active:active}]" @click="checkType(1)">闲聊</span>
         <span :class="['topic-edit-type-ask', {active:!active}]" @click="checkType(0)">问答</span>
       </div>
-      <span class="topic-edit-sub">发表</span>
+      <span class="topic-edit-sub" @click="toPublic">发表</span>
     </div>
   </div>
 </template>
@@ -18,13 +18,43 @@
     data () {
       return {
         active: true,
-        content: ''
+        content: '',
+        num: 500
       }
+    },
+    created () {
+      this.$http({
+        url: this.$api.api_list,
+        method: 'getBbsThreadSectionList',
+        params: [{}]
+      }).then((res) => {
+        console.log(res)
+      })
     },
     methods: {
       checkType (type) {
         this.active = type
         console.log(this.active)
+      },
+      toPublic () {
+        this.$http({
+          url: this.$api.api_list,
+          method: 'BbsPublishThread',
+          params: [{
+            type_id: 1,
+            title: '网利社区',
+            content: this.content
+          }]
+        }).then((res) => {
+          console.log(res)
+        })
+      }
+    },
+    watch: {
+      content () {
+        var len = this.content.length
+        this.num = 500 - len > 0 ? 500 - len : 0
+        this.content = this.content.substring(0, 500)
       }
     },
     components: {

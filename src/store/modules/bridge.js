@@ -15,11 +15,11 @@ const actions = {
     try {
       wlb.ready({
         app (mixins) {
-          commit(types.FETCH_BRIDGE_INFO, { mixinList: mixins, isApp: true })
+          commit(types.FETCH_BRIDGE_INFO, { mixinList: mixins, isWeb: false, isApp: true })
           cb && cb()
         },
         other () {
-          commit(types.FETCH_BRIDGE_INFO, { isWeb: true })
+          commit(types.FETCH_BRIDGE_INFO, { isWeb: true, isApp: false })
           cb && cb()
         }
       })

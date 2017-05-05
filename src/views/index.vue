@@ -6,7 +6,7 @@
     <wlb-tab-container :initial-nav-bar-options="initialNavBarOptions" :initial-active="initialActive">
       <tab-container-item :key="index" :id="tabId(index)" :class="'tab-container'+parseInt(parseInt(index)+1)" v-for="(item, index) in initialNavBarOptions">
         <loadmore :top-method="loadTop" :bottom-method="loadBottom" ref="loadmore">
-          <title-bar-one :options="{title:item.title, more: '更多', targetUrl: {name: 'topicAdd'}}"></title-bar-one>
+          <title-bar-one :options="{title:item.title, more: '更多', targetUrl: {name: 'activities', params: { id: item.id}}}"></title-bar-one>
           <slider-block-one :data="ThreadTopList[index]"></slider-block-one>
           <topic-item :data="ThreadList[index]"></topic-item>
         </loadmore>

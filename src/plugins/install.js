@@ -1,5 +1,5 @@
 import { ruleModal } from '../plugins'
-import { api, http } from '../util'
+import { api, http, consts } from '../util'
 function on (type, fn) {
   const el = this.$el
   if (el.attachEvent) {
@@ -14,5 +14,6 @@ export default {
     Vue.prototype.$rulemodal = ruleModal
     Vue.prototype.$http = http
     Vue.prototype.$api = api
+    Vue.prototype.$const = consts
   }
 }

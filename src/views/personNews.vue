@@ -34,6 +34,18 @@ export default {
       }]
     }
   },
+  created () {
+    this.$http({
+      url: this.$api.api_list,
+      method: 'getBbsUserPm',
+      params: [{
+        page: 1,
+        pageNum: this.$const.BBS_USER_PM_PAGE_NUM
+      }]
+    }).then((res) => {
+      console.log(res)
+    })
+  },
   components: {
     WlbHeader,
     NewsItem

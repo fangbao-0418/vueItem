@@ -1,7 +1,7 @@
 <template>
 <transition name="fade">
   <div class="view" v-show="show" @click="cancel">
-    <div class="comment-form" @click.stop="">
+    <div class="comment-form" @click.stop="" ref="commentform">
       <div class="comment-form-head">
         <span class="comment-cancel fl" @click="cancel">取消</span>
         <span class="comment-sub fr">发表</span>
@@ -30,12 +30,11 @@
     },
     watch: {
       show (val) {
+        console.log($('body'))
         if (val) {
-          $(document).on('touchmove', function (e) {
-            e.preventDefault()
-          })
+          $('body').css('overflow', 'hidden')
         } else {
-          $(document).off('touchmove')
+          $('body').removeAttr('style')
         }
       }
     },

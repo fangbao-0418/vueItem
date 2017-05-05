@@ -26,7 +26,6 @@
   outline: none
   border-radius: .08rem
   font-size: .2rem
-  color: #9b9b9b
   height: .4rem
   width: .8rem
   margin-top: .02rem
@@ -42,6 +41,7 @@
     width: 100%
     height: 100%
   .text
+    color: #033C54
     z-index: 1
   .plan-bg
     background: #12a5e2
