@@ -37,6 +37,11 @@ var plugins = [
     jQuery: 'jquery',
     "window.jQuery": "jquery"
   })
+
+  // new webpack.optimize.CommonsChunkPlugin({
+  //   name: 'manifest',
+  //   minChunks: Infinity
+  // })
 ];
 
 if(isPro){
@@ -45,6 +50,12 @@ if(isPro){
       cssProcessorOptions: {
             safe: true
           }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: function(module){
+        return module.context && module.context.indexOf("node_modules") !== -1;
+      }
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -59,11 +70,14 @@ if(isPro){
 }
 
 module.exports = {
-	entry: resolve("src/app.js"),
+	entry: {
+    index: resolve("src/app.js"),
+    vendor: ['vue', 'jquery', 'vue-router']
+  },
 	output:{
 		path: isPro ? resolve("dist/assets") : resolve("dist"),
     publicPath: isPro ? "/assets/" : "",
-    filename: isPro ? 'js/[name].[hash].js' : '[name].[hash].js',
+    filename: isPro ? 'js/[name].[chunkhash].js' : '[name].[chunkhash].js',
     chunkFilename: isPro ? 'js/[name].[chunkhash].js' : '[name].[chunkhash].js'
 	},
 	module:{
@@ -100,8 +114,8 @@ module.exports = {
       {
         test: /\.js$/,
         use: 'babel-loader',
-        exclude: /(node_modules)/,
-        include: [resolve('src')]
+        // exclude: /node_modules/,
+        include: [resolve('src'), resolve('node_modules/jquery')]
       },
 			{
         test: /\.sass$/,

@@ -18,6 +18,13 @@ axios.interceptors.request.use(function (config) {
   return Promise.reject(error)
 })
 axios.interceptors.response.use(function (response) {
+  console.log(response, 'response')
+  if (response.data.error) {
+    var code = response.data.error.code
+    if (code === 4004) {
+      ruleModal.show({ title: '系统提示', content: '用户未登录', style: 'text-align: center' })
+    }
+  }
   return response
 }, function (error) {
   ruleModal.show({ title: '系统提示', content: '网络异常，获取数据失败', style: 'text-align: center' })

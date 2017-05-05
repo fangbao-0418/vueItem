@@ -8,7 +8,7 @@
         <span :class="['topic-edit-type-chat', {active:active}]" @click="checkType(1)">闲聊</span>
         <span :class="['topic-edit-type-ask', {active:!active}]" @click="checkType(0)">问答</span>
       </div>
-      <span class="topic-edit-sub" @click="toPublic">发表</span>
+      <span :class="['topic-edit-sub', {disable: !publicEnd || !content}]" @click="toPublic">{{publicEnd ? '发表' : '发表中...'}}</span>
     </div>
   </div>
 </template>
@@ -19,7 +19,8 @@
       return {
         active: true,
         content: '',
-        num: 500
+        num: 500,
+        publicEnd: true
       }
     },
     created () {
@@ -37,6 +38,10 @@
         console.log(this.active)
       },
       toPublic () {
+        if (this.publicEnd === false || this.content === '') {
+          return
+        }
+        this.publicEnd = false
         this.$http({
           url: this.$api.api_list,
           method: 'BbsPublishThread',
@@ -47,6 +52,15 @@
           }]
         }).then((res) => {
           console.log(res)
+          this.publicEnd = true
+          this.content = ''
+          if (res.data.result.data.isverify === 1) {
+            this.$rulemodal.show({ title: '系统提示', content: '发表成功', style: 'text-align: center' })
+          }
+          if (res.data.result.data.isverify === 0) {
+            this.$rulemodal.show({ title: '系统提示', content: '已提交后台审核', style: 'text-align: center' })
+          }
+          // if (res.data.error.code === 4004)
         })
       }
     },
@@ -129,4 +143,6 @@
         font-size: .3rem
         color: #12A5E2
         letter-spacing: 0
+      .disable
+        color: #ccc
 </style>
