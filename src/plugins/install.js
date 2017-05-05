@@ -1,4 +1,4 @@
-import { ruleModal } from '../plugins'
+import * as plugins from '../plugins'
 import { api, http, consts } from '../util'
 function on (type, fn) {
   const el = this.$el
@@ -11,7 +11,8 @@ function on (type, fn) {
 export default {
   install (Vue, options) {
     Vue.prototype.v_on = on
-    Vue.prototype.$rulemodal = ruleModal
+    Vue.prototype.$rulemodal = plugins.ruleModal
+    Vue.prototype.$plugin = plugins
     Vue.prototype.$http = http
     Vue.prototype.$api = api
     Vue.prototype.$const = consts

@@ -50,21 +50,7 @@ const actions = {
       commit(types.CHANGE_UNREAD_STATUS, res[1].data.result.data.num > 0)
       commit(types.FETCH_BBS_USER_INFO, res[2].data.result.data)
     })
-  },
-  // 获取用户帖子
-  fetchBbsUserThread ({ commit }, page) {
-    http({
-      url: api.api_list,
-      method: 'getBbsUserThread',
-      params: [{
-        pageNum: 5,
-        page: page
-      }]
-    }).then((res) => {
-      console.log(res)
-    })
   }
-  // 获取我的任务
 }
 
 const mutations = {

@@ -18,9 +18,10 @@ axios.interceptors.request.use(function (config) {
   return Promise.reject(error)
 })
 axios.interceptors.response.use(function (response) {
-  console.log(response, 'response')
   if (response.data.error) {
-    loading.show(false)
+    if (loading.visible) {
+      loading.show(false)
+    }
     var code = response.data.error.code
     console.log(code, 'code')
     if (code === 4004) {

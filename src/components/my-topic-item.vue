@@ -1,17 +1,17 @@
 <template>
-  <div class="post-item mt-20 bg-color-white" :class="{'mt':index == 0}">
+  <router-link :to="{name: 'topicDetail', params: { id: postItem.id }}" class="post-item mt-20 bg-color-white" :class="{'mt':index === 0}" tag="div">
     <div class="post-header">
       <span class="post-title" v-text="postItem.title"></span>
       <span class="post-content" v-text="postItem.content"></span>
     </div>
     <div class="post-foot">
       <p class="fl">
-        <span class="post-hits">查看({{postItem.hits}})</span>
-        <span class="post-comment-num">评论({{postItem.comment}})</span>
+        <span class="post-hits">查看({{postItem.views}})</span>
+        <span class="post-comment-num">评论({{postItem.comment_num}})</span>
       </p>
-      <div class="fr" v-text="postItem.time">2017-03-31 14:29</div>
+      <div class="fr" v-text="postItem.updated_at">2017-03-31 14:29</div>
     </div>
-  </div>
+  </router-link>
 </template>
 <script>
 export default {

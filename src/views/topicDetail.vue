@@ -5,6 +5,7 @@
   <div class="view" type="share">
     <wlb-header>
       <span slot="title">帖子详情</span>
+      <share-icon slot="right"></share-icon>
     </wlb-header>
     <div class="container bg-color-white">
       <div class="topic-head">
@@ -115,7 +116,7 @@
 </template>
 <script>
   import bus from '../bus'
-  import { WlbHeader, CommentFormModal } from '../components'
+  import { WlbHeader, CommentFormModal, ShareIcon } from '../components'
   export default {
     data () {
       return {
@@ -134,7 +135,8 @@
     },
     components: {
       WlbHeader,
-      CommentFormModal
+      CommentFormModal,
+      ShareIcon
     }
   }
 </script>

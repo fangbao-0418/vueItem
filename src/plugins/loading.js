@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import { loading } from '../components'
-var Vm = Vue.extend(loading)
+import { Loading } from '../components'
+var Vm = Vue.extend(Loading)
 
 var Instance = new Vm({
   el: document.createElement('div')
