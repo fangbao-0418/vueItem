@@ -62,15 +62,27 @@ const actions = {
           params: [{
             id: state.topicBoards[state.navbar_select_index]['id']
           }]
+        },
+        {
+          url: api.api_list,
+          method: 'getBbsUserInfo',
+          params: [{}]
         }
       ]).then((res) => {
         var ThreadTopList = []
         var ThreadList = []
-        ThreadTopList[state.navbar_select_index] = res[0].data.result.data
-        ThreadList[state.navbar_select_index] = res[1].data.result.data.list
+        if (res[0].data.result) {
+          ThreadTopList[state.navbar_select_index] = res[0].data.result.data
+        }
+        if (res[1].data.result) {
+          ThreadList[state.navbar_select_index] = res[1].data.result.data.list
+        }
         var data = {
           ThreadTopList,
           ThreadList
+        }
+        if (res[2].data.result) {
+          commit(types.FETCH_BBS_USER_INFO, res[2].data.result.data)
         }
         commit(types.FETCH_BBS_HOME_DATA, data)
         loading.show(false)
@@ -98,8 +110,12 @@ const actions = {
     ]).then((res) => {
       var ThreadTopList = []
       var ThreadList = []
-      ThreadTopList[state.navbar_select_index] = res[0].data.result.data
-      ThreadList[state.navbar_select_index] = res[1].data.result.data.list
+      if (res[0].data.result) {
+        ThreadTopList[state.navbar_select_index] = res[0].data.result.data
+      }
+      if (res[1].data.result) {
+        ThreadList[state.navbar_select_index] = res[1].data.result.data.list
+      }
       var data = {
         ThreadTopList,
         ThreadList

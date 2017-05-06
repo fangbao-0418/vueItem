@@ -10,17 +10,15 @@
     <div class="container bg-color-white">
       <div class="topic-head">
         <div class="topic-avatar mr-20">
-          <img src="../imgs/avatar_big.png" alt="">
+          <img :src="item.users.head_img" v-if="item.users"/>
         </div>
         <div class="topic-info">
-          <p><span class="topic-author">Beforsee</span></p>
-          <p><span class="topic-time">2017-05-02 15:30</span></p>
+          <p><span class="topic-author">{{item.title}}</span></p>
+          <p><span class="topic-time">{{item.updated_at}}</span></p>
         </div>
       </div>
       <div class="topic-content mt-20">
-        <p>
-          在经济增长趋缓和去杠杆的大背景下，利润增速下滑实属正常，不必过度解读。” 中国社科院金融所银行研究室主任曾刚说，这几年，我国银行业已经走出高增长的“黄金时代”，步入平稳增长阶段。考虑到实体经济仍然处于调整期，这一趋势还将延续，但即便如此，银行的绝对盈利额还是很大的。
-        </p>
+        <p>{{item.content}}</p>
       </div>
     </div>
     <div class="comment-area mt-20 bg-color-white">
@@ -111,7 +109,7 @@
         <span>说点什么吧~</span>
       </div>
     </div>
-    <comment-form-modal :show="show"></comment-form-modal>
+    <comment-form-modal :show="show" :id="id"></comment-form-modal>
   </div>
 </template>
 <script>
@@ -120,8 +118,29 @@
   export default {
     data () {
       return {
-        show: false
+        show: false,
+        item: {},
+        commentList: []
       }
+    },
+    computed: {
+      id () {
+        return parseInt(this.$route.params.id)
+      }
+    },
+    created () {
+      this.$plugin.loading.show(true, 'full')
+      this.$http({
+        url: this.$api.api_list,
+        method: 'getBbsThreadDetail',
+        params: [{
+          id: this.id
+        }]
+      }).then((res) => {
+        this.item = res.data.result.data.thread_info
+        this.commentList = res.data.result.data.comment_list
+        this.$plugin.loading.show(false)
+      })
     },
     mounted () {
       bus.$on('comment-cancel', () => {
@@ -172,6 +191,7 @@
     .topic-content
       margin-left: .5rem
       p
+        white-space: pre-wrap
         font-family: PingFangSC-Regular
         font-size: .3rem
         line-height: .42rem

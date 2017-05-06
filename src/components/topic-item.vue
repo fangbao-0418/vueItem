@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="topic-item bg-color-white mb-20" v-for="(item, index) in data">
+    <div :key="index" class="topic-item bg-color-white mb-20" v-for="(item, index) in data">
       <div class="tags">
         <topic-tags></topic-tags>
       </div>
-      <div class="topic-avatar"><img src="../imgs/avatar_small.png" /></div>
+      <div class="topic-avatar"><img :src="item.users.head_img" /></div>
       <div class="topic-main">
         <p class="topic-tit">{{item.title}}</p>
         <p class="topic-ago">12分钟前</p>

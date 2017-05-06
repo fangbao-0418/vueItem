@@ -12,7 +12,7 @@
         </loadmore>
       </tab-container-item>
       <!-- <tab-container-item id="tab-container2">
-        <title-bar-one :options="{title:'精选问答', more: '更多问答', targetUrl: {name: 'topicAdd'}}"></title-bar-one>
+        <title-bar-one :options="{title:'精选问答', more: '问答', targetUrl: {name: 'topicAdd'}}"></title-bar-one>
         <slider-block-one></slider-block-one>
         <topic-item></topic-item>
       </tab-container-item>
@@ -23,7 +23,7 @@
       </tab-container-item> -->
     </wlb-tab-container>
   </div>
-  <public-comment-icon></public-comment-icon>
+  <public-comment-icon v-if="loginStatus"></public-comment-icon>
 </div>
 </template>
 <script>
@@ -45,7 +45,10 @@ export default {
         console.log(state.topic['ThreadList'], 'ThreadList')
         return state.topic['ThreadList']
       }
-    })
+    }),
+    loginStatus () {
+      return this.$store.state.profile.loginStatus
+    }
   },
   created () {
     this.$store.dispatch('fetchBbsHomeData')

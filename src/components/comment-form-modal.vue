@@ -4,7 +4,7 @@
     <div class="comment-form" @click.stop="" ref="commentform">
       <div class="comment-form-head">
         <span class="comment-cancel fl" @click="cancel">取消</span>
-        <span class="comment-sub fr">发表</span>
+        <span :class="['comment-sub fr', {disable: !publicEnd || !content}]" @click="toPublic">{{publicEnd?'发表':'发表中...'}}</span>
       </div>
       <textarea class="comment-text-content" v-model="content" placeholder="说点什么吧..."></textarea>
     </div>
@@ -18,11 +18,15 @@
       show: {
         type: Boolean,
         default: false
+      },
+      id: {
+        type: Number
       }
     },
     data () {
       return {
-        content: ''
+        content: '',
+        publicEnd: true
       }
     },
     mounted () {
@@ -41,6 +45,31 @@
     methods: {
       cancel () {
         bus.$emit('comment-cancel')
+      },
+      toPublic () {
+        if (this.publicEnd === false || this.content === '') {
+          return
+        }
+        this.publicEnd = false
+        this.$http({
+          url: this.$api.api_list,
+          method: 'BbsPublishComment',
+          params: [{
+            id: this.id,
+            content: this.content
+          }]
+        }).then((res) => {
+          this.publicEnd = true
+          this.content = ''
+          if (res.data.result.data.isverify === 1) {
+            this.$rulemodal.show({ content: '评论提交成功，请等待后台审核', style: 'text-align: center' })
+          } else if (res.data.result.data.isverify === 0) {
+            this.$rulemodal.show({ content: '评论成功', style: 'text-align: center' })
+          } else {
+            this.$rulemodal.show({ content: '评论失败', style: 'text-align: center' })
+          }
+          this.cancel()
+        })
       }
     }
   }
@@ -87,6 +116,8 @@
         font-size: .3rem
         color: #12A5E2
         letter-spacing: 0
+      .disable
+        color: #ccc
     .comment-text-content
       padding: 0 .3rem
       width: 6.9rem
