@@ -35,6 +35,17 @@
         console.log(res)
       })
     },
+    mounted  () {
+      // $('.topic-text-content').on('focus', function (event) {
+      //   // 自动反弹 输入法高度自适应
+      //   var target = this
+      //   setTimeout(function () {
+      //     console.log($('.topic-edit-foot'))
+      //     // target.scrollIntoViewIfNeeded()
+      //     // $('.topic-edit-foot')[0].scrollIntoView()
+      //   }, 100)
+      // })
+    },
     methods: {
       checkType (type) {
         this.active = type
@@ -83,7 +94,7 @@
   .view
     background: #fff
     width: 100%
-    height: 100%
+    height: 100%    
     .topic-text-content
       display: block
       width: 6.9rem
@@ -116,6 +127,7 @@
       padding: 0 .3rem
       height: .8rem
       box-sizing: border-box
+      z-index: 1
       &::before
         display: block
         content: ''

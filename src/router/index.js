@@ -71,5 +71,8 @@ export default {
     {path: '/person/task', name: 'personTask', component: PersonTask, beforeEnter: requireAuth},
     {path: '/person/infoedit', name: 'personInfoEdit', component: PersonInfoEdit, beforeEnter: requireAuth},
     {path: '*', redirect: { name: 'index' }}
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 }

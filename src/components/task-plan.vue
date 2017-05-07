@@ -31,7 +31,10 @@
             taskType: this.data.taskType
           }]
         }).then((res) => {
-          console.log(res)
+          if (res.data.result) {
+            var message = res.data.result.message
+            this.$rulemodal.show({ content: message, style: 'text-align: center' })
+          }
         })
       }
     }

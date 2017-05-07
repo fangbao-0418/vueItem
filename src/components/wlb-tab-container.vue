@@ -25,7 +25,7 @@
     },
     data () {
       return {
-        swipeable: true,
+        swipeable: false,
         active: this.initialActive,
         startx: 0,
         endx: 0,
