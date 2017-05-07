@@ -60,6 +60,9 @@ function requireAuth (to, from, next) {
 const isPro = process.env.NODE_ENV.trim() === 'production'
 export default {
   mode: isPro ? 'history' : 'hash',
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  },
   routes: [
     {path: '/', name: 'index', component: Index},
     {path: '/topic/add', name: 'topicAdd', meta: { name: '新建帖子' }, component: TopicAdd, beforeEnter: requireAuth},
@@ -71,8 +74,5 @@ export default {
     {path: '/person/task', name: 'personTask', component: PersonTask, beforeEnter: requireAuth},
     {path: '/person/infoedit', name: 'personInfoEdit', component: PersonInfoEdit, beforeEnter: requireAuth},
     {path: '*', redirect: { name: 'index' }}
-  ],
-  scrollBehavior (to, from, savedPosition) {
-    return { x: 0, y: 0 }
-  }
+  ]
 }
