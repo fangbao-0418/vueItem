@@ -7,7 +7,7 @@
       <div class="topic-avatar"><img :src="item.users.head_img" /></div>
       <div class="topic-main">
         <p class="topic-tit">{{item.title}}</p>
-        <p class="topic-ago">12分钟前</p>
+        <p class="topic-ago">{{item.updated_at}}</p>
         <p class="topic-content">{{item.content}}</p>
         <div class="topic-comment">
           <p class="topic-comment-item mt-20">

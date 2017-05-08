@@ -7,15 +7,13 @@ import 'swiper/dist/css/swiper'
 import './util/reset'
 import plugins from './plugins/install'
 import store from './store'
+import filters from './filters'
 Vue.use(plugins)
 Vue.use(VueRouter)
 const router = new VueRouter(routerConfig)
 
-// router.beforeEach((to, from, next) => {
-//   return next()
-// })
-
 new Vue({
   router,
-  store
+  store,
+  filters
 }).$mount('#root')
