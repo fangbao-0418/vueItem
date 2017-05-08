@@ -1,10 +1,11 @@
 var Location = window.location
-var isPro = process.env.NODE_ENV.trim() === 'production'
+// var isPro = process.env.NODE_ENV.trim() === 'production'
+var isPro = true
 var host, api
-if (!isPro) {
+if (isPro) {
   host = 'https://php1.wanglibao.com'
   if (Location.hostname.indexOf('wanglibao.com') > -1) {
-    host = Location.host
+    host = 'https://' + Location.host
   }
   api = {
     host: host,
