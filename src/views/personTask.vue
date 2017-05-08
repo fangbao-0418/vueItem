@@ -8,37 +8,14 @@
     </wlb-header>
     <div class="task-container bg-color-white" :key="index" v-for="(item, index) in data">
       <div class="task-title mt-30">
-        <div class="day-task title">{{index === 'day' ? '今日任务' : '成就任务'}}</div>
+        <div :class="[{ 'day-task': index === 'day' }, { 'new-task': index !== 'day' }, 'title']">{{index === 'day' ? '今日任务' : '成就任务'}}</div>
         <span class="rule" @click="showRule()">任务规则</span>
       </div>
       <task-item :key="index2" v-for="(item2, index2) in item">
         <span class="task-image-1" slot="image"></span>
         <span slot="task">{{item2.description}}</span>
-        <span slot="award">{{item2.award}}</span>
+        <span slot="award">{{item2.award}}</span>      
         <task-plan :data="item2" slot="right"></task-plan>
-      </task-item>
-      <!-- <task-item>
-        <span class="task-image-2" slot="image"></span>
-        <span slot="task">收到3条评价</span>
-        <span slot="award">奖励999元体验金</span>
-        <task-plan :rate="current/finish" slot="right"></task-plan>
-      </task-item> -->
-    </div>
-    <div class="task-container bg-color-white">
-      <div class="task-title mt-30">
-        <div class="new-task title">新手任务</div>
-        <span class="rule" @click="showRule()">任务规则</span>
-      </div>
-      <task-item>
-        <span class="task-image-1" slot="image"></span>
-        <span slot="task">发帖子1篇</span>
-        <span slot="award">奖励999元体验金</span>
-      </task-item>
-      <task-item>
-        <span class="task-image-2" slot="image"></span>
-        <span slot="task">收到3条评价</span>
-        <span slot="award">奖励999元体验金</span>
-        <button class="task-btn btn-bg" slot="right">领取</button>
       </task-item>
     </div>
   </div>

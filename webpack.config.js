@@ -77,7 +77,7 @@ module.exports = {
   },
 	output:{
 		path: isPro ? resolve("dist/assets") : resolve("dist"),
-    publicPath: isPro ? "/assets/" : "",
+    publicPath: isPro ? "/bbs/assets/" : "",
     filename: isPro ? 'js/[name].[chunkhash].js' : '[name].[hash].js',
     chunkFilename: isPro ? 'js/[name].[chunkhash].js' : '[name].[chunkhash].js'
 	},

@@ -64,7 +64,7 @@ export default {
     return savedPosition || { x: 0, y: 0 }
   },
   routes: [
-    {path: '/:navigator', name: 'index', props: { name: 'name' }, component: Index},
+    {path: '/', name: 'index', props: { name: 'name' }, component: Index},
     {path: '/topic/add', name: 'topicAdd', meta: { name: '新建帖子' }, component: TopicAdd, beforeEnter: requireAuth},
     {path: '/topic/detail/:id', name: 'topicDetail', component: TopicDetail},
     {path: '/activities/:id', name: 'activities', component: Activities},
