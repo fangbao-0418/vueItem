@@ -60,6 +60,7 @@ function requireAuth (to, from, next) {
 const isPro = process.env.NODE_ENV.trim() === 'production'
 export default {
   mode: isPro ? 'history' : 'hash',
+  base: '/bbs/',
   scrollBehavior (to, from, savedPosition) {
     return savedPosition || { x: 0, y: 0 }
   },
