@@ -10,6 +10,11 @@ import store from './store'
 Vue.use(plugins)
 Vue.use(VueRouter)
 const router = new VueRouter(routerConfig)
+
+// router.beforeEach((to, from, next) => {
+//   return next()
+// })
+
 new Vue({
   router,
   store

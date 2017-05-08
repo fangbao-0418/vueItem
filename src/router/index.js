@@ -61,10 +61,10 @@ const isPro = process.env.NODE_ENV.trim() === 'production'
 export default {
   mode: isPro ? 'history' : 'hash',
   scrollBehavior (to, from, savedPosition) {
-    return { x: 0, y: 0 }
+    return savedPosition || { x: 0, y: 0 }
   },
   routes: [
-    {path: '/', name: 'index', component: Index},
+    {path: '/:navigator', name: 'index', props: { name: 'name' }, component: Index},
     {path: '/topic/add', name: 'topicAdd', meta: { name: '新建帖子' }, component: TopicAdd, beforeEnter: requireAuth},
     {path: '/topic/detail/:id', name: 'topicDetail', component: TopicDetail},
     {path: '/activities/:id', name: 'activities', component: Activities},

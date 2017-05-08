@@ -52,6 +52,7 @@
         console.log(this.active)
       },
       toPublic () {
+        this.content = this.content.toString()
         if (this.publicEnd === false || this.content === '') {
           return
         }
@@ -65,7 +66,6 @@
             content: this.content
           }]
         }).then((res) => {
-          console.log(res)
           this.publicEnd = true
           this.content = ''
           if (res.data.result.data.isverify === 1) {
@@ -94,7 +94,7 @@
   .view
     background: #fff
     width: 100%
-    height: 100%    
+    height: 100%
     .topic-text-content
       display: block
       width: 6.9rem

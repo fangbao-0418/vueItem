@@ -77,7 +77,7 @@ module.exports = {
   },
 	output:{
 		path: isPro ? resolve("dist/assets") : resolve("dist"),
-    publicPath: isPro ? "/assets/" : "",
+    publicPath: isPro ? "/bbs/assets/" : "",
     filename: isPro ? 'js/[name].[chunkhash].js' : '[name].[hash].js',
     chunkFilename: isPro ? 'js/[name].[chunkhash].js' : '[name].[chunkhash].js'
 	},
@@ -175,8 +175,8 @@ module.exports = {
 		},
 		//启用gzip压缩一切服务:
 		//compress: true,
-		// host: "0.0.0.0",
-    host: "192.168.10.123",
+		host: "0.0.0.0",
+    // host: "192.168.10.123",
     port: "3001"
 	},
 	resolve: {
