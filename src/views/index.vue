@@ -11,16 +11,6 @@
           <topic-item :data="ThreadList[index]"></topic-item>
         </loadmore>
       </tab-container-item>
-      <!-- <tab-container-item id="tab-container2">
-        <title-bar-one :options="{title:'精选问答', more: '问答', targetUrl: {name: 'topicAdd'}}"></title-bar-one>
-        <slider-block-one></slider-block-one>
-        <topic-item></topic-item>
-      </tab-container-item>
-      <tab-container-item id="tab-container3">
-        <title-bar-one :options="{title:'网利活动', more: '更多活动', targetUrl: {name: 'activities'}}"></title-bar-one>
-        <slider-block-one></slider-block-one>
-        <topic-item></topic-item>
-      </tab-container-item> -->
     </wlb-tab-container>
   </div>
   <public-comment-icon v-if="loginStatus"></public-comment-icon>
@@ -67,10 +57,6 @@ export default {
     Loadmore
   },
   methods: {
-    sub () {
-      console.log(this.$refs.profile.innerText)
-      alert(this.$refs.profile.innerText)
-    },
     tabId (index) {
       return 'tab-container' + (parseInt(index) + 1)
     },

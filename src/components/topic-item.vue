@@ -2,7 +2,7 @@
   <div>
     <div :key="index" class="topic-item bg-color-white mb-20" v-for="(item, index) in data">
       <div class="tags">
-        <topic-tags></topic-tags>
+        <topic-tags :tags="{ ishot: item.ishot, isgreat: item.isgreat }"></topic-tags>
       </div>
       <div class="topic-avatar"><img :src="item.users.head_img" /></div>
       <div class="topic-main">
@@ -10,13 +10,9 @@
         <p class="topic-ago">{{item.updated_at | handleDate}}</p>
         <p class="topic-content">{{item.content}}</p>
         <div class="topic-comment">
-          <p class="topic-comment-item mt-20">
-            <span>人民日报</span><em>:</em>
-            是经济下行压力加大，企业的有效信贷需求是经济下行压力加大，企业的有效信贷需求
-          </p>
-          <p class="topic-comment-item mt-20">
-            <span>不二之选</span><em>:</em>
-            是经济下行压力加大，企业的有效信贷需求是经济下行压力加大，企业的有效信贷需求
+          <p class="topic-comment-item mt-20" v-if="item.comments" v-for="(comment, index2) in item.comments">
+            <span>{{comment.id}}</span><em>:</em>
+            {{comment.content}}
           </p>
         </div>
         <div class="topic-foot mt-30">
@@ -38,7 +34,15 @@
         type: Array
       }
     },
-    mounted () {
+    computed: {
+      myData () {
+        return this.data
+      }
+    },
+    watch: {
+      data () {
+        console.log(this.data, this.$store.state.topic['navbar_select_index'])
+      }
     },
     components: {
       TopicTags

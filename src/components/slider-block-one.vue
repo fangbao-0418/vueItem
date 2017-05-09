@@ -3,14 +3,14 @@
     <div :class="['swiper-container', swiperClassName]">
       <div class="swiper-wrapper">
 
-        <div class="swiper-slide" v-for="(item, index) in data">
+        <router-link key="index" :to="{ name: 'topicDetail', params: { id: item.id } }" class="swiper-slide" v-for="(item, index) in data" tag="div">
           <div class="banner">
-            <div class="tags">
+            <!-- <div class="tags">
               <topic-tags></topic-tags>
-            </div>
-            <img src="../imgs/banner1.png" />
+            </div> -->
+            <img :src="item.cover" />
           </div>
-        </div>
+        </router-link>
 
       </div>
     </div>

@@ -8,7 +8,8 @@ const state = {
   initial_active: 'tab-container1',
   home_data: [],
   ThreadTopList: [],
-  ThreadList: []
+  ThreadList: [],
+  homeDataLoaded: []
 }
 const getters = {
   doneTopicBoards (state) {
@@ -20,9 +21,7 @@ const getters = {
       item['checked'] = parseInt(state.navbar_select_index) === parseInt(i)
       arr.push(item)
     }
-    console.log(arr)
     return arr
-    // return [{ title: '22', checked: true }]
   },
   initialActive (state) {
     return state.initial_active
@@ -91,6 +90,10 @@ const actions = {
   },
   // 更新帖子列表数据
   updateTopicListData ({ state, commit }, id) {
+    if (state.homeDataLoaded[state.navbar_select_index]) {
+      console.log(state.ThreadList, 'ThreadList', [state.navbar_select_index])
+      // return
+    }
     loading.show(true)
     http([
       {
@@ -121,6 +124,7 @@ const actions = {
         ThreadList
       }
       commit(types.FETCH_BBS_HOME_DATA, data)
+      commit(types.HOME_DATA_LOADED, true)
       loading.show(false)
     })
   }
@@ -134,9 +138,11 @@ const mutations = {
     state.initial_active = 'tab-container' + (parseInt(index) + 1)
   },
   [types.FETCH_BBS_HOME_DATA] (state, data) {
-    console.log(data, 'data')
     state.ThreadTopList = data['ThreadTopList']
     state.ThreadList = data['ThreadList']
+  },
+  [types.HOME_DATA_LOADED] (state, data) {
+    state.homeDataLoaded[state.navbar_select_index] = true
   }
 }
 export default {
