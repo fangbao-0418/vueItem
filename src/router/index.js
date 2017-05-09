@@ -18,7 +18,7 @@ const Activities = resolve => require(['../views/activityList'], resolve)
 function requireAuth (to, from, next) {
   store.dispatch('fetchBridgeInfo', () => {
     const { mixinList, isApp } = store.state.bridge
-    console.log(isApp, 'isApp')
+    alert(isApp, 'isApp')
     if (isApp) {
       mixinList.sendUserInfo((result) => {
         const sessionid = result.sessionid
