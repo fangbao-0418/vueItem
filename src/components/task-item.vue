@@ -1,6 +1,6 @@
 <template>
   <div class="task-item border">
-    <div class="task-image"><slot name="image" ></slot></div>
+    <div class="task-image-area"><slot name="image" ></slot></div>
     <div class="task-content">
       <span class="task-des mb-10"><slot name="task"></slot></span>
       <span class="task-award"><slot name="award"></slot></span>
@@ -19,7 +19,7 @@ export default {
 .task-item
   padding: .3rem .4rem .3rem .3rem
   overflow: hidden
-  .task-image
+  .task-image-area
     float: left
     padding-right: .33rem
     width: .44rem

@@ -3,14 +3,14 @@
     <div :class="['swiper-container', swiperClassName]">
       <div class="swiper-wrapper">
 
-        <router-link key="index" :to="{ name: 'topicDetail', params: { id: item.id } }" class="swiper-slide" v-for="(item, index) in data" tag="div">
+        <div class="swiper-slide" v-for="(item, index) in data" >
           <div class="banner">
             <!-- <div class="tags">
               <topic-tags></topic-tags>
             </div> -->
             <img :src="item.cover" />
           </div>
-        </router-link>
+        </div>
 
       </div>
     </div>
@@ -31,7 +31,7 @@
       }
     },
     mounted () {
-      Swiper('.swiper-container', {
+      var swiper = Swiper('.swiper-container', {
         slidesPerView: 'auto',
         grabCursor: true,
         // resistanceRatio: 0,
@@ -42,6 +42,7 @@
         freeModeMomentum: false, // free模式动量。free模式下，若设置为false则关闭动量，释放slide之后立即停止不会滑动。
         preloadImages: false // 默认为true，Swiper会强制加载所有图片。
       })
+      console.log(swiper)
     },
     components: {
       TopicTags

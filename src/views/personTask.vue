@@ -8,13 +8,13 @@
     </wlb-header>
     <div class="task-container bg-color-white" :key="index" v-for="(item, index) in data">
       <div class="task-title mt-30">
-        <div :class="[{ 'day-task': index === 'day' }, { 'new-task': index !== 'day' }, 'title']">{{index === 'day' ? '今日任务' : '成就任务'}}</div>
+        <div :class="[{ 'day-task': item.task === 'day' }, { 'new-task': item.task !== 'day' }, 'title']">{{item.title}}</div>
         <span class="rule" @click="showRule()">任务规则</span>
       </div>
-      <task-item :key="index2" v-for="(item2, index2) in item">
-        <span class="task-image-1" slot="image"></span>
+      <task-item :key="index2" v-for="(item2, index2) in item.list">
+        <img :src="item2.icon" class="task-image" slot="image" />
         <span slot="task">{{item2.description}}</span>
-        <span slot="award">{{item2.award}}</span>      
+        <span slot="award">{{item2.award}}</span>
         <task-plan :data="item2" slot="right"></task-plan>
       </task-item>
     </div>
@@ -80,16 +80,10 @@ export default {
     font-size: .18rem
     color: #A1AFB4
     letter-spacing: 0
-  .task-image-1
+  .task-image
     float: left
     width: .44rem
     height: .44rem
-    background: url('../imgs/icon_post.png') no-repeat 0 0 / .44rem .44rem
-  .task-image-2
-    float: left
-    width: .44rem
-    height: .44rem
-    background: url('../imgs/icon_comment.png') no-repeat 0 0 / .44rem .44rem
   .task-btn
     padding: 0
     border: none

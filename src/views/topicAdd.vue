@@ -3,16 +3,20 @@
  */
 <template>
   <div class="view">
-    <wlb-header :options="{title:'有问有答',rightConfigs:[{type:'share'}]}"></wlb-header>
+    <wlb-header :options="{ title: boardName }">
+      <span slot="right" :class="['rightButton', {disable: !publicEnd || !content}]" @click="toPublic">{{publicEnd ? '发表' : '发表中...'}}</span>
+    </wlb-header>
+    <!-- <input class="topic-text-title" v-model="title" palceholder="请输入发帖标题"/>
+    <div class="line"></div> -->
     <textarea class="topic-text-content" v-model="content" placeholder="说点什么吧..."></textarea>
     <p class="residue">你还可以输入{{num}}字</p>
-    <div class="topic-edit-foot">
+    <!-- <div class="topic-edit-foot">
       <div class="topic-edit-type">
         <span :class="['topic-edit-type-chat', {active:active}]" @click="checkType(1)">闲聊</span>
         <span :class="['topic-edit-type-ask', {active:!active}]" @click="checkType(0)">问答</span>
       </div>
       <span :class="['topic-edit-sub', {disable: !publicEnd || !content}]" @click="toPublic">{{publicEnd ? '发表' : '发表中...'}}</span>
-    </div>
+    </div> -->
   </div>
 </template>
 <script type="text/javascript">
@@ -21,30 +25,25 @@
     data () {
       return {
         active: true,
+        title: '',
         content: '',
         num: 500,
         publicEnd: true
       }
     },
+    computed: {
+      boardName () {
+        return this.$route.params.name
+      }
+    },
     created () {
-      this.$http({
-        url: this.$api.api_list,
-        method: 'getBbsThreadSectionList',
-        params: [{}]
-      }).then((res) => {
-        console.log(res)
-      })
+      if (!this.$route.params.id) {
+        this.$router.replace({
+          name: 'index'
+        })
+      }
     },
     mounted  () {
-      // $('.topic-text-content').on('focus', function (event) {
-      //   // 自动反弹 输入法高度自适应
-      //   var target = this
-      //   setTimeout(function () {
-      //     console.log($('.topic-edit-foot'))
-      //     // target.scrollIntoViewIfNeeded()
-      //     // $('.topic-edit-foot')[0].scrollIntoView()
-      //   }, 100)
-      // })
     },
     methods: {
       checkType (type) {
@@ -61,20 +60,21 @@
           url: this.$api.api_list,
           method: 'BbsPublishThread',
           params: [{
-            type_id: 1,
+            type_id: this.$route.params.id,
             title: '网利社区',
             content: this.content
           }]
         }).then((res) => {
           this.publicEnd = true
           this.content = ''
-          if (res.data.result.data.isverify === 1) {
-            this.$rulemodal.show({ title: '系统提示', content: '发表成功', style: 'text-align: center' })
+          if (res.data.result) {
+            if (res.data.result.data.isverify === 1) {
+              this.$rulemodal.show({ title: '系统提示', content: '发表成功', style: 'text-align: center' })
+            }
+            if (res.data.result.data.isverify === 0) {
+              this.$rulemodal.show({ title: '系统提示', content: '已提交后台审核', style: 'text-align: center' })
+            }
           }
-          if (res.data.result.data.isverify === 0) {
-            this.$rulemodal.show({ title: '系统提示', content: '已提交后台审核', style: 'text-align: center' })
-          }
-          // if (res.data.error.code === 4004)
         })
       }
     },
@@ -95,6 +95,23 @@
     background: #fff
     width: 100%
     height: 100%
+    .rightButton
+      font-family: PingFangSC-Regular
+      font-size: .26rem
+      color: #FFFFFF
+      letter-spacing: 0
+    .disable
+      color: #ccc
+    .topic-text-title
+      width: 6.9rem
+      padding: 0 .3rem
+      height: 1rem
+      border: 0
+      font-family: PingFangSC-Light
+      font-size: .36rem
+      color: #9B9B9B
+    .line
+      border-bottom: 1px solid #E5E5E5
     .topic-text-content
       display: block
       width: 6.9rem
@@ -158,6 +175,4 @@
         font-size: .3rem
         color: #12A5E2
         letter-spacing: 0
-      .disable
-        color: #ccc
 </style>

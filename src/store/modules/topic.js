@@ -34,7 +34,9 @@ const actions = {
       method: 'getBbsThreadSectionList',
       params: [{}]
     }).then((res) => {
-      commit(types.FETCH_TOPIC_BOARDS, res.data.result.data)
+      if (res.data.result) {
+        commit(types.FETCH_TOPIC_BOARDS, res.data.result.data)
+      }
       callback && callback()
     })
   },
@@ -43,6 +45,9 @@ const actions = {
   },
   // 获取社区首页数据
   fetchBbsHomeData ({ state, commit, dispatch }) {
+    if (state.homeDataLoaded[state.navbar_select_index]) {
+      return
+    }
     loading.show(true, 'full')
     dispatch('fetchLoginStatus') // 获取登录状态
     // 获取板块
@@ -84,6 +89,7 @@ const actions = {
           commit(types.FETCH_BBS_USER_INFO, res[2].data.result.data)
         }
         commit(types.FETCH_BBS_HOME_DATA, data)
+        commit(types.HOME_DATA_LOADED, true)
         loading.show(false)
       })
     })
@@ -92,7 +98,7 @@ const actions = {
   updateTopicListData ({ state, commit }, id) {
     if (state.homeDataLoaded[state.navbar_select_index]) {
       console.log(state.ThreadList, 'ThreadList', [state.navbar_select_index])
-      // return
+      return
     }
     loading.show(true)
     http([
@@ -113,6 +119,10 @@ const actions = {
     ]).then((res) => {
       var ThreadTopList = []
       var ThreadList = []
+      for (var i in state.topicBoards) {
+        ThreadTopList[i] = state.ThreadTopList[i]
+        ThreadList[i] = state.ThreadList[i]
+      }
       if (res[0].data.result) {
         ThreadTopList[state.navbar_select_index] = res[0].data.result.data
       }

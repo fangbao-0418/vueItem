@@ -6,8 +6,10 @@
     <wlb-tab-container :initial-nav-bar-options="initialNavBarOptions" :initial-active="initialActive">
       <tab-container-item :key="index" :id="tabId(index)" :class="'tab-container'+parseInt(parseInt(index)+1)" v-for="(item, index) in initialNavBarOptions">
         <loadmore :top-method="loadTop" :bottom-method="loadBottom" ref="loadmore">
-          <title-bar-one :options="{title:item.title, more: '更多', targetUrl: {name: 'activities', params: { id: item.id}}}"></title-bar-one>
-          <slider-block-one :data="ThreadTopList[index]"></slider-block-one>
+          <div v-if="ThreadTopList[index] && ThreadTopList[index].length">
+            <title-bar-one :options="{title:item.title, more: '更多', targetUrl: {name: 'activities', params: { id: item.id}}}"></title-bar-one>
+            <slider-block-one :data="ThreadTopList[index]"></slider-block-one>
+          </div>
           <topic-item :data="ThreadList[index]"></topic-item>
         </loadmore>
       </tab-container-item>
@@ -28,16 +30,17 @@ export default {
     }),
     ...mapState({
       ThreadTopList (state) {
-        console.log(state.topic['ThreadTopList'], 'ThreadTopList')
         return state.topic['ThreadTopList']
       },
       ThreadList (state) {
-        console.log(state.topic['ThreadList'], 'ThreadList')
         return state.topic['ThreadList']
       }
     }),
     loginStatus () {
       return this.$store.state.profile.loginStatus
+    },
+    currentIndex () {
+      return this.$store.state.topic['navbar_select_index']
     }
   },
   created () {
@@ -62,16 +65,15 @@ export default {
     },
     loadTop () {
       // 加载更多数据
-      var index = this.$store.state.topic['navbar_select_index']
       if (this.$refs.loadmore) {
         console.log(this.$refs.loadmore)
-        this.$refs.loadmore[index].onTopLoaded()
+        this.$refs.loadmore[this.currentIndex].onTopLoaded()
       }
     },
     loadBottom () {
       // 加载更多数据
       // this.allLoaded = true // 若数据已全部获取完毕
-      // this.$refs.loadmore.onBottomLoaded()
+      // this.$refs.loadmore[this.currentIndex].onBottomLoaded()
     }
   }
 }

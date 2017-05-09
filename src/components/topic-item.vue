@@ -6,12 +6,12 @@
       </div>
       <div class="topic-avatar"><img :src="item.users.head_img" /></div>
       <div class="topic-main">
-        <p class="topic-tit">{{item.title}}</p>
+        <p class="topic-tit">{{item.users.nickname}}</p>
         <p class="topic-ago">{{item.updated_at | handleDate}}</p>
         <p class="topic-content">{{item.content}}</p>
         <div class="topic-comment">
           <p class="topic-comment-item mt-20" v-if="item.comments" v-for="(comment, index2) in item.comments">
-            <span>{{comment.id}}</span><em>:</em>
+            <span>{{comment.users.nickname}}</span><em>:</em>
             {{comment.content}}
           </p>
         </div>
@@ -32,16 +32,6 @@
     props: {
       data: {
         type: Array
-      }
-    },
-    computed: {
-      myData () {
-        return this.data
-      }
-    },
-    watch: {
-      data () {
-        console.log(this.data, this.$store.state.topic['navbar_select_index'])
       }
     },
     components: {

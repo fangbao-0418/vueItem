@@ -1,8 +1,7 @@
 <template>
   <router-link :to="{name: 'topicDetail', params: { id: postItem.id }}" class="post-item mt-20 bg-color-white" :class="{'mt':index === 0}" tag="div">
     <div class="post-header">
-      <span class="post-title" v-text="postItem.title"></span>
-      <span class="post-content" v-text="postItem.content"></span>
+      <p class="post-content" v-text="postItem.content"></p>
     </div>
     <div class="post-foot">
       <p class="fl">
@@ -26,9 +25,9 @@ export default {
   .post-header
     font-size: .3rem
     color: #666
-    .post-title
-      &::after
-        content: ':'
+    .post-content
+      line-height: .42rem
+      word-wrap: break-word
   .post-foot
     padding-top: .3rem
     height: .33rem
