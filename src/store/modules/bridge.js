@@ -19,7 +19,7 @@ const actions = {
           cb && cb()
         },
         other () {
-          commit(types.FETCH_BRIDGE_INFO, { isWeb: true, isApp: false })
+          commit(types.FETCH_BRIDGE_INFO, { mixinList: {}, isWeb: true, isApp: false })
           cb && cb()
         }
       })
@@ -34,7 +34,8 @@ const mutations = {
   [types.FETCH_BRIDGE_INFO] (state, payload) {
     state.isWeb = payload['isWeb']
     state.isApp = payload['isApp']
-    state.MixinList = payload['MixinList']
+    alert(JSON.stringify(payload['mixinList']))
+    state.MixinList = payload['mixinList']
     // console.log(state)
   }
 }
