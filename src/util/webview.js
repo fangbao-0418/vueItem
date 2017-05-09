@@ -225,7 +225,7 @@ const wlb = (function () {
    *
    */
     if (!Mixin.isAPP()) {
-      // var WebViewJavascriptBridge
+      var WebViewJavascriptBridge
     }
     if (Mixin.isAPP()) {
       if (window.WebViewJavascriptBridge) {
