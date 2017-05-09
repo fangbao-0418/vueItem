@@ -34,7 +34,7 @@ const mutations = {
   [types.FETCH_BRIDGE_INFO] (state, payload) {
     state.isWeb = payload['isWeb']
     state.isApp = payload['isApp']
-    state.MixinList = payload['mixinList']
+    state.mixinList = payload['mixinList']
     // console.log(state)
   }
 }
