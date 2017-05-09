@@ -4,7 +4,7 @@ import { wlb } from '../../util'
 const state = {
   isApp: false,
   isWeb: false,
-  mixinList: []
+  mixinList: {}
 }
 
 const getters = {
@@ -15,7 +15,6 @@ const actions = {
     try {
       wlb.ready({
         app (mixins) {
-          alert(JSON.stringify(mixins))
           commit(types.FETCH_BRIDGE_INFO, { mixinList: mixins, isWeb: false, isApp: true })
           cb && cb()
         },

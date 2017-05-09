@@ -31,7 +31,6 @@ function requireAuth (to, from, next) {
         mixinList.firstLoadWebView({ name: to.meta.name })
         store.dispatch('fetchLoginStatus', () => {
           const { loginStatus } = store.state.profile
-          alert(loginStatus + 'app')
           if (loginStatus) {
             return next()
           } else {
@@ -45,7 +44,6 @@ function requireAuth (to, from, next) {
     } else {
       store.dispatch('fetchLoginStatus', () => {
         const { loginStatus } = store.state.profile
-        alert(loginStatus + 'app')
         if (loginStatus) {
           return next()
         } else {
