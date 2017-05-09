@@ -20,7 +20,6 @@ function requireAuth (to, from, next) {
     const { mixinList, isApp } = store.state.bridge
     // alert(isApp, 'isApp')
     if (isApp) {
-      alert(JSON.stringify(mixinList))
       mixinList.sendUserInfo((result) => {
         const sessionid = result.sessionid
         const splitArray = sessionid.split(';')
