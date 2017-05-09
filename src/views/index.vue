@@ -5,12 +5,13 @@
   <div class="container mt-20">
     <wlb-tab-container :initial-nav-bar-options="initialNavBarOptions" :initial-active="initialActive">
       <tab-container-item :key="index" :id="tabId(index)" :class="'tab-container'+parseInt(parseInt(index)+1)" v-for="(item, index) in initialNavBarOptions">
-        <loadmore :top-method="loadTop" :bottom-method="loadBottom" ref="loadmore">
+        <loadmore :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded[index]" ref="loadmore">
           <div v-if="ThreadTopList[index] && ThreadTopList[index].length">
             <title-bar-one :options="{title:item.title, more: '更多', targetUrl: {name: 'activities', params: { id: item.id}}}"></title-bar-one>
             <slider-block-one :data="ThreadTopList[index]"></slider-block-one>
           </div>
-          <topic-item :data="ThreadList[index]"></topic-item>
+          <topic-item v-if="ThreadList[index] && ThreadList[index].length" :data="ThreadList[index]"></topic-item>
+          <no-more :visible="allLoaded[index]"></no-more>
         </loadmore>
       </tab-container-item>
     </wlb-tab-container>
@@ -19,8 +20,8 @@
 </div>
 </template>
 <script>
-import { UserBrieflyShow, WlbHeader, WlbTabContainer, TopicItem, PublicCommentIcon, TitleBarOne, SliderBlockOne } from '../components'
-import { TabContainerItem, Loadmore } from 'mint-ui'
+import { UserBrieflyShow, WlbHeader, WlbTabContainer, TopicItem, PublicCommentIcon, TitleBarOne, SliderBlockOne, Loadmore, NoMore } from '../components'
+import { TabContainerItem } from 'mint-ui'
 import { mapState, mapGetters } from 'vuex'
 export default {
   computed: {
@@ -41,6 +42,9 @@ export default {
     },
     currentIndex () {
       return this.$store.state.topic['navbar_select_index']
+    },
+    allLoaded () {
+      return this.$store.state.topic['bbsHomeallLoadedInfo']
     }
   },
   created () {
@@ -57,7 +61,8 @@ export default {
     TopicItem,
     TitleBarOne,
     SliderBlockOne,
-    Loadmore
+    Loadmore,
+    NoMore
   },
   methods: {
     tabId (index) {
@@ -65,15 +70,27 @@ export default {
     },
     loadTop () {
       // 加载更多数据
-      if (this.$refs.loadmore) {
-        console.log(this.$refs.loadmore)
-        this.$refs.loadmore[this.currentIndex].onTopLoaded()
+      var that = this
+      if (this.$refs.loadmore[this.currentIndex]) {
+        this.$store.dispatch('bbsHomePageSetLoaded', false)
+        this.$store.dispatch('updateTopicListData', {
+          page: 1,
+          cb: function () {
+            that.$refs.loadmore[that.currentIndex].$children[0].onTopLoaded()
+          }
+        })
       }
     },
     loadBottom () {
-      // 加载更多数据
-      // this.allLoaded = true // 若数据已全部获取完毕
-      // this.$refs.loadmore[this.currentIndex].onBottomLoaded()
+      var that = this
+      if (this.$refs.loadmore[this.currentIndex]) {
+        if (that.allLoaded[that.currentIndex] === false) {
+          this.$store.dispatch('bbsHomePageSetLoaded', false)
+          this.$store.dispatch('updateTopicListData', { cb: function () {
+            that.$refs.loadmore[that.currentIndex].$children[0].onBottomLoaded()
+          }})
+        }
+      }
     }
   }
 }

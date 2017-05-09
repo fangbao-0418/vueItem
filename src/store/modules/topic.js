@@ -9,7 +9,9 @@ const state = {
   home_data: [],
   ThreadTopList: [],
   ThreadList: [],
-  homeDataLoaded: []
+  homeDataLoaded: [],
+  bbsHomeallLoadedInfo: [],
+  bbsHomeCurrentPageInfo: []
 }
 const getters = {
   doneTopicBoards (state) {
@@ -28,6 +30,7 @@ const getters = {
   }
 }
 const actions = {
+  // 获取帖子板块数据
   fetchTopicBoards ({ commit }, callback) {
     http({
       url: api.api_list,
@@ -35,6 +38,11 @@ const actions = {
       params: [{}]
     }).then((res) => {
       if (res.data.result) {
+        for (let i in res.data.result.data) {
+          // 初始化社区首页数据allLoaded && 当前页数
+          commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: i, v: true })
+          commit(types.SET_BBS_HOME_CURRENT_PAGE, { k: i, v: 1 })
+        }
         commit(types.FETCH_TOPIC_BOARDS, res.data.result.data)
       }
       callback && callback()
@@ -42,6 +50,10 @@ const actions = {
   },
   navbarSelect ({ commit }, id) {
     commit(types.NAVBAR_SELECT, id)
+  },
+  // 设置社区首页数据加载状态
+  bbsHomePageSetLoaded ({ commit }, res) {
+    commit(types.HOME_DATA_LOADED, res)
   },
   // 获取社区首页数据
   fetchBbsHomeData ({ state, commit, dispatch }) {
@@ -79,6 +91,12 @@ const actions = {
           ThreadTopList[state.navbar_select_index] = res[0].data.result.data
         }
         if (res[1].data.result) {
+          // 当前页数大于最大页数 设置allLoaded
+          if (state.bbsHomeCurrentPageInfo[state.navbar_select_index] >= res[1].data.result.data.last_page) {
+            commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: state.navbar_select_index, v: true })
+          } else {
+            commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: state.navbar_select_index, v: false })
+          }
           ThreadList[state.navbar_select_index] = res[1].data.result.data.list
         }
         var data = {
@@ -95,9 +113,8 @@ const actions = {
     })
   },
   // 更新帖子列表数据
-  updateTopicListData ({ state, commit }, id) {
+  updateTopicListData ({ state, commit }, params = {}) {
     if (state.homeDataLoaded[state.navbar_select_index]) {
-      console.log(state.ThreadList, 'ThreadList', [state.navbar_select_index])
       return
     }
     loading.show(true)
@@ -106,14 +123,15 @@ const actions = {
         url: api.api_list,
         method: 'getBbsThreadTopList',
         params: [{
-          id: id || state.topicBoards[state.navbar_select_index]['id']
+          id: params.id || state.topicBoards[state.navbar_select_index]['id']
         }]
       },
       {
         url: api.api_list,
         method: 'getBbsThreadList',
         params: [{
-          id: id || state.topicBoards[state.navbar_select_index]['id']
+          id: params.id || state.topicBoards[state.navbar_select_index]['id'],
+          page: params.page || state.bbsHomeCurrentPageInfo[state.navbar_select_index]
         }]
       }
     ]).then((res) => {
@@ -127,6 +145,15 @@ const actions = {
         ThreadTopList[state.navbar_select_index] = res[0].data.result.data
       }
       if (res[1].data.result) {
+        commit(types.SET_BBS_HOME_CURRENT_PAGE, { k: state.navbar_select_index, v: state.bbsHomeCurrentPageInfo[state.navbar_select_index] + 1 })
+        // 当前页数大于最大页数 设置allLoaded
+        console.log(state.bbsHomeCurrentPageInfo[state.navbar_select_index] >= res[1].data.result.data.last_page, '当前页数')
+        if (state.bbsHomeCurrentPageInfo[state.navbar_select_index] >= res[1].data.result.data.last_page) {
+          commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: state.navbar_select_index, v: true })
+        } else {
+          console.log('loaded is false')
+          commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: state.navbar_select_index, v: false })
+        }
         ThreadList[state.navbar_select_index] = res[1].data.result.data.list
       }
       var data = {
@@ -136,6 +163,9 @@ const actions = {
       commit(types.FETCH_BBS_HOME_DATA, data)
       commit(types.HOME_DATA_LOADED, true)
       loading.show(false)
+      if (params.cb) {
+        params.cb && params.cb()
+      }
     })
   }
 }
@@ -151,8 +181,14 @@ const mutations = {
     state.ThreadTopList = data['ThreadTopList']
     state.ThreadList = data['ThreadList']
   },
-  [types.HOME_DATA_LOADED] (state, data) {
-    state.homeDataLoaded[state.navbar_select_index] = true
+  [types.HOME_DATA_LOADED] (state, res) {
+    state.homeDataLoaded[state.navbar_select_index] = res
+  },
+  [types.SET_BBS_HOME_CURRENT_PAGE] (state, res) {
+    state.bbsHomeCurrentPageInfo[res.k] = res.v
+  },
+  [types.SET_BBS_HOME_ALL_LOADED_INFO] (state, res) {
+    state.bbsHomeallLoadedInfo[res.k] = res.v
   }
 }
 export default {

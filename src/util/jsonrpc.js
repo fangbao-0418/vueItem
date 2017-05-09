@@ -21,14 +21,14 @@ axios.interceptors.request.use(function (config) {
 })
 axios.interceptors.response.use(function (response) {
   if (response.data.error) {
-    if (loading.visible) {
-      loading.show(false)
-    }
     var code = response.data.error.code
+    if (loading.visible && code !== 4004) {
+      // loading.show(false)
+    }
     var message = response.data.error.message
     console.log(code, 'code')
     if (code === 4004) {
-      ruleModal.show({ title: '系统提示', content: '用户未登录', style: 'text-align: center' })
+      // ruleModal.show({ title: '系统提示', content: '用户未登录', style: 'text-align: center' })
     } else if (code === '42S22') {
       ruleModal.show({ title: '系统提示', content: '请求服务异常，错误码' + code, style: 'text-align: center' })
     } else {
