@@ -26,11 +26,12 @@
     watch: {
       visible (val) {
         if (val) {
-          $(document).on('touchmove', function (e) {
+          $('body').on('touchmove', function (e) {
+            console.log(e)
             e.preventDefault()
           })
         } else {
-          $(document).off('touchmove')
+          $('body').off('touchmove')
         }
       }
     },

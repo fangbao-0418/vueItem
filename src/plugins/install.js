@@ -1,5 +1,6 @@
 import * as plugins from '../plugins'
 import { api, http, consts } from '../util'
+import * as filters from '../filters'
 function on (type, fn) {
   const el = this.$el
   if (el.attachEvent) {
@@ -10,6 +11,7 @@ function on (type, fn) {
 }
 export default {
   install (Vue, options) {
+    Vue.filter('handleDate', filters.handleDate)
     Vue.prototype.v_on = on
     Vue.prototype.$rulemodal = plugins.ruleModal
     Vue.prototype.$plugin = plugins
