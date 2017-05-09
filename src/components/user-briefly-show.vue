@@ -36,7 +36,7 @@
       login () {
         wlb.ready({
           app: function (mixins) {
-            alert(JSON.stringify(mixins))
+            // alert(JSON.stringify(mixins))
             mixins.loginApp({ refresh: 1, url: '' })
           },
           other: function () {
