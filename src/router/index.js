@@ -20,7 +20,6 @@ function requireAuth (to, from, next) {
     const { mixinList, isApp } = store.state.bridge
     console.log(isApp, 'isApp')
     if (isApp) {
-      console.log(to.meta.name, 'to')
       mixinList.sendUserInfo((result) => {
         const sessionid = result.sessionid
         const splitArray = sessionid.split(';')
@@ -32,7 +31,7 @@ function requireAuth (to, from, next) {
         mixinList.firstLoadWebView({ name: to.meta.name })
         store.dispatch('fetchLoginStatus', () => {
           const { loginStatus } = store.state.profile
-          console.log(loginStatus)
+          alert(loginStatus + 'app')
           if (loginStatus) {
             return next()
           } else {
@@ -46,6 +45,7 @@ function requireAuth (to, from, next) {
     } else {
       store.dispatch('fetchLoginStatus', () => {
         const { loginStatus } = store.state.profile
+        alert(loginStatus + 'app')
         if (loginStatus) {
           return next()
         } else {
