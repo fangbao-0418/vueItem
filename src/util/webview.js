@@ -224,9 +224,9 @@ const wlb = (function () {
    * 检查user-agent： 如果是app就保持侦听
    *
    */
-    if (!Mixin.isAPP()) {
-      var WebViewJavascriptBridge
-    }
+
+    var WebViewJavascriptBridge = window.WebViewJavascriptBridge
+
     if (Mixin.isAPP()) {
       if (window.WebViewJavascriptBridge) {
         // console.log('check')
