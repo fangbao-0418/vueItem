@@ -2,7 +2,7 @@
  * [帖子详情页面]
  */
 <template>
-  <div class="view">
+  <div class="view" v-if="loaded">
     <wlb-header>
       <span slot="title">帖子详情</span>
       <share-icon slot="right"></share-icon>
@@ -10,7 +10,7 @@
     <div class="container bg-color-white">
       <div class="topic-head">
         <div class="topic-avatar mr-20">
-          <img :src="item.users.head_img" v-if="item.users"/>
+          <img :src="item.users.head_img"/>
         </div>
         <div class="topic-info">
           <p><span class="topic-author">{{item.users.nickname}}</span></p>
@@ -64,7 +64,8 @@
         show: false,
         item: {},
         commentList: [],
-        allLoaded: false
+        allLoaded: false,
+        loaded: false
       }
     },
     computed: {
@@ -81,6 +82,7 @@
           id: this.id
         }]
       }).then((res) => {
+        this.loaded = true
         this.item = res.data.result.data.thread_info
         this.commentList = res.data.result.data.comment_list
         this.$plugin.loading.show(false)

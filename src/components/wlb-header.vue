@@ -68,12 +68,10 @@
     },
     mounted () {
       var that = this
-      $(document).ready(function () {
+      $(document).on('WebViewJavascriptBridgeReady', function () {
+        alert('WebViewJavascriptBridgeReady')
         that.$store.dispatch('fetchBridgeInfo')
-        alert('document ready')
-        alert(JSON.stringify(window.WebViewJavascriptBridge))
       })
-      // this.$store.dispatch('fetchBridgeInfo')
       window.onscroll = () => {
         var fontSize = parseFloat(document.documentElement.style['font-size'])
         if (document.body.scrollTop > 2.4 * fontSize) {
@@ -102,6 +100,9 @@
           }
         })
       }
+    },
+    destroyed () {
+      $(document).off('WebViewJavascriptBridgeReady')
     }
   }
 </script>
