@@ -145,6 +145,8 @@
       margin-left: .5rem
       p
         white-space: pre-wrap
+        word-wrap: break-word
+        overflow: hidden
         font-family: PingFangSC-Regular
         font-size: .3rem
         line-height: .42rem
