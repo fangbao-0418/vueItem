@@ -14,7 +14,7 @@ const PersonNews = resolve => require(['../views/personNews'], resolve)
 const PersonTopics = resolve => require(['../views/personTopics'], resolve)
 const PersonTask = resolve => require(['../views/personTask'], resolve)
 const Activities = resolve => require(['../views/activityList'], resolve)
-
+const ActivityDetail = resolve => require(['../views/activityDetail'], resolve)
 function requireAuth (to, from, next) {
   store.dispatch('fetchBridgeInfo', () => {
     const { mixinList, isApp } = store.state.bridge
@@ -66,6 +66,7 @@ export default {
     {path: '/topic/add', name: 'topicAdd', meta: { name: '新建帖子' }, component: TopicAdd, beforeEnter: requireAuth},
     {path: '/topic/detail/:id', name: 'topicDetail', component: TopicDetail},
     {path: '/activities/:id', name: 'activities', component: Activities},
+    {path: '/activity/detail/:id', name: 'activityDetail', component: ActivityDetail},
     {path: '/person', name: 'person', component: Person, beforeEnter: requireAuth},
     {path: '/person/news', name: 'personNews', component: PersonNews, beforeEnter: requireAuth},
     {path: '/person/topics', name: 'personTopics', component: PersonTopics, beforeEnter: requireAuth},

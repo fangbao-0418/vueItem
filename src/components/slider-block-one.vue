@@ -4,12 +4,9 @@
       <div class="swiper-wrapper">
 
         <div class="swiper-slide" v-for="(item, index) in data" >
-          <div class="banner">
-            <!-- <div class="tags">
-              <topic-tags></topic-tags>
-            </div> -->
+          <router-link :to="{ name:'activityDetail', params: { id: item.id } }" class="banner" tag="div">
             <img :src="item.cover" />
-          </div>
+          </router-link>
         </div>
 
       </div>

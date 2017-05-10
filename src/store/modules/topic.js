@@ -121,7 +121,16 @@ const actions = {
       return
     }
     // 设置当前页数
-    commit(types.SET_BBS_HOME_CURRENT_PAGE, { k: state.navbar_select_index, v: state.bbsHomeCurrentPageInfo[state.navbar_select_index] + 1 })
+    var ThreadTopList = []
+    var ThreadList = []
+    for (var i in state.topicBoards) {
+      ThreadTopList[i] = state.ThreadTopList[i]
+      ThreadList[i] = state.ThreadList[i]
+    }
+
+    if (ThreadList[state.navbar_select_index] && ThreadList[state.navbar_select_index].length) {
+      commit(types.SET_BBS_HOME_CURRENT_PAGE, { k: state.navbar_select_index, v: state.bbsHomeCurrentPageInfo[state.navbar_select_index] + 1 })
+    }
     loading.show(true)
     http([
       {
@@ -142,13 +151,6 @@ const actions = {
         }]
       }
     ]).then((res) => {
-      console.log(res, 'updateTopicListData')
-      var ThreadTopList = []
-      var ThreadList = []
-      for (var i in state.topicBoards) {
-        ThreadTopList[i] = state.ThreadTopList[i]
-        ThreadList[i] = state.ThreadList[i]
-      }
       if (res[0].data.result) {
         ThreadTopList[state.navbar_select_index] = res[0].data.result.data
       }
@@ -166,7 +168,6 @@ const actions = {
         }
       }
       if (res[1].data.error) {
-        alert('error')
         // 失败设置当前页数回退
         commit(types.SET_BBS_HOME_CURRENT_PAGE, { k: state.navbar_select_index, v: state.bbsHomeCurrentPageInfo[state.navbar_select_index] - 1 })
         commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: state.navbar_select_index, v: true })

@@ -47,16 +47,15 @@
             page: this.page
           }]
         }).then((res) => {
-          if (res.data.result.data['last_page'] >= this.page) {
-            this.page += 1
+          this.page += 1
+          if (res.data.result.data['last_page'] + 1 >= this.page) {
             if (this.page === 2) {
               this.postItems = res.data.result.data.list
             } else {
               this.postItems = this.postItems.concat(res.data.result.data.list)
             }
-            console.log(this.postItems, this.postItems.length)
           }
-          if (res.data.result.data['last_page'] === this.page) {
+          if (res.data.result.data['last_page'] < this.page) {
             this.nomore = true
           } else {
             this.nomore = false

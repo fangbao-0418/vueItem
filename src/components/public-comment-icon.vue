@@ -40,7 +40,7 @@
     100%
   @keyframes toHidden
     0%
-      bottom: 0rem
+      bottom: .7rem
     100%
       bottom: -4rem
   .fade-enter-active
@@ -53,7 +53,7 @@
     width: 1rem
     position: fixed
     right: .3rem
-    bottom: 4.3rem
+    bottom: 3.66rem
     z-index: 10
     overflow: hidden
     height: 999rem
@@ -61,7 +61,7 @@
     .topic-boards-main
       transition: all .3s
       position: absolute
-      bottom: 0
+      bottom: .7rem
       .topic-type
         margin-top: .28rem
         display: flex

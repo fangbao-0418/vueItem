@@ -1,6 +1,6 @@
 <template>
 <div class="not-more" v-if="visible">
-  <span>～没有更多了～</span>
+  <span>{{content}}</span>
 </div>
 </template>
 <script>
@@ -9,6 +9,10 @@
       visible: {
         type: Boolean,
         default: false
+      },
+      content: {
+        type: String,
+        default: '～没有更多了～'
       }
     }
   }

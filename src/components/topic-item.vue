@@ -11,7 +11,7 @@
         <p class="topic-content">{{item.content | msubstring(0, 64)}}</p>
         <div class="topic-comment">
           <p class="topic-comment-item mt-20" v-if="item.comments" v-for="(comment, index2) in item.comments">
-            <span>{{comment.users.nickname}}</span><em>:</em>
+            <span v-if="comment.users">{{comment.users.nickname}}</span><em>:</em>
             {{comment.content}}
           </p>
         </div>

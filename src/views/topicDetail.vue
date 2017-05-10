@@ -21,24 +21,24 @@
         <p>{{item.content}}</p>
       </div>
     </div>
-    <div class="comment-area mt-20 bg-color-white">
+    <div class="comment-area mt-20 bg-color-white" v-if="commentList && commentList.length" >
       <div class="comment-sign">
         <span>评论列表 (6)</span>
       </div>
       <loadmore v-if="commentList && commentList.length" :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded" ref="loadmore">
         <ul class="comment-items">
-          <li v-for="item in commentList">
+          <li v-for="(item, index) in commentList" v-if="item.users">
             <div class="comment-avatar">
-              <img src="../imgs/avatar_small.png" />
+              <img :src="item.users.head_img" />
             </div>
             <div class="comment-right">
               <div class="comment-head">
                 <div class="comment-head-left">
-                  <p class="comment-user">理财小子</p>
-                  <p class="comment-ago">12分钟前</p>
+                  <p class="comment-user">{{item.users.nickname}}</p>
+                  <p class="comment-ago">{{item.updated_at | handleDate}}</p>
                 </div>
                 <div class="comment-head-right">
-                  <span class="comment-floor">1#</span>
+                  <span class="comment-floor">{{index+1}}#</span>
                 </div>
               </div>
               <p class="comment-content mt-20">{{item.content}}</p>
@@ -47,25 +47,20 @@
         </ul>
       </loadmore>
     </div>
-    <div class="comment-public-area">
-      <div class="comment-btn" @click="publicComment">
-        <span>说点什么吧~</span>
-      </div>
-    </div>
-    <comment-form-modal :show="show" :id="id"></comment-form-modal>
+    <no-more :visible="nomore" content="～暂时没有评论～"></no-more>
+    <comment-form-modal :id="id"></comment-form-modal>
   </div>
 </template>
 <script>
-  import bus from '../bus'
-  import { WlbHeader, CommentFormModal, ShareIcon, Loadmore } from '../components'
+  import { WlbHeader, CommentFormModal, ShareIcon, Loadmore, NoMore } from '../components'
   export default {
     data () {
       return {
-        show: false,
         item: {},
         commentList: [],
         allLoaded: false,
-        loaded: false
+        loaded: false,
+        nomore: false
       }
     },
     computed: {
@@ -85,30 +80,24 @@
         this.loaded = true
         this.item = res.data.result.data.thread_info
         this.commentList = res.data.result.data.comment_list
+        if (this.commentList.length === 0) {
+          this.nomore = true
+        }
         this.$plugin.loading.show(false)
       })
     },
-    mounted () {
-      bus.$on('comment-cancel', () => {
-        this.show = false
-      })
-    },
     methods: {
-      publicComment () {
-        this.show = true
-      },
       loadTop () {
-
       },
       loadBottom () {
-
       }
     },
     components: {
       WlbHeader,
       CommentFormModal,
       ShareIcon,
-      Loadmore
+      Loadmore,
+      NoMore
     }
   }
 </script>
@@ -209,24 +198,4 @@
             font-size: .3rem
             color: #013047
             line-height: .42rem
-  .comment-public-area
-    &::before
-      content: ''
-      display: block
-      height: 1.75rem
-    .comment-btn
-      position: fixed
-      bottom: .25rem
-      left: 0
-      right: 0
-      margin: 0 auto
-      width: 6.9rem
-      height: .9rem
-      line-height: .9rem
-      background: #FFFFFF
-      border: 1px solid #A1AFB4
-      span
-        padding-left: .18rem
-        font-size: .3rem
-        color: #9B9B9B
 </style>

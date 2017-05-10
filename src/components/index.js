@@ -19,6 +19,7 @@ import Loading from './loading'
 import Loadmore from './load-more'
 import NoMore from './no-more'
 import ShareIcon from './share-icon'
+import CommentList from './comment-list' // 评论列表
 export {
   WlbHeader,
   UserBrieflyShow,
@@ -40,5 +41,6 @@ export {
   Loading,
   Loadmore,
   NoMore,
-  ShareIcon
+  ShareIcon,
+  CommentList
 }

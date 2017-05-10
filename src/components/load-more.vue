@@ -1,5 +1,5 @@
 <template>
-  <loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded">
+  <loadmore :top-loading-text="topLoadingText" :bottom-pull-text="bottomPullText" :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded">
     <slot></slot>
   </loadmore>
 </template>
@@ -16,6 +16,12 @@
       allLoaded: {
         type: Boolean,
         default: true
+      }
+    },
+    data () {
+      return {
+        bottomPullText: '上拉加载',
+        topLoadingText: '刷新中...'
       }
     },
     components: {

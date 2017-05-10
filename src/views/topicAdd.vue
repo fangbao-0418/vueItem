@@ -68,12 +68,7 @@
           this.publicEnd = true
           this.content = ''
           if (res.data.result) {
-            if (res.data.result.data.isverify === 1) {
-              this.$rulemodal.show({ title: '系统提示', content: '发表成功', style: 'text-align: center' })
-            }
-            if (res.data.result.data.isverify === 0) {
-              this.$rulemodal.show({ title: '系统提示', content: '已提交后台审核', style: 'text-align: center' })
-            }
+            this.$rulemodal.show({ title: '系统提示', content: '帖子发布成功，已提交后台审核', style: 'text-align: center' })
           }
         })
       }

@@ -3,52 +3,83 @@
     <wlb-header>
       <span slot="title">我的消息</span>
     </wlb-header>
-    <news-item :item="item" :index="index" v-for="(item, index) in news" :key="item.name"></news-item>
-    <div v-if="! news.length" class="empty">
+    <loadmore v-if="data.length" :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded" ref="loadmore">
+      <news-item :item="item" :index="index" v-for="(item, index) in data" :key="item.name"></news-item>
+    </loadmore>
+    <no-more :visible="nomore"></no-more>
+    <div v-if="! data.length" class="empty">
       <div>还没有消息哦</div>
     </div>
   </div>
 </template>
 <script>
-import { WlbHeader, NewsItem } from '../components'
+import { WlbHeader, NewsItem, Loadmore, NoMore } from '../components'
 export default {
   data () {
     return {
-//      news: []
-      news: [{
-        type: 'normal',
-        name: 'EMAD',
-        title: '网利宝交易突破100亿',
-        content: '网利宝始终对金融风险怀着敬畏之心,恪守合法合规与风险控制两大底线，简直稳健发展，并以稳健被行业熟知',
-        time: '2017-03-31 18:59'
-      }, {
-        type: 'normal',
-        name: 'EMAD',
-        title: '网利宝交易突破100亿',
-        content: '网利宝始终对金融风险怀着敬畏之心,恪守合法合规与风险控制两大底线，简直稳健发展，并以稳健被行业熟知',
-        time: '2017-03-31 18:59'
-      }, {
-        type: 'delete',
-        title: '网利宝交易突破100亿',
-        time: '2017-03-31 18:59'
-      }]
+      data: [],
+      page: 1,
+      nomore: false
     }
   },
   created () {
-    this.$http({
-      url: this.$api.api_list,
-      method: 'getBbsUserPm',
-      params: [{
-        page: 1,
-        pageNum: this.$const.BBS_USER_PM_PAGE_NUM
-      }]
-    }).then((res) => {
-      console.log(res)
+    this.$plugin.loading.show(true, 'full')
+    this.loadData(() => {
+      this.$plugin.loading.show(false)
     })
+  },
+  computed: {
+    allLoaded () {
+      return this.nomore
+    }
   },
   components: {
     WlbHeader,
-    NewsItem
+    NewsItem,
+    Loadmore,
+    NoMore
+  },
+  methods: {
+    loadData (cb) {
+      this.$http({
+        url: this.$api.api_list,
+        method: 'getBbsUserPm',
+        params: [{
+          pageNum: this.$const.BBS_USER_PM_PAGE_NUM,
+          page: this.page
+        }]
+      }).then((res) => {
+        this.page += 1
+        if (res.data.result.data['last_page'] + 1 >= this.page) {
+          if (this.page === 2) {
+            this.data = res.data.result.data.list
+          } else {
+            this.data = this.data.concat(res.data.result.data.list)
+          }
+        }
+        if (res.data.result.data['last_page'] < this.page) {
+          this.nomore = true
+        } else {
+          this.nomore = false
+        }
+        cb && cb()
+      })
+    },
+    loadTop () {
+      this.page = 1
+      this.$plugin.loading.show(true)
+      this.loadData(() => {
+        this.$plugin.loading.show(false)
+        this.$refs.loadmore.$children[0].onTopLoaded()
+      })
+    },
+    loadBottom () {
+      this.$plugin.loading.show(true)
+      this.loadData(() => {
+        this.$plugin.loading.show(false)
+        this.$refs.loadmore.$children[0].onBottomLoaded()
+      })
+    }
   }
 }
 </script>

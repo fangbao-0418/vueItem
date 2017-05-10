@@ -10,29 +10,26 @@ body
 	font-size: 10px
 	#root
 		height: 100%
-body, p, ul, li
+body, p, ul, li, h1, h2, h3, h4, h5, h6
 	margin: 0
 	padding: 0
 em
 	font-style: normal
 p
-	word-wrap: break-word	
+	word-wrap: break-word
 .bg-color-white
 	background-color: #FFF
-.mt-20
-	margin-top: .2rem
-.mt-30
-	margin-top: .3rem
-.mr-10
-	margin-right: .1rem
-.mr-20
-	margin-right: .2rem
-.mb-10
-	margin-bottom: .1rem
-.mb-20
-	margin-bottom: .2rem
-.pt-20
-	padding-top: .2rem
+@for $i from 1 through 100
+	.mt-#{$i}
+		margin-top: .01rem * $i
+	.mr-#{$i}
+		margin-right: .01rem * $i
+	.mb-#{$i}
+		margin-bottom: .01rem * $i
+	.ml-#{$i}
+		margin-left: .01rem * $i
+	.pt-#{$i}
+		padding-top: .01rem * $i
 .fl
 	float: left
 .fr
