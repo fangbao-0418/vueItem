@@ -65,8 +65,6 @@
       }
     },
     created () {
-      alert('created')
-      alert(JSON.stringify(window.WebViewJavascriptBridge))
     },
     mounted () {
       alert('mounted')

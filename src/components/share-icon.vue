@@ -9,9 +9,6 @@
         return this.$store.state.bridge['isApp']
       }
     },
-    mounted () {
-      this.$store.dispatch('fetchBridgeInfo')
-    },
     methods: {
       share () {
         wlb.ready({
