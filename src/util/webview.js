@@ -242,10 +242,10 @@ const wlb = (function () {
     }
 
     function run (target) {
-      alert(target.callback)
       if (target.callback && target.callback === 'app') {
         if (mixins === undefined) {
           mixins = getMixin(target.data)
+          alert(JSON.stringify(mixins))
           mixins._init()
         }
       }
