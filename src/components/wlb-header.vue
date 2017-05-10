@@ -65,7 +65,7 @@
       }
     },
     created () {
-      this.$store.dispatch('fetchBridgeInfo')
+      // this.$store.dispatch('fetchBridgeInfo')
     },
     mounted () {
       window.onscroll = () => {
