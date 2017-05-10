@@ -16,7 +16,6 @@
       share () {
         wlb.ready({
           app: function (mixins) {
-            alert(JSON.stringify(mixins))
             // mixins.firstLoadWebView({ name: 'wanglishequ' })
             mixins.touchShare({
               title: '网利社区',
