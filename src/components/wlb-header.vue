@@ -69,9 +69,7 @@
     mounted () {
       var that = this
       $(document).on('WebViewJavascriptBridgeReady', function () {
-        if (window.WebViewJavascript) {
-          alert(JSON.stringify(new window.WebViewJavascript()))
-        }
+        alert('WebViewJavascriptBridgeReady')
         that.$store.dispatch('fetchBridgeInfo')
       })
       window.onscroll = () => {
