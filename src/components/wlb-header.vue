@@ -67,6 +67,10 @@
     created () {
     },
     mounted () {
+      $(document).ready(function () {
+        alert('document ready')
+        alert(JSON.stringify(window.WebViewJavascriptBridge))
+      })
       alert('mounted')
       alert(JSON.stringify(window.WebViewJavascriptBridge))
       this.$store.dispatch('fetchBridgeInfo')
