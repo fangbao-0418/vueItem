@@ -226,7 +226,6 @@ const wlb = (function () {
    */
 
     var WebViewJavascriptBridge = window.WebViewJavascriptBridge
-    alert(JSON.stringify(WebViewJavascriptBridge))
     if (Mixin.isAPP()) {
       if (window.WebViewJavascriptBridge) {
         // console.log('check')
