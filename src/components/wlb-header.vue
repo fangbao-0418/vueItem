@@ -67,10 +67,9 @@
     created () {
     },
     mounted () {
-      var that = this
+      // var that = this
       $(document).on('WebViewJavascriptBridgeReady', function () {
-        alert(window.WebViewJavascript)
-        that.$store.dispatch('fetchBridgeInfo')
+        // that.$store.dispatch('fetchBridgeInfo')
       })
       window.onscroll = () => {
         var fontSize = parseFloat(document.documentElement.style['font-size'])
