@@ -1,9 +1,17 @@
 <template>
-	<span class="share-icon" @click="share"></span>
+	<span class="share-icon" @click="share" v-if="isApp"></span>
 </template>
 <script>
   import { wlb } from '../util'
   export default {
+    computed: {
+      isApp () {
+        return this.$store.state.bridge['isApp']
+      }
+    },
+    created () {
+      this.$store.dispatch('fetchBridgeInfo')
+    },
     methods: {
       share () {
         wlb.ready({

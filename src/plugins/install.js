@@ -12,6 +12,7 @@ function on (type, fn) {
 export default {
   install (Vue, options) {
     Vue.filter('handleDate', filters.handleDate)
+    Vue.filter('msubstring', filters.msubstring)
     Vue.prototype.v_on = on
     Vue.prototype.$rulemodal = plugins.ruleModal
     Vue.prototype.$plugin = plugins

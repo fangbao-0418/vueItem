@@ -3,7 +3,7 @@
     <transition name="fade">
       <div class="topic-boards" v-if="visible">
         <div class="topic-boards-main">
-          <router-link :key="index" :to="{ name:'topicAdd', params: { id: item.id, name: item.name } }" class="topic-type" v-for="(item, index) in data" tag="div">
+          <router-link :key="index" :to="{ name:'topicAdd', params: { id: item.id, name: item.name } }" class="topic-type" v-for="(item, index) in data" tag="div" v-if="item.isban === 0">
             <span>{{item.name}}</span>
           </router-link>
         </div>
@@ -74,7 +74,7 @@
         position: relative
         bottom: 0
         span
-          width: .48rem
+          width: .68rem
           font-family: PingFangSC-Regular
           display: inline-block
           font-size: .24rem

@@ -1,7 +1,8 @@
 /* 茄子相关数据 */
 import * as types from '../mutation-types'
-import { http, api } from '../../util'
+import { http, api, consts } from '../../util'
 import { loading } from '../../plugins'
+
 const state = {
   topicBoards: [],
   navbar_select_index: 0, // navbar 初始index
@@ -40,7 +41,7 @@ const actions = {
       if (res.data.result) {
         for (let i in res.data.result.data) {
           // 初始化社区首页数据allLoaded && 当前页数
-          commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: i, v: true })
+          commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: i, v: false })
           commit(types.SET_BBS_HOME_CURRENT_PAGE, { k: i, v: 1 })
         }
         commit(types.FETCH_TOPIC_BOARDS, res.data.result.data)
@@ -69,14 +70,16 @@ const actions = {
           url: api.api_list,
           method: 'getBbsThreadTopList',
           params: [{
-            id: state.topicBoards[state.navbar_select_index]['id']
+            id: state.topicBoards[state.navbar_select_index]['id'],
+            limit: consts.BBS_HOME_THREAD_TOP_LIST_PAGE_NUM
           }]
         },
         {
           url: api.api_list,
           method: 'getBbsThreadList',
           params: [{
-            id: state.topicBoards[state.navbar_select_index]['id']
+            id: state.topicBoards[state.navbar_select_index]['id'],
+            pageNum: consts.BBS_HOME_THREAD_LIST_PAGE_NUM
           }]
         },
         {
@@ -117,13 +120,16 @@ const actions = {
     if (state.homeDataLoaded[state.navbar_select_index]) {
       return
     }
+    // 设置当前页数
+    commit(types.SET_BBS_HOME_CURRENT_PAGE, { k: state.navbar_select_index, v: state.bbsHomeCurrentPageInfo[state.navbar_select_index] + 1 })
     loading.show(true)
     http([
       {
         url: api.api_list,
         method: 'getBbsThreadTopList',
         params: [{
-          id: params.id || state.topicBoards[state.navbar_select_index]['id']
+          id: params.id || state.topicBoards[state.navbar_select_index]['id'],
+          limit: consts.BBS_HOME_THREAD_TOP_LIST_PAGE_NUM
         }]
       },
       {
@@ -131,10 +137,12 @@ const actions = {
         method: 'getBbsThreadList',
         params: [{
           id: params.id || state.topicBoards[state.navbar_select_index]['id'],
-          page: params.page || state.bbsHomeCurrentPageInfo[state.navbar_select_index]
+          page: params.page || state.bbsHomeCurrentPageInfo[state.navbar_select_index],
+          pageNum: consts.BBS_HOME_THREAD_LIST_PAGE_NUM
         }]
       }
     ]).then((res) => {
+      console.log(res, 'updateTopicListData')
       var ThreadTopList = []
       var ThreadList = []
       for (var i in state.topicBoards) {
@@ -145,21 +153,29 @@ const actions = {
         ThreadTopList[state.navbar_select_index] = res[0].data.result.data
       }
       if (res[1].data.result) {
-        commit(types.SET_BBS_HOME_CURRENT_PAGE, { k: state.navbar_select_index, v: state.bbsHomeCurrentPageInfo[state.navbar_select_index] + 1 })
         // 当前页数大于最大页数 设置allLoaded
-        console.log(state.bbsHomeCurrentPageInfo[state.navbar_select_index] >= res[1].data.result.data.last_page, '当前页数')
         if (state.bbsHomeCurrentPageInfo[state.navbar_select_index] >= res[1].data.result.data.last_page) {
           commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: state.navbar_select_index, v: true })
         } else {
-          console.log('loaded is false')
           commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: state.navbar_select_index, v: false })
         }
-        ThreadList[state.navbar_select_index] = res[1].data.result.data.list
+        if (state.bbsHomeCurrentPageInfo[state.navbar_select_index] > 1) {
+          ThreadList[state.navbar_select_index] = ThreadList[state.navbar_select_index].concat(res[1].data.result.data.list)
+        } else {
+          ThreadList[state.navbar_select_index] = res[1].data.result.data.list
+        }
+      }
+      if (res[1].data.error) {
+        alert('error')
+        // 失败设置当前页数回退
+        commit(types.SET_BBS_HOME_CURRENT_PAGE, { k: state.navbar_select_index, v: state.bbsHomeCurrentPageInfo[state.navbar_select_index] - 1 })
+        commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: state.navbar_select_index, v: true })
       }
       var data = {
         ThreadTopList,
         ThreadList
       }
+      // console.log(ThreadList[state.navbar_select_index], state.navbar_select_index, '帖子列表')
       commit(types.FETCH_BBS_HOME_DATA, data)
       commit(types.HOME_DATA_LOADED, true)
       loading.show(false)

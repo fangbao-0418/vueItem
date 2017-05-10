@@ -2,7 +2,7 @@
  * [帖子详情页面]
  */
 <template>
-  <div class="view" type="share">
+  <div class="view">
     <wlb-header>
       <span slot="title">帖子详情</span>
       <share-icon slot="right"></share-icon>
@@ -13,7 +13,7 @@
           <img :src="item.users.head_img" v-if="item.users"/>
         </div>
         <div class="topic-info">
-          <p><span class="topic-author">{{item.title}}</span></p>
+          <p><span class="topic-author">{{item.users.nickname}}</span></p>
           <p><span class="topic-time">{{item.updated_at}}</span></p>
         </div>
       </div>
@@ -25,84 +25,27 @@
       <div class="comment-sign">
         <span>评论列表 (6)</span>
       </div>
-      <ul class="comment-items">
-        <li>
-          <div class="comment-avatar">
-            <img src="../imgs/avatar_small.png" />
-          </div>
-          <div class="comment-right">
-            <div class="comment-head">
-              <div class="comment-head-left">
-                <p class="comment-user">理财小子</p>
-                <p class="comment-ago">12分钟前</p>
-              </div>
-              <div class="comment-head-right">
-                <span class="comment-floor">1#</span>
-              </div>
+      <loadmore v-if="commentList && commentList.length" :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded" ref="loadmore">
+        <ul class="comment-items">
+          <li v-for="item in commentList">
+            <div class="comment-avatar">
+              <img src="../imgs/avatar_small.png" />
             </div>
-            <p class="comment-content mt-20">
-              在经济增长趋缓和去杠杆的大背景下，利润增速下滑实属正常，不必过度解读。
-            </p>
-          </div>
-        </li>
-        <li>
-          <div class="comment-avatar">
-            <img src="../imgs/avatar_small.png" />
-          </div>
-          <div class="comment-right">
-            <div class="comment-head">
-              <div class="comment-head-left">
-                <p class="comment-user">理财小子</p>
-                <p class="comment-ago">12分钟前</p>
+            <div class="comment-right">
+              <div class="comment-head">
+                <div class="comment-head-left">
+                  <p class="comment-user">理财小子</p>
+                  <p class="comment-ago">12分钟前</p>
+                </div>
+                <div class="comment-head-right">
+                  <span class="comment-floor">1#</span>
+                </div>
               </div>
-              <div class="comment-head-right">
-                <span class="comment-floor">1#</span>
-              </div>
+              <p class="comment-content mt-20">{{item.content}}</p>
             </div>
-            <p class="comment-content mt-20">
-              在经济增长趋缓和去杠杆的大背景下，利润增速下滑实属正常，不必过度解读。
-            </p>
-          </div>
-        </li>
-        <li>
-          <div class="comment-avatar">
-            <img src="../imgs/avatar_small.png" />
-          </div>
-          <div class="comment-right">
-            <div class="comment-head">
-              <div class="comment-head-left">
-                <p class="comment-user">理财小子</p>
-                <p class="comment-ago">12分钟前</p>
-              </div>
-              <div class="comment-head-right">
-                <span class="comment-floor">1#</span>
-              </div>
-            </div>
-            <p class="comment-content mt-20">
-              在经济增长趋缓和去杠杆的大背景下，利润增速下滑实属正常，不必过度解读。
-            </p>
-          </div>
-        </li>
-        <li>
-          <div class="comment-avatar">
-            <img src="../imgs/avatar_small.png" />
-          </div>
-          <div class="comment-right">
-            <div class="comment-head">
-              <div class="comment-head-left">
-                <p class="comment-user">理财小子</p>
-                <p class="comment-ago">12分钟前</p>
-              </div>
-              <div class="comment-head-right">
-                <span class="comment-floor">1#</span>
-              </div>
-            </div>
-            <p class="comment-content mt-20">
-              在经济增长趋缓和去杠杆的大背景下，利润增速下滑实属正常，不必过度解读。
-            </p>
-          </div>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </loadmore>
     </div>
     <div class="comment-public-area">
       <div class="comment-btn" @click="publicComment">
@@ -114,13 +57,14 @@
 </template>
 <script>
   import bus from '../bus'
-  import { WlbHeader, CommentFormModal, ShareIcon } from '../components'
+  import { WlbHeader, CommentFormModal, ShareIcon, Loadmore } from '../components'
   export default {
     data () {
       return {
         show: false,
         item: {},
-        commentList: []
+        commentList: [],
+        allLoaded: false
       }
     },
     computed: {
@@ -150,12 +94,19 @@
     methods: {
       publicComment () {
         this.show = true
+      },
+      loadTop () {
+
+      },
+      loadBottom () {
+
       }
     },
     components: {
       WlbHeader,
       CommentFormModal,
-      ShareIcon
+      ShareIcon,
+      Loadmore
     }
   }
 </script>
@@ -258,7 +209,7 @@
     &::before
       content: ''
       display: block
-      margin-top: 1.75rem
+      height: 1.75rem
     .comment-btn
       position: fixed
       bottom: .25rem

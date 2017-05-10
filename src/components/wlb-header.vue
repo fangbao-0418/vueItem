@@ -9,7 +9,7 @@
     <div class="header">
       <div class="header-button">
         <div class="goback" @click="goback"></div>
-        <div class="cancel" @click="cancel" v-if="isAndroid"></div>
+        <div class="cancel" @click="cancel" v-if="isAndroid && isApp"></div>
       </div>
       <div class="header-title">
         <span>{{options.title}}</span>
@@ -59,7 +59,13 @@
       },
       isIndex () {
         return this.$route.name === 'index'
+      },
+      isApp () {
+        return this.$store.state.bridge['isApp']
       }
+    },
+    created () {
+      this.$store.dispatch('fetchBridgeInfo')
     },
     mounted () {
       window.onscroll = () => {
@@ -77,7 +83,7 @@
     },
     methods: {
       goback () {
-        if (this.$route.name === 'index') {
+        if (this.$route.name === 'index' && this.isApp) {
           this.cancel()
         } else {
           this.$router.go(-1)

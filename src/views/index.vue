@@ -5,7 +5,7 @@
   <div class="container mt-20">
     <wlb-tab-container :initial-nav-bar-options="initialNavBarOptions" :initial-active="initialActive">
       <tab-container-item :key="index" :id="tabId(index)" :class="'tab-container'+parseInt(parseInt(index)+1)" v-for="(item, index) in initialNavBarOptions">
-        <loadmore :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded[index]" ref="loadmore">
+        <loadmore v-if="(ThreadTopList[index] && ThreadTopList[index].length) || (ThreadList[index] && ThreadList[index].length)" :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded[index]" ref="loadmore">
           <div v-if="ThreadTopList[index] && ThreadTopList[index].length">
             <title-bar-one :options="{title:item.title, more: '更多', targetUrl: {name: 'activities', params: { id: item.id}}}"></title-bar-one>
             <slider-block-one :data="ThreadTopList[index]"></slider-block-one>
