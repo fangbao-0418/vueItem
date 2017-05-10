@@ -67,13 +67,13 @@
     created () {
     },
     mounted () {
+      var that = this
       $(document).ready(function () {
+        that.$store.dispatch('fetchBridgeInfo')
         alert('document ready')
         alert(JSON.stringify(window.WebViewJavascriptBridge))
       })
-      alert('mounted')
-      alert(JSON.stringify(window.WebViewJavascriptBridge))
-      this.$store.dispatch('fetchBridgeInfo')
+      // this.$store.dispatch('fetchBridgeInfo')
       window.onscroll = () => {
         var fontSize = parseFloat(document.documentElement.style['font-size'])
         if (document.body.scrollTop > 2.4 * fontSize) {
