@@ -15,7 +15,6 @@ const actions = {
     try {
       wlb.ready({
         app (mixins) {
-          alert(JSON.stringify(mixins))
           commit(types.FETCH_BRIDGE_INFO, { mixinList: mixins, isWeb: false, isApp: true })
           cb && cb()
         },
