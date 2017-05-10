@@ -65,9 +65,13 @@
       }
     },
     created () {
-      this.$store.dispatch('fetchBridgeInfo')
+      alert('created')
+      alert(JSON.stringify(window.WebViewJavascriptBridge))
     },
     mounted () {
+      alert('mounted')
+      alert(JSON.stringify(window.WebViewJavascriptBridge))
+      this.$store.dispatch('fetchBridgeInfo')
       window.onscroll = () => {
         var fontSize = parseFloat(document.documentElement.style['font-size'])
         if (document.body.scrollTop > 2.4 * fontSize) {

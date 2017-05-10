@@ -9,7 +9,7 @@
         return this.$store.state.bridge['isApp']
       }
     },
-    created () {
+    mounted () {
       this.$store.dispatch('fetchBridgeInfo')
     },
     methods: {
