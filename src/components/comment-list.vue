@@ -27,11 +27,17 @@
       </loadmore>
     </div>
     <no-more :visible="nomore" content="～暂时没有评论～"></no-more>
-  </div>  
+  </div>
 </template>
 <script>
-  import { Loadmore, NoMore } from '../components'
+  import Loadmore from './load-more'
+  import NoMore from './no-more'
   export default {
+    props: {
+      id: {
+        type: Number
+      }
+    },
     data () {
       return {
         commentList: [],
@@ -40,21 +46,22 @@
       }
     },
     created () {
-      this.$plugin.loading.show(true)
-      this.$http({
-        url: this.$api.api_list,
-        method: 'getBbsCommentList',
-        params: [{
-          id: this.id
-        }]
-      }).then((res) => {
-        if (res.data.result) {
-          // this.commentList = res.data.result.data.thread_info
-        } else {
-          this.nomore = true
-        }
-        this.$plugin.loading.show(false)
-      })
+      console.log('comment-list')
+      // this.$plugin.loading.show(true)
+      // this.$http({
+      //   url: this.$api.api_list,
+      //   method: 'getBbsCommentList',
+      //   params: [{
+      //     id: this.id
+      //   }]
+      // }).then((res) => {
+      //   if (res.data.result) {
+      //     // this.commentList = res.data.result.data.thread_info
+      //   } else {
+      //     this.nomore = true
+      //   }
+      //   this.$plugin.loading.show(false)
+      // })
     },
     methods: {
       loadTop () {

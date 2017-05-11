@@ -19,7 +19,7 @@
     </div>
     <div v-if="item.type == 3" class="news-delete news-box bg-color-white mt-20">
       <div class="delete-con">
-        <span>您发表的评论</span>
+        <span>{{item.from_users.nickname}}评论</span>
         <span class="delete-title">{{item.threads.content | msubstring(0, 10)}}</span>
         审核通过
       </div>

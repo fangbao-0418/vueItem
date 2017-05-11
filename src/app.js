@@ -23,7 +23,7 @@ router.beforeEach((to, from, next) => {
           let split = splitArray[key].split('=')
           cookie.set(split[0], split[1], { path: '/', domain: '.wanglibao.com' })
         }
-        alert('app beforeEnter' + JSON.stringify(cookie.get()))
+        // alert('app beforeEnter' + JSON.stringify(cookie.get()))
         next()
       })
     },

@@ -48,7 +48,7 @@ export default {
     }
   },
   created () {
-    alert('index created')
+    // alert('index created')
     this.$store.dispatch('fetchBbsHomeData')
   },
   mounted () {

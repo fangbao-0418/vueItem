@@ -17,6 +17,15 @@ export function dateTotimestamp (date) {
   var timestamp = Date.parse(new Date(date))
   return timestamp
 }
-export function msubstring (str, start, end) {
-  return str.substring(start, end)
+/**
+ * [msubstring description]
+ * @param  {[String]} str   [截取的字符串]
+ * @param  {[Number]} start [开始位置]
+ * @param  {[Number]} end   [结束位置]
+ * @param  {[String]} chase [末尾追加字符串]
+ * @return {[String]}       [处理后的字符串]
+ */
+export function msubstring (str, start, end, chase = '...') {
+  var res = str.length > end ? str.substring(start, end) + chase : str.substring(start, end)
+  return res
 }
