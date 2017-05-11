@@ -225,15 +225,14 @@ const wlb = (function () {
    *
    */
 
-    var WebViewJavascriptBridge = window.WebViewJavascriptBridge
     if (Mixin.isAPP()) {
       if (window.WebViewJavascriptBridge) {
         // console.log('check')
-        run({ callback: 'app', data: WebViewJavascriptBridge })
+        run({ callback: 'app', data: window.WebViewJavascriptBridge })
       } else {
         document.addEventListener('WebViewJavascriptBridgeReady', function () {
           alert('WebViewJavascriptBridgeReady')
-          run({ callback: 'app', data: WebViewJavascriptBridge })
+          run({ callback: 'app', data: window.WebViewJavascriptBridge })
         }, false)
       }
     } else {
