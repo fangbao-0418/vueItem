@@ -6,7 +6,7 @@
       </div>
       <loadmore :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded" ref="loadmore">
         <ul class="comment-items">
-          <li v-for="(item, index) in data">
+          <li v-for="(item, index) in data" v-if="item.users">
             <div class="comment-avatar">
               <img :src="item.users.head_img" v-lazyload="{ placeholder: require('../imgs/avatar_defult_big.png') }" />
             </div>

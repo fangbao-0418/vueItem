@@ -19,6 +19,7 @@ export default {
     return {
       data: [],
       page: 1,
+      lastPage: 1,
       nomore: false
     }
   },
@@ -50,14 +51,15 @@ export default {
         }]
       }).then((res) => {
         this.page += 1
-        if (res.data.result.data['last_page'] + 1 >= this.page) {
+        this.lastPage = res.data.result.data['last_page']
+        if (this.lastPage + 1 >= this.page) {
           if (this.page === 2) {
             this.data = res.data.result.data.list
           } else {
             this.data = this.data.concat(res.data.result.data.list)
           }
         }
-        if (res.data.result.data['last_page'] < this.page) {
+        if (this.lastPage < this.page) {
           this.nomore = true
         } else {
           this.nomore = false
@@ -74,6 +76,9 @@ export default {
       })
     },
     loadBottom () {
+      if (this.page > this.lastPage) {
+        return ''
+      }
       this.$plugin.loading.show(true)
       this.loadData(() => {
         this.$plugin.loading.show(false)

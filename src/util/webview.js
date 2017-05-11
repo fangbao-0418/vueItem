@@ -231,7 +231,7 @@ const wlb = (function () {
         run({ callback: 'app', data: window.WebViewJavascriptBridge })
       } else {
         document.addEventListener('WebViewJavascriptBridgeReady', function () {
-          alert('WebViewJavascriptBridgeReady')
+          // alert('WebViewJavascriptBridgeReady')
           run({ callback: 'app', data: window.WebViewJavascriptBridge })
         }, false)
       }

@@ -70,6 +70,7 @@
         height: .33rem
         text-align: center
       .content
+        white-space: pre-wrap
         font-family: PingFangSC-Regular
         font-size: .3rem
         color: #666666

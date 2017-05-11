@@ -19,7 +19,6 @@ function requireAuth (to, from, next) {
   store.dispatch('fetchBridgeInfo', () => {
     const { mixinList, isApp } = store.state.bridge
     if (isApp) {
-      alert('requireAuth')
       mixinList.firstLoadWebView({ name: to.meta.name })
       store.dispatch('fetchLoginStatus', () => {
         const { loginStatus } = store.state.profile

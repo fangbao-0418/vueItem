@@ -61,10 +61,6 @@
       })
     },
     methods: {
-      loadTop () {
-      },
-      loadBottom () {
-      }
     },
     components: {
       WlbHeader,
