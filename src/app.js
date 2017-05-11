@@ -23,16 +23,15 @@ router.beforeEach((to, from, next) => {
           let split = splitArray[key].split('=')
           cookie.set(split[0], split[1], { path: '/', domain: '.wanglibao.com' })
         }
-        alert('new' + JSON.stringify(cookie.get()))
+        alert('app beforeEnter' + JSON.stringify(cookie.get()))
         next()
       })
     },
     other () {
-      alert('new' + JSON.stringify(cookie.get()))
+      alert('other beforeEnter' + JSON.stringify(cookie.get()))
       next()
     }
   })
-  next()
 })
 new Vue({
   router,
