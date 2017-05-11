@@ -1,6 +1,5 @@
 import * as types from '../mutation-types'
 import { wlb } from '../../util'
-import cookie from 'js-cookie'
 
 // initial state
 const state = {
@@ -17,15 +16,6 @@ const actions = {
     try {
       wlb.ready({
         app (mixins) {
-          mixins.sendUserInfo((result) => {
-            const sessionid = result.sessionid
-            const splitArray = sessionid.split(';')
-            for (let key in splitArray) {
-              let split = splitArray[key].split('=')
-              cookie.set(split[0], split[1], { path: '/', domain: '.wanglibao.com' })
-            }
-          })
-          alert('new' + JSON.stringify(cookie.get()))
           commit(types.FETCH_BRIDGE_INFO, { mixinList: mixins, isWeb: false, isApp: true })
           cb && cb()
         },

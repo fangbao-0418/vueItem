@@ -65,7 +65,6 @@
       }
     },
     created () {
-      alert('header created')
       this.$store.dispatch('fetchBridgeInfo')
     },
     mounted () {

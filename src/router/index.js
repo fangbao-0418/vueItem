@@ -20,25 +20,16 @@ function requireAuth (to, from, next) {
     const { mixinList, isApp } = store.state.bridge
     if (isApp) {
       alert('requireAuth')
-      mixinList.sendUserInfo((result) => {
-        // const sessionid = result.sessionid
-        // const splitArray = sessionid.split(';')
-        // for (let key in splitArray) {
-        //   let split = splitArray[key].split('=')
-        //   cookie.set(split[0], split[1], { path: '/', domain: '.wanglibao.com' })
-        // }
-        // 数据埋点
-        mixinList.firstLoadWebView({ name: to.meta.name })
-        store.dispatch('fetchLoginStatus', () => {
-          const { loginStatus } = store.state.profile
-          if (loginStatus) {
-            return next()
-          } else {
-            return next({
-              name: 'index'
-            })
-          }
-        })
+      mixinList.firstLoadWebView({ name: to.meta.name })
+      store.dispatch('fetchLoginStatus', () => {
+        const { loginStatus } = store.state.profile
+        if (loginStatus) {
+          return next()
+        } else {
+          return next({
+            name: 'index'
+          })
+        }
       })
       return next()
     } else {

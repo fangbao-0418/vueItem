@@ -28,7 +28,7 @@ router.beforeEach((to, from, next) => {
       })
     },
     other () {
-      alert('other beforeEnter' + JSON.stringify(cookie.get()))
+      // alert('other beforeEnter' + JSON.stringify(cookie.get()))
       next()
     }
   })
