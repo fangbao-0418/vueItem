@@ -17,7 +17,6 @@ const actions = {
     try {
       wlb.ready({
         app (mixins) {
-          alert('old' + JSON.stringify(cookie.get()))
           mixins.sendUserInfo((result) => {
             const sessionid = result.sessionid
             const splitArray = sessionid.split(';')
