@@ -47,6 +47,7 @@
   "dependencies": {
     "axios": "^0.16.1",
     "jquery": "^3.2.1",
+    "jquery-lazyload": "^1.9.7",
     "js-cookie": "^2.1.4",
     "mint-ui": "^2.2.4",
     "swiper": "^3.4.2",

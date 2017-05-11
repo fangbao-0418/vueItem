@@ -6,7 +6,7 @@
         <span class="photo-title">头像</span>
         <div class="photo-right fr">
           <span class="right fr"></span>
-          <img :src="userInfo.head_img" class="photo fr">
+          <img :src="userInfo.head_img" v-lazyload="{ placeholder: require('../imgs/avatar_defult_big.png') }" class="photo fr">
         </div>
       </div>
       <div class="item">
@@ -103,10 +103,21 @@ export default {
         }
       ]).then((res) => {
         loading.show(false)
-        ruleModal.show({
-          content: '信息修改成功',
-          style: 'text-align: center'
-        })
+        if (res[1].data.result) {
+          var code = res[1].data.result.code
+          var msg = res[1].data.result.data
+          if (code === 0) {
+            ruleModal.show({
+              content: '信息修改成功',
+              style: 'text-align: center'
+            })
+          } else {
+            ruleModal.show({
+              content: msg,
+              style: 'text-align: center'
+            })
+          }
+        }
       })
     }
   },

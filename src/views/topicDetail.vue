@@ -10,7 +10,7 @@
     <div class="container bg-color-white">
       <div class="topic-head">
         <div class="topic-avatar mr-20">
-          <img :src="item.users.head_img"/>
+          <img :src="item.users.head_img" v-lazyload="{ placeholder: require('../imgs/avatar_defult_big.png') }" />
         </div>
         <div class="topic-info">
           <p><span class="topic-author">{{item.users.nickname}}</span></p>
@@ -113,62 +113,4 @@
         font-size: .3rem
         line-height: .42rem
         color: #666666
-  .comment-area
-    .comment-sign
-      padding: 0 .3rem
-      height: .6rem
-      line-height: .6rem
-      border-bottom: 1px solid #E5E5E5
-      box-sizing: border-box
-      span
-        font-family: PingFangSC-Regular
-        font-size: .24rem
-        color: #A1AFB4
-    .comment-items
-      list-style: none
-      overflow: hidden
-      li
-        float: left
-        padding: .3rem
-        border-bottom: 1px solid #E5E5E5
-        .comment-avatar
-          float: left
-          width: .4rem
-          img
-            width: .4rem
-            height: .4rem
-            border-radius: 50%
-        .comment-right
-          margin-left: .1rem
-          width: 6.4rem
-          float: right
-          .comment-head
-            overflow: hidden
-            .comment-head-left
-              width: 80%
-              float: left
-              .comment-user
-                font-family: PingFangSC-Regular
-                font-size: .24rem
-                color: #666666
-                line-height: .33rem
-              .comment-ago
-                font-family: PingFangSC-Regular
-                font-size: .2rem
-                color: #9B9B9B
-                line-height: .28rem
-            .comment-head-right
-              width: 20%
-              float: right
-              text-align: right
-              line-height: .6rem
-              .comment-floor
-                font-family: PingFangSC-Light
-                font-size: .3rem
-                color: #013047
-          .comment-content
-            font-family: PingFangSC-Light
-            font-size: .3rem
-            color: #013047
-            line-height: .42rem
 </style>

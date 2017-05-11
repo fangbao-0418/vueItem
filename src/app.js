@@ -3,11 +3,11 @@ import VueRouter from 'vue-router'
 import routerConfig from './router' // 路由配置文件
 import { wlb } from './util'
 import cookie from 'js-cookie'
-import './sass/app'
+import './sass/app' // sass入口
 import 'mint-ui/lib/style'
 import 'swiper/dist/css/swiper'
 
-import './util/reset'
+import './util/common' // 执行全局方法
 import plugins from './plugins/install'
 import store from './store'
 Vue.use(plugins)

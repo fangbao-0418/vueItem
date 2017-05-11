@@ -1,6 +1,7 @@
 import * as plugins from '../plugins'
 import { api, http, consts } from '../util'
 import * as filters from '../filters'
+import * as directives from '../directives'
 function on (type, fn) {
   const el = this.$el
   if (el.attachEvent) {
@@ -13,6 +14,7 @@ export default {
   install (Vue, options) {
     Vue.filter('handleDate', filters.handleDate)
     Vue.filter('msubstring', filters.msubstring)
+    Vue.directive('lazyload', directives.lazyload)
     Vue.prototype.v_on = on
     Vue.prototype.$rulemodal = plugins.ruleModal
     Vue.prototype.$plugin = plugins

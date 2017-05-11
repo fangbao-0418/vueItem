@@ -5,7 +5,7 @@
   <div>
     <router-link :to="{name: 'person'}" class="user bg-color-white" tag="div" v-if="loginStatus">
       <div class="user-avatar">
-        <img :src="userInfo.head_img" />
+        <img :src="userInfo.head_img" v-lazyload="{ placeholder: require('../imgs/avatar_defult_big.png') }"/>
       </div>
       <p class="user-nick">{{userInfo.nickname}}</p>
       <div class="user-remind">

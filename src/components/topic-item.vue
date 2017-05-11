@@ -4,7 +4,7 @@
       <div class="tags">
         <topic-tags :tags="{ ishot: item.ishot, isgreat: item.isgreat }"></topic-tags>
       </div>
-      <div class="topic-avatar"><img :src="item.users.head_img" /></div>
+      <div class="topic-avatar"><img :src="item.users.head_img" v-lazyload="{ placeholder: require('../imgs/avatar_defult_big.png') }" /></div>
       <div class="topic-main">
         <p class="topic-tit">{{item.users.nickname}}</p>
         <p class="topic-ago">{{item.updated_at | handleDate}}</p>

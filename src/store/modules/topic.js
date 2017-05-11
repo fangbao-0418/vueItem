@@ -71,7 +71,7 @@ const actions = {
           method: 'getBbsThreadTopList',
           params: [{
             id: state.topicBoards[state.navbar_select_index]['id'],
-            limit: consts.BBS_HOME_THREAD_TOP_LIST_PAGE_NUM
+            pageNum: consts.BBS_HOME_THREAD_TOP_LIST_PAGE_NUM
           }]
         },
         {
@@ -91,7 +91,7 @@ const actions = {
         var ThreadTopList = []
         var ThreadList = []
         if (res[0].data.result) {
-          ThreadTopList[state.navbar_select_index] = res[0].data.result.data
+          ThreadTopList[state.navbar_select_index] = res[0].data.result.data.data
         }
         if (res[1].data.result) {
           // 当前页数大于最大页数 设置allLoaded
@@ -138,7 +138,7 @@ const actions = {
         method: 'getBbsThreadTopList',
         params: [{
           id: params.id || state.topicBoards[state.navbar_select_index]['id'],
-          limit: consts.BBS_HOME_THREAD_TOP_LIST_PAGE_NUM
+          pageNum: consts.BBS_HOME_THREAD_TOP_LIST_PAGE_NUM
         }]
       },
       {
@@ -152,7 +152,7 @@ const actions = {
       }
     ]).then((res) => {
       if (res[0].data.result) {
-        ThreadTopList[state.navbar_select_index] = res[0].data.result.data
+        ThreadTopList[state.navbar_select_index] = res[0].data.result.data.data
       }
       if (res[1].data.result) {
         // 当前页数大于最大页数 设置allLoaded

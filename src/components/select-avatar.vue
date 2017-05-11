@@ -8,7 +8,7 @@
       <div class="avatar-items">
         <div class="avatar-item" v-for="(item, i) in data">
           <div :class="{selected: index(i)}" @click="selected(i)">
-            <img :src="item" />
+            <img :src="item" v-lazyload="{ placeholder: require('../imgs/avatar_defult_big.png') }" />
             <i></i>
           </div>
         </div>

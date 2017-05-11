@@ -5,7 +5,7 @@
 
         <div class="swiper-slide" v-for="(item, index) in data" >
           <router-link :to="{ name:'activityDetail', params: { id: item.id } }" class="banner" tag="div">
-            <img :src="item.cover" />
+            <img :src="item.cover" v-lazyload="{ placeholder: require('../imgs/banner_defult_sml.png') }" />
           </router-link>
         </div>
 
