@@ -232,7 +232,7 @@ const wlb = (function () {
         run({ callback: 'app', data: WebViewJavascriptBridge })
       } else {
         document.addEventListener('WebViewJavascriptBridgeReady', function () {
-          // console.log('listen.')
+          alert('WebViewJavascriptBridgeReady')
           run({ callback: 'app', data: WebViewJavascriptBridge })
         }, false)
       }

@@ -65,12 +65,13 @@
       }
     },
     created () {
+      this.$store.dispatch('fetchBridgeInfo')
     },
     mounted () {
-      var that = this
-      $(document).on('WebViewJavascriptBridgeReady', function () {
-        that.$store.dispatch('fetchBridgeInfo')
-      })
+      // var that = this
+      // $(document).on('WebViewJavascriptBridgeReady', function () {
+      //   that.$store.dispatch('fetchBridgeInfo')
+      // })
       window.onscroll = () => {
         var fontSize = parseFloat(document.documentElement.style['font-size'])
         if (document.body.scrollTop > 2.4 * fontSize) {
