@@ -96,15 +96,18 @@ export default {
     width: .44rem
     height: .44rem
     background: url('../imgs/icon_message.png') no-repeat
-    background-size: .44rem .44rem
+    background-size: .42rem .42rem
+    display: inline-block
   .my-post
     width: .44rem
     height: .44rem
     background: url('../imgs/icon_post.png') no-repeat
-    background-size: .44rem .44rem
+    background-size: .42rem .42rem
+    display: inline-block
   .my-task
     width: .44rem
     height: .44rem
     background: url('../imgs/icon_task.png') no-repeat
-    background-size: .44rem .44rem
+    background-size: .42rem .42rem
+    display: inline-block
 </style>
