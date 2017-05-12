@@ -7,7 +7,7 @@ function resolve (dir) {
   return path.resolve(__dirname, dir);
 }
 var isPro = process.env.NODE_ENV.trim() === 'production';
-
+var needHandleDir = [resolve('src'), resolve('node_modules/vuex'), resolve('node_modules/jquery'), resolve('node_modules/vue-router'), resolve('node_modules/swiper'), resolve('node_modules/mint-ui'), resolve('node_modules/js-cookie'), resolve('node_modules/jquery-lazyload'), resolve('node_modules/axios')]
 var plugins = [
   new webpack.DefinePlugin({
     'process.env': {
@@ -74,14 +74,14 @@ if(isPro){
         safe: true
       }
     }),
-    // new webpack.optimize.UglifyJsPlugin({
-    //   compress: {
-    //     warnings: false,
-    //     drop_console: isPro,
-    //     drop_debugger: isPro,
-    //   },
-    //   //sourceMap: true
-    // }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+        drop_console: isPro,
+        drop_debugger: isPro,
+      },
+      //sourceMap: true
+    }),
     new webpack.NoEmitOnErrorsPlugin()
   ])
 }
@@ -131,7 +131,7 @@ module.exports = {
         test: /\.js$/,
         use: 'babel-loader',
         // exclude: /node_modules/,
-        include: [resolve('src')]
+        include: needHandleDir
       },
 			{
         test: /\.sass$/,

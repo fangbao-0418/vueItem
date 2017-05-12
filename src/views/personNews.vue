@@ -2,9 +2,10 @@
   <div class="view">
     <wlb-header>
       <span slot="title">我的消息</span>
+      <span slot="right" class="rightBtnText" @click="allDel">全部删除</span>
     </wlb-header>
     <loadmore v-if="data.length" :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded" ref="loadmore">
-      <news-item :item="item" :index="index" v-for="(item, index) in data" :key="item.name"></news-item>
+      <news-item :item="item" v-for="(item, index) in data" :key="index"></news-item>
     </loadmore>
     <no-more v-if="data.length > 0" :visible="nomore"></no-more>
     <div v-if="data.length === 0" class="empty">
@@ -84,11 +85,31 @@ export default {
         this.$plugin.loading.show(false)
         this.$refs.loadmore.$children[0].onBottomLoaded()
       })
+    },
+    allDel () {
+      if (this.data.length === 0) {
+        this.$rulemodal.show({ content: '没有可删除的消息', style: 'text-align: center' })
+      } else {
+        this.$http({
+          url: this.$api.api_list,
+          method: 'delBbsUserAllPm',
+          params: [{}]
+        }).then((res) => {
+          this.data = []
+          this.$rulemodal.show({ content: '已全部删除了消息', style: 'text-align: center' })
+        })
+      }
     }
   }
 }
 </script>
 <style media="screen" lang="sass" scoped>
+.rightBtnText
+  font-family: PingFangSC-Regular
+  font-size: .26rem
+  line-height: .37rem
+  color: #FFFFFF
+  letter-spacing: 0
 .empty
   position: absolute
   top: 50%

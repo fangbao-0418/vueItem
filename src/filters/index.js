@@ -26,6 +26,9 @@ export function dateTotimestamp (date) {
  * @return {[String]}       [处理后的字符串]
  */
 export function msubstring (str, start, end, chase = '...') {
+  if (str === '') {
+    return ''
+  }
   var res = str.length > end ? str.substring(start, end) + chase : str.substring(start, end)
   return res
 }

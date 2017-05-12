@@ -1,45 +1,63 @@
 <template>
-  <div class="news-content">
-    <div v-if="item.type == 1" class="news-box bg-color-white mt-20" :class="{'mt':index == 0}">
-      <div class="item-title">
-        {{item.name}}
-        <span class="fixed-text">评论了你的帖子</span>
-        {{item.title}}
-      </div>
-      <div class="item-content" v-text="item.content"></div>
-      <div class="item-time fr" v-text="item.time"></div>
+  <div :class="['news-content', { 'readed': item.isread }]" @click="go">
+    <div v-if="item.type == 1" class="news-box bg-color-white mt-20">
+      <p>
+        <span class="color1">您 </span>
+        <span>发布的帖子</span>
+        <span class="color1"> {{item.content | msubstring(0, 20)}} </span>
+        <span>通过了管理员的审核</span>
+      </p>
+      <div class="item-time mt-27" v-text="item.created_at"></div>
     </div>
-    <div v-if="item.type == 2" class="news-delete news-box bg-color-white mt-20">
-      <div class="delete-con">
-        <span>发表的评论</span>
-        <span class="delete-title">{{item.title}}</span>
-        因政治敏感被管理员删除
-      </div>
-      <div class="item-time fr" v-text="item.time"></div>
+    <div v-if="item.type == 2" class="news-box bg-color-white mt-20">
+      <p>
+        <span class="color1">您 </span><span>发布的帖子 </span>
+        <span class="color1">{{item.content | msubstring(0, 20)}}</span>
+        因{{item.del_reason}}被管理员删除
+      </p>
+      <div class="item-time mt-27" v-text="item.created_at"></div>
     </div>
-    <div v-if="item.type == 3" class="news-delete news-box bg-color-white mt-20">
-      <div class="delete-con">
-        <span>{{item.from_users.nickname}}评论</span>
-        <span class="delete-title">{{item.threads.content | msubstring(0, 10)}}</span>
-        审核通过
-      </div>
-      <div class="item-time fr" v-text="item.time"></div>
+    <div v-if="item.type == 3" class="news-box bg-color-white mt-20">
+      <p>
+        <span class="color1">{{item.from_users.nickname}} </span><span>评论了您的帖子 </span>
+        <span class="color1">{{item.threads.content | msubstring(0, 10)}}</span>
+      </p>
+      <p>{{item.content}}</p>
+      <div class="item-time mt-27" v-text="item.created_at"></div>
     </div>
-    <div v-if="item.type == 4" class="news-delete news-box bg-color-white mt-20">
-      <div class="delete-con">
-        <span>您发布的帖子</span>
-        <span class="delete-title">{{item.content}}</span>
-        因政治敏感被管理员删除
-      </div>
-      <div class="item-time fr" v-text="item.time"></div>
+    <div v-if="item.type == 4" class="news-box bg-color-white mt-20">
+      <p>
+        <span class="color1">您 </span><span>发表的评论</span>
+        <span class="color1">{{item.content | msubstring(0, 10)}}</span>
+        因{{item.del_reason}}被管理员删除
+      </p>
+      <div class="item-time mt-27" v-text="item.created_at"></div>
     </div>
   </div>
 </template>
 <script>
 export default {
-  props: ['item', 'index'],
+  props: ['item'],
   data () {
     return {}
+  },
+  methods: {
+    go () {
+      this.$http({
+        url: this.$api.api_list,
+        method: 'getBbsThreadDetail',
+        params: [{
+          fromPm: this.item.id,
+          id: this.item.tid
+        }]
+      })
+      this.$router.push({
+        name: 'topicDetail',
+        params: {
+          id: this.item.tid
+        }
+      })
+    }
   }
 }
 </script>
@@ -50,6 +68,16 @@ export default {
   .news-box
     padding: .3rem .3rem .2rem
     overflow: hidden
+    p
+      word-wrap: break-word
+      line-height: .38rem
+      span
+        font-family: PingFangSC-Regular
+        font-size: .27rem
+        letter-spacing: 0
+        color: #2A2A2A
+      .color1
+        color: #12A5E2
   .item-title
     width: 5.3rem
     height: .33rem
@@ -67,22 +95,10 @@ export default {
     color: #666
     letter-spacing: .02rem
   .item-time
+    text-align: right
     padding-top: .07rem
     height: .33rem
     line-height: .33rem
     font-size: .24rem
     color: #a1afb4
-  .news-delete
-    font-size: .3rem
-    color: #666
-    .delete-con
-      overflow: hidden
-    span
-      float: left
-    .delete-title
-      width: 2.5rem
-      white-space: nowrap
-      overflow: hidden
-      text-overflow: ellipsis
-      color: #12a5e2
 </style>
