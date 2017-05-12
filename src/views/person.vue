@@ -7,7 +7,7 @@
     <user-briefly-show></user-briefly-show>
     <div class="section mt-20 bg-color-white">
       <section-item v-for="item in items" :key="item.code" :to="item.to">
-        <span slot="image" class="fl" :class="['list-img', item.flag]"></span>
+        <span slot="image" class="fl" :class="['list-img mr-33', item.flag]"></span>
         <span class="list-des fl" v-text="item.title"></span>
       <span slot="right" class="list-right fr">
         <span class="right-icon fr"></span>
@@ -67,10 +67,10 @@ export default {
   background-size: 100% 100%
 .section
   .list-img
-    width: .46rem
-    height: .46rem
+    width: .44rem
+    height: .44rem
+    display: inline-block
   .list-des
-    padding-left: .33rem
     font-size: .3rem
     color: #666
     line-height: .44rem
@@ -93,12 +93,18 @@ export default {
       background: url('../imgs/dot_remind.png') no-repeat
       background-size: .16rem .16rem
   .my-message
-    background: #ccc url('../imgs/icon_message.png') no-repeat
+    width: .44rem
+    height: .44rem
+    background: url('../imgs/icon_message.png') no-repeat
     background-size: .44rem .44rem
   .my-post
-    background: #ccc url('../imgs/icon_post.png') no-repeat
+    width: .44rem
+    height: .44rem
+    background: url('../imgs/icon_post.png') no-repeat
     background-size: .44rem .44rem
   .my-task
-    background: #ccc url('../imgs/icon_task.png') no-repeat
+    width: .44rem
+    height: .44rem
+    background: url('../imgs/icon_task.png') no-repeat
     background-size: .44rem .44rem
 </style>
