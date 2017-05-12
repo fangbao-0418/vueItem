@@ -67,8 +67,8 @@ export default {
   background-size: 100% 100%
 .section
   .list-img
-    width: .44rem
-    height: .44rem
+    width: .46rem
+    height: .46rem
   .list-des
     padding-left: .33rem
     font-size: .3rem
