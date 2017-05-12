@@ -24,31 +24,46 @@ var plugins = [
   new HtmlWebpackPlugin({
     template: './src/index.html',
     // 要把<script>标签插入到页面哪个标签里(body|true|head|false)
-    inject: 'body',
+    inject: 'true',
     filename: resolve("dist/index.html"),
     // hash如果为true，将添加hash到所有包含的脚本和css文件，对于解除cache很有用
     // minify用于压缩html文件，其中的removeComments:true用于移除html中的注释，collapseWhitespace:true用于删除空白符与换行符
-    removeComments:true,
-    collapseWhitespace:true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true
+      // more options:
+      // https://github.com/kangax/html-minifier#options-quick-reference
+    },
+    // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+    chunksSortMode: 'dependency'
     // hash:true
   }),
   new webpack.ProvidePlugin({
     $: 'jquery',
     jQuery: 'jquery',
-    "window.jQuery": "jquery"
+    "window.jQuery": 'jquery'
   }),
   // 将node_modules打入vendor
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendor',
-    minChunks: function (module) {
-      // this assumes your vendor imports exist in the node_modules directory
-      return module.context && module.context.indexOf('node_modules') !== -1;
-    }
-  }),
+  // new webpack.optimize.CommonsChunkPlugin({
+  //   name: 'vendor',
+  //   minChunks: function (module, count) {
+  //     // this assumes your vendor imports exist in the node_modules directory
+  //     // any required modules inside node_modules are extracted to vendor
+  //       return (
+  //         module.resource &&
+  //         /\.js$/.test(module.resource) &&
+  //         module.resource.indexOf(
+  //           path.join(__dirname, '../node_modules')
+  //         ) === 0
+  //       )
+  //   }
+  // }),
   // To extract the webpack bootstrap logic into a separate file
   // 其他打入清单
   new webpack.optimize.CommonsChunkPlugin({
-    names: 'manifest'
+    name: 'manifest',
+    chunks: ['vendor']
   })
 ];
 
@@ -59,14 +74,14 @@ if(isPro){
         safe: true
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        drop_console: isPro,
-        drop_debugger: isPro,
-      },
-      //sourceMap: true
-    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false,
+    //     drop_console: isPro,
+    //     drop_debugger: isPro,
+    //   },
+    //   //sourceMap: true
+    // }),
     new webpack.NoEmitOnErrorsPlugin()
   ])
 }
@@ -116,7 +131,7 @@ module.exports = {
         test: /\.js$/,
         use: 'babel-loader',
         // exclude: /node_modules/,
-        include: [resolve('src'), resolve('node_modules/jquery')]
+        include: [resolve('src')]
       },
 			{
         test: /\.sass$/,
