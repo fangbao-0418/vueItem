@@ -110,4 +110,5 @@ export default {
     background: url('../imgs/icon_task.png') no-repeat
     background-size: .44rem .44rem
     display: inline-block
+    border: 0
 </style>
