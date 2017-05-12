@@ -1,18 +1,18 @@
 /*! This file is created by fangbao */
 webpackJsonp([3],{
 
-/***/ 253:
+/***/ 278:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(265)
+__webpack_require__(290)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(260),
+  __webpack_require__(285),
   /* template */
-  __webpack_require__(272),
+  __webpack_require__(297),
   /* scopeId */
   "data-v-10ae7efd",
   /* cssModules */
@@ -40,14 +40,14 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 260:
+/***/ 285:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__plugins__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bus__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__plugins__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bus__ = __webpack_require__(45);
 
 
 
@@ -150,14 +150,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 265:
+/***/ 290:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 272:
+/***/ 297:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -185,7 +185,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       name: "lazyload",
       rawName: "v-lazyload",
       value: ({
-        placeholder: __webpack_require__(11)
+        placeholder: __webpack_require__(17)
       }),
       expression: "{ placeholder: require('../imgs/avatar_defult_big.png') }"
     }],
@@ -240,4 +240,4 @@ if (false) {
 /***/ })
 
 });
-//# sourceMappingURL=3.e17fe758cbd0daac091d.js.map
+//# sourceMappingURL=3.514fd4955d0197ed0d65.js.map

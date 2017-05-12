@@ -131,7 +131,7 @@ module.exports = {
         test: /\.js$/,
         use: 'babel-loader',
         // exclude: /node_modules/,
-        include: [resolve('src')]
+        include: [resolve('src'), resolve('node_modules/jquery')]
       },
 			{
         test: /\.sass$/,
