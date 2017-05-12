@@ -8,11 +8,11 @@
     <div class="section mt-20 bg-color-white">
       <section-item v-for="item in items" :key="item.code" :to="item.to">
         <span slot="image" class="fl" :class="['list-img mr-33', item.flag]"></span>
-        <!-- <span class="list-des fl" v-text="item.title"></span>
+        <span class="list-des fl" v-text="item.title"></span>
         <span slot="right" class="list-right fr">
           <span class="right-icon fr"></span>
           <span class="right-news fr" v-if="item.code === 'MY-NEWS' && unreadStatus"></span>
-        </span> -->
+        </span>
       </section-item>
     </div>
   </div>
@@ -107,7 +107,6 @@ export default {
     width: .44rem
     height: .44rem
     background: url('../imgs/icon_task.png') no-repeat
-    background-size: .44rem .44rem
+    background-size: .42rem .42rem
     display: inline-block
-    border: 0
 </style>
