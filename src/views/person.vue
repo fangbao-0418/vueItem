@@ -108,6 +108,6 @@ export default {
     width: .44rem
     height: .44rem
     background: url('../imgs/icon_task.png') no-repeat
-    background-size: .42rem .42rem
+    background-size: .44rem .44rem
     display: inline-block
 </style>

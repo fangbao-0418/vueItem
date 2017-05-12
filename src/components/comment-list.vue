@@ -27,7 +27,7 @@
       </loadmore>
     </div>
     <no-more :visible="total === 0" content="～暂时没有评论～"></no-more>
-    <no-more :visible="nomore" content="～没有更多了～"></no-more>
+    <no-more v-if="total > 0" :visible="nomore" content="～没有更多了～"></no-more>
   </div>
 </template>
 <script>
