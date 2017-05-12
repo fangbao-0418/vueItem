@@ -72,12 +72,11 @@ export default {
     loadTop () {
       // 加载更多数据
       var that = this
-      console.log(this.$refs['loadmore_' + this.currentIndex], this.currentIndex)
       if (this.$refs['loadmore_' + this.currentIndex]) {
-        console.log('loadTop')
         this.$store.dispatch('bbsHomePageSetLoaded', false)
         this.$store.dispatch('updateTopicListData', {
           page: 1,
+          refresh: true,
           cb: function () {
             that.$refs['loadmore_' + that.currentIndex][0].$children[0].onTopLoaded()
           }

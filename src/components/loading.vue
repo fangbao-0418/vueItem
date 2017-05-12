@@ -71,7 +71,7 @@
       height: 1rem
       position: absolute
       background: #1a6844
-      border-radius: .03rem
+      border-radius: .1rem
       animation: animate .5s linear infinite
     &::after
       content: ""

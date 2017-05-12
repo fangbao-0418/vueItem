@@ -38,12 +38,25 @@ const actions = {
       method: 'getBbsThreadSectionList',
       params: [{}]
     }).then((res) => {
+      var ThreadTopList = []
+      var ThreadList = []
       if (res.data.result) {
+        // 初始化社区首页数据allLoaded && 当前页数 && 列表数据
         for (let i in res.data.result.data) {
-          // 初始化社区首页数据allLoaded && 当前页数
           commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: i, v: false })
-          commit(types.SET_BBS_HOME_CURRENT_PAGE, { k: i, v: 1 })
+          if (i === state.navbar_select_index) {
+            commit(types.SET_BBS_HOME_CURRENT_PAGE, { k: i, v: 1 })
+          } else {
+            commit(types.SET_BBS_HOME_CURRENT_PAGE, { k: i, v: 0 })
+          }
+          ThreadTopList[i] = []
+          ThreadList[i] = []
         }
+        var data = {
+          ThreadTopList,
+          ThreadList
+        }
+        commit(types.FETCH_BBS_HOME_DATA, data)
         commit(types.FETCH_TOPIC_BOARDS, res.data.result.data)
       }
       callback && callback()
@@ -88,8 +101,8 @@ const actions = {
           params: [{}]
         }
       ]).then((res) => {
-        var ThreadTopList = []
-        var ThreadList = []
+        var ThreadTopList = [].concat(state.ThreadTopList)
+        var ThreadList = [].concat(state.ThreadList)
         if (res[0].data.result) {
           ThreadTopList[state.navbar_select_index] = res[0].data.result.data.data
         }
@@ -120,24 +133,24 @@ const actions = {
     if (state.homeDataLoaded[state.navbar_select_index]) {
       return
     }
-    // 设置当前页数
-    var ThreadTopList = []
-    var ThreadList = []
-    for (var i in state.topicBoards) {
-      ThreadTopList[i] = state.ThreadTopList[i]
-      ThreadList[i] = state.ThreadList[i]
-    }
 
-    if (ThreadList[state.navbar_select_index] && ThreadList[state.navbar_select_index].length) {
+    var ThreadTopList = [].concat(state.ThreadTopList)
+    var ThreadList = [].concat(state.ThreadList)
+
+    // 设置当前页数
+    if (params.refresh) {
+      commit(types.SET_BBS_HOME_CURRENT_PAGE, { k: state.navbar_select_index, v: 1 })
+    } else {
       commit(types.SET_BBS_HOME_CURRENT_PAGE, { k: state.navbar_select_index, v: state.bbsHomeCurrentPageInfo[state.navbar_select_index] + 1 })
     }
+
     loading.show(true)
     http([
       {
         url: api.api_list,
         method: 'getBbsThreadTopList',
         params: [{
-          id: params.id || state.topicBoards[state.navbar_select_index]['id'],
+          id: state.topicBoards[state.navbar_select_index]['id'],
           pageNum: consts.BBS_HOME_THREAD_TOP_LIST_PAGE_NUM
         }]
       },
@@ -145,8 +158,8 @@ const actions = {
         url: api.api_list,
         method: 'getBbsThreadList',
         params: [{
-          id: params.id || state.topicBoards[state.navbar_select_index]['id'],
-          page: params.page || state.bbsHomeCurrentPageInfo[state.navbar_select_index],
+          id: state.topicBoards[state.navbar_select_index]['id'],
+          page: state.bbsHomeCurrentPageInfo[state.navbar_select_index],
           pageNum: consts.BBS_HOME_THREAD_LIST_PAGE_NUM
         }]
       }
@@ -176,7 +189,7 @@ const actions = {
         ThreadTopList,
         ThreadList
       }
-      // console.log(ThreadList[state.navbar_select_index], state.navbar_select_index, '帖子列表')
+      console.log(ThreadList[state.navbar_select_index].length, '帖子数')
       commit(types.FETCH_BBS_HOME_DATA, data)
       commit(types.HOME_DATA_LOADED, true)
       loading.show(false)

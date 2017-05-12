@@ -31,10 +31,7 @@
     data () {
       return {
         item: {},
-        commentList: [],
-        allLoaded: false,
-        loaded: false,
-        nomore: false
+        loaded: false
       }
     },
     computed: {
@@ -51,13 +48,13 @@
           id: this.id
         }]
       }).then((res) => {
-        this.loaded = true
-        this.item = res.data.result.data.thread_info
-        this.commentList = res.data.result.data.comment_list
-        if (this.commentList.length === 0) {
-          this.nomore = true
+        if (res.data.result.code === 0) {
+          this.loaded = true
+          this.item = res.data.result.data.thread_info
+          this.$plugin.loading.show(false)
+        } else {
+          this.$router.replace({ name: 'index' })
         }
-        this.$plugin.loading.show(false)
       })
     },
     methods: {

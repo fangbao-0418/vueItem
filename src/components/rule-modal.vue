@@ -95,7 +95,7 @@
         padding: 0 .3rem .8rem
       .footer
         height: .9rem
-        border-top: solid #D8D8D8 .02rem;
+        border-top: solid #D8D8D8 1px
         text-align: center
         line-height: .9rem
         span

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :key="index" class="topic-item bg-color-white mb-20" v-for="(item, index) in data">
+    <div v-if="item.users" :key="index" class="topic-item bg-color-white mb-20" v-for="(item, index) in data">
       <div class="tags">
         <topic-tags :tags="{ ishot: item.ishot, isgreat: item.isgreat }"></topic-tags>
       </div>

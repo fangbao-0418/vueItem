@@ -94,9 +94,12 @@ export default {
       background: url('../imgs/dot_remind.png') no-repeat
       background-size: .16rem .16rem
   .my-message
-    background: url('../imgs/icon_message.png') no-repeat 0 0 / .44rem .44rem
+    background: url('../imgs/icon_message.png') no-repeat
+    background-size: .44rem .44rem
   .my-post
-    background: url('../imgs/icon_post.png') no-repeat 0 0 / .44rem .44rem
+    background: url('../imgs/icon_post.png') no-repeat
+    background-size: .44rem .44rem
   .my-task
-    background: url('../imgs/icon_task.png') no-repeat 0 0 / .44rem .44rem
+    background: url('../imgs/icon_task.png') no-repeat
+    background-size: .44rem .44rem
 </style>

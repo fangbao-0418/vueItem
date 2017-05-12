@@ -43,10 +43,12 @@
           id: this.id
         }]
       }).then((res) => {
-        if (res.data.result) {
+        if (res.data.result.code === 0) {
           this.item = res.data.result.data.thread_info
+          this.$plugin.loading.show(false)
+        } else {
+          this.$router.replace({ name: 'index' })
         }
-        this.$plugin.loading.show(false)
       })
     }
   }

@@ -19,6 +19,7 @@ axios.interceptors.request.use(function (config) {
 }, function (error) {
   return Promise.reject(error)
 })
+
 axios.interceptors.response.use(function (response) {
   if (response.data.error) {
     var code = response.data.error.code
@@ -45,6 +46,7 @@ axios.interceptors.response.use(function (response) {
   ruleModal.show({ title: '系统提示', content: '网络异常，获取数据失败', style: 'text-align: center' })
   return Promise.reject(error)
 })
+
 function http () {
   if (arguments[0] instanceof Array) {
     var resultArr = []
@@ -71,7 +73,7 @@ function fetchData (params) {
     url: params.url,
     method: 'post',
     data: json,
-    // timeout: 1000,
+    timeout: 10000,
     withCredentials: isCrossDomain || !isPro
   })
 }

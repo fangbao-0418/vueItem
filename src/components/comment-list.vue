@@ -2,7 +2,7 @@
   <div>
     <div class="comment-area mt-20 bg-color-white" v-if="data && data.length" >
       <div class="comment-sign">
-        <span>评论列表 (6)</span>
+        <span>评论列表 ({{total}})</span>
       </div>
       <loadmore :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded" ref="loadmore">
         <ul class="comment-items">
@@ -26,7 +26,8 @@
         </ul>
       </loadmore>
     </div>
-    <no-more :visible="nomore" content="～暂时没有评论～"></no-more>
+    <no-more :visible="total === 0" content="～暂时没有评论～"></no-more>
+    <no-more :visible="nomore" content="～没有更多了～"></no-more>
   </div>
 </template>
 <script>
@@ -42,7 +43,9 @@
       return {
         data: [],
         page: 1,
-        nomore: true
+        lastPage: 1,
+        nomore: true,
+        total: 0
       }
     },
     created () {
@@ -67,6 +70,8 @@
             page: this.page
           }]
         }).then((res) => {
+          this.total = res.data.result.data.total
+          this.lastPage = res.data.result.data['last_page']
           this.page += 1
           if (res.data.result.data['last_page'] + 1 >= this.page) {
             if (this.page === 2) {
@@ -92,6 +97,9 @@
         })
       },
       loadBottom () {
+        if (this.lastPage <= this.page) {
+          return ''
+        }
         this.$plugin.loading.show(true)
         this.loadData(() => {
           this.$plugin.loading.show(false)
