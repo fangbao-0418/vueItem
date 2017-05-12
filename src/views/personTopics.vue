@@ -12,7 +12,7 @@
     </loadmore>
     <div v-if="!postItems.length" class="empty">
       <div class="text">还没有发帖纪录哦</div>
-      <router-link :to="{name: 'topicAdd'}" class="go-topic">去发帖</router-link>
+      <!-- <router-link :to="{name: 'topicAdd'}" class="go-topic">去发帖</router-link> -->
     </div>
   </div>
 </template>
