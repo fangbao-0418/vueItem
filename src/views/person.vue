@@ -8,12 +8,11 @@
     <div class="section mt-20 bg-color-white">
       <section-item v-for="item in items" :key="item.code" :to="item.to">
         <span slot="image" class="fl" :class="['list-img mr-33', item.flag]"></span>
-        <span class="list-des fl" v-text="item.title"></span>
-      <span slot="right" class="list-right fr">
-        <span class="right-icon fr"></span>
-        <!--当是我的消息且有新消息显示点-->
-        <span class="right-news fr" v-if="item.code === 'MY-NEWS' && unreadStatus"></span>
-      </span>
+        <!-- <span class="list-des fl" v-text="item.title"></span>
+        <span slot="right" class="list-right fr">
+          <span class="right-icon fr"></span>
+          <span class="right-news fr" v-if="item.code === 'MY-NEWS' && unreadStatus"></span>
+        </span> -->
       </section-item>
     </div>
   </div>
