@@ -67,7 +67,6 @@ export default {
   background-size: 100% 100%
 .section
   .list-img
-    display: inline-block
     width: .44rem
     height: .44rem
   .list-des
@@ -94,12 +93,12 @@ export default {
       background: url('../imgs/dot_remind.png') no-repeat
       background-size: .16rem .16rem
   .my-message
-    background: url('../imgs/icon_message.png') no-repeat
+    background: #ccc url('../imgs/icon_message.png') no-repeat
     background-size: .44rem .44rem
   .my-post
-    background: url('../imgs/icon_post.png') no-repeat
+    background: #ccc url('../imgs/icon_post.png') no-repeat
     background-size: .44rem .44rem
   .my-task
-    background: url('../imgs/icon_task.png') no-repeat
+    background: #ccc url('../imgs/icon_task.png') no-repeat
     background-size: .44rem .44rem
 </style>
