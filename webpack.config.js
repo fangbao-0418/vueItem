@@ -61,10 +61,10 @@ var plugins = [
   // }),
   // To extract the webpack bootstrap logic into a separate file
   // 其他打入清单
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'manifest',
-    chunks: ['vendor']
-  })
+  // new webpack.optimize.CommonsChunkPlugin({
+  //   name: 'manifest',
+  //   chunks: ['vendor']
+  // })
 ];
 
 if(isPro){
@@ -131,7 +131,7 @@ module.exports = {
         test: /\.js$/,
         use: 'babel-loader',
         // exclude: /node_modules/,
-        include: [resolve('src'), resolve('node_modules/jquery')]
+        include: [resolve('src')]
       },
 			{
         test: /\.sass$/,

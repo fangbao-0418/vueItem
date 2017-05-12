@@ -49,7 +49,7 @@
   "dependencies": {
     "axios": "^0.16.1",
     "iscroll": "^5.2.0",
-    "jquery": "^3.2.1",
+    "jquery": "^3.1.1",
     "jquery-lazyload": "^1.9.7",
     "js-cookie": "^2.1.4",
     "mint-ui": "^2.2.4",
