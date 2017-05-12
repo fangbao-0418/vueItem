@@ -1,18 +1,18 @@
 /*! This file is created by fangbao */
 webpackJsonp([5],{
 
-/***/ 251:
+/***/ 255:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(264)
+__webpack_require__(268)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(258),
+  __webpack_require__(262),
   /* template */
-  __webpack_require__(271),
+  __webpack_require__(275),
   /* scopeId */
   "data-v-0980a2fd",
   /* cssModules */
@@ -40,41 +40,50 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 258:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ 262:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components__ = __webpack_require__(10);
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data() {
+var _components = __webpack_require__(11);
+
+exports.default = {
+  data: function data() {
     return {
       data: [],
       page: 1,
       nomore: false
     };
   },
+
   computed: {
-    allLoaded() {
+    allLoaded: function allLoaded() {
       return this.nomore;
     }
   },
-  created() {
+  created: function created() {
+    var _this = this;
+
     this.$plugin.loading.show(true);
-    this.loadData(() => {
-      this.$plugin.loading.show(false);
+    this.loadData(function () {
+      _this.$plugin.loading.show(false);
     });
   },
+
   components: {
-    WlbHeader: __WEBPACK_IMPORTED_MODULE_0__components__["c" /* WlbHeader */],
-    Loadmore: __WEBPACK_IMPORTED_MODULE_0__components__["g" /* Loadmore */],
-    NoMore: __WEBPACK_IMPORTED_MODULE_0__components__["h" /* NoMore */]
+    WlbHeader: _components.WlbHeader,
+    Loadmore: _components.Loadmore,
+    NoMore: _components.NoMore
   },
   methods: {
-    loadData(cb) {
+    loadData: function loadData(cb) {
+      var _this2 = this;
+
       this.$http({
         url: this.$api.api_list,
         method: 'getBbsThreadTopList',
@@ -84,57 +93,61 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           page: this.page,
           lastPage: 1
         }]
-      }).then(res => {
+      }).then(function (res) {
         if (res.data.result) {
-          this.page += 1;
-          this.lastPage = res.data.result.data['last_page'];
-          if (res.data.result.data['last_page'] + 1 >= this.page) {
-            if (this.page === 2) {
-              this.data = res.data.result.data.data;
+          _this2.page += 1;
+          _this2.lastPage = res.data.result.data['last_page'];
+          if (res.data.result.data['last_page'] + 1 >= _this2.page) {
+            if (_this2.page === 2) {
+              _this2.data = res.data.result.data.data;
             } else {
-              this.data = this.data.concat(res.data.result.data.data);
+              _this2.data = _this2.data.concat(res.data.result.data.data);
             }
           }
-          if (res.data.result.data['last_page'] < this.page) {
-            this.nomore = true;
+          if (res.data.result.data['last_page'] < _this2.page) {
+            _this2.nomore = true;
           } else {
-            this.nomore = false;
+            _this2.nomore = false;
           }
           cb && cb();
         }
       });
     },
-    loadTop() {
+    loadTop: function loadTop() {
+      var _this3 = this;
+
       this.page = 1;
       this.$plugin.loading.show(true);
-      this.loadData(() => {
-        this.$plugin.loading.show(false);
-        this.$refs.loadmore.$children[0].onTopLoaded();
+      this.loadData(function () {
+        _this3.$plugin.loading.show(false);
+        _this3.$refs.loadmore.$children[0].onTopLoaded();
       });
     },
-    loadBottom() {
+    loadBottom: function loadBottom() {
+      var _this4 = this;
+
       if (this.page > this.lastPage) {
         return '';
       }
       this.$plugin.loading.show(true);
-      this.loadData(() => {
-        this.$plugin.loading.show(false);
-        this.$refs.loadmore.$children[0].onBottomLoaded();
+      this.loadData(function () {
+        _this4.$plugin.loading.show(false);
+        _this4.$refs.loadmore.$children[0].onBottomLoaded();
       });
     }
   }
-});
+};
 
 /***/ }),
 
-/***/ 264:
+/***/ 268:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 271:
+/***/ 275:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -174,7 +187,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         name: "lazyload",
         rawName: "v-lazyload",
         value: ({
-          placeholder: __webpack_require__(69)
+          placeholder: __webpack_require__(70)
         }),
         expression: "{ placeholder: require('../imgs/banner_defult_sml.png') }"
       }],
@@ -195,7 +208,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         name: "lazyload",
         rawName: "v-lazyload",
         value: ({
-          placeholder: __webpack_require__(69)
+          placeholder: __webpack_require__(70)
         }),
         expression: "{ placeholder: require('../imgs/banner_defult_sml.png') }"
       }],
@@ -220,4 +233,4 @@ if (false) {
 /***/ })
 
 });
-//# sourceMappingURL=5.6b55c25113de63bb6336.js.map
+//# sourceMappingURL=5.4e7f8adf7bfb309934f2.js.map

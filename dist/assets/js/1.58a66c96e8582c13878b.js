@@ -1,18 +1,18 @@
 /*! This file is created by fangbao */
 webpackJsonp([1],{
 
-/***/ 255:
+/***/ 259:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(266)
+__webpack_require__(270)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(262),
+  __webpack_require__(266),
   /* template */
-  __webpack_require__(273),
+  __webpack_require__(277),
   /* scopeId */
   "data-v-3a3824aa",
   /* cssModules */
@@ -40,57 +40,64 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 262:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ 266:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components__ = __webpack_require__(10);
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data() {
+var _components = __webpack_require__(11);
+
+exports.default = {
+  data: function data() {
     return {
       data: {}
     };
   },
+
   components: {
-    WlbHeader: __WEBPACK_IMPORTED_MODULE_0__components__["c" /* WlbHeader */],
-    TaskItem: __WEBPACK_IMPORTED_MODULE_0__components__["i" /* TaskItem */],
-    TaskPlan: __WEBPACK_IMPORTED_MODULE_0__components__["j" /* TaskPlan */]
+    WlbHeader: _components.WlbHeader,
+    TaskItem: _components.TaskItem,
+    TaskPlan: _components.TaskPlan
   },
-  created() {
+  created: function created() {
+    var _this = this;
+
     this.$plugin.loading.show(true, 'full');
     this.$http({
       url: this.$api.api_list,
       method: 'queryBbsUserTask',
       params: [{}]
-    }).then(res => {
-      this.data = res.data.result.data;
-      this.$plugin.loading.show(false);
+    }).then(function (res) {
+      _this.data = res.data.result.data;
+      _this.$plugin.loading.show(false);
     });
   },
+
   methods: {
-    showRule() {
+    showRule: function showRule() {
       this.$rulemodal.show({
         title: '活动规则',
         content: '新华社北京4月26日电 中共中央政治局4月25日下午就维护国家金融安全进行第四十次集体学习。中共中央总书记习近平在主持学习时强调，金融安全是国家安全的重要组成部分，是经济平稳健康发展的重要基础。维护金融安全，是关系我国经济社会发展全局的一件带有战略性、根本性的大事。金融活，经济活；金融稳，经济稳。必须充分认识金融在经济发展和社会生活中的重要地位和作用，切实把维护金融安全作为治国理政的一件大事，扎扎实实把金融工作做好。'
       });
     }
   }
-});
+};
 
 /***/ }),
 
-/***/ 266:
+/***/ 270:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 273:
+/***/ 277:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -150,4 +157,4 @@ if (false) {
 /***/ })
 
 });
-//# sourceMappingURL=1.b2164ea8138ac3db8fbc.js.map
+//# sourceMappingURL=1.58a66c96e8582c13878b.js.map

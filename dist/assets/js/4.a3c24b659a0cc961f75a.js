@@ -1,18 +1,18 @@
 /*! This file is created by fangbao */
 webpackJsonp([4],{
 
-/***/ 252:
+/***/ 256:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(267)
+__webpack_require__(271)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(259),
+  __webpack_require__(263),
   /* template */
-  __webpack_require__(274),
+  __webpack_require__(278),
   /* scopeId */
   "data-v-60b05405",
   /* cssModules */
@@ -40,22 +40,28 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 259:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ 263:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(34);
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
+var _extends2 = __webpack_require__(71);
 
+var _extends3 = _interopRequireDefault(_extends2);
 
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data() {
+var _components = __webpack_require__(11);
+
+var _vuex = __webpack_require__(35);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  data: function data() {
     return {
       items: [{
         code: 'MY-NEWS',
@@ -75,31 +81,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }]
     };
   },
-  created() {
+  created: function created() {
     this.$store.dispatch('fetchPersonPageData');
   },
-  computed: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapState */])({
-    unreadStatus(state) {
+
+  computed: (0, _extends3.default)({}, (0, _vuex.mapState)({
+    unreadStatus: function unreadStatus(state) {
       return state.profile.unreadStatus;
     }
   })),
   components: {
-    WlbHeader: __WEBPACK_IMPORTED_MODULE_1__components__["c" /* WlbHeader */],
-    UserBrieflyShow: __WEBPACK_IMPORTED_MODULE_1__components__["n" /* UserBrieflyShow */],
-    SectionItem: __WEBPACK_IMPORTED_MODULE_1__components__["o" /* SectionItem */]
+    WlbHeader: _components.WlbHeader,
+    UserBrieflyShow: _components.UserBrieflyShow,
+    SectionItem: _components.SectionItem
   }
-});
+};
 
 /***/ }),
 
-/***/ 267:
+/***/ 271:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 274:
+/***/ 278:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -153,4 +160,4 @@ if (false) {
 /***/ })
 
 });
-//# sourceMappingURL=4.420dcb28ca88f3020cb0.js.map
+//# sourceMappingURL=4.a3c24b659a0cc961f75a.js.map

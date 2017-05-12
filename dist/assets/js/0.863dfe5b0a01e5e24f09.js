@@ -1,18 +1,18 @@
 /*! This file is created by fangbao */
 webpackJsonp([0],{
 
-/***/ 256:
+/***/ 260:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(268)
+__webpack_require__(272)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(263),
+  __webpack_require__(267),
   /* template */
-  __webpack_require__(275),
+  __webpack_require__(279),
   /* scopeId */
   "data-v-61365189",
   /* cssModules */
@@ -40,36 +40,45 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 263:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ 267:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components__ = __webpack_require__(10);
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data() {
+var _components = __webpack_require__(11);
+
+exports.default = {
+  data: function data() {
     return {
       postItems: [],
       page: 1,
       nomore: false
     };
   },
+
   computed: {
-    allLoaded() {
+    allLoaded: function allLoaded() {
       return this.nomore;
     }
   },
-  created() {
+  created: function created() {
+    var _this = this;
+
     this.$plugin.loading.show(true, 'full');
-    this.loadData(() => {
-      this.$plugin.loading.show(false);
+    this.loadData(function () {
+      _this.$plugin.loading.show(false);
     });
   },
+
   methods: {
-    loadData(cb) {
+    loadData: function loadData(cb) {
+      var _this2 = this;
+
       this.$http({
         url: this.$api.api_list,
         method: 'getBbsUserThread',
@@ -77,57 +86,61 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           pageNum: this.$const.BBS_USER_THREAD_PAGE_NUM,
           page: this.page
         }]
-      }).then(res => {
-        this.page += 1;
-        if (res.data.result.data['last_page'] + 1 >= this.page) {
-          if (this.page === 2) {
-            this.postItems = res.data.result.data.list;
+      }).then(function (res) {
+        _this2.page += 1;
+        if (res.data.result.data['last_page'] + 1 >= _this2.page) {
+          if (_this2.page === 2) {
+            _this2.postItems = res.data.result.data.list;
           } else {
-            this.postItems = this.postItems.concat(res.data.result.data.list);
+            _this2.postItems = _this2.postItems.concat(res.data.result.data.list);
           }
         }
-        if (res.data.result.data['last_page'] < this.page) {
-          this.nomore = true;
+        if (res.data.result.data['last_page'] < _this2.page) {
+          _this2.nomore = true;
         } else {
-          this.nomore = false;
+          _this2.nomore = false;
         }
         cb && cb();
       });
     },
-    loadTop() {
+    loadTop: function loadTop() {
+      var _this3 = this;
+
       this.page = 1;
       this.$plugin.loading.show(true);
-      this.loadData(() => {
-        this.$plugin.loading.show(false);
-        this.$refs.loadmore.$children[0].onTopLoaded();
+      this.loadData(function () {
+        _this3.$plugin.loading.show(false);
+        _this3.$refs.loadmore.$children[0].onTopLoaded();
       });
     },
-    loadBottom() {
+    loadBottom: function loadBottom() {
+      var _this4 = this;
+
       this.$plugin.loading.show(true);
-      this.loadData(() => {
-        this.$plugin.loading.show(false);
-        this.$refs.loadmore.$children[0].onBottomLoaded();
+      this.loadData(function () {
+        _this4.$plugin.loading.show(false);
+        _this4.$refs.loadmore.$children[0].onBottomLoaded();
       });
     }
   },
   components: {
-    WlbHeader: __WEBPACK_IMPORTED_MODULE_0__components__["c" /* WlbHeader */],
-    MyTopicItem: __WEBPACK_IMPORTED_MODULE_0__components__["k" /* MyTopicItem */],
-    Loadmore: __WEBPACK_IMPORTED_MODULE_0__components__["g" /* Loadmore */],
-    NoMore: __WEBPACK_IMPORTED_MODULE_0__components__["h" /* NoMore */]
+    WlbHeader: _components.WlbHeader,
+    MyTopicItem: _components.MyTopicItem,
+    Loadmore: _components.Loadmore,
+    NoMore: _components.NoMore
   }
-});
+};
 
 /***/ }),
 
-/***/ 268:
+/***/ 272:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 275:
+/***/ 279:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -171,4 +184,4 @@ if (false) {
 /***/ })
 
 });
-//# sourceMappingURL=0.755f670066881b0e2206.js.map
+//# sourceMappingURL=0.863dfe5b0a01e5e24f09.js.map

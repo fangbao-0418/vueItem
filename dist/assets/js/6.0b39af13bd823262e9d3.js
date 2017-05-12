@@ -1,18 +1,18 @@
 /*! This file is created by fangbao */
 webpackJsonp([6],{
 
-/***/ 250:
+/***/ 254:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(270)
+__webpack_require__(274)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(257),
+  __webpack_require__(261),
   /* template */
-  __webpack_require__(277),
+  __webpack_require__(281),
   /* scopeId */
   "data-v-d15b3920",
   /* cssModules */
@@ -40,33 +40,39 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 257:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ 261:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components__ = __webpack_require__(10);
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+var _components = __webpack_require__(11);
+
+exports.default = {
   components: {
-    WlbHeader: __WEBPACK_IMPORTED_MODULE_0__components__["c" /* WlbHeader */],
-    CommentFormModal: __WEBPACK_IMPORTED_MODULE_0__components__["d" /* CommentFormModal */],
-    ShareIcon: __WEBPACK_IMPORTED_MODULE_0__components__["e" /* ShareIcon */],
-    CommentList: __WEBPACK_IMPORTED_MODULE_0__components__["f" /* CommentList */]
+    WlbHeader: _components.WlbHeader,
+    CommentFormModal: _components.CommentFormModal,
+    ShareIcon: _components.ShareIcon,
+    CommentList: _components.CommentList
   },
-  data() {
+  data: function data() {
     return {
       item: {}
     };
   },
+
   computed: {
-    id() {
+    id: function id() {
       return parseInt(this.$route.params.id);
     }
   },
-  created() {
+  created: function created() {
+    var _this = this;
+
     this.$plugin.loading.show(true, 'full');
     this.$http({
       url: this.$api.api_list,
@@ -74,27 +80,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       params: [{
         id: this.id
       }]
-    }).then(res => {
+    }).then(function (res) {
       if (res.data.result.code === 0) {
-        this.item = res.data.result.data.thread_info;
-        this.$plugin.loading.show(false);
+        _this.item = res.data.result.data.thread_info;
+        _this.$plugin.loading.show(false);
       } else {
-        this.$router.replace({ name: 'index' });
+        _this.$router.replace({ name: 'index' });
       }
     });
   }
-});
+};
 
 /***/ }),
 
-/***/ 270:
+/***/ 274:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 277:
+/***/ 281:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -137,4 +143,4 @@ if (false) {
 /***/ })
 
 });
-//# sourceMappingURL=6.375f0d12a21f0f1e0c92.js.map
+//# sourceMappingURL=6.0b39af13bd823262e9d3.js.map

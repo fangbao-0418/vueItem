@@ -1,18 +1,18 @@
 /*! This file is created by fangbao */
 webpackJsonp([3],{
 
-/***/ 253:
+/***/ 257:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(265)
+__webpack_require__(269)
 
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(260),
+  __webpack_require__(264),
   /* template */
-  __webpack_require__(272),
+  __webpack_require__(276),
   /* scopeId */
   "data-v-10ae7efd",
   /* cssModules */
@@ -40,25 +40,32 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 260:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ 264:
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__plugins__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bus__ = __webpack_require__(33);
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
+var _components = __webpack_require__(11);
 
+var _plugins = __webpack_require__(15);
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+var _bus = __webpack_require__(34);
+
+var _bus2 = _interopRequireDefault(_bus);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
   components: {
-    WlbHeader: __WEBPACK_IMPORTED_MODULE_0__components__["c" /* WlbHeader */],
-    SelectAvatar: __WEBPACK_IMPORTED_MODULE_0__components__["m" /* SelectAvatar */]
+    WlbHeader: _components.WlbHeader,
+    SelectAvatar: _components.SelectAvatar
   },
-  data() {
+  data: function data() {
     return {
       userInfo: {},
       allHeadImgs: {},
@@ -67,9 +74,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       index: 1
     };
   },
+
   computed: {},
-  created() {
-    __WEBPACK_IMPORTED_MODULE_1__plugins__["loading"].show(true, 'full');
+  created: function created() {
+    var _this = this;
+
+    _plugins.loading.show(true, 'full');
     this.$http([{
       url: this.$api.api_list,
       method: 'getBbsUserInfo',
@@ -78,39 +88,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       url: this.$api.api_list,
       method: 'getBbsUserAllHeadImg',
       params: [{}]
-    }]).then(res => {
-      this.userInfo = res[0].data.result.data;
-      this.allHeadImgs = res[1].data.result.data;
-      setTimeout(() => {
-        this.changed = false;
+    }]).then(function (res) {
+      _this.userInfo = res[0].data.result.data;
+      _this.allHeadImgs = res[1].data.result.data;
+      setTimeout(function () {
+        _this.changed = false;
       }, 0);
-      __WEBPACK_IMPORTED_MODULE_1__plugins__["loading"].show(false);
+      _plugins.loading.show(false);
     });
   },
-  mounted() {
-    __WEBPACK_IMPORTED_MODULE_2__bus__["a" /* default */].$on('select-avatar', index => {
-      this.userInfo['head_img'] = this.allHeadImgs[index];
-      this.index = index;
+  mounted: function mounted() {
+    var _this2 = this;
+
+    _bus2.default.$on('select-avatar', function (index) {
+      _this2.userInfo['head_img'] = _this2.allHeadImgs[index];
+      _this2.index = index;
     });
   },
+
   watch: {
     userInfo: {
       deep: true,
-      handler(val) {
+      handler: function handler(val) {
         this.changed = true;
       }
     }
   },
   methods: {
-    editAvatar() {
-      __WEBPACK_IMPORTED_MODULE_2__bus__["a" /* default */].$emit('show-select-avatar-page');
+    editAvatar: function editAvatar() {
+      _bus2.default.$emit('show-select-avatar-page');
     },
-    save() {
+    save: function save() {
       if (!this.changed) {
         return;
       }
       this.changed = false;
-      __WEBPACK_IMPORTED_MODULE_1__plugins__["loading"].show(true);
+      _plugins.loading.show(true);
       this.$http([{
         url: this.$api.api_list,
         method: 'updateBbsUserHeadimg',
@@ -123,18 +136,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         params: [{
           nickname: this.userInfo['nickname']
         }]
-      }]).then(res => {
-        __WEBPACK_IMPORTED_MODULE_1__plugins__["loading"].show(false);
+      }]).then(function (res) {
+        _plugins.loading.show(false);
         if (res[1].data.result) {
           var code = res[1].data.result.code;
           var msg = res[1].data.result.data;
           if (code === 0) {
-            __WEBPACK_IMPORTED_MODULE_1__plugins__["ruleModal"].show({
+            _plugins.ruleModal.show({
               content: '信息修改成功',
               style: 'text-align: center'
             });
           } else {
-            __WEBPACK_IMPORTED_MODULE_1__plugins__["ruleModal"].show({
+            _plugins.ruleModal.show({
               content: msg,
               style: 'text-align: center'
             });
@@ -143,21 +156,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     }
   },
-  destroyed() {
-    __WEBPACK_IMPORTED_MODULE_2__bus__["a" /* default */].$off('show-select-avatar-page');
+  destroyed: function destroyed() {
+    _bus2.default.$off('show-select-avatar-page');
   }
-});
+};
 
 /***/ }),
 
-/***/ 265:
+/***/ 269:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 272:
+/***/ 276:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -185,7 +198,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       name: "lazyload",
       rawName: "v-lazyload",
       value: ({
-        placeholder: __webpack_require__(11)
+        placeholder: __webpack_require__(12)
       }),
       expression: "{ placeholder: require('../imgs/avatar_defult_big.png') }"
     }],
@@ -240,4 +253,4 @@ if (false) {
 /***/ })
 
 });
-//# sourceMappingURL=3.e17fe758cbd0daac091d.js.map
+//# sourceMappingURL=3.b6a5482d96e356394019.js.map
