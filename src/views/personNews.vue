@@ -6,8 +6,8 @@
     <loadmore v-if="data.length" :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded" ref="loadmore">
       <news-item :item="item" :index="index" v-for="(item, index) in data" :key="item.name"></news-item>
     </loadmore>
-    <no-more :visible="nomore"></no-more>
-    <div v-if="! data.length" class="empty">
+    <no-more v-if="data.length > 0" :visible="nomore"></no-more>
+    <div v-if="data.length === 0" class="empty">
       <div>还没有消息哦</div>
     </div>
   </div>
