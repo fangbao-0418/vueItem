@@ -7,8 +7,8 @@ function resolve (dir) {
   return path.resolve(__dirname, dir);
 }
 var isPro = process.env.NODE_ENV.trim() === 'production';
-// var needHandleDir = [resolve('src'), resolve('node_modules/vuex'), resolve('node_modules/vue-resource'), resolve('node_modules/jquery'), resolve('node_modules/vue-router'), resolve('node_modules/swiper'), resolve('node_modules/mint-ui'), resolve('node_modules/js-cookie'), resolve('node_modules/jquery-lazyload')]
-var needHandleDir = [resolve('src')]
+var needHandleDir = [resolve('src'), resolve('node_modules/vuex'), resolve('node_modules/vue-resource'), resolve('node_modules/jquery'), resolve('node_modules/vue-router'), resolve('node_modules/swiper'), resolve('node_modules/mint-ui'), resolve('node_modules/js-cookie'), resolve('node_modules/jquery-lazyload')]
+// var needHandleDir = [resolve('src')]
 var plugins = [
   new webpack.DefinePlugin({
     'process.env': {
@@ -46,26 +46,26 @@ var plugins = [
     "window.jQuery": 'jquery'
   }),
   // 将node_modules打入vendor
-  // new webpack.optimize.CommonsChunkPlugin({
-  //   name: 'vendor',
-  //   minChunks: function (module, count) {
-  //     // this assumes your vendor imports exist in the node_modules directory
-  //     // any required modules inside node_modules are extracted to vendor
-  //       return (
-  //         module.resource &&
-  //         /\.js$/.test(module.resource) &&
-  //         module.resource.indexOf(
-  //           path.join(__dirname, '../node_modules')
-  //         ) === 0
-  //       )
-  //   }
-  // }),
+  new webpack.optimize.CommonsChunkPlugin({
+    name: 'vendor',
+    minChunks: function (module, count) {
+      // this assumes your vendor imports exist in the node_modules directory
+      // any required modules inside node_modules are extracted to vendor
+        return (
+          module.resource &&
+          /\.js$/.test(module.resource) &&
+          module.resource.indexOf(
+            path.join(__dirname, 'node_modules')
+          ) === 0
+        )
+    }
+  }),
   // To extract the webpack bootstrap logic into a separate file
   // 其他打入清单
-  // new webpack.optimize.CommonsChunkPlugin({
-  //   name: 'manifest',
-  //   chunks: ['vendor']
-  // })
+  new webpack.optimize.CommonsChunkPlugin({
+    name: 'manifest',
+    chunks: ['vendor']
+  })
 ];
 
 if(isPro){

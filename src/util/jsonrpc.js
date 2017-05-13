@@ -8,9 +8,9 @@
  * @return Promise
  */
 
-import axios from 'axios'
+// import axios from 'axios'
 import { Http } from 'vue-resource'
-// import { ruleModal, loading } from '../plugins'
+import { ruleModal, loading } from '../plugins'
 console.log(Http)
 // var pass = 'wlh5_H5~h5#H5'
 // var clientMask = '7005'
@@ -48,19 +48,25 @@ var isCrossDomain = window.location.hostname.indexOf('wanglibao.com') === -1
 //   ruleModal.show({ title: '系统提示', content: '网络异常，获取数据失败', style: 'text-align: center' })
 //   return Promise.reject(error)
 // })
-// Http.interceptors.push(function (request, next) {
-//   next(function (response) {
-//     // alert('response')
-//   })
-// })
+
+Http.interceptors.push(function (request, next) {
+  // alert('response')
+  next(function (response) {
+    if (!response.ok) {
+      loading.show(false)
+      ruleModal.show({ title: '系统提示', content: '网络异常，获取数据失败', style: 'text-align: center' })
+    }
+    return response
+  })
+})
 function http () {
   if (arguments[0] instanceof Array) {
     var resultArr = []
     for (let i in arguments[0]) {
       resultArr.push(fetchData(arguments[0][i]))
     }
-    return axios.all(resultArr)
-    // return Promise.all(resultArr)
+    // return axios.all(resultArr)
+    return Promise.all(resultArr)
   } else {
     let params = arguments[0]
     return fetchData(params)
@@ -77,24 +83,27 @@ function fetchData (params) {
   let json = JSON.stringify(jsonObj)
   console.log(params.url)
 
-  return axios({
-    url: params.url,
-    method: 'post',
-    data: json,
-    // timeout: 1000,
-    withCredentials: isCrossDomain || !isPro
-  })
-
-  // return Http({
-  //   method: 'post',
+  /**
+   * axios 不兼容safari 9
+   */
+  // return axios({
   //   url: params.url,
-  //   body: json,
-  //   emulateJSON: true,
-  //   timeout: 10000,
-  //   credentials: isCrossDomain || !isPro,
-  //   headers: {
-  //     'Content-Type': 'application/x-www-form-urlencoded'
-  //   }
+  //   method: 'post',
+  //   data: json,
+  //   // timeout: 1000,
+  //   withCredentials: isCrossDomain || !isPro
   // })
+
+  return Http({
+    method: 'post',
+    url: params.url,
+    body: json,
+    emulateJSON: true,
+    timeout: 10000,
+    credentials: isCrossDomain || !isPro,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  })
 }
 export default http

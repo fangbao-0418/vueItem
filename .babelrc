@@ -3,6 +3,5 @@
     "es2015",
     "stage-0"
   ],
-  "plugins": ["transform-runtime"],
-  "comments": false
+  "plugins": ["transform-runtime", "syntax-async-functions"]
 }
