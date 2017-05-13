@@ -3,6 +3,6 @@
     "es2015",
     "stage-0"
   ],
-  "plugins": ["transform-runtime", "transform-decorators-legacy", "syntax-async-functions"],
+  "plugins": ["transform-runtime"],
   "comments": false
 }
