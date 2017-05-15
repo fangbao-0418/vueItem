@@ -111,7 +111,7 @@
   height: .96rem
   background-color: #10A6E2
   overflow: hidden
-  position: fixed
+  position: absolute
   z-index: 999
   top: 0
   .header
