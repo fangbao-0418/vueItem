@@ -7,8 +7,7 @@ function resolve (dir) {
   return path.resolve(__dirname, dir);
 }
 var isPro = process.env.NODE_ENV.trim() === 'production';
-var needHandleDir = [resolve('src'), resolve('node_modules/vue-resource'), resolve('node_modules/jquery'), resolve('node_modules/vue-router'), resolve('node_modules/swiper'), resolve('node_modules/mint-ui'), resolve('node_modules/js-cookie'), resolve('node_modules/jquery-lazyload')]
-/// var needHandleDir = [resolve('src'), resolve('node_modules/vue-resource')]
+var needHandleDir = [resolve('src'), resolve('node_modules/vuex'), resolve('node_modules/vue-resource')]
 var plugins = [
   new webpack.DefinePlugin({
     'process.env': {
@@ -16,7 +15,7 @@ var plugins = [
     }
   }),
   //给输出的文件头部添加注释信息。
-  new webpack.BannerPlugin('This file is created by wangli team'),
+  new webpack.BannerPlugin('This file is created by fangbao'),
   new ExtractTextPlugin({
     filename: isPro ? 'css/[name].[contenthash].css' : '[name].[contenthash].css',
     //disable: false,
@@ -55,7 +54,7 @@ var plugins = [
           module.resource &&
           /\.js$/.test(module.resource) &&
           module.resource.indexOf(
-            path.join(__dirname, 'node_modules')
+            path.join(__dirname, '../node_modules')
           ) === 0
         )
     }
