@@ -1,23 +1,21 @@
 <template>
-  <transition name="fade">
-    <div class="avatar-select" v-if="show">
-      <div class="avatar-select-head">
-        <span class="title">选择头像</span>
-        <span class="cancel" @click="cancel()">取消</span>
-      </div>
-      <div class="avatar-items">
-        <div class="avatar-item" v-for="(item, i) in data">
-          <div :class="{selected: index(i)}" @click="selected(i)">
-            <img :src="item" v-lazyload="{ placeholder: require('../imgs/avatar_defult_big.png') }" />
-            <i></i>
-          </div>
+  <div class="avatar-select" v-if="show">
+    <div class="avatar-select-head">
+      <span class="title">选择头像</span>
+      <span class="cancel" @click="cancel()">取消</span>
+    </div>
+    <div class="avatar-items">
+      <div class="avatar-item" v-for="(item, i) in data">
+        <div :class="{selected: index(i)}" @click="selected(i)">
+          <img :src="item" v-lazyload="{ placeholder: require('../imgs/avatar_defult_big.png') }" />
+          <i></i>
         </div>
       </div>
-      <div class="affirm-btn" @click="ok">
-        <span>就选它了</span>
-      </div>
     </div>
-  </transition>
+    <div class="affirm-btn" @click="ok">
+      <span>就选它了</span>
+    </div>
+  </div>
 </template>
 <script>
 import bus from '../bus'

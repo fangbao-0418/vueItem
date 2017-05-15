@@ -10,10 +10,10 @@
     <div class="container bg-color-white">
       <div class="topic-head">
         <div class="topic-avatar mr-20">
-          <img :src="item.users.head_img" v-lazyload="{ placeholder: require('../imgs/avatar_defult_big.png') }" />
+          <img :src="item.user.head_img" v-lazyload="{ placeholder: require('../imgs/avatar_defult_big.png') }" />
         </div>
         <div class="topic-info">
-          <p><span class="topic-author">{{item.users.nickname}}</span></p>
+          <p><span class="topic-author">{{item.user.nickname}}</span></p>
           <p><span class="topic-time">{{item.updated_at}}</span></p>
         </div>
       </div>

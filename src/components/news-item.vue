@@ -4,7 +4,7 @@
       <p>
         <span class="color1">您 </span>
         <span>发布的帖子</span>
-        <span class="color1"> {{item.content | msubstring(0, 20)}} </span>
+        <span class="color1"> {{item.threads.content | msubstring(0, 20)}} </span>
         <span>通过了管理员的审核</span>
       </p>
       <div class="item-time mt-27" v-text="item.created_at"></div>
@@ -12,7 +12,7 @@
     <div v-if="item.type == 2" class="news-box bg-color-white mt-20">
       <p>
         <span class="color1">您 </span><span>发布的帖子 </span>
-        <span class="color1">{{item.content | msubstring(0, 20)}}</span>
+        <span class="color1">{{item.threads.content | msubstring(0, 20)}}</span>
         因{{item.del_reason}}被管理员删除
       </p>
       <div class="item-time mt-27" v-text="item.created_at"></div>

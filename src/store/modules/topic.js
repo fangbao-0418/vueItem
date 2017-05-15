@@ -106,6 +106,7 @@ const actions = {
         if (res[0].data.result) {
           ThreadTopList[state.navbar_select_index] = res[0].data.result.data.data
         }
+        console.log(ThreadTopList[state.navbar_select_index], 'threadToplist')
         if (res[1].data.result) {
           // 当前页数大于最大页数 设置allLoaded
 
@@ -115,6 +116,7 @@ const actions = {
             commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: state.navbar_select_index, v: false })
           }
           console.log(state.bbsHomeallLoadedInfo, state.navbar_select_index, 'currentPageInfo')
+          console.log(res[1].data.result.data.list, 'threadlist')
           ThreadList[state.navbar_select_index] = res[1].data.result.data.list
         }
         var data = {

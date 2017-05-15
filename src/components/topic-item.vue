@@ -1,17 +1,17 @@
 <template>
   <div>
-    <div v-if="item.users" :key="index" class="topic-item bg-color-white mb-20" v-for="(item, index) in data">
+    <div v-if="item.user" :key="index" class="topic-item bg-color-white mb-20" v-for="(item, index) in data">
       <div class="tags">
         <topic-tags :tags="{ ishot: item.ishot, isgreat: item.isgreat }"></topic-tags>
       </div>
-      <div class="topic-avatar"><img :src="item.users.head_img" v-lazyload="{ placeholder: require('../imgs/avatar_defult_big.png') }" /></div>
+      <div class="topic-avatar"><img :src="item.user.head_img" v-lazyload="{ placeholder: require('../imgs/avatar_defult_big.png') }" /></div>
       <div class="topic-main">
-        <p class="topic-tit">{{item.users.nickname}}</p>
+        <p class="topic-tit">{{item.user.nickname}}</p>
         <p class="topic-ago">{{item.updated_at | handleDate}}</p>
         <p class="topic-content">{{item.content | msubstring(0, 64)}}</p>
         <div class="topic-comment">
           <p class="topic-comment-item mt-20" v-if="item.comments" v-for="(comment, index2) in item.comments">
-            <span v-if="comment.users">{{comment.users.nickname}}</span><em>:</em>
+            <span v-if="comment.user">{{comment.user.nickname}}</span><em>:</em>
             {{comment.content}}
           </p>
         </div>
