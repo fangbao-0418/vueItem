@@ -66,6 +66,8 @@
         margin-top: .28rem
         display: flex
         align-items: center
+        -webkit-box-align: center
+        -webkit-box-pack: center
         width: 1rem
         height: 1rem
         border-radius: 50%

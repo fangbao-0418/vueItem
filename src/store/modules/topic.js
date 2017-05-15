@@ -44,7 +44,7 @@ const actions = {
         // 初始化社区首页数据allLoaded && 当前页数 && 列表数据
         for (let i in res.data.result.data) {
           commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: i, v: false })
-          if (i === state.navbar_select_index) {
+          if (Number(i) === Number(state.navbar_select_index)) {
             commit(types.SET_BBS_HOME_CURRENT_PAGE, { k: i, v: 1 })
           } else {
             commit(types.SET_BBS_HOME_CURRENT_PAGE, { k: i, v: 0 })
@@ -108,11 +108,13 @@ const actions = {
         }
         if (res[1].data.result) {
           // 当前页数大于最大页数 设置allLoaded
+
           if (state.bbsHomeCurrentPageInfo[state.navbar_select_index] >= res[1].data.result.data.last_page) {
             commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: state.navbar_select_index, v: true })
           } else {
             commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: state.navbar_select_index, v: false })
           }
+          console.log(state.bbsHomeallLoadedInfo, state.navbar_select_index, 'currentPageInfo')
           ThreadList[state.navbar_select_index] = res[1].data.result.data.list
         }
         var data = {

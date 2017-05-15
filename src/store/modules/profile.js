@@ -11,7 +11,6 @@ const state = {
 const actions = {
   fetchLoginStatus (context, cb) {
     const { commit } = context
-    // loading.show(true)
     http({
       url: api.api_account,
       method: 'loginStatus'

@@ -13,6 +13,9 @@
             <span :class="['comment-sub fr', {disable: !publicEnd || !content}]" @click="toPublic">{{publicEnd?'发表':'发表中...'}}</span>
           </div>
           <textarea class="comment-text-content" v-model="content" placeholder="说点什么吧..."></textarea>
+          <div class="comment-form-foot">
+            <span>你还可以输入{{num}}字</span>
+          </div>
         </div>
       </div>
     </transition>
@@ -29,6 +32,7 @@
       return {
         show: false,
         content: '',
+        num: 200,
         publicEnd: true
       }
     },
@@ -42,6 +46,11 @@
         } else {
           $('body').removeAttr('style')
         }
+      },
+      content () {
+        var len = this.content.length
+        this.num = 200 - len > 0 ? 200 - len : 0
+        this.content = this.content.substring(0, 200)
       }
     },
     methods: {
@@ -151,4 +160,13 @@
           letter-spacing: 0
           height: 4rem
           overflow-y: scroll
+        .comment-form-foot
+          overflow: hidden
+          span
+            padding: 0 .3rem .3rem
+            font-family: PingFangSC-Light
+            font-size: .24rem
+            color: #9B9B9B
+            line-height: .33rem
+            float: right
 </style>
