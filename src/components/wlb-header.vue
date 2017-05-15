@@ -29,6 +29,7 @@
   <div class="float-block">
     <to-top-icon :show="toTopIconShowState"></to-top-icon>
   </div>
+  <div class="box-stance"></div>
 </div>
 </template>
 <script type="text/javascript">
@@ -102,18 +103,23 @@
   }
 </script>
 <style media="screen" lang="sass" scoped>
-.box
+.box-stance
+  width: 100%
   height: .96rem
+.box
+  width: 100%
+  height: .96rem
+  background-color: #10A6E2
+  overflow: hidden
+  position: fixed
+  z-index: 999
+  top: 0
   .header
-    position: fixed
-    z-index: 999
-    top: 0
     width: 6.9rem
     height: .96rem
-    background-color: #10A6E2
     display: flex
     align-items: center
-    padding: 0 .3rem
+    margin: 0 .3rem
     .header-button
       flex: .5
       .goback

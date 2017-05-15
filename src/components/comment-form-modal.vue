@@ -122,7 +122,7 @@
       background: rgba(0,0,0,0.40)
       position: fixed
       top: 0
-      z-index: 1
+      z-index: 99
       transition: all .3s ease
       .comment-form
         position: fixed

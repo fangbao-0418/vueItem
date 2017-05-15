@@ -88,8 +88,7 @@
 <style lang="sass" scoped>
   .view
     background: #fff
-    width: 100%
-    height: 100%
+    flex: 1
     .rightButton
       font-family: PingFangSC-Regular
       font-size: .26rem
