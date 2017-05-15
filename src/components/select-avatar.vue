@@ -133,7 +133,7 @@ export default {
       border-radius: .99rem
       text-align: center
       line-height: .72rem
-      position: fixed
+      position: absolute
       bottom: 1.54rem
       left: 0
       right: 0

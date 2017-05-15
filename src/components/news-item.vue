@@ -62,6 +62,10 @@ export default {
 }
 </script>
 <style media="screen" lang="sass" scoped>
+.readed
+  p
+    span
+      color: #9B9B9B !important
 .news-content
   .mt
     margin: 0
