@@ -43,8 +43,8 @@
           id: this.id
         }]
       }).then((res) => {
-        if (res.data.result.code === 0) {
-          this.item = res.data.result.data.thread_info
+        if (res.data.result.code === 0 && res.data.result.data) {
+          this.item = res.data.result.data
           this.$plugin.loading.show(false)
         } else {
           this.$router.replace({ name: 'index' })

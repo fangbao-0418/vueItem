@@ -128,9 +128,8 @@ export default {
 </script>
 <style media="screen" lang="sass" scoped>
 .view
-  width: 100%
-  height: 100%
   background: #fff
+  flex: 1
   .edit-section
     .item
       border-bottom: 1px solid #e5e5e5
