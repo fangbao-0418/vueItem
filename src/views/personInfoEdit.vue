@@ -1,21 +1,23 @@
 <template>
   <div class="view">
     <wlb-header><span slot="title">个人中心</span></wlb-header>
-    <div class="edit-section">
-      <div class="item" @click="editAvatar()">
-        <span class="photo-title">头像</span>
-        <div class="photo-right fr">
-          <span class="right fr"></span>
-          <img :src="userInfo.head_img" v-lazyload="{ placeholder: require('../imgs/avatar_defult_big.png') }" class="photo fr">
+    <div class="scroll-view">
+      <div class="edit-section">
+        <div class="item" @click="editAvatar()">
+          <span class="photo-title">头像</span>
+          <div class="photo-right fr">
+            <span class="right fr"></span>
+            <img :src="userInfo.head_img" v-lazyload="{ placeholder: require('../imgs/avatar_defult_big.png') }" class="photo fr">
+          </div>
+        </div>
+        <div class="item">
+          <span class="name-title fl">昵称</span>
+          <input class="name-right fr" v-model="userInfo.nickname">
         </div>
       </div>
-      <div class="item">
-        <span class="name-title fl">昵称</span>
-        <input class="name-right fr" v-model="userInfo.nickname">
+      <div class="edit-btn">
+        <button :class="['btn', {changed}]" @click="save">保存</button>
       </div>
-    </div>
-    <div class="edit-btn">
-      <button :class="['btn', {changed}]" @click="save">保存</button>
     </div>
     <select-avatar :data="allHeadImgs"></select-avatar>
   </div>
@@ -130,6 +132,7 @@ export default {
 .view
   background: #fff
   flex: 1
+  overflow: hidden
   .edit-section
     .item
       border-bottom: 1px solid #e5e5e5

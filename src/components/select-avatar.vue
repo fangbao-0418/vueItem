@@ -60,7 +60,7 @@ export default {
 </script>
 <style lang="sass" scoped>
   .avatar-select
-    position: fixed
+    position: absolute
     z-index: 9999
     top: 0
     width: 100%
@@ -134,7 +134,7 @@ export default {
       text-align: center
       line-height: .72rem
       bottom: 1.54rem
-      margin: 2rem auto 0
+      margin: 1rem auto 0
       span
         font-family: PingFangSC-Regular
         font-size: .3rem
