@@ -1,22 +1,24 @@
 <template>
   <div class="view">
     <wlb-header><span slot="title">个人中心</span></wlb-header>
-    <div class="scroll-view">
-      <div class="edit-section">
-        <div class="item" @click="editAvatar()">
-          <span class="photo-title">头像</span>
-          <div class="photo-right fr">
-            <span class="right fr"></span>
-            <img :src="userInfo.head_img" v-lazyload="{ placeholder: require('../imgs/avatar_defult_big.png') }" class="photo fr">
+    <div id="wrapper">
+      <div class="scroll">
+        <div class="edit-section">
+          <div class="item" @click="editAvatar()">
+            <span class="photo-title">头像</span>
+            <div class="photo-right fr">
+              <span class="right fr"></span>
+              <img :src="userInfo.head_img" v-lazyload="{ placeholder: require('../imgs/avatar_defult_big.png') }" class="photo fr">
+            </div>
+          </div>
+          <div class="item">
+            <span class="name-title fl">昵称</span>
+            <input class="name-right fr" v-model="userInfo.nickname">
           </div>
         </div>
-        <div class="item">
-          <span class="name-title fl">昵称</span>
-          <input class="name-right fr" v-model="userInfo.nickname">
+        <div class="edit-btn">
+          <button :class="['btn', {changed}]" @click="save">保存</button>
         </div>
-      </div>
-      <div class="edit-btn">
-        <button :class="['btn', {changed}]" @click="save">保存</button>
       </div>
     </div>
     <select-avatar :data="allHeadImgs"></select-avatar>
@@ -26,6 +28,7 @@
 import { WlbHeader, SelectAvatar } from '../components'
 import { loading, ruleModal } from '../plugins'
 import bus from '../bus'
+import IScroll from 'iscroll'
 export default {
   components: {
     WlbHeader,
@@ -69,6 +72,11 @@ export default {
       this.userInfo['head_img'] = this.allHeadImgs[index]
       this.index = index
     })
+    $(document).ready(function () {
+      var iscroll = new IScroll('#wrapper', { mouseWheel: true })
+      console.log(iscroll)
+    })
+    // document.addEventListener('touchmove', function (e) { e.preventDefault() }, false)
   },
   watch: {
     userInfo: {
@@ -134,8 +142,16 @@ export default {
   flex: 1
   overflow: hidden
   height: 100%
-  .scroll-view
-    height: 6rem
+  #wrapper
+    position: absolute
+    z-index: 1
+    top: 45px
+    bottom: 48px
+    left: 0
+    width: 100%
+    overflow: hidden
+    .scroll
+      min-height: 100%
   .edit-section
     .item
       border-bottom: 1px solid #e5e5e5
