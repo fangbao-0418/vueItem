@@ -107,7 +107,7 @@ export default {
           display: inline-block
           position: relative
           img
-            border: solid #12A5E2 .02rem
+            border: solid #12A5E2 1px
             border-radius: 100%
             box-sizing: border-box
           i
@@ -133,11 +133,8 @@ export default {
       border-radius: .99rem
       text-align: center
       line-height: .72rem
-      position: absolute
       bottom: 1.54rem
-      left: 0
-      right: 0
-      margin: 0 auto
+      margin: 2rem auto 0
       span
         font-family: PingFangSC-Regular
         font-size: .3rem
