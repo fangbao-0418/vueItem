@@ -7,8 +7,8 @@ function resolve (dir) {
   return path.resolve(__dirname, dir);
 }
 var isPro = process.env.NODE_ENV.trim() === 'production';
-// var needHandleDir = [resolve('src'), resolve('node_modules/vuex'), resolve('node_modules/vue-resource'), resolve('node_modules/jquery'), resolve('node_modules/vue-router'), resolve('node_modules/swiper'), resolve('node_modules/mint-ui'), resolve('node_modules/js-cookie'), resolve('node_modules/jquery-lazyload')]
-var needHandleDir = [resolve('src'), resolve('node_modules/vue-resource')]
+var needHandleDir = [resolve('src'), resolve('node_modules/vue-resource'), resolve('node_modules/jquery')]
+/// var needHandleDir = [resolve('src'), resolve('node_modules/vue-resource')]
 var plugins = [
   new webpack.DefinePlugin({
     'process.env': {
