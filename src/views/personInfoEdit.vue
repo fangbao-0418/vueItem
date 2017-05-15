@@ -133,6 +133,9 @@ export default {
   background: #fff
   flex: 1
   overflow: hidden
+  height: 100%
+  .scroll-view
+    height: 6rem
   .edit-section
     .item
       border-bottom: 1px solid #e5e5e5
