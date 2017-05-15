@@ -11,7 +11,6 @@
 // import axios from 'axios'
 import { Http } from 'vue-resource'
 import { ruleModal, loading } from '../plugins'
-console.log(Http)
 // var pass = 'wlh5_H5~h5#H5'
 // var clientMask = '7005'
 var isPro = process.env.NODE_ENV === 'production'

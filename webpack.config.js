@@ -7,8 +7,8 @@ function resolve (dir) {
   return path.resolve(__dirname, dir);
 }
 var isPro = process.env.NODE_ENV.trim() === 'production';
-var needHandleDir = [resolve('src'), resolve('node_modules/vuex'), resolve('node_modules/vue-resource'), resolve('node_modules/jquery'), resolve('node_modules/vue-router'), resolve('node_modules/swiper'), resolve('node_modules/mint-ui'), resolve('node_modules/js-cookie'), resolve('node_modules/jquery-lazyload')]
-// var needHandleDir = [resolve('src')]
+// var needHandleDir = [resolve('src'), resolve('node_modules/vuex'), resolve('node_modules/vue-resource'), resolve('node_modules/jquery'), resolve('node_modules/vue-router'), resolve('node_modules/swiper'), resolve('node_modules/mint-ui'), resolve('node_modules/js-cookie'), resolve('node_modules/jquery-lazyload')]
+var needHandleDir = [resolve('src')]
 var plugins = [
   new webpack.DefinePlugin({
     'process.env': {
@@ -16,7 +16,7 @@ var plugins = [
     }
   }),
   //给输出的文件头部添加注释信息。
-  new webpack.BannerPlugin('This file is created by fangbao'),
+  new webpack.BannerPlugin('This file is created by wangli team'),
   new ExtractTextPlugin({
     filename: isPro ? 'css/[name].[contenthash].css' : '[name].[contenthash].css',
     //disable: false,
@@ -35,9 +35,9 @@ var plugins = [
       removeAttributeQuotes: true
       // more options:
       // https://github.com/kangax/html-minifier#options-quick-reference
-    },
+    }
     // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-    chunksSortMode: 'dependency'
+    // chunksSortMode: 'dependency'
     // hash:true
   }),
   new webpack.ProvidePlugin({
@@ -178,7 +178,7 @@ module.exports = {
 		]
 	},
 	devServer:{
-		contentBase: "build",
+		contentBase: "dist",
 		//热替换的区别就在于，当前端代码变动时，无需刷新整个页面，只把变化的部分替换掉。
 		//自动刷新整个页面刷新
 		inline: true,
@@ -191,8 +191,8 @@ module.exports = {
 		},
 		//启用gzip压缩一切服务:
 		//compress: true,
-		// host: "0.0.0.0",
-    host: "192.168.10.123",
+		host: "0.0.0.0",
+    // host: "192.168.10.123",
     port: "3001"
 	},
 	resolve: {
