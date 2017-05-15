@@ -129,12 +129,12 @@
         bottom: 0
         background-color: #FFF
         width: 100%
-        min-height: 4.4rem
+        min-height: 2.4rem
         z-index: 2
         transition: all .3s ease
         .comment-form-head
           overflow: hidden
-          padding: 0 .28rem
+          padding: .1rem .28rem 0
           height: .6rem
           line-height: .6rem
           .comment-cancel
@@ -158,7 +158,7 @@
           font-size: .3rem
           color: #A1AFB4
           letter-spacing: 0
-          height: 4rem
+          height: 2rem
           overflow-y: scroll
         .comment-form-foot
           overflow: hidden
