@@ -58,6 +58,7 @@
         this.show = true
       },
       cancel () {
+        $('textarea').blur()
         this.show = false
       },
       toPublic () {

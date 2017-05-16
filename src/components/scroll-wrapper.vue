@@ -13,7 +13,8 @@
         var iscroll = new IScroll('#wrapper', {
           mouseWheel: true,
           scrollbars: true,
-          click: true
+          click: true,
+          checkDOMChanges: true
         })
         console.log(iscroll)
       })
