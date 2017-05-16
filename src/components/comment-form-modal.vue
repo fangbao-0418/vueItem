@@ -58,8 +58,11 @@
         this.show = true
       },
       cancel () {
+        var that = this
         $('.comment-text-content').blur()
-        this.show = false
+        setTimeout(() => {
+          that.show = false
+        }, 0)
       },
       toPublic () {
         if (this.publicEnd === false || this.content === '') {
