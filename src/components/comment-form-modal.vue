@@ -58,13 +58,16 @@
         this.show = true
       },
       cancel () {
-        // var that = this
+        var that = this
+        alert($('.header').scrollTop())
         $('.comment-text-content').blur()
+        that.show = false
         setTimeout(() => {
           // that.show = false
         }, 0)
       },
       toPublic () {
+        $('.comment-text-content').blur()
         if (this.publicEnd === false || this.content === '') {
           return
         }
