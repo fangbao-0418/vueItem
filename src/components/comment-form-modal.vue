@@ -59,7 +59,7 @@
       },
       cancel () {
         var that = this
-        alert('scrollTop: ' + $('.header').scrollTop() + '; bodyHeight: ' + $('body').clientHeight)
+        alert('scrollTop: ' + $('.header').scrollTop() + '; bodyHeight: ' + $('body').height())
         $('.comment-text-content').blur()
         that.show = false
         setTimeout(() => {
