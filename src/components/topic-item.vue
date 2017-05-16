@@ -50,6 +50,7 @@
     top: 0
     right: 0.3rem
   .topic-avatar
+    width: .4rem
     float: left
     img
       width: .4rem

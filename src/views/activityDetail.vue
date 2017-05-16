@@ -1,5 +1,5 @@
 <template>
-  <div class="view" v-if="item.users">
+  <div class="view" v-if="item.user">
     <wlb-header>
       <span slot="title">活动详情</span>
       <share-icon slot="right"></share-icon>
@@ -7,7 +7,7 @@
     <div class="detail-block bg-color-white">
       <h1 class="title">{{item.title}}</h1>
       <div class="topic-infos mt-10">
-        <span class="author">{{item.users.nickname}}</span> | <span class="pubdate">{{item.updated_at}}</span>
+        <span class="author">{{item.user.nickname}}</span> | <span class="pubdate">{{item.updated_at}}</span>
       </div>
       <p class="content mt-45">{{item.content}}</p>
     </div>

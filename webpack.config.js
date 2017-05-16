@@ -7,7 +7,7 @@ function resolve (dir) {
   return path.resolve(__dirname, dir);
 }
 var isPro = process.env.NODE_ENV.trim() === 'production';
-var needHandleDir = [resolve('src'), resolve('node_modules/vuex'), resolve('node_modules/vue-resource')]
+var needHandleDir = [resolve('src'), resolve('node_modules/vuex'), resolve('node_modules/jquery'), resolve('node_modules/vue-resource'), resolve('node_modules/iscroll')]
 var plugins = [
   new webpack.DefinePlugin({
     'process.env': {
