@@ -20,7 +20,6 @@ import PersonTopics from '../views/personTopics'
 import PersonTask from '../views/personTask'
 import Activities from '../views/activityList'
 import ActivityDetail from '../views/activityDetail'
-import Iscroll from '../views/iscroll'
 
 /* 懒加载路由 */
 // const Index = resolve => require(['../views/index'], resolve)
@@ -82,7 +81,6 @@ export default {
     {path: '/person/topics', name: 'personTopics', component: PersonTopics, beforeEnter: requireAuth},
     {path: '/person/task', name: 'personTask', component: PersonTask, beforeEnter: requireAuth},
     {path: '/person/infoedit', name: 'personInfoEdit', component: PersonInfoEdit, beforeEnter: requireAuth},
-    {path: '/iscroll', component: Iscroll},
     {path: '*', redirect: { name: 'index' }}
   ]
 }

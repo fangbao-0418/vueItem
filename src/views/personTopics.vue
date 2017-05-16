@@ -6,19 +6,27 @@
     <wlb-header>
       <span slot="title">我的帖子</span>
     </wlb-header>
-    <loadmore v-if="postItems.length" :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded" ref="loadmore">
-      <my-topic-item :post-item="postItem" :index="index" v-for="(postItem, index) in postItems" :key="postItem.title"></my-topic-item>
-      <no-more :visible="nomore"></no-more>
-    </loadmore>
-    <div v-if="!postItems.length" class="empty">
-      <div class="text">还没有发帖纪录哦</div>
-      <!-- <router-link :to="{name: 'topicAdd'}" class="go-topic">去发帖</router-link> -->
-    </div>
+    <scroll-wrapper>
+      <loadmore v-if="postItems.length" :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded" ref="loadmore">
+        <my-topic-item :post-item="postItem" :index="index" v-for="(postItem, index) in postItems" :key="postItem.title"></my-topic-item>
+        <no-more :visible="nomore"></no-more>
+      </loadmore>
+      <div v-if="!postItems.length" class="empty">
+        <div class="text">还没有发帖纪录哦</div>
+      </div>
+    </scroll-wrapper>
   </div>
 </template>
 <script>
-  import { WlbHeader, MyTopicItem, Loadmore, NoMore } from '../components'
+  import { ScrollWrapper, WlbHeader, MyTopicItem, Loadmore, NoMore } from '../components'
   export default {
+    components: {
+      ScrollWrapper,
+      WlbHeader,
+      MyTopicItem,
+      Loadmore,
+      NoMore
+    },
     data () {
       return {
         postItems: [],
@@ -78,12 +86,6 @@
           this.$refs.loadmore.$children[0].onBottomLoaded()
         })
       }
-    },
-    components: {
-      WlbHeader,
-      MyTopicItem,
-      Loadmore,
-      NoMore
     }
   }
 </script>

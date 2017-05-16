@@ -12,7 +12,7 @@
             <span class="comment-cancel fl" @click="cancel">取消</span>
             <span :class="['comment-sub fr', {disable: !publicEnd || !content}]" @click="toPublic">{{publicEnd?'发表':'发表中...'}}</span>
           </div>
-          <textarea class="comment-text-content" v-model="content" placeholder="说点什么吧..."></textarea>
+          <textarea class="comment-text-content" v-model="content" placeholder="说点什么吧..." ref="content"></textarea>
           <div class="comment-form-foot">
             <span>你还可以输入{{num}}字</span>
           </div>
@@ -42,6 +42,9 @@
       show (val) {
         console.log($('body'))
         if (val) {
+          setTimeout(() => {
+            this.$refs.content.focus()
+          }, 0)
           $('body').css('overflow', 'hidden')
         } else {
           $('body').removeAttr('style')
@@ -58,44 +61,34 @@
         this.show = true
       },
       cancel () {
-        var that = this
-        alert('scrollTop: ' + $('.header').scrollTop() + '; bodyHeight: ' + $('body').height())
-        $('.comment-text-content').blur()
-        that.show = false
-        setTimeout(() => {
-          // that.show = false
-        }, 0)
+        this.show = false
       },
       toPublic () {
-        $('.comment-text-content').blur(function () {
-          alert('scrollTop: ' + $('.header').scrollTop() + '; bodyHeight: ' + $('body').height())
+        if (this.publicEnd === false || this.content === '') {
+          return
+        }
+        this.publicEnd = false
+        this.$http({
+          url: this.$api.api_list,
+          method: 'BbsPublishComment',
+          params: [{
+            id: this.id,
+            content: this.content
+          }]
+        }).then((res) => {
+          this.publicEnd = true
+          this.content = ''
+          if (res.data.result && res.data.result.code === 0) {
+            if (res.data.result) {
+              this.$rulemodal.show({ content: '评论提交成功，请等待后台审核', style: 'text-align: center' })
+            }
+          } else if (res.data.error && res.data.error.code === 4004) {
+            this.$rulemodal.show({ content: '用户未登录，请登陆后进行评论', style: 'text-align: center' })
+          } else {
+            this.$rulemodal.show({ content: '发布评论失败', style: 'text-align: center' })
+          }
+          this.cancel()
         })
-        //
-        // if (this.publicEnd === false || this.content === '') {
-        //   return
-        // }
-        // this.publicEnd = false
-        // this.$http({
-        //   url: this.$api.api_list,
-        //   method: 'BbsPublishComment',
-        //   params: [{
-        //     id: this.id,
-        //     content: this.content
-        //   }]
-        // }).then((res) => {
-        //   this.publicEnd = true
-        //   this.content = ''
-        //   if (res.data.result && res.data.result.code === 0) {
-        //     if (res.data.result) {
-        //       this.$rulemodal.show({ content: '评论提交成功，请等待后台审核', style: 'text-align: center' })
-        //     }
-        //   } else if (res.data.error && res.data.error.code === 4004) {
-        //     this.$rulemodal.show({ content: '用户未登录，请登陆后进行评论', style: 'text-align: center' })
-        //   } else {
-        //     this.$rulemodal.show({ content: '发布评论失败', style: 'text-align: center' })
-        //   }
-        // this.cancel()
-        // })
       }
     }
   }
@@ -103,12 +96,12 @@
 <style lang="sass" scoped>
   .comment-block
     .comment-public-area
-      &::before
+      &::after
         content: ''
         display: block
-        height: 1.75rem
+        clear: both
       .comment-btn
-        position: fixed
+        position: absolute
         bottom: .25rem
         left: 0
         right: 0
@@ -118,6 +111,7 @@
         line-height: .9rem
         background: #FFFFFF
         border: 1px solid #A1AFB4
+        z-index: 99
         span
           padding-left: .18rem
           font-size: .3rem
@@ -136,12 +130,12 @@
       width: 100%
       height: 100%
       background: rgba(0,0,0,0.40)
-      position: fixed
+      position: absolute
       top: 0
       z-index: 99
       transition: all .3s ease
       .comment-form
-        position: fixed
+        position: absolute
         bottom: 0
         background-color: #FFF
         width: 100%

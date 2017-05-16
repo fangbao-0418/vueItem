@@ -58,6 +58,7 @@ export default {
 </script>
 <style lang="sass" scoped>
   .avatar-select
+    overflow-y: scroll
     position: absolute
     z-index: 9999
     top: 0
@@ -133,6 +134,10 @@ export default {
       line-height: .72rem
       bottom: 1.54rem
       margin: 1rem auto 0
+      &::after
+        content: ''
+        display: block
+        height: 1rem
       span
         font-family: PingFangSC-Regular
         font-size: .3rem

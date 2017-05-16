@@ -1,30 +1,33 @@
 <template>
 <div class="view">
   <wlb-header :options="{ title: '网利社区', rightConfigs: [{ type: 'share' }] }"></wlb-header>
-  <user-briefly-show></user-briefly-show>
-  <div class="container mt-20">
-    <wlb-tab-container :initial-nav-bar-options="initialNavBarOptions" :initial-active="initialActive">
-      <tab-container-item :key="index" :id="tabId(index)" :class="'tab-container'+parseInt(parseInt(index)+1)" v-for="(item, index) in initialNavBarOptions">
-        <loadmore v-if="(ThreadTopList[index] && ThreadTopList[index].length) || (ThreadList[index] && ThreadList[index].length)" :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded[index]" :ref="'loadmore_'+index">
-          <div v-if="ThreadTopList[index] && ThreadTopList[index].length">
-            <title-bar-one :options="{title:item.title, more: '更多', targetUrl: {name: 'activities', params: { id: item.id}}}"></title-bar-one>
-            <slider-block-one :data="ThreadTopList[index]"></slider-block-one>
-          </div>
-          <topic-item v-if="ThreadList[index] && ThreadList[index].length" :data="ThreadList[index]"></topic-item>
-        </loadmore>
-        <no-more :visible="allLoaded[index]"></no-more>
-      </tab-container-item>
-    </wlb-tab-container>
-  </div>
+  <scroll-wrapper>
+    <user-briefly-show></user-briefly-show>
+    <div class="container mt-20">
+      <wlb-tab-container :initial-nav-bar-options="initialNavBarOptions" :initial-active="initialActive">
+        <tab-container-item :key="index" :id="tabId(index)" :class="'tab-container'+parseInt(parseInt(index)+1)" v-for="(item, index) in initialNavBarOptions">
+          <loadmore v-if="(ThreadTopList[index] && ThreadTopList[index].length) || (ThreadList[index] && ThreadList[index].length)" :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded[index]" :ref="'loadmore_'+index">
+            <div v-if="ThreadTopList[index] && ThreadTopList[index].length">
+              <title-bar-one :options="{title:item.title, more: '更多', targetUrl: {name: 'activities', params: { id: item.id}}}"></title-bar-one>
+              <slider-block-one :data="ThreadTopList[index]"></slider-block-one>
+            </div>
+            <topic-item v-if="ThreadList[index] && ThreadList[index].length" :data="ThreadList[index]"></topic-item>
+          </loadmore>
+          <no-more :visible="allLoaded[index]"></no-more>
+        </tab-container-item>
+      </wlb-tab-container>
+    </div>
+  </scroll-wrapper>
   <public-comment-icon v-if="loginStatus"></public-comment-icon>
 </div>
 </template>
 <script>
-import { UserBrieflyShow, WlbHeader, WlbTabContainer, TopicItem, PublicCommentIcon, TitleBarOne, SliderBlockOne, Loadmore, NoMore } from '../components'
+import { ScrollWrapper, UserBrieflyShow, WlbHeader, WlbTabContainer, TopicItem, PublicCommentIcon, TitleBarOne, SliderBlockOne, Loadmore, NoMore } from '../components'
 import { TabContainerItem } from 'mint-ui'
 import { mapState, mapGetters } from 'vuex'
 export default {
   components: {
+    ScrollWrapper,
     WlbHeader,
     UserBrieflyShow,
     WlbTabContainer,

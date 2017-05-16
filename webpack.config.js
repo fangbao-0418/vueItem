@@ -188,10 +188,10 @@ module.exports = {
 			colors: true,
 			errors: true
 		},
-		//启用gzip压缩一切服务:
-		//compress: true,
-		host: "0.0.0.0",
-    // host: "192.168.10.123",
+		// 启用gzip压缩一切服务:
+		// compress: true,
+		// host: "0.0.0.0",
+    host: "192.168.10.123",
     port: "3001"
 	},
 	resolve: {

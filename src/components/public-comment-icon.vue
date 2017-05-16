@@ -51,7 +51,7 @@
       animation: toHidden .3s ease
   .topic-boards
     width: 1rem
-    position: fixed
+    position: absolute
     right: .3rem
     bottom: 3.66rem
     z-index: 10
@@ -89,7 +89,7 @@
     height: 1.06rem
     background: url('../imgs/edit.png') no-repeat
     background-size: 100% 100%
-    position: fixed
+    position: absolute
     right: .3rem
     bottom: 3.02rem
     z-index: 10
@@ -98,7 +98,7 @@
     height: 1.06rem
     background: url('../imgs/closed.png') no-repeat
     background-size: 100% 100%
-    position: fixed
+    position: absolute
     right: .3rem
     bottom: 3.02rem
     z-index: 10

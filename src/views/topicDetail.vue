@@ -7,27 +7,37 @@
       <span slot="title">帖子详情</span>
       <share-icon slot="right"></share-icon>
     </wlb-header>
-    <div class="container bg-color-white">
-      <div class="topic-head">
-        <div class="topic-avatar mr-20">
-          <img :src="item.user.head_img" v-lazyload="{ placeholder: require('../imgs/avatar_defult_big.png') }" />
+    <scroll-wrapper>
+      <div class="container bg-color-white">
+        <div class="topic-head">
+          <div class="topic-avatar mr-20">
+            <img :src="item.user.head_img" v-lazyload="{ placeholder: require('../imgs/avatar_defult_big.png') }" />
+          </div>
+          <div class="topic-info">
+            <p><span class="topic-author">{{item.user.nickname}}</span></p>
+            <p><span class="topic-time">{{item.updated_at}}</span></p>
+          </div>
         </div>
-        <div class="topic-info">
-          <p><span class="topic-author">{{item.user.nickname}}</span></p>
-          <p><span class="topic-time">{{item.updated_at}}</span></p>
+        <div class="topic-content mt-20">
+          <p>{{item.content}}</p>
         </div>
       </div>
-      <div class="topic-content mt-20">
-        <p>{{item.content}}</p>
-      </div>
-    </div>
-    <comment-list :id="id"></comment-list>
+      <comment-list :id="id" class="mb-20"></comment-list>
+      <div style="height: 1.2rem"></div>
+    </scroll-wrapper>
     <comment-form-modal :id="id"></comment-form-modal>
   </div>
 </template>
 <script>
-  import { WlbHeader, CommentFormModal, ShareIcon, CommentList } from '../components'
+  import { ScrollWrapper, WlbHeader, CommentFormModal, ShareIcon, CommentList } from '../components'
   export default {
+    components: {
+      ScrollWrapper,
+      WlbHeader,
+      CommentFormModal,
+      ShareIcon,
+      CommentList
+    },
     data () {
       return {
         item: {},
@@ -59,12 +69,6 @@
       })
     },
     methods: {
-    },
-    components: {
-      WlbHeader,
-      CommentFormModal,
-      ShareIcon,
-      CommentList
     }
   }
 </script>

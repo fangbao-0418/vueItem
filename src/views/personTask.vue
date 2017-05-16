@@ -6,22 +6,24 @@
     <wlb-header>
       <span slot="title">我的任务</span>
     </wlb-header>
-    <div class="task-container bg-color-white" :key="index" v-for="(item, index) in data">
-      <div class="task-title mt-30">
-        <div :class="[{ 'day-task': item.task === 'day' }, { 'new-task': item.task !== 'day' }, 'title']">{{item.title}}</div>
-        <span class="rule" @click="showRule(item.task)">任务规则</span>
+    <scroll-wrapper>
+      <div class="task-container bg-color-white" :key="index" v-for="(item, index) in data">
+        <div class="task-title mt-30">
+          <div :class="[{ 'day-task': item.task === 'day' }, { 'new-task': item.task !== 'day' }, 'title']">{{item.title}}</div>
+          <span class="rule" @click="showRule(item.task)">任务规则</span>
+        </div>
+        <task-item :key="index2" v-for="(item2, index2) in item.list">
+          <img :src="item2.icon" class="task-image" slot="image" />
+          <span slot="task">{{item2.description}}</span>
+          <span slot="award">{{item2.award}}</span>
+          <task-plan :data="item2" slot="right"></task-plan>
+        </task-item>
       </div>
-      <task-item :key="index2" v-for="(item2, index2) in item.list">
-        <img :src="item2.icon" class="task-image" slot="image" />
-        <span slot="task">{{item2.description}}</span>
-        <span slot="award">{{item2.award}}</span>
-        <task-plan :data="item2" slot="right"></task-plan>
-      </task-item>
-    </div>
+    </scroll-wrapper>  
   </div>
 </template>
 <script>
-import { WlbHeader, TaskItem, TaskPlan } from '../components'
+import { ScrollWrapper, WlbHeader, TaskItem, TaskPlan } from '../components'
 export default {
   data () {
     return {
@@ -29,6 +31,7 @@ export default {
     }
   },
   components: {
+    ScrollWrapper,
     WlbHeader,
     TaskItem,
     TaskPlan

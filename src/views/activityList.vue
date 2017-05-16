@@ -1,26 +1,34 @@
 <template>
 	<div class="view">
 		<wlb-header :options="{title:'网利活动',rightConfigs:[{type:'share'}]}"></wlb-header>
-		<div class="activities" v-if="data && data.length" >
-			<loadmore :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded" ref="loadmore">
-
-				<div :key="index" class="activity-item" v-for="(item, index) in data" tag="div">
-					<a v-if="item.url" :href="item.url" >
-						<img :src="item.cover" v-lazyload="{ placeholder: require('../imgs/banner_defult_sml.png') }">
-					</a>
-					<router-link v-else :to="{ name: 'activityDetail', params: { id: item.id } }" >
-						<img :src="item.cover" v-lazyload="{ placeholder: require('../imgs/banner_defult_sml.png') }">
-					</router-link>
-				</div>
-
-				<no-more :visible="nomore"></no-more>
-    	</loadmore>
-		</div>
+		<scroll-wrapper>
+			<div class="activities" v-if="data && data.length" >
+				<loadmore :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded" ref="loadmore">
+					<div style="min-height: 7rem">
+						<div :key="index" class="activity-item" v-for="(item, index) in data" tag="div">
+							<a v-if="item.url" :href="item.url" >
+								<img :src="item.cover" v-lazyload="{ placeholder: require('../imgs/banner_defult_sml.png') }">
+							</a>
+							<router-link v-else :to="{ name: 'activityDetail', params: { id: item.id } }" >
+								<img :src="item.cover" v-lazyload="{ placeholder: require('../imgs/banner_defult_sml.png') }">
+							</router-link>
+						</div>
+						<no-more :visible="nomore"></no-more>
+					</div>
+	    	</loadmore>
+			</div>
+		</scroll-wrapper>
 	</div>
 </template>
 <script>
-import { WlbHeader, Loadmore, NoMore } from '../components'
+import { ScrollWrapper, WlbHeader, Loadmore, NoMore } from '../components'
 export default {
+  components: {
+    ScrollWrapper,
+    WlbHeader,
+    Loadmore,
+    NoMore
+  },
   data () {
     return {
       data: [],
@@ -38,11 +46,6 @@ export default {
     this.loadData(() => {
       this.$plugin.loading.show(false)
     })
-  },
-  components: {
-    WlbHeader,
-    Loadmore,
-    NoMore
   },
   methods: {
     loadData (cb) {

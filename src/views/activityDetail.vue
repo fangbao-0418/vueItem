@@ -4,21 +4,25 @@
       <span slot="title">活动详情</span>
       <share-icon slot="right"></share-icon>
     </wlb-header>
-    <div class="detail-block bg-color-white">
-      <h1 class="title">{{item.title}}</h1>
-      <div class="topic-infos mt-10">
-        <span class="author">{{item.user.nickname}}</span> | <span class="pubdate">{{item.updated_at}}</span>
+    <scroll-wrapper>
+      <div class="detail-block bg-color-white">
+        <h1 class="title">{{item.title}}</h1>
+        <div class="topic-infos mt-10">
+          <span class="author">{{item.user.nickname}}</span> | <span class="pubdate">{{item.updated_at}}</span>
+        </div>
+        <p class="content mt-45">{{item.content}}</p>
       </div>
-      <p class="content mt-45">{{item.content}}</p>
-    </div>
-    <comment-list :id="id"></comment-list>
+      <comment-list :id="id"></comment-list>
+      <div style="height: 1.2rem"></div>
+    </scroll-wrapper>  
     <comment-form-modal :id="id"></comment-form-modal>
   </div>
 </template>
 <script>
-  import { WlbHeader, CommentFormModal, ShareIcon, CommentList } from '../components'
+  import { ScrollWrapper, WlbHeader, CommentFormModal, ShareIcon, CommentList } from '../components'
   export default {
     components: {
+      ScrollWrapper,
       WlbHeader,
       CommentFormModal,
       ShareIcon,

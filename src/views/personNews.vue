@@ -4,18 +4,27 @@
       <span slot="title">我的消息</span>
       <span slot="right" class="rightBtnText" @click="allDel">全部删除</span>
     </wlb-header>
-    <loadmore v-if="data.length" :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded" ref="loadmore">
-      <news-item :item="item" v-for="(item, index) in data" :key="index"></news-item>
-    </loadmore>
-    <no-more v-if="data.length > 0" :visible="nomore"></no-more>
-    <div v-if="data.length === 0" class="empty">
-      <div>还没有消息哦</div>
-    </div>
+    <scroll-wrapper>
+      <loadmore v-if="data.length" :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded" ref="loadmore">
+        <news-item :item="item" v-for="(item, index) in data" :key="index"></news-item>
+      </loadmore>
+      <no-more v-if="data.length > 0" :visible="nomore"></no-more>
+      <div v-if="data.length === 0" class="empty">
+        <div>还没有消息哦</div>
+      </div>
+    </scroll-wrapper>  
   </div>
 </template>
 <script>
-import { WlbHeader, NewsItem, Loadmore, NoMore } from '../components'
+import { ScrollWrapper, WlbHeader, NewsItem, Loadmore, NoMore } from '../components'
 export default {
+  components: {
+    ScrollWrapper,
+    WlbHeader,
+    NewsItem,
+    Loadmore,
+    NoMore
+  },
   data () {
     return {
       data: [],
@@ -34,12 +43,6 @@ export default {
     allLoaded () {
       return this.nomore
     }
-  },
-  components: {
-    WlbHeader,
-    NewsItem,
-    Loadmore,
-    NoMore
   },
   methods: {
     loadData (cb) {

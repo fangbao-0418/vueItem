@@ -6,7 +6,6 @@ const init = function () {
   var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize'
   var recalc = function () {
     var clientWidth = docEl.clientWidth
-    console.log(clientWidth)
     if (!clientWidth) return
     docEl.style.fontSize = 100 * (clientWidth / 750) + 'px'
   }

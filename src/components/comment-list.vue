@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="comment-area mt-20 bg-color-white" v-if="data && data.length" >
-      <div class="comment-sign">
+    <div class="comment-area mt-20" v-if="data && data.length" >
+      <div class="comment-sign bg-color-white">
         <span>评论列表 ({{total}})</span>
       </div>
       <loadmore :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded" ref="loadmore">
-        <ul class="comment-items">
+        <ul class="comment-items bg-color-white">
           <li v-for="(item, index) in data" v-if="item.users">
             <div class="comment-avatar">
               <img :src="item.users.head_img" v-lazyload="{ placeholder: require('../imgs/avatar_defult_big.png') }" />
@@ -24,10 +24,10 @@
             </div>
           </li>
         </ul>
+        <no-more :visible="total === 0" content="～暂时没有评论～"></no-more>
+        <no-more v-if="total > 0" :visible="nomore" content="～没有更多了～"></no-more>
       </loadmore>
     </div>
-    <no-more :visible="total === 0" content="～暂时没有评论～"></no-more>
-    <no-more v-if="total > 0" :visible="nomore" content="～没有更多了～"></no-more>
   </div>
 </template>
 <script>
