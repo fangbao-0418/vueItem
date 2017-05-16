@@ -51,14 +51,14 @@
     right: 0.3rem
   .topic-avatar
     width: .4rem
-    float: left
+    display: table-cell
+    vertical-align: top
     img
       width: .4rem
       height: .4rem
   .topic-main
-    float: right
+    display: table-cell
     padding-left: .1rem
-    width: 6.3rem
     .topic-tit
       font-family: PingFangSC-Regular
       font-size: .24rem
