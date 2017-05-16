@@ -3,9 +3,7 @@
     <div class="view" v-if="visible" @click="close()">
       <div class="container" @click.stop="">
         <div class="title">{{title}}</div>
-        <div class="content" :style="style">
-          {{content}}
-        </div>
+        <div class="content" :style="style">{{content}}</div>
         <div class="footer" @click="close()">
           <span>知道了</span>
         </div>
@@ -87,6 +85,7 @@
         margin: .4rem auto .55rem
         text-align: center
       .content
+        white-space: pre-wrap
         font-family: PingFangSC-Light
         font-size: .3rem
         color: #666666

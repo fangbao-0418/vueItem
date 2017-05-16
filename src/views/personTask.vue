@@ -9,7 +9,7 @@
     <div class="task-container bg-color-white" :key="index" v-for="(item, index) in data">
       <div class="task-title mt-30">
         <div :class="[{ 'day-task': item.task === 'day' }, { 'new-task': item.task !== 'day' }, 'title']">{{item.title}}</div>
-        <span class="rule" @click="showRule()">任务规则</span>
+        <span class="rule" @click="showRule(item.task)">任务规则</span>
       </div>
       <task-item :key="index2" v-for="(item2, index2) in item.list">
         <img :src="item2.icon" class="task-image" slot="image" />
@@ -45,11 +45,30 @@ export default {
     })
   },
   methods: {
-    showRule () {
-      this.$rulemodal.show({
-        title: '活动规则',
-        content: '新华社北京4月26日电 中共中央政治局4月25日下午就维护国家金融安全进行第四十次集体学习。中共中央总书记习近平在主持学习时强调，金融安全是国家安全的重要组成部分，是经济平稳健康发展的重要基础。维护金融安全，是关系我国经济社会发展全局的一件带有战略性、根本性的大事。金融活，经济活；金融稳，经济稳。必须充分认识金融在经济发展和社会生活中的重要地位和作用，切实把维护金融安全作为治国理政的一件大事，扎扎实实把金融工作做好。'
-      })
+    showRule (task) {
+      var option = {}
+      switch (task) {
+        case 'day':
+          option = {
+            title: '每日任务规则',
+            content: `1.用户可通过完成指定的每日任务，获得体验金奖励。
+2.体验金有效期7天。
+3.每日任务所产生的奖励每天只可领取一次。
+成就任务规则`
+          }
+          break
+        case 'achieve':
+          option = {
+            title: '成就任务规则',
+            content: `1.用户可通过完成指定的成就任务，获得高额体验金奖励。
+2.体验金有效期7天。
+3.成就任务所产生的奖励只可领取一次。`
+          }
+          break
+        default:
+          break
+      }
+      this.$rulemodal.show(option)
     }
   }
 }

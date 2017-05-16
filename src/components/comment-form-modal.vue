@@ -58,8 +58,7 @@
         this.show = true
       },
       cancel () {
-        $('textarea').blur()
-        $('input').blur()
+        $('.comment-text-content').blur()
         this.show = false
       },
       toPublic () {

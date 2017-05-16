@@ -6,22 +6,16 @@
     <wlb-header :options="{ title: boardName }">
       <span slot="right" :class="['rightButton', {disable: !publicEnd || !content}]" @click="toPublic">{{publicEnd ? '发表' : '发表中...'}}</span>
     </wlb-header>
-    <!-- <input class="topic-text-title" v-model="title" palceholder="请输入发帖标题"/>
-    <div class="line"></div> -->
     <textarea class="topic-text-content" v-model="content" placeholder="说点什么吧..."></textarea>
     <p class="residue">你还可以输入{{num}}字</p>
-    <!-- <div class="topic-edit-foot">
-      <div class="topic-edit-type">
-        <span :class="['topic-edit-type-chat', {active:active}]" @click="checkType(1)">闲聊</span>
-        <span :class="['topic-edit-type-ask', {active:!active}]" @click="checkType(0)">问答</span>
-      </div>
-      <span :class="['topic-edit-sub', {disable: !publicEnd || !content}]" @click="toPublic">{{publicEnd ? '发表' : '发表中...'}}</span>
-    </div> -->
   </div>
 </template>
 <script type="text/javascript">
   import { WlbHeader } from '../components'
   export default {
+    components: {
+      WlbHeader
+    },
     data () {
       return {
         active: true,
@@ -79,9 +73,6 @@
         this.num = 500 - len > 0 ? 500 - len : 0
         this.content = this.content.substring(0, 500)
       }
-    },
-    components: {
-      WlbHeader
     }
   }
 </script>
