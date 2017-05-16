@@ -42,7 +42,7 @@
 <style media="screen" lang="sass" scoped>
 .topic-item
   padding: .3rem
-  display: table
+  // display: table
   position: relative
   width: 6.9rem
   overflow: hidden
