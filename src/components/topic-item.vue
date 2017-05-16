@@ -45,6 +45,7 @@
   display: table
   position: relative
   width: 6.9rem
+  overflow: hidden
   .tags
     position: absolute
     top: 0
@@ -57,7 +58,7 @@
       width: .4rem
       height: .4rem
   .topic-main
-    width: 6.4rem
+    width: 6.9rem
     display: table-cell
     padding-left: .1rem
     .topic-tit
