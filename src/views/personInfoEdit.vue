@@ -83,6 +83,7 @@ export default {
   },
   methods: {
     editAvatar () {
+      $('input').blur()
       bus.$emit('show-select-avatar-page')
     },
     save () {
