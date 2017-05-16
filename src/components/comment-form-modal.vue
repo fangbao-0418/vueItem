@@ -74,9 +74,9 @@
             content: this.content
           }]
         }).then((res) => {
+          this.publicEnd = true
+          this.content = ''
           if (res.data.result && res.data.result.code === 0) {
-            this.publicEnd = true
-            this.content = ''
             if (res.data.result) {
               this.$rulemodal.show({ content: '评论提交成功，请等待后台审核', style: 'text-align: center' })
             }
