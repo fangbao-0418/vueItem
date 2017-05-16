@@ -57,6 +57,7 @@
       width: .4rem
       height: .4rem
   .topic-main
+    width: 6.4rem
     display: table-cell
     padding-left: .1rem
     .topic-tit
