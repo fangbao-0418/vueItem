@@ -58,10 +58,10 @@
         this.show = true
       },
       cancel () {
-        var that = this
+        // var that = this
         $('.comment-text-content').blur()
         setTimeout(() => {
-          that.show = false
+          // that.show = false
         }, 0)
       },
       toPublic () {
