@@ -59,6 +59,7 @@
       },
       cancel () {
         $('textarea').blur()
+        $('input').blur()
         this.show = false
       },
       toPublic () {
