@@ -1,5 +1,5 @@
 # 简介
-基于vue+webpack+eslint+vuex+axios框架
+基于vue+webpack+eslint+vuex+vue-resource框架
 
 # 安装
 npm install
@@ -24,16 +24,19 @@ npm run build
 * postcss.config.js postcss配置文件 配置自动补全css前缀
 
 # 源码文件src详解
-* views vue模板存放目录
-* app.js vue入口文件
-* index.html 入口html模板
-* router 路由配置文件
 * components 组件存放目录
-* sass sass文件存放目录
+* directives 指令存放目录
+* filters 过滤器存放目录
+* imgs 图片存放目录
 * plugins 插件存放目录
+* router 路由配置文件
+* sass sass文件存放目录
 * store store文件存放目录
 * util util文件存放目录
-* imgs 图片存放目录
+* views vue模板存放目录
+* app.js vue入口文件
+* bus.js 空的 Vue 实例作为中央事件总线
+* index.html 入口html模板
 
 # 相关文档参考
 * [vue2.0 中文文档](https://cn.vuejs.org/v2/guide/)
@@ -41,3 +44,8 @@ npm run build
 * [vuex2.0 中文文档](https://vuex.vuejs.org/zh-cn/)
 * [axios github参考文档](https://github.com/mzabriskie/axios)
 * [mint-ui 2 使用文档(中文)](http://mint-ui.github.io/docs/#/zh-cn2)
+
+# 其他备注
+<p>
+因axios在safari存在兼容性暂用vue-resource代替
+</p>

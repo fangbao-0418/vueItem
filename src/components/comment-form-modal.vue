@@ -74,10 +74,16 @@
             content: this.content
           }]
         }).then((res) => {
-          this.publicEnd = true
-          this.content = ''
-          if (res.data.result) {
-            this.$rulemodal.show({ content: '评论提交成功，请等待后台审核', style: 'text-align: center' })
+          if (res.data.result && res.data.result.code === 0) {
+            this.publicEnd = true
+            this.content = ''
+            if (res.data.result) {
+              this.$rulemodal.show({ content: '评论提交成功，请等待后台审核', style: 'text-align: center' })
+            }
+          } else if (res.data.error && res.data.error.code === 4004) {
+            this.$rulemodal.show({ content: '用户未登录，请登陆后进行评论', style: 'text-align: center' })
+          } else {
+            this.$rulemodal.show({ content: '发布评论失败', style: 'text-align: center' })
           }
           this.cancel()
         })

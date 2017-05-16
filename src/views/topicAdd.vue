@@ -61,8 +61,12 @@
         }).then((res) => {
           this.publicEnd = true
           this.content = ''
-          if (res.data.result) {
+          if (res.data.result && res.data.result.code === 0) {
             this.$rulemodal.show({ title: '系统提示', content: '帖子发布成功，已提交后台审核', style: 'text-align: center' })
+          } else if (res.data.error && res.data.error.code === 4004) {
+            this.$rulemodal.show({ content: '用户未登录，请登陆后进行评论', style: 'text-align: center' })
+          } else {
+            this.$rulemodal.show({ content: '发布帖子失败', style: 'text-align: center' })
           }
         })
       }

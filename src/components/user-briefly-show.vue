@@ -14,7 +14,7 @@
     </router-link>
     <div v-else class="user bg-color-white">
       <div class="login-btn" @click="login"><span>登录</span></div>
-      <p class="remind-msg">做任务的体验金</p>
+      <p class="remind-msg">做任务得体验金</p>
     </div>
   </div>
 </template>
