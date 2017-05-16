@@ -20,6 +20,7 @@ import Loadmore from './load-more'
 import NoMore from './no-more'
 import ShareIcon from './share-icon'
 import CommentList from './comment-list' // 评论列表
+import ScrollWrapper from './scroll-wrapper'
 export {
   WlbHeader,
   UserBrieflyShow,
@@ -42,5 +43,6 @@ export {
   Loadmore,
   NoMore,
   ShareIcon,
-  CommentList
+  CommentList,
+  ScrollWrapper
 }

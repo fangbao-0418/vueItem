@@ -21,6 +21,11 @@
 import { UserBrieflyShow, WlbHeader, SectionItem } from '../components'
 import { mapState } from 'vuex'
 export default {
+  components: {
+    WlbHeader,
+    UserBrieflyShow,
+    SectionItem
+  },
   data () {
     return {
       items: [{
@@ -50,11 +55,6 @@ export default {
         return state.profile.unreadStatus
       }
     })
-  },
-  components: {
-    WlbHeader,
-    UserBrieflyShow,
-    SectionItem
   }
 }
 </script>

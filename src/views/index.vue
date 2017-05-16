@@ -24,6 +24,18 @@ import { UserBrieflyShow, WlbHeader, WlbTabContainer, TopicItem, PublicCommentIc
 import { TabContainerItem } from 'mint-ui'
 import { mapState, mapGetters } from 'vuex'
 export default {
+  components: {
+    WlbHeader,
+    UserBrieflyShow,
+    WlbTabContainer,
+    TabContainerItem,
+    PublicCommentIcon,
+    TopicItem,
+    TitleBarOne,
+    SliderBlockOne,
+    Loadmore,
+    NoMore
+  },
   computed: {
     ...mapGetters({
       initialNavBarOptions: 'doneTopicBoards',
@@ -52,18 +64,6 @@ export default {
     this.$store.dispatch('fetchBbsHomeData')
   },
   mounted () {
-  },
-  components: {
-    WlbHeader,
-    UserBrieflyShow,
-    WlbTabContainer,
-    TabContainerItem,
-    PublicCommentIcon,
-    TopicItem,
-    TitleBarOne,
-    SliderBlockOne,
-    Loadmore,
-    NoMore
   },
   methods: {
     tabId (index) {
