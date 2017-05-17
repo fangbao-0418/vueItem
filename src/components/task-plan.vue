@@ -4,7 +4,7 @@
       <span class="text">{{this.data.current + '/' + this.data.finish}}</span>
       <span class="plan-bg" :style="{width: widthRate}"></span>
     </button>
-    <button :class="['task-btn', { 'btn-bg': data.isAward === 0 }, { 'isaward': data.isAward }]" slot="right" v-if="iscompleted" @click="receive">{{data.isAward === 1 ? '已领取' : '领取'}}</button>
+    <button :class="['task-btn', { 'btn-bg': data.isAward === 0 }, { 'isaward': data.isAward }]" slot="right" v-if="iscompleted" @click="receive">{{data.isAward > 0 ? '已领取' : '领取'}}</button>
   </div>
 </template>
 <script>
@@ -24,6 +24,10 @@
     },
     methods: {
       receive () {
+        if (this.data.isAward > 0) {
+          return ''
+        }
+        this.$plugin.loading.show(true)
         this.$http({
           url: this.$api.api_list,
           method: 'BbsUserSendAward',
@@ -35,6 +39,11 @@
             var message = res.data.result.message
             this.$rulemodal.show({ content: message, style: 'text-align: center' })
           }
+          if (res.data.error) {
+            var errmessage = res.data.error.message
+            this.$rulemodal.show({ content: errmessage, style: 'text-align: center' })
+          }
+          this.$plugin.loading.show(false)
         })
       }
     }
