@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="comment-area mt-20" v-if="data && data.length" >
+    <div class="comment-area mt-20" v-if="total > 0" >
       <div class="comment-sign bg-color-white">
         <span>评论列表 ({{total}})</span>
       </div>
       <loadmore :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded" ref="loadmore">
-        <ul class="comment-items bg-color-white">
-          <li v-for="(item, index) in data" v-if="item.users">
+        <ul class="comment-items">
+          <li v-for="(item, index) in data" class="bg-color-white" v-if="item.users">
             <div class="comment-avatar">
               <img :src="item.users.head_img" v-lazyload="{ placeholder: require('../imgs/avatar_defult_big.png') }" />
             </div>
@@ -23,11 +23,13 @@
               <p class="comment-content mt-20">{{item.content}}</p>
             </div>
           </li>
+          <li>
+            <no-more v-if="total > 0" :visible="nomore" content="～没有更多了～"></no-more>
+          </li>
         </ul>
-        <no-more :visible="total === 0" content="～暂时没有评论～"></no-more>
-        <no-more v-if="total > 0" :visible="nomore" content="～没有更多了～"></no-more>
       </loadmore>
     </div>
+    <no-more :visible="total === 0" content="～暂时没有评论～"></no-more>
   </div>
 </template>
 <script>
@@ -70,20 +72,22 @@
             page: this.page
           }]
         }).then((res) => {
-          this.total = res.data.result.data.total
-          this.lastPage = res.data.result.data['last_page']
-          this.page += 1
-          if (res.data.result.data['last_page'] + 1 >= this.page) {
-            if (this.page === 2) {
-              this.data = res.data.result.data.data
-            } else {
-              this.data = this.data.concat(res.data.result.data.data)
+          if (res.data.result.data && res.data.result.data.total > 0) {
+            this.total = res.data.result.data.total
+            this.lastPage = res.data.result.data['last_page']
+            this.page += 1
+            if (res.data.result.data['last_page'] + 1 >= this.page) {
+              if (this.page === 2) {
+                this.data = res.data.result.data.data
+              } else {
+                this.data = this.data.concat(res.data.result.data.data)
+              }
             }
-          }
-          if (res.data.result.data['last_page'] < this.page) {
-            this.nomore = true
-          } else {
-            this.nomore = false
+            if (res.data.result.data['last_page'] < this.page) {
+              this.nomore = true
+            } else {
+              this.nomore = false
+            }
           }
           cb && cb()
         })
@@ -126,12 +130,14 @@
         font-size: .24rem
         color: #A1AFB4
     .comment-items
+      min-height: 6rem
       list-style: none
       overflow: hidden
       li
         float: left
         padding: .3rem
         border-bottom: 1px solid #E5E5E5
+        width: 6.9rem
         .comment-avatar
           float: left
           width: .4rem
