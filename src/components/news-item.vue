@@ -13,7 +13,7 @@
       <p>
         <span class="color1">您 </span><span>发布的帖子 </span>
         <span class="color1">{{item.threads.content | msubstring(0, 20)}}</span>
-        因{{item.del_reason}}被管理员删除
+        <span> 因{{item.del_reason}}被管理员删除</span>
       </p>
       <div class="item-time mt-27" v-text="item.created_at"></div>
     </div>
@@ -22,14 +22,14 @@
         <span class="color1">{{item.from_users.nickname}} </span><span>评论了您的帖子 </span>
         <span class="color1">{{item.threads.content | msubstring(0, 10)}}</span>
       </p>
-      <p>{{item.content}}</p>
+      <p class="font-1 mt-18">{{item.content}}</p>
       <div class="item-time mt-27" v-text="item.created_at"></div>
     </div>
     <div v-if="item.type == 4" class="news-box bg-color-white mt-20">
       <p>
         <span class="color1">您 </span><span>发表的评论</span>
         <span class="color1">{{item.content | msubstring(0, 10)}}</span>
-        因{{item.del_reason}}被管理员删除
+        <span> 因{{item.del_reason}}被管理员删除</span>
       </p>
       <div class="item-time mt-27" v-text="item.created_at"></div>
     </div>
@@ -62,8 +62,15 @@ export default {
 }
 </script>
 <style media="screen" lang="sass" scoped>
+.font-1
+  font-family: PingFangSC-Regular
+  font-size: .3rem
+  color: #9B9B9B
+  letter-spacing: 0
+  line-height: .42rem
 .readed
   p
+    color: #9B9B9B !important
     span
       color: #9B9B9B !important
 .news-content
