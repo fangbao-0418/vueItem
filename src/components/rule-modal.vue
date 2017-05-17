@@ -4,8 +4,13 @@
       <div class="container" @click.stop="">
         <div class="title">{{title}}</div>
         <div class="content" :style="style">{{content}}</div>
-        <div class="footer" @click="close()">
+        <div v-if="footType === 1" class="footer" @click="close()">
           <span>知道了</span>
+        </div>
+        <div v-if="footType === 2" class="footer">
+          <span class="cancel" @click="close()">{{cancelOptions && cancelOptions.title ? cancelOptions.title: '取消'}}</span>
+          <div class="line"></div>
+          <span class="affirm" @click="ok()">{{okOptions && okOptions.title ? okOptions.title: '确定'}}</span>
         </div>
       </div>
     </div>
@@ -18,7 +23,14 @@
         visible: false,
         title: '',
         content: '',
-        style: ''
+        style: '',
+        okOptions: {},
+        cancelOptions: {}
+      }
+    },
+    computed: {
+      footType () {
+        return (this.okOptions && (this.okOptions.title || this.okOptions.callback)) ? 2 : 1
       }
     },
     watch: {
@@ -34,6 +46,9 @@
       }
     },
     methods: {
+      ok () {
+        this.okOptions.callback && this.okOptions.callback()
+      },
       close () {
         this.visible = false
       }
@@ -97,9 +112,18 @@
         border-top: solid #D8D8D8 1px
         text-align: center
         line-height: .9rem
+        display: flex
         span
           font-family: PingFangSC-Light
           font-size: .3rem
           color: #666666
           letter-spacing: 0
+          flex: 1
+        .affirm
+          flex: 1
+        .line
+          width: 1px
+          background-color: #D8D8D8
+        .cancel
+          flex: 1
 </style>

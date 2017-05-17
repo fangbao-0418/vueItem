@@ -12,7 +12,7 @@
       <div v-if="data.length === 0" class="empty">
         <div>还没有消息哦</div>
       </div>
-    </scroll-wrapper>  
+    </scroll-wrapper>
   </div>
 </template>
 <script>
@@ -89,17 +89,30 @@ export default {
         this.$refs.loadmore.$children[0].onBottomLoaded()
       })
     },
+    doDel () {
+      this.$rulemodal.show(false)
+      this.$http({
+        url: this.$api.api_list,
+        method: 'delBbsUserAllPm',
+        params: [{}]
+      }).then((res) => {
+        this.data = []
+        this.$rulemodal.show({ content: '已全部删除了消息', style: 'text-align: center' })
+      })
+    },
     allDel () {
+      var that = this
       if (this.data.length === 0) {
         this.$rulemodal.show({ content: '没有可删除的消息', style: 'text-align: center' })
       } else {
-        this.$http({
-          url: this.$api.api_list,
-          method: 'delBbsUserAllPm',
-          params: [{}]
-        }).then((res) => {
-          this.data = []
-          this.$rulemodal.show({ content: '已全部删除了消息', style: 'text-align: center' })
+        this.$rulemodal.show({
+          content: '已全部删除了消息',
+          style: 'text-align: center',
+          ok: {
+            callback: function () {
+              that.doDel()
+            }
+          }
         })
       }
     }
