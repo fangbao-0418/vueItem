@@ -13,7 +13,7 @@
     },
     methods: {
       goTop () {
-        $('#wrapper').stop().animate({'scrollTop': 0}, 500)
+        $('#wrapper').stop().animate({'scrollTop': 0}, 100)
       }
     }
   }

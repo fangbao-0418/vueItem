@@ -1,7 +1,9 @@
 <template>
-  <div id="wrapper">
-    <div class="scroll">
-      <slot></slot>
+  <div>
+    <div id="wrapper"  ref="wrapper">
+      <div class="scroll">
+        <slot></slot>
+      </div>
     </div>
     <div class="float-block">
       <to-top-icon :show="toTopIconShowState"></to-top-icon>
@@ -21,14 +23,14 @@
       }
     },
     mounted () {
-      $('#wrapper').scroll(() => {
+      this.$refs.wrapper.onscroll = () => {
         var fontSize = parseFloat(document.documentElement.style['font-size'])
-        if ($('#wrapper').scrollTop() > 2.4 * fontSize) {
+        if (this.$refs.wrapper.scrollTop > 2.4 * fontSize) {
           this.toTopIconShowState = true
         } else {
           this.toTopIconShowState = false
         }
-      })
+      }
       // $(document).ready(function () {
       //   var iscroll = new IScroll('#wrapper', {
       //     mouseWheel: true,
