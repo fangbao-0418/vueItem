@@ -19,7 +19,7 @@
           <task-plan :data="item2" slot="right"></task-plan>
         </task-item>
       </div>
-    </scroll-wrapper>  
+    </scroll-wrapper>
   </div>
 </template>
 <script>
@@ -56,8 +56,7 @@ export default {
             title: '每日任务规则',
             content: `1.用户可通过完成指定的每日任务，获得体验金奖励。
 2.体验金有效期7天。
-3.每日任务所产生的奖励每天只可领取一次。
-成就任务规则`
+3.每日任务所产生的奖励每天只可领取一次。`
           }
           break
         case 'achieve':
