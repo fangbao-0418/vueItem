@@ -8,7 +8,7 @@
         <span class="post-hits">查看({{postItem.views}})</span>
         <span class="post-comment-num">评论({{postItem.comment_num}})</span>
       </p>
-      <div class="fr" v-text="postItem.updated_at">2017-03-31 14:29</div>
+      <div class="fr" v-text="postItem.created_at">2017-03-31 14:29</div>
     </div>
   </router-link>
 </template>

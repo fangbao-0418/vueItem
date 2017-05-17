@@ -15,7 +15,7 @@
           </div>
           <div class="topic-info">
             <p><span class="topic-author">{{item.user.nickname}}</span></p>
-            <p><span class="topic-time">{{item.updated_at}}</span></p>
+            <p><span class="topic-time">{{item.created_at}}</span></p>
           </div>
         </div>
         <div class="topic-content mt-20">

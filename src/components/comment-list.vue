@@ -14,7 +14,7 @@
               <div class="comment-head">
                 <div class="comment-head-left">
                   <p class="comment-user">{{item.users.nickname}}</p>
-                  <p class="comment-ago">{{item.updated_at | handleDate}}</p>
+                  <p class="comment-ago">{{item.created_at | handleDate}}</p>
                 </div>
                 <div class="comment-head-right">
                   <span class="comment-floor">{{index+1}}#</span>

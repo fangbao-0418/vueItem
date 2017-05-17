@@ -8,7 +8,7 @@
       <div class="detail-block bg-color-white">
         <h1 class="title">{{item.title}}</h1>
         <div class="topic-infos mt-10">
-          <span class="author">{{item.user.nickname}}</span> | <span class="pubdate">{{item.updated_at}}</span>
+          <span class="author">{{item.user.nickname}}</span> | <span class="pubdate">{{item.created_at}}</span>
         </div>
         <p class="content mt-45">{{item.content}}</p>
       </div>
