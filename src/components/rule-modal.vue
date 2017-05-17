@@ -114,6 +114,8 @@
         line-height: .9rem
         display: flex
         span
+          display: block
+          text-align: center
           font-family: PingFangSC-Light
           font-size: .3rem
           color: #666666

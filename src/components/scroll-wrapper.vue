@@ -14,6 +14,12 @@
   import ToTopIcon from './to-top-icon'
   // import IScroll from 'iscroll'
   export default {
+    props: {
+      scrollToTop: {
+        type: Boolean,
+        default: true
+      }
+    },
     components: {
       ToTopIcon
     },
@@ -23,12 +29,14 @@
       }
     },
     mounted () {
-      this.$refs.wrapper.onscroll = () => {
-        var fontSize = parseFloat(document.documentElement.style['font-size'])
-        if (this.$refs.wrapper.scrollTop > 2.4 * fontSize) {
-          this.toTopIconShowState = true
-        } else {
-          this.toTopIconShowState = false
+      if (this.scrollToTop) {
+        this.$refs.wrapper.onscroll = () => {
+          var fontSize = parseFloat(document.documentElement.style['font-size'])
+          if (this.$refs.wrapper.scrollTop > 2.4 * fontSize) {
+            this.toTopIconShowState = true
+          } else {
+            this.toTopIconShowState = false
+          }
         }
       }
       // $(document).ready(function () {

@@ -65,7 +65,7 @@ export default {
 .font-1
   font-family: PingFangSC-Regular
   font-size: .3rem
-  color: #9B9B9B
+  color: #666666
   letter-spacing: 0
   line-height: .42rem
 .readed

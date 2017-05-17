@@ -6,7 +6,7 @@
     <wlb-header>
       <span slot="title">我的任务</span>
     </wlb-header>
-    <scroll-wrapper>
+    <scroll-wrapper :scrollToTop="false">
       <div class="task-container bg-color-white" :key="index" v-for="(item, index) in data">
         <div class="task-title mt-30">
           <div :class="[{ 'day-task': item.task === 'day' }, { 'new-task': item.task !== 'day' }, 'title']">{{item.title}}</div>
