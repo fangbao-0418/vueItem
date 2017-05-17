@@ -26,17 +26,16 @@
       </div>
     </div>
   </div>
-  <div class="float-block">
-    <to-top-icon :show="toTopIconShowState"></to-top-icon>
-  </div>
   <div class="box-stance"></div>
 </div>
 </template>
 <script type="text/javascript">
-  import ToTopIcon from './to-top-icon'
   import ShareIcon from './share-icon'
   import { wlb } from '../util'
   export default {
+    components: {
+      ShareIcon
+    },
     props: {
       options: {
         type: Object,
@@ -46,11 +45,6 @@
             rightOptions: []
           }
         }
-      }
-    },
-    data () {
-      return {
-        toTopIconShowState: false
       }
     },
     computed: {
@@ -69,18 +63,6 @@
       this.$store.dispatch('fetchBridgeInfo')
     },
     mounted () {
-      window.onscroll = () => {
-        var fontSize = parseFloat(document.documentElement.style['font-size'])
-        if (document.body.scrollTop > 2.4 * fontSize) {
-          this.toTopIconShowState = true
-        } else {
-          this.toTopIconShowState = false
-        }
-      }
-    },
-    components: {
-      ToTopIcon,
-      ShareIcon
     },
     methods: {
       goback () {
