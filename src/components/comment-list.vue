@@ -97,7 +97,7 @@
         })
       },
       loadBottom () {
-        if (this.lastPage <= this.page) {
+        if (this.lastPage < this.page || this.lastPage === 1) {
           return ''
         }
         this.$plugin.loading.show(true)
