@@ -138,6 +138,8 @@
         padding: .3rem
         border-bottom: 1px solid #E5E5E5
         width: 6.9rem
+        &:last-child
+          border: none
         .comment-avatar
           float: left
           width: .4rem
