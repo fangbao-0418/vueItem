@@ -14,17 +14,19 @@
         return this.$store.state.bridge['isApp']
       }
     },
+    mounted () {
+      // console.log((this.options && this.options.content) || '1', 'content')
+    },
     methods: {
       share () {
         var that = this
         wlb.ready({
           app: function (mixins) {
-            // mixins.firstLoadWebView({ name: 'wanglishequ' })
             mixins.touchShare({
-              title: that.options && that.options.title,
-              content: that.options && that.options.content,
-              shareUrl: window.location.href,
-              image: that.options && that.options.image
+              title: (that.options && that.options.title) || '',
+              content: (that.options && that.options.content) || '',
+              shareUrl: window.location.href || '',
+              image: (that.options && that.options.image) || ''
             })
           }
         })

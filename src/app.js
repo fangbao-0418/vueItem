@@ -16,6 +16,7 @@ const router = new VueRouter(routerConfig)
 router.beforeEach((to, from, next) => {
   wlb.ready({
     app (mixins) {
+      mixins.firstLoadWebView({ name: to.meta.name || 'wanglishequ' })
       mixins.sendUserInfo((result) => {
         const sessionid = result.sessionid
         const splitArray = sessionid.split(';')

@@ -71,7 +71,6 @@
         font-family: PingFangSC-Medium
         font-size: .35rem
         line-height: .49rem
-        height: .49rem
         color: #4A4A4A
         text-align: center
       .topic-infos
