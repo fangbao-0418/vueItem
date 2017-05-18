@@ -11,8 +11,8 @@
 // import axios from 'axios'
 import { Http } from 'vue-resource'
 import { ruleModal, loading } from '../plugins'
-// var pass = 'wlh5_H5~h5#H5'
-// var clientMask = '7005'
+var pass = 'wlh5_H5~h5#H5'
+var clientMask = '7005'
 var isPro = process.env.NODE_ENV === 'production'
 var isCrossDomain = window.location.hostname.indexOf('wanglibao.com') === -1
 // axios.interceptors.request.use(function (config) {
@@ -92,11 +92,11 @@ function fetchData (params) {
   //   // timeout: 1000,
   //   withCredentials: isCrossDomain || !isPro
   // })
-
+  var encryptData = clientMask + global.XXTEA.encryptToBase64(json, pass)
   return Http({
     method: 'post',
     url: params.url,
-    body: json,
+    body: encryptData,
     emulateJSON: true,
     timeout: 10000,
     credentials: isCrossDomain || !isPro,

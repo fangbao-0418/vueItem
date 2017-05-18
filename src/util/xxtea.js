@@ -1,532 +1,420 @@
+(function (global) {
+  if (typeof global.btoa === 'undefined') {
+    global.btoa = (function () {
+      var base64EncodeChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'.split('')
+      return function (str) {
+        var buf, i, j, len, r, l, c
+        i = j = 0
+        len = str.length
+        r = len % 3
+        len = len - r
+        l = (len / 3) << 2
+        if (r > 0) {
+          l += 4
+        }
+        buf = new Array(l)
 
+        while (i < len) {
+          c = str.charCodeAt(i++) << 16 |
+              str.charCodeAt(i++) << 8 |
+              str.charCodeAt(i++)
+          buf[j++] = base64EncodeChars[c >> 18] +
+                     base64EncodeChars[c >> 12 & 0x3f] +
+                     base64EncodeChars[c >> 6 & 0x3f] +
+                     base64EncodeChars[c & 0x3f]
+        }
+        if (r === 1) {
+          c = str.charCodeAt(i++)
+          buf[j++] = base64EncodeChars[c >> 2] +
+                     base64EncodeChars[(c & 0x03) << 4] +
+                     '=='
+        } else if (r === 2) {
+          c = str.charCodeAt(i++) << 8 |
+              str.charCodeAt(i++)
+          buf[j++] = base64EncodeChars[c >> 10] +
+                     base64EncodeChars[c >> 4 & 0x3f] +
+                     base64EncodeChars[(c & 0x0f) << 2] +
+                     '='
+        }
+        return buf.join('')
+      }
+    })()
+  }
 
+  if (typeof global.atob === 'undefined') {
+    global.atob = (function () {
+      var base64DecodeChars = [
+        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63,
+        52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -1, -1, -1,
+        -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+        15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1,
+        -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+        41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1
+      ]
+      return function (str) {
+        var c1, c2, c3, c4
+        var i, j, len, r, l, out
 
-//
-// 'Block' Tiny Encryption Algorithm xxtea
-//
-// Algorithm: David Wheeler & Roger Needham, Cambridge University Computer Lab
-//            http://www.cl.cam.ac.uk/ftp/papers/djw-rmn/djw-rmn-tea.html (1994)
-//            http://www.cl.cam.ac.uk/ftp/users/djw3/xtea.ps (1997)
-//            http://www.cl.cam.ac.uk/ftp/users/djw3/xxtea.ps (1998)
-//
-// JavaScript implementation: Chris Veness, Movable Type Ltd: www.movable-type.co.uk
-//
+        len = str.length
+        if (len % 4 !== 0) {
+          return ''
+        }
+        if (/[^ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=]/.test(str)) {
+          return ''
+        }
+        if (str.charAt(len - 2) === '=') {
+          r = 1
+        } else if (str.charAt(len - 1) === '=') {
+          r = 2
+        } else {
+          r = 0
+        }
+        l = len
+        if (r > 0) {
+          l -= 4
+        }
+        l = (l >> 2) * 3 + r
+        out = new Array(l)
 
+        i = j = 0
+        while (i < len) {
+          // c1
+          c1 = base64DecodeChars[str.charCodeAt(i++)]
+          if (c1 === -1) break
 
-//
-// TEAencrypt: Use Corrected Block TEA to encrypt plaintext using password
-//            (note plaintext & password must be strings not string objects)
-//
-// Return encrypted text as string
-//
-function TEAencrypt(plaintext, password)
-{
-   if (plaintext.length == 0) return('');  // nothing to encrypt
-   // 'escape' plaintext so chars outside ISO-8859-1 work in single-byte packing, but
-   // keep spaces as spaces (not '%20') so encrypted text doesn't grow too long, and
-   // convert result to longs
-   var v = strToLongs(escape(plaintext).replace(/%20/g,' '));
-   if (v.length <= 1) v[1] = 0;  // algorithm doesn't work for n<2 so fudge by adding nulls
+          // c2
+          c2 = base64DecodeChars[str.charCodeAt(i++)]
+          if (c2 === -1) break
 
-   // will(a)ndri.st: make password become a SHA 1 Hash of itself
-   password = do_sha1(password);
-   var k = strToLongs(password.slice(0,16));  // simply convert first 16 chars of password as key
-   var n = v.length;
+          out[j++] = String.fromCharCode((c1 << 2) | ((c2 & 0x30) >> 4))
 
-   var z = v[n-1], y = v[0], delta = 0x9E3779B9;
-   //var mx, e, q = Math.floor(6 + 52/n), sum = 0;
-   var mx, e, q = Math.floor(16 + 52/n), sum = 0;   // WA: increase encryption level by extending rounds from former 6 to 16
+          // c3
+          c3 = base64DecodeChars[str.charCodeAt(i++)]
+          if (c3 === -1) break
 
-   while (q-- > 0) {  // 6 + 52/n operations gives between 6 & 32 mixes on each word
-       sum += delta;
-       e = sum>>>2 & 3;
-       for (var p = 0; p < n-1; p++) {
-           y = v[p+1];
-           mx = (z>>>5 ^ y<<2) + (y>>>3 ^ z<<4) ^ (sum^y) + (k[p&3 ^ e] ^ z)
-           z = v[p] += mx;
-       }
-       y = v[0];
-       mx = (z>>>5 ^ y<<2) + (y>>>3 ^ z<<4) ^ (sum^y) + (k[p&3 ^ e] ^ z)
-       z = v[n-1] += mx;
-   }
-   // note use of >>> in place of >> due to lack of 'unsigned' type in JavaScript
-   // (thanks to Karsten Kraus @ swr3 for this)
+          out[j++] = String.fromCharCode(((c2 & 0x0f) << 4) | ((c3 & 0x3c) >> 2))
 
-   result = (longsToStr(v));
-   // added by WA: Output is expected to be in Base64 encoding to support pocket Note formatting.
-   return encodeBase64(result);
+          // c4
+          c4 = base64DecodeChars[str.charCodeAt(i++)]
+          if (c4 === -1) break
 
-}
+          out[j++] = String.fromCharCode(((c3 & 0x03) << 6) | c4)
+        }
+        return out.join('')
+      }
+    })()
+  }
 
-//---------
-// TEAdecrypt: Use Corrected Block TEA to decrypt ciphertext using password
-//
-function TEAdecrypt(ciphertext, password)
-{
-   // added by WA: Choose encrypted text from URL instead of input field
-    var URLwert = do_URLcontent("" + document.URL);
-    if (URLwert == "-") {
-      ciphertext = ciphertext;
-    } else {
-      ciphertext = URLwert;
+  var DELTA = 0x9E3779B9
+
+  function toBinaryString (v, includeLength) {
+    var length = v.length
+    var n = length << 2
+    if (includeLength) {
+      var m = v[length - 1]
+      n -= 4
+      if ((m < n - 3) || (m > n)) {
+        return null
+      }
+      n = m
     }
-   if (ciphertext.length == 0) return('');
-
-    // added by WA: Input is expected to be in Base64 encoding
-     ciphertext = decodeBase64(ciphertext)
-     var v = strToLongs(unescCtrlCh(ciphertext));
-
-   // will(a)ndri.st: make password become a SHA 1 Hash of itself;
-     password = do_sha1(password);
-
-   var k = strToLongs(password.slice(0,16));
-   var n = v.length;
-
-   var z = v[n-1], y = v[0], delta = 0x9E3779B9;
-   //    var mx, e, q = Math.floor(6 + 52/n), sum = q*delta;
-   var mx, e, q = Math.floor(16 + 52/n), sum = q*delta;     /// increased security by changing from 6 to 16. Might become 3times slower though
-
-   while (sum != 0) {
-       e = sum>>>2 & 3;
-       for (var p = n-1; p > 0; p--) {
-           z = v[p-1];
-           mx = (z>>>5 ^ y<<2) + (y>>>3 ^ z<<4) ^ (sum^y) + (k[p&3 ^ e] ^ z)
-           y = v[p] -= mx;
-       }
-       z = v[n-1];
-       mx = (z>>>5 ^ y<<2) + (y>>>3 ^ z<<4) ^ (sum^y) + (k[p&3 ^ e] ^ z)
-       y = v[0] -= mx;
-       sum -= delta;
-   }
-
-   var plaintext = longsToStr(v);
-   // strip trailing null chars resulting from filling 4-char blocks:
-   if (plaintext.search(/\0/) != -1) plaintext = plaintext.slice(0, plaintext.search(/\0/));
-   return unescape(plaintext);
-}
-
-
-// supporting functions
-
-function strToLongs(s) {  // convert string to array of longs, each containing 4 chars
-   // note chars must be within ISO-8859-1 (with Unicode code-point < 256) to fit 4/long
-   var l = new Array(Math.ceil(s.length/4))
-   for (var i=0; i<l.length; i++) {
-       // note little-endian encoding - endianness is irrelevant as long as
-       // it is the same in longsToStr()
-       l[i] = s.charCodeAt(i*4) + (s.charCodeAt(i*4+1)<<8) +
-              (s.charCodeAt(i*4+2)<<16) + (s.charCodeAt(i*4+3)<<24);
-   }
-   return l;  // note running off the end of the string generates nulls since
-}              // bitwise operators treat NaN as 0
-
-function longsToStr(l) {  // convert array of longs back to string
-   var a = new Array(l.length);
-   for (var i=0; i<l.length; i++) {
-       a[i] = String.fromCharCode(l[i] & 0xFF, l[i]>>>8 & 0xFF,
-                                  l[i]>>>16 & 0xFF, l[i]>>>24 & 0xFF);
-   }
-   return a.join('');  // use Array.join() rather than repeated string appends for efficiency
-}
-
-function escCtrlCh(str) {  // escape control chars which might cause problems with encrypted texts
-   return str.replace(/[\0\n\v\f\r!]/g, function(c) { return '!' + c.charCodeAt(0) + '!'; });
-}
-
-function unescCtrlCh(str) {  // unescape potentially problematic nulls and control characters
-   return str.replace(/!\d\d?!/g, function(c) { return String.fromCharCode(c.slice(1,-1)); });
-}
-
-// -----------------
-// Read URL: Detect content of encrypted test, starting after  ...htm?e=....
-// added by WA
-// -----------------
-function do_URLcontent(URLx)
-{
-   fullurl = URLx;
-   if (fullurl.indexOf('?') > 0) {
-     URLx = fullurl.substring(fullurl.indexOf('?')+3, fullurl.length);
-   } else {
-      URLx = "-";
-   }
- return (URLx);
-}
-
-
-//--------------------------------------------------
-// Hex64Base for Cipher Text to prevent Unicode conversion Problems
-// added by will(a)ndri.st, source ostermiller.org
-//-------------------------------------------------
-var END_OF_INPUT = -1;
-
-var base64Chars = new Array(
-   'A','B','C','D','E','F','G','H',
-   'I','J','K','L','M','N','O','P',
-   'Q','R','S','T','U','V','W','X',
-   'Y','Z','a','b','c','d','e','f',
-   'g','h','i','j','k','l','m','n',
-   'o','p','q','r','s','t','u','v',
-   'w','x','y','z','0','1','2','3',
-   '4','5','6','7','8','9','+','/'
-);
-
-var reverseBase64Chars = new Array();
-for (var i=0; i < base64Chars.length; i++){
-   reverseBase64Chars[base64Chars[i]] = i;
-}
-
-var base64Str;
-var base64Count;
-function setBase64Str(str){
-   base64Str = str;
-   base64Count = 0;
-}
-function readBase64(){
-   if (!base64Str) return END_OF_INPUT;
-   if (base64Count >= base64Str.length) return END_OF_INPUT;
-   var c = base64Str.charCodeAt(base64Count) & 0xff;
-   base64Count++;
-   return c;
-}
-function encodeBase64(str){
-   setBase64Str(str);
-   var result = '';
-   var inBuffer = new Array(3);
-   var lineCount = 0;
-   var done = false;
-   while (!done && (inBuffer[0] = readBase64()) != END_OF_INPUT){
-       inBuffer[1] = readBase64();
-       inBuffer[2] = readBase64();
-       result += (base64Chars[ inBuffer[0] >> 2 ]);
-       if (inBuffer[1] != END_OF_INPUT){
-           result += (base64Chars [(( inBuffer[0] << 4 ) & 0x30) | (inBuffer[1] >> 4) ]);
-           if (inBuffer[2] != END_OF_INPUT){
-               result += (base64Chars [((inBuffer[1] << 2) & 0x3c) | (inBuffer[2] >> 6) ]);
-               result += (base64Chars [inBuffer[2] & 0x3F]);
-           } else {
-               result += (base64Chars [((inBuffer[1] << 2) & 0x3c)]);
-               result += ('=');
-               done = true;
-           }
-       } else {
-           result += (base64Chars [(( inBuffer[0] << 4 ) & 0x30)]);
-           result += ('=');
-           result += ('=');
-           done = true;
-       }
-       lineCount += 4;
-       if (lineCount >= 76){
-           result += ('\n');
-           lineCount = 0;
-       }
-   }
-   return result;
-}
-function readReverseBase64(){
-   if (!base64Str) return END_OF_INPUT;
-   while (true){
-       if (base64Count >= base64Str.length) return END_OF_INPUT;
-       var nextCharacter = base64Str.charAt(base64Count);
-       base64Count++;
-       if (reverseBase64Chars[nextCharacter]){
-           return reverseBase64Chars[nextCharacter];
-       }
-       if (nextCharacter == 'A') return 0;
-   }
-   return END_OF_INPUT;
-}
-
-function ntos(n){
-   n=n.toString(16);
-   if (n.length == 1) n="0"+n;
-   n="%"+n;
-   return unescape(n);
-}
-
-function decodeBase64(str){
-   setBase64Str(str);
-   var result = "";
-   var inBuffer = new Array(4);
-   var done = false;
-   while (!done && (inBuffer[0] = readReverseBase64()) != END_OF_INPUT
-       && (inBuffer[1] = readReverseBase64()) != END_OF_INPUT){
-       inBuffer[2] = readReverseBase64();
-       inBuffer[3] = readReverseBase64();
-       result += ntos((((inBuffer[0] << 2) & 0xff)| inBuffer[1] >> 4));
-       if (inBuffer[2] != END_OF_INPUT){
-           result +=  ntos((((inBuffer[1] << 4) & 0xff)| inBuffer[2] >> 2));
-           if (inBuffer[3] != END_OF_INPUT){
-               result +=  ntos((((inBuffer[2] << 6)  & 0xff) | inBuffer[3]));
-           } else {
-               done = true;
-           }
-       } else {
-           done = true;
-       }
-   }
-   return result;
-}
-
-//--------------------------------------------------
-// Hex in Unicode - changes SHA-1 Hash result from two digit Hex in single characters
-// added by WA, source ostermiller.org
-//-------------------------------------------------
-
-function decodeHex(str){
-   str = str.replace(new RegExp("s/[^0-9a-zA-Z]//g"));
-   var result = "";
-   var nextchar = "";
-   for (var i=0; i<str.length; i++){
-       nextchar += str.charAt(i);
-       if (nextchar.length == 2){
-           result += ntos(eval('0x'+nextchar));
-           nextchar = "";
-       }
-   }
-   return result;
-
-}
-
-
-
-//----------------------------------
-// SHA-1
-// added by will(a)ndri.st, source by ostermiller.org
-//----------------------------------
-
-// accumulate values to put into text area
-var accumulated_output_info;
-
-// add a labeled value to the text area
-function accumulate_output( str )
-{
-  accumulated_output_info = accumulated_output_info + str + "\n";
-}
-
-// convert a 32-bit value to a 8-char hex string
-function cvt_hex( val )
-{
-  var str="";
-  var i;
-  var v;
-
-  for( i=7; i>=0; i-- )
-  {
-     v = (val>>>(i*4))&0x0f;
-     str += v.toString(16);
-  }
-  return str;
-}
-
-// add a bit string to the output, inserting spaces as designated
-function accumulate_val( label, val )
-{
-  accumulated_output_info += label + cvt_hex(val) + "\n";
-}
-
-// return a hex value LSB first
-function lsb_hex( val )
-{
-  var str="";
-  var i;
-  var vh;
-  var vl;
-
-  for( i=0; i<=6; i+=2 )
-  {
-     vh = (val>>>(i*4+4))&0x0f;
-     vl = (val>>>(i*4))&0x0f;
-     str += vh.toString(16) + vl.toString(16);
-  }
-  return str;
-}
-
-// rotate left circular
-function rotate_left( n, s )
-{
-  var t4 = ( n<<s ) | (n>>>(32-s));
-//   accumulate_output( "  "+cvt_hex(n)+"<<<"+s+"="+cvt_hex(t4) );
-  return t4;
-}
-
-// calculate the hash
-function do_sha1(msg)
-{
-  var blockstart;			// which block of words from the dataare we using now?
-  var i, j;
-  var W = new Array(80);
-  // initial constants
-  var H0 = 0x67452301;
-  var H1 = 0xEFCDAB89;
-  var H2 = 0x98BADCFE;
-  var H3 = 0x10325476;
-  var H4 = 0xC3D2E1F0;
-  // working variables
-  var A, B, C, D, E;
-  var temp;
-
-  // initialize detail output string
-  accumulated_output_info="";
-
-  // get message to hash
-  //var msg = document.stuff.inmsg.value;
-
-  // note current length
-  var msg_len = msg.length;
-
-  // convert to a 32-bit word array
-  var word_array = new Array();
-  for( i=0; i<msg_len-3; i+=4 )
-  {
-     // convert 4 bytes to a word
-     j = msg.charCodeAt(i)<<24 | msg.charCodeAt(i+1)<<16 |
-   msg.charCodeAt(i+2)<<8 | msg.charCodeAt(i+3);
-     word_array.push( j );
-     accumulate_val( msg.substr(i, 4)+": ", j );
+    for (var i = 0; i < length; i++) {
+      v[i] = String.fromCharCode(
+        v[i] & 0xFF,
+        v[i] >>> 8 & 0xFF,
+        v[i] >>> 16 & 0xFF,
+        v[i] >>> 24 & 0xFF
+      )
+    }
+    var result = v.join('')
+    if (includeLength) {
+      return result.substring(0, n)
+    }
+    return result
   }
 
-  // handle final bits, add beginning of padding: 1 bit, then 0 bits
-  switch( msg_len % 4 )
-  {
-     case 0:
-        // text length was a multiple of 4 bytes, start padding
-        i = 0x080000000;				// 4 bytes padding
-        break;
-
-     case 1:
-        // one byte of text left
-        i = msg.charCodeAt(msg_len-1)<<24 | 0x0800000;	// 3 bytes padding
-        break;
-
-     case 2:
-        // two bytes of text left
-        i = msg.charCodeAt(msg_len-2)<<24 | msg.charCodeAt(msg_len-1)<<16
-   | 0x08000;				// 2 bytes padding
-        break;
-
-     case 3:
-        // three bytes of text left
-        i = msg.charCodeAt(msg_len-3)<<24 | msg.charCodeAt(msg_len-2)<<16
-   | msg.charCodeAt(msg_len-1)<<8	| 0x80;	// 1 byte padding
-        break;
-
-     default:
-        window.alert("Something went weird in the switch!")
-        return;
+  function toUint32Array (bs, includeLength) {
+    var length = bs.length
+    var n = length >> 2
+    if ((length & 3) !== 0) {
+      ++n
+    }
+    var v
+    if (includeLength) {
+      v = new Array(n + 1)
+      v[n] = length
+    } else {
+      v = new Array(n)
+    }
+    for (var i = 0; i < length; ++i) {
+      v[i >> 2] |= bs.charCodeAt(i) << ((i & 3) << 3)
+    }
+    return v
   }
-  accumulate_output( "length="+msg_len );
-  accumulate_val( "length%4="+(msg_len%4)+", padding=", i );
 
-  // handle the end of the text and beginning of the padding
-  word_array.push( i );
+  function int32 (i) {
+    return i & 0xFFFFFFFF
+  }
 
-  // pad to 448 bits (mod 512 bits) = 14 words (mod 16 words)
-  while( (word_array.length % 16) != 14 )
-     word_array.push( 0 );
+  function mx (sum, y, z, p, e, k) {
+    return ((z >>> 5 ^ y << 2) + (y >>> 3 ^ z << 4)) ^ ((sum ^ y) + (k[p & 3 ^ e] ^ z))
+  }
 
-  // add 64-bit message length (in bits)
-  word_array.push( msg_len>>>29 );
-  word_array.push( (msg_len<<3)&0x0ffffffff );
+  function fixk (k) {
+    if (k.length < 4) k.length = 4
+    return k
+  }
 
-  for( i=0; i<word_array.length; i++ )
-     accumulate_output( "msg[" + i + "]=" + cvt_hex( word_array[i] ) );
+  function encryptUint32Array (v, k) {
+    var length = v.length
+    var n = length - 1
+    var y, z, sum, e, p, q
+    z = v[n]
+    sum = 0
+    for (q = Math.floor(6 + 52 / length) | 0; q > 0; --q) {
+      sum = int32(sum + DELTA)
+      e = sum >>> 2 & 3
+      for (p = 0; p < n; ++p) {
+        y = v[p + 1]
+        z = v[p] = int32(v[p] + mx(sum, y, z, p, e, k))
+      }
+      y = v[0]
+      z = v[n] = int32(v[n] + mx(sum, y, z, n, e, k))
+    }
+    return v
+  }
 
-  // Process each 16-word block.
-  for ( blockstart=0; blockstart<word_array.length; blockstart+=16 )
-  {
-     accumulate_output( "Starting block at word "+blockstart );
+  function decryptUint32Array (v, k) {
+    var length = v.length
+    var n = length - 1
+    var y, z, sum, e, p, q
+    y = v[0]
+    q = Math.floor(6 + 52 / length)
+    for (sum = int32(q * DELTA); sum !== 0; sum = int32(sum - DELTA)) {
+      e = sum >>> 2 & 3
+      for (p = n; p > 0; --p) {
+        z = v[p - 1]
+        y = v[p] = int32(v[p] - mx(sum, y, z, p, e, k))
+      }
+      z = v[n]
+      y = v[0] = int32(v[0] - mx(sum, y, z, 0, e, k))
+    }
+    return v
+  }
 
-     // create entries in W array
-     for( i=0; i<16; i++ )
-        W[i] = word_array[blockstart+i];
-     for( i=16; i<=79; i++ )
-        W[i] = rotate_left(W[i-3] ^ W[i-8] ^ W[i-14] ^ W[i-16], 1);
-     for( i=0; i<=79; i++ )
-        accumulate_output( "W[" + i + "]=" + cvt_hex( W[i] ) );
+  function utf8Encode (str) {
+    if (/^[\x00-\x7f]*$/.test(str)) {
+      return str
+    }
+    var buf = []
+    var n = str.length
+    for (var i = 0, j = 0; i < n; ++i, ++j) {
+      var codeUnit = str.charCodeAt(i)
+      if (codeUnit < 0x80) {
+        buf[j] = str.charAt(i)
+      } else if (codeUnit < 0x800) {
+        buf[j] = String.fromCharCode(0xC0 | (codeUnit >> 6),
+                                     0x80 | (codeUnit & 0x3F))
+      } else if (codeUnit < 0xD800 || codeUnit > 0xDFFF) {
+        buf[j] = String.fromCharCode(0xE0 | (codeUnit >> 12),
+                                     0x80 | ((codeUnit >> 6) & 0x3F),
+                                     0x80 | (codeUnit & 0x3F))
+      } else {
+        if (i + 1 < n) {
+          var nextCodeUnit = str.charCodeAt(i + 1)
+          if (codeUnit < 0xDC00 && nextCodeUnit >= 0xDC00 && nextCodeUnit <= 0xDFFF) {
+            var rune = (((codeUnit & 0x03FF) << 10) | (nextCodeUnit & 0x03FF)) + 0x010000
+            buf[j] = String.fromCharCode(0xF0 | ((rune >> 18) & 0x3F),
+                                         0x80 | ((rune >> 12) & 0x3F),
+                                         0x80 | ((rune >> 6) & 0x3F),
+                                         0x80 | (rune & 0x3F))
+            ++i
+            continue
+          }
+        }
+        throw new Error('Malformed string')
+      }
+    }
+    return buf.join('')
+  }
 
-     // copy state
-     A = H0;
-     B = H1;
-     C = H2;
-     D = H3;
-     E = H4;
+  function utf8DecodeShortString (bs, n) {
+    var charCodes = new Array(n)
+    var i = 0
+    var off = 0
+    for (var len = bs.length; i < n && off < len; i++) {
+      var unit = bs.charCodeAt(off++)
+      switch (unit >> 4) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+          charCodes[i] = unit
+          break
+        case 12:
+        case 13:
+          if (off < len) {
+            charCodes[i] = ((unit & 0x1F) << 6) |
+                            (bs.charCodeAt(off++) & 0x3F)
+          } else {
+            throw new Error('Unfinished UTF-8 octet sequence')
+          }
+          break
+        case 14:
+          if (off + 1 < len) {
+            charCodes[i] = ((unit & 0x0F) << 12) |
+                           ((bs.charCodeAt(off++) & 0x3F) << 6) |
+                           (bs.charCodeAt(off++) & 0x3F)
+          } else {
+            throw new Error('Unfinished UTF-8 octet sequence')
+          }
+          break
+        case 15:
+          if (off + 2 < len) {
+            var rune = (((unit & 0x07) << 18) |
+                        ((bs.charCodeAt(off++) & 0x3F) << 12) |
+                        ((bs.charCodeAt(off++) & 0x3F) << 6) |
+                        (bs.charCodeAt(off++) & 0x3F)) - 0x10000
+            if (rune >= 0 && rune <= 0xFFFFF) {
+              charCodes[i++] = (((rune >> 10) & 0x03FF) | 0xD800)
+              charCodes[i] = ((rune & 0x03FF) | 0xDC00)
+            } else {
+              throw new Error('Character outside valid Unicode range: 0x' + rune.toString(16))
+            }
+          } else {
+            throw new Error('Unfinished UTF-8 octet sequence')
+          }
+          break
+        default:
+          throw new Error('Bad UTF-8 encoding 0x' + unit.toString(16))
+      }
+    }
+    if (i < n) {
+      charCodes.length = i
+    }
+    return String.fromCharCode.apply(String, charCodes)
+  }
 
-     // note start of round values
-     accumulate_output("A=" + cvt_hex(A) + " B=" + cvt_hex(B) + " C=" + cvt_hex(C)
-   + " D=" + cvt_hex(D) + " E=" + cvt_hex(E) );
+  function utf8DecodeLongString (bs, n) {
+    var buf = []
+    var charCodes = new Array(0x8000)
+    var i = 0
+    var off = 0
+    for (var len = bs.length; i < n && off < len; i++) {
+      var unit = bs.charCodeAt(off++)
+      switch (unit >> 4) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+          charCodes[i] = unit
+          break
+        case 12:
+        case 13:
+          if (off < len) {
+            charCodes[i] = ((unit & 0x1F) << 6) |
+                            (bs.charCodeAt(off++) & 0x3F)
+          } else {
+            throw new Error('Unfinished UTF-8 octet sequence')
+          }
+          break
+        case 14:
+          if (off + 1 < len) {
+            charCodes[i] = ((unit & 0x0F) << 12) |
+                           ((bs.charCodeAt(off++) & 0x3F) << 6) |
+                           (bs.charCodeAt(off++) & 0x3F)
+          } else {
+            throw new Error('Unfinished UTF-8 octet sequence')
+          }
+          break
+        case 15:
+          if (off + 2 < len) {
+            var rune = (((unit & 0x07) << 18) |
+                        ((bs.charCodeAt(off++) & 0x3F) << 12) |
+                        ((bs.charCodeAt(off++) & 0x3F) << 6) |
+                        (bs.charCodeAt(off++) & 0x3F)) - 0x10000
+            if (rune >= 0 && rune <= 0xFFFFF) {
+              charCodes[i++] = (((rune >> 10) & 0x03FF) | 0xD800)
+              charCodes[i] = ((rune & 0x03FF) | 0xDC00)
+            } else {
+              throw new Error('Character outside valid Unicode range: 0x' + rune.toString(16))
+            }
+          } else {
+            throw new Error('Unfinished UTF-8 octet sequence')
+          }
+          break
+        default:
+          throw new Error('Bad UTF-8 encoding 0x' + unit.toString(16))
+      }
+      if (i >= 0x7FFF - 1) {
+        var size = i + 1
+        charCodes.length = size
+        buf[buf.length] = String.fromCharCode.apply(String, charCodes)
+        n -= size
+        i = -1
+      }
+    }
+    if (i > 0) {
+      charCodes.length = i
+      buf[buf.length] = String.fromCharCode.apply(String, charCodes)
+    }
+    return buf.join('')
+  }
 
-     // update state variables
-     for( i= 0; i<=19; i++ )
-     {
-        temp = (rotate_left(A,5) + ((B&C) | (~B&D)) + E + W[i] + 0x5A827999) & 0x0ffffffff;
+  // n is UTF16 length
+  function utf8Decode (bs, n) {
+    if (n === undefined || n === null || (n < 0)) n = bs.length
+    if (n === 0) return ''
+    if (/^[\x00-\x7f]*$/.test(bs) || !(/^[\x00-\xff]*$/.test(bs))) {
+      if (n === bs.length) return bs
+      return bs.substr(0, n)
+    }
+    return ((n < 0xFFFF) ? utf8DecodeShortString(bs, n) : utf8DecodeLongString(bs, n))
+  }
 
-        // update state
-        E = D;
-        D = C;
-        C = rotate_left(B,30);
-        B = A;
-        A = temp;
-        accumulate_output( "i="+i+" A=" + cvt_hex(A) + " B=" + cvt_hex(B) + " C=" + cvt_hex(C)
-   + " D=" + cvt_hex(D) + " E=" + cvt_hex(E) );
-     }
+  function encrypt (data, key) {
+    if (data === undefined || data === null || data.length === 0) {
+      return data
+    }
+    data = utf8Encode(data)
+    key = utf8Encode(key)
+    return toBinaryString(encryptUint32Array(toUint32Array(data, true), fixk(toUint32Array(key, false))), false)
+  }
 
-     for( i=20; i<=39; i++ )
-     {
-        temp = (rotate_left(A,5) + (B ^ C ^ D) + E + W[i] + 0x6ED9EBA1) & 0x0ffffffff;
+  function encryptToBase64 (data, key) {
+    return global.btoa(encrypt(data, key))
+  }
 
-        // update state
-        E = D;
-        D = C;
-        C = rotate_left(B,30);
-        B = A;
-        A = temp;
-        accumulate_output( "i="+i+" A=" + cvt_hex(A) + " B=" + cvt_hex(B) + " C=" + cvt_hex(C)
-   + " D=" + cvt_hex(D) + " E=" + cvt_hex(E) );
-     }
+  function decrypt (data, key) {
+    if (data === undefined || data === null || data.length === 0) {
+      return data
+    }
+    key = utf8Encode(key)
+    return utf8Decode(toBinaryString(decryptUint32Array(toUint32Array(data, false), fixk(toUint32Array(key, false))), true))
+  }
 
-     for( i=40; i<=59; i++ )
-     {
-        temp = (rotate_left(A,5) + ((B&C) | (B&D) | (C&D)) + E + W[i] + 0x8F1BBCDC) & 0x0ffffffff;
-
-        // update state
-        E = D;
-        D = C;
-        C = rotate_left(B,30);
-        B = A;
-        A = temp;
-        accumulate_output( "i="+i+" A=" + cvt_hex(A) + " B=" + cvt_hex(B) + " C=" + cvt_hex(C)
-   + " D=" + cvt_hex(D) + " E=" + cvt_hex(E) );
-     }
-
-     for( i=60; i<=79; i++ )
-     {
-       temp = (rotate_left(A,5) + (B ^ C ^ D) + E + W[i] + 0x6CA62C1D6) & 0x0ffffffff;
-
-        // update state
-        E = D;
-        D = C;
-        C = rotate_left(B,30);
-        B = A;
-        A = temp;
-        accumulate_output( "i="+i+" A=" + cvt_hex(A) + " B=" + cvt_hex(B) + " C=" + cvt_hex(C)
-   + " D=" + cvt_hex(D) + " E=" + cvt_hex(E) );
-     }
-
-     H0 = (H0 + A) & 0x0ffffffff;
-     H1 = (H1 + B) & 0x0ffffffff;
-     H2 = (H2 + C) & 0x0ffffffff;
-     H3 = (H3 + D) & 0x0ffffffff;
-     H4 = (H4 + E) & 0x0ffffffff;
-
-     accumulate_output( "H0=" + cvt_hex(H0) + " H1=" + cvt_hex(H1) + " H2=" + cvt_hex(H2)
-   + " H3=" + cvt_hex(H3) + " H4=" + cvt_hex(H4) );
-  } // of loop on i
-
-  // process output
-  // document.stuff.outhash.value = cvt_hex(H0) + cvt_hex(H1) + cvt_hex(H2) + cvt_hex(H3) + cvt_hex(H4);
-  // document.stuff.details.value = accumulated_output_info;
-  result = cvt_hex(H0) + cvt_hex(H1) + cvt_hex(H2) + cvt_hex(H3) + cvt_hex(H4);
-
-  // will(a)ndri.st returns two digit hex code into unicode single characters
-  return decodeHex(result);
-}
+  function decryptFromBase64 (data, key) {
+    if (data === undefined || data === null || data.length === 0) {
+      return data
+    }
+    return decrypt(global.atob(data), key)
+  }
+  global.XXTEA = {
+    utf8Encode: utf8Encode,
+    utf8Decode: utf8Decode,
+    encrypt: encrypt,
+    encryptToBase64: encryptToBase64,
+    decrypt: decrypt,
+    decryptFromBase64: decryptFromBase64
+  }
+})(this || [eval][0]('this'))
