@@ -4,7 +4,7 @@
       <span class="text">{{this.data.current + '/' + this.data.finish}}</span>
       <span class="plan-bg" :style="{width: widthRate}"></span>
     </button>
-    <button :class="['task-btn', { 'btn-bg': data.isAward === 0 }, { 'isaward': data.isAward }]" slot="right" v-if="iscompleted" @click="receive">{{data.isAward > 0 ? '已领取' : '领取'}}</button>
+    <button :class="['task-btn', { 'btn-bg': isAward === 0 }, { 'isaward': isAward }]" slot="right" v-if="iscompleted" @click="receive">{{isAward > 0 ? '已领取' : '领取'}}</button>
   </div>
 </template>
 <script>
@@ -12,6 +12,11 @@
     props: {
       data: {
         type: Object
+      }
+    },
+    data () {
+      return {
+        isAward: this.data.isAward
       }
     },
     computed: {
@@ -36,6 +41,9 @@
           }]
         }).then((res) => {
           if (res.data.result) {
+            if (res.data.result.data && res.data.result.data.status) {
+              this.isAward = 1
+            }
             var message = res.data.result.message
             this.$rulemodal.show({ content: message, style: 'text-align: center' })
           }
