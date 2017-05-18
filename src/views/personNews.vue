@@ -6,9 +6,11 @@
     </wlb-header>
     <scroll-wrapper>
       <loadmore v-if="data.length" :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded" ref="loadmore">
-        <news-item :item="item" v-for="(item, index) in data" :key="index"></news-item>
+        <div style="min-height: 8rem">
+          <news-item :item="item" v-for="(item, index) in data" :key="index"></news-item>
+          <no-more v-if="data.length > 0" :visible="nomore"></no-more>
+        </div>
       </loadmore>
-      <no-more v-if="data.length > 0" :visible="nomore"></no-more>
       <div v-if="data.length === 0" class="empty">
         <div>还没有消息哦</div>
       </div>

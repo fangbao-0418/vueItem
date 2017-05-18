@@ -3,8 +3,11 @@
     <div :class="['swiper-container', swiperClassName]">
       <div class="swiper-wrapper">
 
-        <div class="swiper-slide" v-for="(item, index) in data" >
-          <router-link :to="{ name:'activityDetail', params: { id: item.id } }" class="banner" tag="div">
+        <div class="swiper-slide" v-for="(item, index) in data">
+          <a v-if="item.url" :href="item.url" class="banner">
+            <img :src="item.cover" v-lazyload="{ placeholder: require('../imgs/banner_defult_sml.png') }" />
+          </a>
+          <router-link v-else :to="{ name:'activityDetail', params: { id: item.id } }" class="banner" tag="div">
             <img :src="item.cover" v-lazyload="{ placeholder: require('../imgs/banner_defult_sml.png') }" />
           </router-link>
         </div>
