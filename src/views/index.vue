@@ -1,6 +1,6 @@
 <template>
 <div class="view">
-  <wlb-header :options="{ title: '网利社区', rightConfigs: [{ type: 'share', options: { title: '网利社区' } }] }"></wlb-header>
+  <wlb-header :options="{ title: '网利社区', rightConfigs: [{ type: 'share', options: {} }] }"></wlb-header>
   <scroll-wrapper>
     <user-briefly-show></user-briefly-show>
     <div class="container mt-20">
