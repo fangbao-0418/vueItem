@@ -20,7 +20,7 @@
           app: function (mixins) {
             // mixins.firstLoadWebView({ name: 'wanglishequ' })
             mixins.touchShare({
-              title: this.options && this.options.title,
+              title: '网利宝社区',
               content: this.options && this.options.content,
               shareUrl: window.location.href,
               image: this.options && this.options.image
