@@ -86,10 +86,16 @@
       overflow : hidden
     .topic-comment
       .topic-comment-item
+        display: -webkit-box
         font-family: PingFangSC-Light
         font-size: .26rem
         color: #010000
         line-height: .37rem
+        -webkit-line-clamp: 2
+        word-break: break-word
+        -webkit-box-orient: vertical
+        text-overflow: ellipsis
+        overflow: hidden
         span
           color: #12A5E2
         em

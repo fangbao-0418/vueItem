@@ -6,7 +6,7 @@
     <wlb-header :options="{ title: boardName }">
       <span slot="right" :class="['rightButton', {disable: !publicEnd || !content}]" @click="toPublic">{{publicEnd ? '发表' : '发表中...'}}</span>
     </wlb-header>
-    <textarea class="topic-text-content" v-model="content" placeholder="说点什么吧..."></textarea>
+    <textarea ref="textarea" autofocus='true' class="topic-text-content" v-model="content" placeholder="说点什么吧..."></textarea>
     <p class="residue">你还可以输入{{num}}字</p>
   </div>
 </template>
@@ -22,7 +22,8 @@
         title: '',
         content: '',
         num: 500,
-        publicEnd: true
+        publicEnd: true,
+        open: false
       }
     },
     computed: {
@@ -37,7 +38,10 @@
         })
       }
     },
-    mounted  () {
+    mounted () {
+      setTimeout(() => {
+        this.$refs.textarea.focus()
+      }, 0)
     },
     methods: {
       checkType (type) {
