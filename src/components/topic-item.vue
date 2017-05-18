@@ -8,7 +8,7 @@
       <div class="topic-main">
         <p class="topic-tit">{{item.user.nickname}}</p>
         <p class="topic-ago">{{item.created_at | handleDate}}</p>
-        <p class="topic-content">{{item.content | msubstring(0, 64)}}</p>
+        <p class="topic-content">{{item.content | msubstring(0, 320)}}</p>
         <div class="topic-comment">
           <p class="topic-comment-item mt-20" v-if="item.comments" v-for="(comment, index2) in item.comments">
             <span v-if="comment.user">{{comment.user.nickname}}</span><em>:</em>
@@ -73,11 +73,17 @@
       font-size: .20rem
       color: #9B9B9B
     .topic-content
+      display: -webkit-box
       margin-top: .11rem
       font-family: PingFangSC-Regular
       font-size: .3rem
-      line-heightL: .42rem
+      line-height: .42rem
       color: #666666
+      -webkit-line-clamp: 3
+      word-break: break-word
+      -webkit-box-orient: vertical
+      text-overflow: ellipsis
+      overflow : hidden
     .topic-comment
       .topic-comment-item
         font-family: PingFangSC-Light

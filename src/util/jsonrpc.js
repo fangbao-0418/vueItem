@@ -11,10 +11,12 @@
 // import axios from 'axios'
 import { Http } from 'vue-resource'
 import { ruleModal, loading } from '../plugins'
+import * as Fn from './global.func'
 var pass = 'wlh5_H5~h5#H5'
 var clientMask = '7005'
 var isPro = process.env.NODE_ENV === 'production'
 var isCrossDomain = window.location.hostname.indexOf('wanglibao.com') === -1
+
 // axios.interceptors.request.use(function (config) {
 //   return config
 // }, function (error) {
@@ -80,7 +82,9 @@ function fetchData (params) {
     id: 1
   }
   let json = JSON.stringify(jsonObj)
-  console.log(params.url)
+
+  var debug = Fn.getUrlParam('debug')
+  var encryptData = debug === 'true' ? json : clientMask + global.XXTEA.encryptToBase64(json, pass)
 
   /**
    * axios 不兼容safari 9
@@ -92,7 +96,7 @@ function fetchData (params) {
   //   // timeout: 1000,
   //   withCredentials: isCrossDomain || !isPro
   // })
-  var encryptData = clientMask + global.XXTEA.encryptToBase64(json, pass)
+
   return Http({
     method: 'post',
     url: params.url,
