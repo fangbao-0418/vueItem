@@ -48,7 +48,7 @@
 </script>
 <style lang="sass" scoped>
   .swiper-container
-    width: 100%
+    width: 7.1rem
     height: 1.8rem
     padding: .35rem .2rem .44rem
     .swiper-slide
@@ -57,7 +57,6 @@
       font-size: 18px
       background: #fff
       width: 4.5rem
-      margin: auto .1rem
       /* Center slide text vertically */
       display: -webkit-box
       display: -ms-flexbox
@@ -76,6 +75,7 @@
         height: 1.8rem
         position: relative
         overflow: hidden
+        margin: auto .1rem
         .tags
           position: absolute
           left: -.08rem
