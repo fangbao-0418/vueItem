@@ -5,7 +5,7 @@
   <div class="view" v-if="loaded">
     <wlb-header>
       <span slot="title">帖子详情</span>
-      <share-icon slot="right"></share-icon>
+      <share-icon slot="right" :options="options"></share-icon>
     </wlb-header>
     <scroll-wrapper>
       <div class="container bg-color-white">
@@ -41,7 +41,8 @@
     data () {
       return {
         item: {},
-        loaded: false
+        loaded: false,
+        options: {}
       }
     },
     computed: {
@@ -61,7 +62,9 @@
         if (res.data.result.code === 0 && res.data.result.data) {
           this.loaded = true
           this.item = res.data.result.data
-          console.log(this.item)
+          this.options = {
+            content: this.$filters.msubstring(this.item.content, 0, 64)
+          }
         } else {
           this.$router.replace({ name: 'index' })
         }

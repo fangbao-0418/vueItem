@@ -1,6 +1,6 @@
 <template>
 	<div class="view">
-		<wlb-header :options="{title:'网利活动',rightConfigs:[{type:'share'}]}"></wlb-header>
+		<wlb-header :options="{title:'网利活动',rightConfigs:[{ type: 'share', options: { title: '网利活动' } }]}"></wlb-header>
 		<scroll-wrapper>
 			<div class="activities" v-if="data && data.length" >
 				<loadmore :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded" ref="loadmore">

@@ -18,7 +18,7 @@
       <div class="header-button">
         <div class="fr">
           <div class="header-right-icon" v-for="(item, index) in options.rightConfigs">
-            <share-icon v-if="item.type == 'share'"></share-icon>
+            <share-icon v-if="item.type == 'share'" :options="item.options"></share-icon>
             <router-link class="person-info-eidt-icon" :to="{name: 'personInfoEdit'}" v-if="item.type == 'personInfoEdit'" tag="div"></router-link>
           </div>
           <slot name="right"></slot>

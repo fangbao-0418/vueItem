@@ -21,5 +21,6 @@ export default {
     Vue.prototype.$http = http
     Vue.prototype.$api = api
     Vue.prototype.$const = consts
+    Vue.prototype.$filters = filters
   }
 }

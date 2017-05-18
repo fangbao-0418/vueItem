@@ -2,7 +2,7 @@
   <div class="view" v-if="item.user">
     <wlb-header>
       <span slot="title">活动详情</span>
-      <share-icon slot="right"></share-icon>
+      <share-icon slot="right" :options="options"></share-icon>
     </wlb-header>
     <scroll-wrapper>
       <div class="detail-block bg-color-white">
@@ -14,7 +14,7 @@
       </div>
       <comment-list :id="id"></comment-list>
       <div style="height: 1.2rem"></div>
-    </scroll-wrapper>  
+    </scroll-wrapper>
     <comment-form-modal :id="id"></comment-form-modal>
   </div>
 </template>
@@ -30,7 +30,8 @@
     },
     data () {
       return {
-        item: {}
+        item: {},
+        options: {}
       }
     },
     computed: {
@@ -49,6 +50,11 @@
       }).then((res) => {
         if (res.data.result.code === 0 && res.data.result.data) {
           this.item = res.data.result.data
+          this.options = {
+            title: this.item.title,
+            content: this.$filters.msubstring(this.item.content, 0, 64),
+            image: this.item.cover
+          }
           this.$plugin.loading.show(false)
         } else {
           this.$router.replace({ name: 'index' })

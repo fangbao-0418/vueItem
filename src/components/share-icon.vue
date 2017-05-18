@@ -4,6 +4,11 @@
 <script>
   import { wlb } from '../util'
   export default {
+    props: {
+      options: {
+        type: Object
+      }
+    },
     computed: {
       isApp () {
         return this.$store.state.bridge['isApp']
@@ -15,10 +20,10 @@
           app: function (mixins) {
             // mixins.firstLoadWebView({ name: 'wanglishequ' })
             mixins.touchShare({
-              title: '网利社区',
-              content: '网利宝',
+              title: this.options && this.options.title,
+              content: this.options && this.options.content,
               shareUrl: window.location.href,
-              image: 'https://www.wanglibao.com/images/logo.png'
+              image: this.options && this.options.image
             })
           }
         })
