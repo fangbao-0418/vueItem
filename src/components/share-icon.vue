@@ -16,14 +16,15 @@
     },
     methods: {
       share () {
+        var that = this
         wlb.ready({
           app: function (mixins) {
             // mixins.firstLoadWebView({ name: 'wanglishequ' })
             mixins.touchShare({
-              title: '网利宝社区',
-              content: this.options && this.options.content,
+              title: that.options && that.options.title,
+              content: that.options && that.options.content,
               shareUrl: window.location.href,
-              image: this.options && this.options.image
+              image: that.options && that.options.image
             })
           }
         })
