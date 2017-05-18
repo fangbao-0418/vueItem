@@ -23,8 +23,8 @@
         wlb.ready({
           app: function (mixins) {
             mixins.touchShare({
-              title: (that.options && that.options.title) || '',
-              content: (that.options && that.options.content) || '',
+              title: (that.options && that.options.title) || '网利社区',
+              content: (that.options && that.options.content) || '更多精彩福利等你来抢！',
               shareUrl: window.location.href || '',
               image: (that.options && that.options.image) || ''
             })
