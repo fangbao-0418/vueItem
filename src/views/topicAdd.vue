@@ -14,7 +14,7 @@
 </template>
 <script type="text/javascript">
   import { WlbHeader } from '../components'
-  import { wlb } from '../util'
+  // import { wlb } from '../util'
   export default {
     components: {
       WlbHeader
@@ -42,13 +42,13 @@
       }
     },
     mounted () {
-      wlb.ready({
-        app: function (mixins) {
-          mixins.openKeyboard((res) => {
-            alert(JSON.stringify(res))
-          })
-        }
-      })
+      // wlb.ready({
+      //   app: function (mixins) {
+      //     mixins.openKeyboard((res) => {
+      //       alert(JSON.stringify(res))
+      //     })
+      //   }
+      // })
       setTimeout(() => {
         this.$refs.textarea.focus()
       }, 0)
