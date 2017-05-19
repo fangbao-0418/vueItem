@@ -11,6 +11,7 @@
 // import axios from 'axios'
 import { Http } from 'vue-resource'
 import { ruleModal, loading } from '../plugins'
+import router from '../router'
 import * as Fn from './global.func'
 var pass = 'wlh5_H5~h5#H5'
 var clientMask = '7005'
@@ -53,6 +54,13 @@ var isCrossDomain = window.location.hostname.indexOf('wanglibao.com') === -1
 Http.interceptors.push(function (request, next) {
   // alert('response')
   next(function (response) {
+    if (response.data.error && response.data.error.code === 4004) {
+      ruleModal.show(false)
+      setTimeout(() => {
+        console.log(router, 'router')
+        router.replace({ name: 'index' })
+      }, 1000)
+    }
     if (!response.ok) {
       loading.show(false)
       ruleModal.show({ title: '系统提示', content: '网络异常，获取数据失败', style: 'text-align: center' })

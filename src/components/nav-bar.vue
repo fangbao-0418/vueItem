@@ -40,11 +40,11 @@
   width: 100%
   font-size: .24rem
   color: #666666
+  overflow: hidden
   ul
     width: 100%
     // display: table
     .swiper-slide
-      overflow: auto
       text-align: center
       background: #fff
       /* Center slide text vertically */
@@ -63,22 +63,22 @@
     li
       width: auto
       text-align: center
-      // display: table-cell
+      overflow: hidden
       &.active
         color: #12A5E2
         span
           border-bottom: #10A6E2 solid .08rem
       span
-        display: inline-block
+        display: block
         padding: .29rem .37rem .21rem
         text-align: center
         box-sizing: border-box
         font-size: .24rem
         line-height: .32rem
       .line
-        margin-top: .08rem
+        display: block
+        margin-top: .06rem
         height: .32rem
         width: 1px
         background-color: #E5E5E5
-        float: right
 </style>

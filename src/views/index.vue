@@ -14,8 +14,9 @@
             <topic-item v-if="ThreadList[index] && ThreadList[index].length" :data="ThreadList[index]"></topic-item>
           </loadmore>
           <no-more v-if="ThreadList[index] && ThreadTopList[index].length > 0" :visible="allLoaded[index]"></no-more>
-          <div class="no-topic">
+          <div class="no-topic" v-if="ThreadList[index] && ThreadTopList[index].length == 0">
             <img src="../imgs/no-topic-icon.png" alt="">
+            <span class="mt-16">还没有内容哦</span>
           </div>
         </tab-container-item>
       </wlb-tab-container>
@@ -105,11 +106,19 @@ export default {
 </script>
 <style lang="sass" scoped>
   .no-topic
-    display: flex
-    height: 5rem
-    align-items: center
-    justify-content: center
+    text-align: center
+    margin-top: 2.5rem
     img
+      display: block
       width: 1.9rem
       height: 2.32rem
+      margin: 0 auto
+    span
+      display: block
+      text-align: center
+      font-family: PingFangSC-Light
+      font-size: .24rem
+      color: #999999
+      letter-spacing: 0.51px
+      line-height: .33rem
 </style>

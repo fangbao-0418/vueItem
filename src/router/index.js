@@ -1,3 +1,6 @@
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
 import store from '../store'
 
 /**
@@ -33,6 +36,8 @@ import ActivityDetail from '../views/activityDetail'
 // const Activities = resolve => require(['../views/activityList'], resolve)
 // const ActivityDetail = resolve => require(['../views/activityDetail'], resolve)
 
+Vue.use(VueRouter) // 安装路由
+
 function requireAuth (to, from, next) {
   store.dispatch('fetchBridgeInfo', () => {
     const { mixinList, isApp } = store.state.bridge
@@ -64,7 +69,7 @@ function requireAuth (to, from, next) {
   })
 }
 const isPro = process.env.NODE_ENV.trim() === 'production'
-export default {
+const routerConfig = {
   mode: isPro ? 'history' : 'hash',
   base: '/bbs/',
   scrollBehavior (to, from, savedPosition) {
@@ -84,3 +89,4 @@ export default {
     {path: '*', redirect: { name: 'index' }}
   ]
 }
+export default new VueRouter(routerConfig)

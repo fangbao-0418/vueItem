@@ -49,9 +49,9 @@
       //     })
       //   }
       // })
-      setTimeout(() => {
-        this.$refs.textarea.focus()
-      }, 0)
+      // setTimeout(() => {
+      //   this.$refs.textarea.focus()
+      // }, 0)
     },
     methods: {
       checkType (type) {
@@ -85,7 +85,7 @@
           setTimeout(() => {
             this.$rulemodal.show(false)
             this.$router.push({ name: 'index' })
-          }, 3000)
+          }, 1000)
         })
       }
     },
