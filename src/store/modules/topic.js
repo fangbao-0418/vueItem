@@ -71,9 +71,11 @@ const actions = {
   },
   // 获取社区首页数据
   fetchBbsHomeData ({ state, commit, dispatch }) {
-    if (state.homeDataLoaded[state.navbar_select_index]) {
-      return
-    }
+    // 已经加载过是否重新加载
+    // if (state.homeDataLoaded[state.navbar_select_index]) {
+    //   return
+    // }
+
     loading.show(true, 'full')
     dispatch('fetchLoginStatus') // 获取登录状态
     // 获取板块
@@ -134,9 +136,10 @@ const actions = {
   },
   // 更新帖子列表数据
   updateTopicListData ({ state, commit }, params = {}) {
-    if (state.homeDataLoaded[state.navbar_select_index]) {
-      return
-    }
+    // 已经加载过是否重新加载
+    // if (state.homeDataLoaded[state.navbar_select_index]) {
+    //   return
+    // }
 
     var ThreadTopList = [].concat(state.ThreadTopList)
     var ThreadList = [].concat(state.ThreadList)

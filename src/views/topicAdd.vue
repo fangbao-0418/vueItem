@@ -72,6 +72,10 @@
           } else {
             this.$rulemodal.show({ content: '发布帖子失败', style: 'text-align: center' })
           }
+          setTimeout(() => {
+            this.$rulemodal.show(false)
+            this.$router.push({ name: 'index' })
+          }, 3000)
         })
       }
     },
