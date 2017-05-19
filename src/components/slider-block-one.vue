@@ -57,7 +57,6 @@
     .swiper-slide
       overflow: auto
       text-align: center
-      font-size: 18px
       background: #fff
       width: 4.5rem
       /* Center slide text vertically */

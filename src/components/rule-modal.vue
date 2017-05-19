@@ -92,12 +92,12 @@
       top: 50%
       transform: translateY(-50%)
       .title
-        font-family: PingFangSC-Light
-        font-size: .3rem
+        font-family: PingFangSC-Medium
+        font-size: .38rem
         color: #666666
         letter-spacing: 0
-        line-height: .42rem
-        margin: .4rem auto .55rem
+        line-height: .53rem
+        margin: .4rem auto .52rem
         text-align: center
       .content
         white-space: pre-wrap

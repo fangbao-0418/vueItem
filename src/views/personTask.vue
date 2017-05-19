@@ -96,9 +96,9 @@ export default {
   .rule
     position: absolute
     right: .4rem
-    top: .1rem
+    top: .12rem
     font-family: PingFangSC-Light
-    font-size: .18rem
+    font-size: .2rem
     color: #A1AFB4
     letter-spacing: 0
   .task-image

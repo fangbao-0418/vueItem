@@ -4,10 +4,12 @@
 <template>
   <div class="view">
     <wlb-header :options="{ title: boardName }">
-      <span slot="right" :class="['rightButton', {disable: !publicEnd || !content}]" @click="toPublic">{{publicEnd ? '发表' : '发表中...'}}</span>
     </wlb-header>
-    <textarea ref="textarea" class="topic-text-content" v-model="content" placeholder="说点什么吧..."></textarea>
-    <p class="residue">你还可以输入{{num}}字</p>
+    <textarea ref="textarea" class="topic-text-content" v-model="content" placeholder="请输入发帖内容"></textarea>
+    <div class="topic-footer">
+      <span class="residue">你还可以输入{{num}}字</span>
+      <div @click="toPublic" :class="['btn', { disable: !publicEnd || !content }]"><span>{{publicEnd ? '发表' : '发表中...'}}</span></div>
+    </div>
   </div>
 </template>
 <script type="text/javascript">
@@ -92,13 +94,10 @@
   .view
     background: #fff
     flex: 1
-    .rightButton
-      font-family: PingFangSC-Regular
-      font-size: .26rem
-      color: #FFFFFF
-      letter-spacing: 0
     .disable
-      color: #ccc
+      background-color: #E5E5E5 !important
+      span
+        color: #ffffff !important
     .topic-text-title
       width: 6.9rem
       padding: 0 .3rem
@@ -110,28 +109,43 @@
     .line
       border-bottom: 1px solid #E5E5E5
     .topic-text-content
+      background-attachment: fixed
+      resize: none
+      outline: none
       display: block
-      width: 6.9rem
+      width: 6.3rem
       border: 0
-      padding: 0 .3rem
-      margin: .3rem 0
+      padding: .3rem
+      margin: .3rem
       font-family: PingFangSC-Light
       font-size: .3rem
       color: #9B9B9B
       line-height: .42rem
-      min-height: 2.7rem
+      min-height: 3.1rem
       overflow-y: visible
-    .residue
+      border: 1px solid #ccc
+      border-radius: 9px
+    .topic-footer
       padding: 0 .3rem .3rem
-      font-family: PingFangSC-Light
-      font-size: .24rem
-      color: #9B9B9B
-      line-height: .33rem
-      text-align: right
-      &::after
-        content: ''
-        display: block
-        margin-bottom: .8rem
+      height: .7rem
+      .residue
+        font-family: PingFangSC-Light
+        color: #9B9B9B
+        font-size: .24rem
+        line-height: .7rem
+      .btn
+        width: 2rem
+        height: .7rem
+        background: #10A6E2
+        border-radius: 100px
+        text-align: center
+        line-height: .7rem
+        float: right
+        span
+          font-family: PingFangSC-Light
+          font-size: .3rem
+          color: #FFFFFF
+          letter-spacing: 0
     .topic-edit-foot
       width: 100%
       position: fixed

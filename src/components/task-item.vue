@@ -44,4 +44,5 @@ export default {
       letter-spacing: 0
   .task-right
     float: right
+    line-height: 1rem
 </style>
