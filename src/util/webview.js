@@ -206,6 +206,19 @@ const wlb = (function () {
       this.bridge.callHandler('touchClose', function (response) {
         callback && callback(response)
       })
+    },
+    /* 呼出软键盘 */
+    openKeyboard: function (callback) {
+      this.bridge.callHandler('openKeyboard', function (response) {
+        callback && callback(response)
+      })
+    },
+    /* 注册键盘输入监听 */
+    textChanged: function (callback) {
+      this.bridge.registerHandler('textChanged', function (backdata, responseCallback) {
+        var responseData = Mixin.filterJSON(backdata)
+        callback && callback(responseData)
+      })
     }
   }
 

@@ -35,6 +35,7 @@
 <script>
   import Loadmore from './load-more'
   import NoMore from './no-more'
+  import bus from '../bus'
   export default {
     props: {
       id: {
@@ -51,7 +52,14 @@
       }
     },
     created () {
-      this.$plugin.loading.show(true, 'full')
+      bus.$on('comment-refresh-data', (data) => {
+        this.page = 1
+        this.$plugin.loading.show(true)
+        this.loadData(() => {
+          this.$plugin.loading.show(false)
+        })
+      })
+      this.$plugin.loading.show(true)
       this.loadData(() => {
         this.$plugin.loading.show(false)
       })

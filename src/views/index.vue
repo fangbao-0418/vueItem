@@ -13,7 +13,10 @@
             </div>
             <topic-item v-if="ThreadList[index] && ThreadList[index].length" :data="ThreadList[index]"></topic-item>
           </loadmore>
-          <no-more :visible="allLoaded[index]"></no-more>
+          <no-more v-if="ThreadList[index] && ThreadTopList[index].length > 0" :visible="allLoaded[index]"></no-more>
+          <div class="no-topic">
+            <img src="../imgs/no-topic-icon.png" alt="">
+          </div>
         </tab-container-item>
       </wlb-tab-container>
     </div>
@@ -101,4 +104,12 @@ export default {
 }
 </script>
 <style lang="sass" scoped>
+  .no-topic
+    display: flex
+    height: 5rem
+    align-items: center
+    justify-content: center
+    img
+      width: 1.9rem
+      height: 2.32rem
 </style>

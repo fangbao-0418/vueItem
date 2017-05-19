@@ -66,20 +66,19 @@
       // display: table-cell
       &.active
         color: #12A5E2
-        border-bottom: #10A6E2 solid .08rem
+        span
+          border-bottom: #10A6E2 solid .08rem
       span
-        padding: 0 .37rem
         display: inline-block
-        margin: .29rem 0 .21rem
+        padding: .29rem .37rem .21rem
         text-align: center
         box-sizing: border-box
         font-size: .24rem
         line-height: .32rem
-        height: .32rem
       .line
         margin-top: .08rem
         height: .32rem
-        width: .04rem
-        border-right: .02rem solid #E5E5E5
+        width: 1px
+        background-color: #E5E5E5
         float: right
 </style>

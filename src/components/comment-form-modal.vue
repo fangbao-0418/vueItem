@@ -22,6 +22,7 @@
   </div>
 </template>
 <script>
+  import bus from '../bus'
   export default {
     props: {
       id: {
@@ -81,6 +82,8 @@
           if (res.data.result && res.data.result.code === 0) {
             if (res.data.result) {
               this.$rulemodal.show({ content: '评论提交成功，请等待后台审核', style: 'text-align: center' })
+              console.log(res.data.result.data, 'from-data')
+              bus.$emit('comment-refresh-data', res.data.result.data)
             }
           } else if (res.data.error && res.data.error.code === 4004) {
             this.$rulemodal.show({ content: '用户未登录，请登陆后进行评论', style: 'text-align: center' })
