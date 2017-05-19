@@ -92,7 +92,7 @@ function fetchData (params) {
   let json = JSON.stringify(jsonObj)
 
   var debug = Fn.getUrlParam('debug')
-  var encryptData = debug === 'true' ? json : clientMask + global.XXTEA.encryptToBase64(json, pass)
+  var encryptData = debug === 'true' || !isPro ? json : clientMask + global.XXTEA.encryptToBase64(json, pass)
 
   /**
    * axios 不兼容safari 9
