@@ -12,7 +12,6 @@
 </template>
 <script type="text/javascript">
   import ToTopIcon from './to-top-icon'
-  // import IScroll from 'iscroll'
   export default {
     props: {
       scrollToTop: {
@@ -39,16 +38,6 @@
           }
         }
       }
-      // $(document).ready(function () {
-      //   var iscroll = new IScroll('#wrapper', {
-      //     mouseWheel: true,
-      //     scrollbars: true,
-      //     click: true,
-      //     checkDOMChanges: true
-      //   })
-      //   console.log(iscroll)
-      // })
-      // document.addEventListener('touchmove', function (e) { e.preventDefault() }, false)
     }
   }
 </script>
