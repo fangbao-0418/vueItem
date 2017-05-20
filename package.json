@@ -2,12 +2,11 @@
   "name": "wanglibao_BBS",
   "version": "1.0.0",
   "description": "网利社区",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
     "start": "set NODE_ENV=development && node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --inline --progress --watch --colors",
-    "dev-help": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --help",
     "lint": "eslint --color --ext .js,.vue src",
-    "build": "rimraf dist && set NODE_ENV=production &&webpack --progress --colors"
+    "build": "rimraf dist && set NODE_ENV=production && webpack --progress --colors"
   },
   "author": "fangbao",
   "license": "ISC",

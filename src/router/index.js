@@ -13,28 +13,28 @@ import store from '../store'
 **/
 
 /* 普通路由 */
-import Index from '../views/index' // 普通路由加载
-import TopicDetail from '../views/topicDetail'
-import TopicAdd from '../views/TopicAdd'
-import Person from '../views/person.vue'
-import PersonInfoEdit from '../views/personInfoEdit'
-import PersonNews from '../views/personNews'
-import PersonTopics from '../views/personTopics'
-import PersonTask from '../views/personTask'
-import Activities from '../views/activityList'
-import ActivityDetail from '../views/activityDetail'
+// import Index from '../views/index' // 普通路由加载
+// import TopicDetail from '../views/topicDetail'
+// import TopicAdd from '../views/TopicAdd'
+// import Person from '../views/person.vue'
+// import PersonInfoEdit from '../views/personInfoEdit'
+// import PersonNews from '../views/personNews'
+// import PersonTopics from '../views/personTopics'
+// import PersonTask from '../views/personTask'
+// import Activities from '../views/activityList'
+// import ActivityDetail from '../views/activityDetail'
 
 /* 懒加载路由 */
-// const Index = resolve => require(['../views/index'], resolve)
-// const TopicDetail = resolve => require(['../views/topicDetail'], resolve)
-// const TopicAdd = resolve => require(['../views/TopicAdd'], resolve)
-// const Person = resolve => require(['../views/person'], resolve)
-// const PersonInfoEdit = resolve => require(['../views/personInfoEdit'], resolve)
-// const PersonNews = resolve => require(['../views/personNews'], resolve)
-// const PersonTopics = resolve => require(['../views/personTopics'], resolve)
-// const PersonTask = resolve => require(['../views/personTask'], resolve)
-// const Activities = resolve => require(['../views/activityList'], resolve)
-// const ActivityDetail = resolve => require(['../views/activityDetail'], resolve)
+const Index = resolve => require(['../views/index'], resolve)
+const TopicDetail = resolve => require(['../views/topicDetail'], resolve)
+const TopicAdd = resolve => require(['../views/TopicAdd'], resolve)
+const Person = resolve => require(['../views/person'], resolve)
+const PersonInfoEdit = resolve => require(['../views/personInfoEdit'], resolve)
+const PersonNews = resolve => require(['../views/personNews'], resolve)
+const PersonTopics = resolve => require(['../views/personTopics'], resolve)
+const PersonTask = resolve => require(['../views/personTask'], resolve)
+const Activities = resolve => require(['../views/activityList'], resolve)
+const ActivityDetail = resolve => require(['../views/activityDetail'], resolve)
 
 Vue.use(VueRouter) // 安装路由
 
