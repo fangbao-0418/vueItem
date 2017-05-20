@@ -13,11 +13,12 @@
             </div>
             <topic-item v-if="ThreadList[index] && ThreadList[index].length" :data="ThreadList[index]"></topic-item>
           </loadmore>
-          <no-more v-if="ThreadList[index] && ThreadTopList[index].length > 0" :visible="allLoaded[index]"></no-more>
-          <div class="no-topic" v-if="ThreadList[index] && ThreadTopList[index].length == 0">
+          <no-more v-if="ThreadList[index].length > 0" :visible="allLoaded[index]"></no-more>
+          <div class="no-topic" v-if="ThreadList[index].length == 0 && ThreadTopList[index].length === 0">
             <img src="../imgs/no-topic-icon.png" alt="">
             <span class="mt-16">还没有内容哦</span>
           </div>
+          <div style="height: .1rem;"></div>
         </tab-container-item>
       </wlb-tab-container>
     </div>
