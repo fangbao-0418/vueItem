@@ -11,7 +11,7 @@
               <title-bar-one :options="{title:item.title, more: '更多', targetUrl: {name: 'activities', params: { id: item.id}}}"></title-bar-one>
               <slider-block-one :data="ThreadTopList[index]"></slider-block-one>
             </div>
-            <topic-item v-if="ThreadUserTopList[index] && ThreadUserTopList[index].length > 0" :data="ThreadUserTopList[index]"></topic-item>
+            <topic-item v-if="ThreadUserTopList[index] && ThreadUserTopList[index].length > 0" :data="ThreadUserTopList[index]" type="top"></topic-item>
             <topic-item v-if="ThreadList[index] && ThreadList[index].length" :data="ThreadList[index]"></topic-item>
           </loadmore>
           <no-more v-if="ThreadList[index].length > 0" :visible="allLoaded[index]"></no-more>

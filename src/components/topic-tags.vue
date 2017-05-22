@@ -1,6 +1,6 @@
 <template>
   <div class="topic-tags">
-    <span class="tag-top" v-if="tags.istop=== 1"></span>
+    <!-- <span class="tag-top" v-if="tags.istop=== 1"></span> -->
     <span class="tag-great" v-if="tags.isgreat === 1"></span>
     <span class="tag-hot" v-if="tags.ishot=== 1"></span>
   </div>
@@ -10,10 +10,14 @@
     props: {
       tags: {
         type: Object
+      },
+      type: {
+        type: String,
+        default: ''
       }
     },
     mounted () {
-      console.log(this.tags, 'tags')
+      console.log(this.istop === 1 && this.type === 'top', 'tags')
     }
   }
 </script>
