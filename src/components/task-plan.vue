@@ -89,6 +89,7 @@
     background: #12a5e2
     color: #fff
   .isaward
+    width: auto
     background: transparent !important
     color: #A1AFB4
 </style>
