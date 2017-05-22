@@ -85,7 +85,7 @@ export default {
   .title
     width: 100%
     height: .58rem
-    line-height: .58rem
+    line-height: .48rem
     font-size: .24rem
     color: #FFF
     text-align: center
