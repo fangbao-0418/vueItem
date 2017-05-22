@@ -63,7 +63,17 @@ Http.interceptors.push(function (request, next) {
     }
     if (!response.ok) {
       loading.show(false)
-      ruleModal.show({ title: '系统提示', content: '网络异常，获取数据失败', style: 'text-align: center' })
+      ruleModal.show({
+        title: '系统提示',
+        content: '网络异常，获取数据失败',
+        ok: {
+          title: '刷新',
+          callback: function () {
+            window.location.reload()
+          }
+        },
+        style: 'text-align: center'
+      })
     }
     return response
   })
