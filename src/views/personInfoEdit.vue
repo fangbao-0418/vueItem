@@ -109,9 +109,10 @@ export default {
         }
       ]).then((res) => {
         loading.show(false)
+        var msg
         if (res[1].data.result) {
           var code = res[1].data.result.code
-          var msg = res[1].data.result.data
+          msg = res[1].data.result.data
           if (code === 0) {
             ruleModal.show({
               content: '信息修改成功',
@@ -123,6 +124,13 @@ export default {
               style: 'text-align: center'
             })
           }
+        }
+        if (res[1].data.error) {
+          msg = res[1].data.error.message
+          ruleModal.show({
+            content: msg,
+            style: 'text-align: center'
+          })
         }
       })
     }
