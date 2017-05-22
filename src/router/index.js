@@ -77,7 +77,7 @@ const routerConfig = {
   },
   routes: [
     {path: '/', name: 'index', props: { name: 'name' }, component: Index},
-    {path: '/topic/add', name: 'topicAdd', meta: { name: '新建帖子' }, component: TopicAdd},
+    {path: '/topic/add/:id', name: 'topicAdd', meta: { name: '新建帖子' }, component: TopicAdd},
     {path: '/topic/detail/:id', name: 'topicDetail', component: TopicDetail},
     {path: '/activities/:id', name: 'activities', component: Activities},
     {path: '/activity/detail/:id', name: 'activityDetail', component: ActivityDetail},
