@@ -24,7 +24,7 @@
       </wlb-tab-container>
     </div>
   </scroll-wrapper>
-  <public-comment-icon v-if="loginStatus"></public-comment-icon>
+  <public-comment-icon></public-comment-icon>
 </div>
 </template>
 <script>
