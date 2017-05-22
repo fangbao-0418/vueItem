@@ -5,7 +5,7 @@ export const lazyload = {
     $(el).lazyload({
       placeholder: binding.value.placeholder,
       effect: 'fadeIn', // 效果
-      threshold: 200,
+      // threshold: 200,
       event: 'sporty',
       failure_limit: 20,
       skip_invisible: true
@@ -21,7 +21,7 @@ export const lazyload = {
     $(el).lazyload({
       placeholder: binding.value.placeholder,
       effect: 'fadeIn',
-      threshold: 200,
+      // threshold: 200,
       event: 'sporty',
       failure_limit: 20,
       skip_invisible: true

@@ -14,7 +14,7 @@
 </template>
 <script type="text/javascript">
   import { WlbHeader } from '../components'
-  // import { wlb } from '../util'
+  import { wlb, api } from '../util'
   export default {
     components: {
       WlbHeader
@@ -77,15 +77,30 @@
           this.content = ''
           if (res.data.result && res.data.result.code === 0) {
             this.$rulemodal.show({ title: '系统提示', content: '帖子发布成功，已提交后台审核', style: 'text-align: center' })
+            setTimeout(() => {
+              this.$rulemodal.show(false)
+              this.$router.push({ name: 'index' })
+            }, 1000)
           } else if (res.data.error && res.data.error.code === 4004) {
             this.$rulemodal.show({ content: '用户未登录，请登陆后进行评论', style: 'text-align: center' })
+            setTimeout(() => {
+              wlb.ready({
+                app: function (mixins) {
+                  mixins.loginApp({ refresh: 1, url: '' })
+                },
+                other: function () {
+                  window.location.href = api.host + '/wechat/verify'
+                }
+              })
+            }, 1000)
           } else {
-            this.$rulemodal.show({ content: '发布帖子失败', style: 'text-align: center' })
+            var msg = res.data.error.message
+            this.$rulemodal.show({ content: msg, style: 'text-align: center' })
+            setTimeout(() => {
+              this.$rulemodal.show(false)
+              this.$router.push({ name: 'index' })
+            }, 1000)
           }
-          setTimeout(() => {
-            this.$rulemodal.show(false)
-            this.$router.push({ name: 'index' })
-          }, 1000)
         })
       }
     },

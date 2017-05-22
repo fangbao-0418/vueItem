@@ -8,8 +8,9 @@ const state = {
   navbar_select_index: 0, // navbar 初始index
   initial_active: 'tab-container1',
   home_data: [],
-  ThreadTopList: [],
-  ThreadList: [],
+  ThreadTopList: [], // 后台置顶帖
+  ThreadUserTopList: [], // 用户置顶帖
+  ThreadList: [], // 普通置顶帖
   homeDataLoaded: [],
   bbsHomeallLoadedInfo: [],
   bbsHomeCurrentPageInfo: []
@@ -39,6 +40,7 @@ const actions = {
       params: [{}]
     }).then((res) => {
       var ThreadTopList = []
+      var ThreadUserTopList = []
       var ThreadList = []
       if (res.data.result) {
         // 初始化社区首页数据allLoaded && 当前页数 && 列表数据
@@ -50,10 +52,12 @@ const actions = {
             commit(types.SET_BBS_HOME_CURRENT_PAGE, { k: i, v: 0 })
           }
           ThreadTopList[i] = []
+          ThreadUserTopList[i] = []
           ThreadList[i] = []
         }
         var data = {
           ThreadTopList,
+          ThreadUserTopList,
           ThreadList
         }
         commit(types.FETCH_BBS_HOME_DATA, data)
@@ -101,14 +105,24 @@ const actions = {
           url: api.api_list,
           method: 'getBbsUserInfo',
           params: [{}]
+        },
+        {
+          url: api.api_list,
+          method: 'getBbsThreadUserTopList',
+          params: [{
+            id: state.topicBoards[state.navbar_select_index]['id']
+          }]
         }
       ]).then((res) => {
         var ThreadTopList = [].concat(state.ThreadTopList)
+        var ThreadUserTopList = [].concat(state.ThreadUserTopList)
         var ThreadList = [].concat(state.ThreadList)
         if (res[0].data.result) {
           ThreadTopList[state.navbar_select_index] = res[0].data.result.data.data
         }
-        console.log(ThreadTopList[state.navbar_select_index], 'threadToplist')
+        if (res[3].data.result) {
+          ThreadUserTopList[state.navbar_select_index] = res[3].data.result.data
+        }
         if (res[1].data.result) {
           // 当前页数大于最大页数 设置allLoaded
 
@@ -123,6 +137,7 @@ const actions = {
         }
         var data = {
           ThreadTopList,
+          ThreadUserTopList,
           ThreadList
         }
         if (res[2].data.result) {
@@ -142,6 +157,7 @@ const actions = {
     // }
 
     var ThreadTopList = [].concat(state.ThreadTopList)
+    var ThreadUserTopList = [].concat(state.ThreadUserTopList)
     var ThreadList = [].concat(state.ThreadList)
 
     // 设置当前页数
@@ -169,6 +185,13 @@ const actions = {
           page: state.bbsHomeCurrentPageInfo[state.navbar_select_index],
           pageNum: consts.BBS_HOME_THREAD_LIST_PAGE_NUM
         }]
+      },
+      {
+        url: api.api_list,
+        method: 'getBbsThreadUserTopList',
+        params: [{
+          id: state.topicBoards[state.navbar_select_index]['id']
+        }]
       }
     ]).then((res) => {
       if (res[0].data.result) {
@@ -192,8 +215,12 @@ const actions = {
         commit(types.SET_BBS_HOME_CURRENT_PAGE, { k: state.navbar_select_index, v: state.bbsHomeCurrentPageInfo[state.navbar_select_index] - 1 })
         commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: state.navbar_select_index, v: true })
       }
+      if (res[2].data.result) {
+        ThreadUserTopList[state.navbar_select_index] = res[2].data.result.data
+      }
       var data = {
         ThreadTopList,
+        ThreadUserTopList,
         ThreadList
       }
       console.log(ThreadList[state.navbar_select_index].length, '帖子数')
@@ -216,6 +243,7 @@ const mutations = {
   },
   [types.FETCH_BBS_HOME_DATA] (state, data) {
     state.ThreadTopList = data['ThreadTopList']
+    state.ThreadUserTopList = data['ThreadUserTopList']
     state.ThreadList = data['ThreadList']
   },
   [types.HOME_DATA_LOADED] (state, res) {

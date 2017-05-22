@@ -4,7 +4,7 @@
       <div class="comment-sign bg-color-white">
         <span>评论列表 ({{total}})</span>
       </div>
-      <loadmore :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded" ref="loadmore">
+      <loadmore :cb-load-bottom="loadBottom" :all-loaded="allLoaded" ref="loadmore">
         <ul class="comment-items">
           <li v-for="(item, index) in data" class="bg-color-white" v-if="item.users">
             <div class="comment-avatar">

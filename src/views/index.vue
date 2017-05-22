@@ -11,10 +11,11 @@
               <title-bar-one :options="{title:item.title, more: '更多', targetUrl: {name: 'activities', params: { id: item.id}}}"></title-bar-one>
               <slider-block-one :data="ThreadTopList[index]"></slider-block-one>
             </div>
+            <topic-item v-if="ThreadUserTopList[index] && ThreadUserTopList[index].length > 0" :data="ThreadUserTopList[index]"></topic-item>
             <topic-item v-if="ThreadList[index] && ThreadList[index].length" :data="ThreadList[index]"></topic-item>
           </loadmore>
           <no-more v-if="ThreadList[index].length > 0" :visible="allLoaded[index]"></no-more>
-          <div class="no-topic" v-if="ThreadList[index].length == 0 && ThreadTopList[index].length === 0">
+          <div class="no-topic" v-if="ThreadTopList[index].length === 0 && ThreadUserTopList[index].length === 0 && ThreadList[index].length == 0">
             <img src="../imgs/no-topic-icon.png" alt="">
             <span class="mt-16">还没有内容哦</span>
           </div>
@@ -52,6 +53,10 @@ export default {
     ...mapState({
       ThreadTopList (state) {
         return state.topic['ThreadTopList']
+      },
+      ThreadUserTopList (state) {
+        console.log(state.topic['ThreadUserTopList'], 'ThreadUserTopList')
+        return state.topic['ThreadUserTopList']
       },
       ThreadList (state) {
         return state.topic['ThreadList']

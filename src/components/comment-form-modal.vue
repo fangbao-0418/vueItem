@@ -23,6 +23,7 @@
 </template>
 <script>
   import bus from '../bus'
+  import { wlb, api } from '../util'
   export default {
     props: {
       id: {
@@ -87,8 +88,19 @@
             }
           } else if (res.data.error && res.data.error.code === 4004) {
             this.$rulemodal.show({ content: '用户未登录，请登陆后进行评论', style: 'text-align: center' })
+            setTimeout(() => {
+              wlb.ready({
+                app: function (mixins) {
+                  mixins.loginApp({ refresh: 1, url: '' })
+                },
+                other: function () {
+                  window.location.href = api.host + '/wechat/verify'
+                }
+              })
+            }, 1000)
           } else {
-            this.$rulemodal.show({ content: '发布评论失败', style: 'text-align: center' })
+            var msg = res.data.error.message
+            this.$rulemodal.show({ content: msg, style: 'text-align: center' })
           }
           this.cancel()
         })
