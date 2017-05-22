@@ -2,7 +2,7 @@
   <div>
     <div v-if="item.user" :key="index" class="topic-item bg-color-white mb-20" v-for="(item, index) in data">
       <div class="tags">
-        <topic-tags :tags="{ ishot: item.ishot, isgreat: item.isgreat }"></topic-tags>
+        <topic-tags :tags="{ ishot: item.ishot, isgreat: item.isgreat, istop: item.istop }"></topic-tags>
       </div>
       <div class="topic-avatar"><img :src="item.user.head_img" v-lazyload="{ placeholder: require('../imgs/avatar_defult_big.png') }" /></div>
       <div class="topic-main">

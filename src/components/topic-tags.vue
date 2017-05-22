@@ -1,5 +1,6 @@
 <template>
   <div class="topic-tags">
+    <span class="tag-top" v-if="tags.istop=== 1"></span>
     <span class="tag-great" v-if="tags.isgreat === 1"></span>
     <span class="tag-hot" v-if="tags.ishot=== 1"></span>
   </div>
@@ -8,14 +9,11 @@
   export default {
     props: {
       tags: {
-        type: Object,
-        default: function () {
-          return {
-            isgreat: 1,
-            ishot: 1
-          }
-        }
+        type: Object
       }
+    },
+    mounted () {
+      console.log(this.tags, 'tags')
     }
   }
 </script>
@@ -31,5 +29,8 @@
       background-size: 100% 100%
     .tag-hot
       background: url('../imgs/tag_hot.png') no-repeat
+      background-size: 100% 100%
+    .tag-top
+      background: url('../imgs/tag_top.png') no-repeat
       background-size: 100% 100%
 </style>
