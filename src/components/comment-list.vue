@@ -29,7 +29,7 @@
         </ul>
       </loadmore>
     </div>
-    <no-more :visible="total === 0" content="～暂时没有评论～"></no-more>
+    <no-more :visible="total === 0" content="～还没有人评论，快去抢沙发～"></no-more>
   </div>
 </template>
 <script>

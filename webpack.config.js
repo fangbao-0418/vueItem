@@ -87,9 +87,7 @@ if(isPro){
 }
 
 module.exports = {
-	entry: {
-    index: resolve("src/app.js")
-  },
+	entry: ['babel-polyfill', resolve('src/app.js')],
 	output:{
 		path: isPro ? resolve("dist/assets") : resolve("dist"),
     publicPath: isPro ? "/bbs/assets/" : "",
@@ -190,8 +188,8 @@ module.exports = {
 		},
 		// 启用gzip压缩一切服务:
 		// compress: true,
-		host: "0.0.0.0",
-    // host: "192.168.10.123",
+		// host: "0.0.0.0",
+    host: "192.168.10.207",
     port: "3001"
 	},
 	resolve: {

@@ -4,9 +4,9 @@
   "description": "网利社区",
   "main": "src/app.js",
   "scripts": {
-    "start": "set NODE_ENV=development && node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --inline --progress --watch --colors",
+    "start": "export NODE_ENV=development && node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --inline --progress --watch --colors",
     "lint": "eslint --color --ext .js,.vue src",
-    "build": "rimraf dist && set NODE_ENV=production && webpack --progress --colors"
+    "build": "rimraf dist && export NODE_ENV=production && webpack --progress --colors"
   },
   "author": "fangbao",
   "license": "ISC",
@@ -19,6 +19,7 @@
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-do-expressions": "^6.22.0",
     "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.24.1",
