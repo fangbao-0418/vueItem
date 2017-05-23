@@ -8,7 +8,7 @@
         <tab-container-item :key="index" :id="tabId(index)" :class="'tab-container'+parseInt(parseInt(index)+1)" v-for="(item, index) in initialNavBarOptions">
           <loadmore v-if="(ThreadTopList[index] && ThreadTopList[index].length) || (ThreadList[index] && ThreadList[index].length)" :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded[index]" :ref="'loadmore_'+index">
             <div v-if="ThreadTopList[index] && ThreadTopList[index].length">
-              <title-bar-one :options="{title:item.title, more: '更多', targetUrl: {name: 'activities', params: { id: item.id}}}"></title-bar-one>
+              <title-bar-one :options="{title:item.title, more: ThreadTopList[index].length >= 2 ? '更多' : null, targetUrl: {name: 'activities', params: { id: item.id}}}"></title-bar-one>
               <slider-block-one :data="ThreadTopList[index]"></slider-block-one>
             </div>
             <topic-item v-if="ThreadList[index] && ThreadList[index].length" :data="ThreadList[index]"></topic-item>
