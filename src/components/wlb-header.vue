@@ -66,7 +66,7 @@
     },
     methods: {
       goback () {
-        alert(this.$route.name + this.isApp)
+        // alert(this.$route.name + this.isApp)
         if (this.$route.name === 'index' && this.isApp) {
           this.cancel()
         } else {
@@ -74,7 +74,7 @@
         }
       },
       cancel () {
-        alert('app exit')
+        // alert('app exit')
         wlb.ready({
           app: function (mixins) {
             mixins.touchClose()
