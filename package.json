@@ -4,9 +4,9 @@
   "description": "网利社区",
   "main": "src/app.js",
   "scripts": {
-    "start": "export NODE_ENV=development && node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --inline --progress --watch --colors",
+    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --inline --progress --watch --colors --env 'development'",
     "lint": "eslint --color --ext .js,.vue src",
-    "build": "rimraf dist && export NODE_ENV=production && webpack --progress --colors"
+    "build": "rimraf dist && webpack --progress --colors --env 'production'"
   },
   "author": "fangbao",
   "license": "ISC",

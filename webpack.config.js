@@ -3,15 +3,16 @@ var path = require('path');// NodeJS中的Path对象，用于处理目录的对�
 var HtmlWebpackPlugin = require('html-webpack-plugin');//html模板插入代码。
 var ExtractTextPlugin = require("extract-text-webpack-plugin");//将组件中的样式提取出来。
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
+var argv = require('yargs').argv;
 function resolve (dir) {
   return path.resolve(__dirname, dir);
 }
-var isPro = process.env.NODE_ENV.trim() === 'production';
+var isPro = argv.env.trim() === 'production';
 var needHandleDir = [resolve('src'), resolve('node_modules/vuex'), resolve('node_modules/jquery'), resolve('node_modules/vue-resource')]
 var plugins = [
   new webpack.DefinePlugin({
     'process.env': {
-      NODE_ENV: `"${process.env.NODE_ENV.trim()}"`
+      NODE_ENV: `"${argv.env.trim()}"`
     }
   }),
   //给输出的文件头部添加注释信息。
@@ -189,7 +190,7 @@ module.exports = {
 		// 启用gzip压缩一切服务:
 		// compress: true,
 		// host: "0.0.0.0",
-    host: "192.168.11.228",
+    host: "192.168.10.183",
     port: "3001"
 	},
 	resolve: {
