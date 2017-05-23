@@ -188,6 +188,7 @@
           .disable
             color: #ccc
         .comment-text-content
+          resize: none
           padding: 0 .3rem
           width: 6.9rem
           border: 0
