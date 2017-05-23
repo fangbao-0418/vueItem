@@ -24,7 +24,7 @@
           app: function (mixins) {
             mixins.touchShare({
               title: (that.options && that.options.title) || '网利社区',
-              content: (that.options && that.options.content) || '更多精彩福利等你来抢！',
+              content: (that.options && that.options.content) || '网利粉儿们的集结地-爱理财的人都在这里！',
               shareUrl: window.location.href || '',
               image: (that.options && that.options.image) || ''
             })

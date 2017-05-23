@@ -89,7 +89,7 @@
           } else if (res.data.error && res.data.error.code === 4004) {
             // this.$rulemodal.show({ content: '用户未登录，请登陆后进行评论', style: 'text-align: center' })
             Toast({
-              message: '用户未登录，请登陆后进行评论',
+              message: '用户未登录，请登陆后进行发帖',
               duration: 1500
             })
             setTimeout(() => {
