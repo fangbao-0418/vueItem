@@ -6,7 +6,12 @@ export function handleDate (date) {
 
   if (difference < 60 * 60) {
     // 1小时之内
-    return Math.ceil(difference / 60) + '分钟前'
+    // console.log(difference, Math.ceil(difference / 60), '分钟前')
+    if (Math.ceil(difference / 60) > 0) {
+      return Math.ceil(difference / 60) + '分钟前'
+    } else {
+      return '1分钟前'
+    }
   } else if (difference < 24 * 60 * 60 && difference >= 60 * 60) {
     // 24小时之内
     return Math.ceil(difference / (60 * 60)) + '小时前'
