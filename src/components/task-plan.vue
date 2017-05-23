@@ -8,6 +8,7 @@
   </div>
 </template>
 <script>
+  import bus from '../bus'
   export default {
     props: {
       data: {
@@ -46,6 +47,7 @@
             }
             var message = res.data.result.message
             this.$rulemodal.show({ content: message, style: 'text-align: center' })
+            bus.$emit('refresh-task-page')
           }
           if (res.data.error) {
             var errmessage = res.data.error.message
@@ -54,6 +56,9 @@
           this.$plugin.loading.show(false)
         })
       }
+    },
+    destroyed () {
+      bus.$off('refresh-task-page')
     }
   }
 </script>

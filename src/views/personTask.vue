@@ -24,6 +24,7 @@
 </template>
 <script>
 import { ScrollWrapper, WlbHeader, TaskItem, TaskPlan } from '../components'
+import bus from '../bus'
 export default {
   data () {
     return {
@@ -45,6 +46,9 @@ export default {
     }).then((res) => {
       this.data = res.data.result.data
       this.$plugin.loading.show(false)
+    })
+    bus.$on('refresh-task-page', () => {
+      this.refresh()
     })
   },
   methods: {
@@ -71,6 +75,18 @@ export default {
           break
       }
       this.$rulemodal.show(option)
+    },
+    refresh () {
+      console.log('refresh')
+      this.$plugin.loading.show(true)
+      this.$http({
+        url: this.$api.api_list,
+        method: 'queryBbsUserTask',
+        params: [{}]
+      }).then((res) => {
+        this.data = res.data.result.data
+        this.$plugin.loading.show(false)
+      })
     }
   }
 }
