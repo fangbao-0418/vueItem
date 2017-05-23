@@ -58,7 +58,7 @@
       overflow: auto
       text-align: center
       background: #fff
-      width: 4.5rem
+      width: 4.7rem
       /* Center slide text vertically */
       display: -webkit-box
       display: -ms-flexbox
