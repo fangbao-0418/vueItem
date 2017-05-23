@@ -14,7 +14,7 @@
             <topic-item v-if="ThreadList[index] && ThreadList[index].length" :data="ThreadList[index]"></topic-item>
           </loadmore>
           <no-more v-if="ThreadList[index].length > 0" :visible="allLoaded[index]"></no-more>
-          <div class="no-topic" v-if="ThreadTopList[index].length === 0 && ThreadList[index].length == 0">
+          <div class="no-topic" v-if="homeDataLoaded[index] && ThreadTopList[index].length === 0 && ThreadList[index].length == 0">
             <img src="../imgs/no-topic-icon.png" alt="">
             <span class="mt-16">还没有内容哦</span>
           </div>
@@ -53,6 +53,9 @@ export default {
       ThreadTopList (state) {
         console.log(state.topic['ThreadTopList'])
         return state.topic['ThreadTopList']
+      },
+      homeDataLoaded (state) {
+        return state.topic['homeDataLoaded']
       },
       ThreadList (state) {
         console.log(state.topic['ThreadList'], 'ThreadList--index')

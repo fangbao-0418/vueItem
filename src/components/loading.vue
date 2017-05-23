@@ -13,7 +13,13 @@
     },
     computed: {
       style () {
-        return this.type === 'full' ? 'background: #f5f5f5' : ''
+        if (this.type === 'full') {
+          return 'background: #f5f5f5'
+        } else if (this.type === '') {
+          return ''
+        } else {
+          return this.type
+        }
       }
     },
     watch: {

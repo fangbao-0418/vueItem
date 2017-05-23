@@ -127,11 +127,10 @@ export default {
     .affirm-btn
       width: 3.2rem
       height: .8rem
-      box-sizing: border-box
-      border: .04rem solid #12A5E2
+      border: 1px solid #12A5E2
       border-radius: .99rem
       text-align: center
-      line-height: .72rem
+      line-height: .8rem
       bottom: 1.54rem
       margin: 1rem auto 0
       &::after

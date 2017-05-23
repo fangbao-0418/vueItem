@@ -143,7 +143,7 @@ const actions = {
     // if (state.homeDataLoaded[state.navbar_select_index]) {
     //   return
     // }
-
+    commit(types.HOME_DATA_LOADED, false)
     var ThreadTopList = [].concat(state.ThreadTopList)
     var ThreadList = [].concat(state.ThreadList)
 
@@ -154,7 +154,7 @@ const actions = {
       commit(types.SET_BBS_HOME_CURRENT_PAGE, { k: state.navbar_select_index, v: state.bbsHomeCurrentPageInfo[state.navbar_select_index] + 1 })
     }
 
-    loading.show(true)
+    loading.show(true, 'background: rgba(0,0,0,.4)')
     http([
       {
         url: api.api_list,
