@@ -1,6 +1,5 @@
 # 简介
-基于vue+webpack+eslint+vuex+vue-resource框架
-
+基于vue+webpack+eslint+vuex+axios
 # 安装
 npm install
 
