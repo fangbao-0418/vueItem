@@ -8,9 +8,9 @@
  * @return Promise
  */
 
-// import axios from 'axios'
+import axios from 'axios'
 
-import { Http } from 'vue-resource'
+// import { Http } from 'vue-resource'
 
 import { ruleModal, loading } from '../plugins'
 import router from '../router'
@@ -20,77 +20,77 @@ var clientMask = '7005'
 var isPro = process.env.NODE_ENV === 'production'
 var isCrossDomain = window.location.hostname.indexOf('wanglibao.com') === -1
 
-// axios.interceptors.request.use(function (config) {
-//   return config
-// }, function (error) {
-//   return Promise.reject(error)
-// })
-//
-// axios.interceptors.response.use(function (response) {
-//   if (response.data.error) {
-//     var code = response.data.error.code
-//     if (loading.visible && code !== 4004) {
-//       // loading.show(false)
-//     }
-//     var message = response.data.error.message
-//     console.log(code, 'code')
-//     if (code === 4004) {
-//       ruleModal.show(false)
-//       setTimeout(() => {
-//         console.log(router, 'router')
-//         router.replace({ name: 'index' })
-//       }, 1000)
-//     } else {
-//       if (message) {
-//         ruleModal.show({ title: '系统提示', content: message, style: 'text-align: center' })
-//       } else {
-//         ruleModal.show({ title: '系统提示', content: '请求服务异常，错误未知', style: 'text-align: center' })
-//       }
-//     }
-//   }
-//   return response
-// }, function (error) {
-//   loading.show(false)
-//   ruleModal.show({
-//     title: '系统提示',
-//     content: '网络异常，获取数据失败',
-//     ok: {
-//       title: '刷新',
-//       callback: function () {
-//         window.location.reload()
-//       }
-//     },
-//     style: 'text-align: center'
-//   })
-//   return Promise.reject(error)
-// })
+axios.interceptors.request.use(function (config) {
+  return config
+}, function (error) {
+  return Promise.reject(error)
+})
 
-Http.interceptors.push(function (request, next) {
-  next(function (response) {
-    if (response.data.error && response.data.error.code === 4004) {
+axios.interceptors.response.use(function (response) {
+  if (response.data.error) {
+    var code = response.data.error.code
+    if (loading.visible && code !== 4004) {
+      // loading.show(false)
+    }
+    var message = response.data.error.message
+    console.log(code, 'code')
+    if (code === 4004) {
       ruleModal.show(false)
       setTimeout(() => {
         console.log(router, 'router')
         router.replace({ name: 'index' })
       }, 1000)
+    } else {
+      if (message) {
+        ruleModal.show({ title: '系统提示', content: message, style: 'text-align: center' })
+      } else {
+        ruleModal.show({ title: '系统提示', content: '请求服务异常，错误未知', style: 'text-align: center' })
+      }
     }
-    if (!response.ok) {
-      loading.show(false)
-      ruleModal.show({
-        title: '系统提示',
-        content: '网络异常，获取数据失败',
-        ok: {
-          title: '刷新',
-          callback: function () {
-            window.location.reload()
-          }
-        },
-        style: 'text-align: center'
-      })
-    }
-    return response
+  }
+  return response
+}, function (error) {
+  loading.show(false)
+  ruleModal.show({
+    title: '系统提示',
+    content: '网络异常，获取数据失败',
+    ok: {
+      title: '刷新',
+      callback: function () {
+        window.location.reload()
+      }
+    },
+    style: 'text-align: center'
   })
+  return Promise.reject(error)
 })
+
+// Http.interceptors.push(function (request, next) {
+//   next(function (response) {
+//     if (response.data.error && response.data.error.code === 4004) {
+//       ruleModal.show(false)
+//       setTimeout(() => {
+//         console.log(router, 'router')
+//         router.replace({ name: 'index' })
+//       }, 1000)
+//     }
+//     if (!response.ok) {
+//       loading.show(false)
+//       ruleModal.show({
+//         title: '系统提示',
+//         content: '网络异常，获取数据失败',
+//         ok: {
+//           title: '刷新',
+//           callback: function () {
+//             window.location.reload()
+//           }
+//         },
+//         style: 'text-align: center'
+//       })
+//     }
+//     return response
+//   })
+// })
 
 function http () {
   if (arguments[0] instanceof Array) {
@@ -98,8 +98,8 @@ function http () {
     for (let i in arguments[0]) {
       resultArr.push(fetchData(arguments[0][i]))
     }
-    // return axios.all(resultArr)
-    return Promise.all(resultArr)
+    return axios.all(resultArr)
+    // return Promise.all(resultArr)
   } else {
     let params = arguments[0]
     return fetchData(params)
@@ -121,24 +121,24 @@ function fetchData (params) {
   /**
    * axios 不兼容safari 9
    */
-  // return axios({
-  //   url: params.url,
-  //   method: 'post',
-  //   data: encryptData,
-  //   timeout: 10000,
-  //   withCredentials: isCrossDomain || !isPro
-  // })
-
-  return Http({
-    method: 'post',
+  return axios({
     url: params.url,
-    body: encryptData,
-    emulateJSON: true,
+    method: 'post',
+    data: encryptData,
     timeout: 10000,
-    credentials: isCrossDomain || !isPro,
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
+    withCredentials: isCrossDomain || !isPro
   })
+
+  // return Http({
+  //   method: 'post',
+  //   url: params.url,
+  //   body: encryptData,
+  //   emulateJSON: true,
+  //   timeout: 10000,
+  //   credentials: isCrossDomain || !isPro,
+  //   headers: {
+  //     'Content-Type': 'application/x-www-form-urlencoded'
+  //   }
+  // })
 }
 export default http
