@@ -43,9 +43,10 @@ const actions = {
     }).then((res) => {
       var ThreadTopList = []
       var ThreadList = []
-      if (res.body.result) {
+      var result = res.data.result
+      if (result) {
         // 初始化社区首页数据allLoaded && 当前页数 && 列表数据
-        for (let i in res.body.result.data) {
+        for (let i in result.data) {
           commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: i, v: false })
           if (Number(i) === Number(state.navbar_select_index)) {
             commit(types.SET_BBS_HOME_CURRENT_PAGE, { k: i, v: 1 })
@@ -60,8 +61,8 @@ const actions = {
           ThreadList
         }
         commit(types.FETCH_BBS_HOME_DATA, data)
-        console.log(res.body.result.data, 'boards')
-        commit(types.FETCH_TOPIC_BOARDS, res.body.result.data)
+        console.log(result.data, 'boards')
+        commit(types.FETCH_TOPIC_BOARDS, result.data)
       }
       callback && callback()
     })
@@ -110,25 +111,25 @@ const actions = {
         console.log(res, 'homedata')
         var ThreadTopList = [].concat(state.ThreadTopList)
         var ThreadList = [].concat(state.ThreadList)
-        if (res[0].body.result) {
-          ThreadTopList[state.navbar_select_index] = res[0].body.result.data.data
+        if (res[0].data.result) {
+          ThreadTopList[state.navbar_select_index] = res[0].data.result.data.data
         }
-        if (res[1].body.result) {
+        if (res[1].data.result) {
           // 当前页数大于最大页数 设置allLoaded
 
-          if (state.bbsHomeCurrentPageInfo[state.navbar_select_index] >= res[1].body.result.data.last_page) {
+          if (state.bbsHomeCurrentPageInfo[state.navbar_select_index] >= res[1].data.result.data.last_page) {
             commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: state.navbar_select_index, v: true })
           } else {
             commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: state.navbar_select_index, v: false })
           }
-          ThreadList[state.navbar_select_index] = res[1].body.result.data.list
+          ThreadList[state.navbar_select_index] = res[1].data.result.data.list
         }
         var data = {
           ThreadTopList,
           ThreadList
         }
-        if (res[2].body.result) {
-          commit(types.FETCH_BBS_USER_INFO, res[2].body.result.data)
+        if (res[2].data.result) {
+          commit(types.FETCH_BBS_USER_INFO, res[2].data.result.data)
         }
         commit(types.FETCH_BBS_HOME_DATA, data)
         commit(types.HOME_DATA_LOADED, true)
@@ -173,23 +174,23 @@ const actions = {
         }]
       }
     ]).then((res) => {
-      if (res[0].body.result) {
-        ThreadTopList[state.navbar_select_index] = res[0].body.result.data.data
+      if (res[0].data.result) {
+        ThreadTopList[state.navbar_select_index] = res[0].data.result.data.data
       }
-      if (res[1].body.result) {
+      if (res[1].data.result) {
         // 当前页数大于最大页数 设置allLoaded
-        if (state.bbsHomeCurrentPageInfo[state.navbar_select_index] >= res[1].body.result.data.last_page) {
+        if (state.bbsHomeCurrentPageInfo[state.navbar_select_index] >= res[1].data.result.data.last_page) {
           commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: state.navbar_select_index, v: true })
         } else {
           commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: state.navbar_select_index, v: false })
         }
         if (state.bbsHomeCurrentPageInfo[state.navbar_select_index] > 1) {
-          ThreadList[state.navbar_select_index] = ThreadList[state.navbar_select_index].concat(res[1].body.result.data.list)
+          ThreadList[state.navbar_select_index] = ThreadList[state.navbar_select_index].concat(res[1].data.result.data.list)
         } else {
-          ThreadList[state.navbar_select_index] = res[1].body.result.data.list
+          ThreadList[state.navbar_select_index] = res[1].data.result.data.list
         }
       }
-      if (res[1].body.error) {
+      if (res[1].data.error) {
         // 失败设置当前页数回退
         commit(types.SET_BBS_HOME_CURRENT_PAGE, { k: state.navbar_select_index, v: state.bbsHomeCurrentPageInfo[state.navbar_select_index] - 1 })
         commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: state.navbar_select_index, v: true })

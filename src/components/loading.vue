@@ -55,7 +55,7 @@
   position: absolute
   top: 0
   // background: #f5f5f5
-  z-index: 9999
+  z-index: 999
   .loading-box
     width: 1rem
     height: 1rem

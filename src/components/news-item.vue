@@ -1,6 +1,6 @@
 <template>
   <div :class="['news-content', { 'readed': item.isread }]" @click="go">
-    <div v-if="item.type == 1" class="news-box bg-color-white mt-20">
+    <div v-if="item.type === 1" class="news-box bg-color-white mt-20">
       <p>
         <span class="color1">您 </span>
         <span>发布的帖子</span>
@@ -9,7 +9,7 @@
       </p>
       <div class="item-time mt-27" v-text="item.created_at"></div>
     </div>
-    <div v-if="item.type == 2" class="news-box bg-color-white mt-20">
+    <div v-if="item.type === 2" class="news-box bg-color-white mt-20">
       <p>
         <span class="color1">您 </span><span>发布的帖子 </span>
         <span class="color1">{{item.threads.content | msubstring(0, 20)}}</span>
@@ -17,7 +17,7 @@
       </p>
       <div class="item-time mt-27" v-text="item.created_at"></div>
     </div>
-    <div v-if="item.type == 3" class="news-box bg-color-white mt-20">
+    <div v-if="item.type === 3" class="news-box bg-color-white mt-20">
       <p>
         <span class="color1">{{item.from_users.nickname}} </span><span>评论了您的帖子 </span>
         <span class="color1">{{item.threads.content | msubstring(0, 10)}}</span>
@@ -25,7 +25,7 @@
       <p class="font-1 mt-18">{{item.content}}</p>
       <div class="item-time mt-27" v-text="item.created_at"></div>
     </div>
-    <div v-if="item.type == 4" class="news-box bg-color-white mt-20">
+    <div v-if="item.type === 4" class="news-box bg-color-white mt-20">
       <p>
         <span class="color1">您 </span><span>发表的评论</span>
         <span class="color1">{{item.comments.content | msubstring(0, 10)}}</span>

@@ -46,6 +46,3 @@ npm run build
 * [mint-ui 2 使用文档(中文)](http://mint-ui.github.io/docs/#/zh-cn2)
 
 # 其他备注
-<p>
-因axios在safari存在兼容性暂用vue-resource代替
-</p>

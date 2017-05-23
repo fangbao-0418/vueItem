@@ -56,6 +56,7 @@ export default {
           page: this.page
         }]
       }).then((res) => {
+        console.log(res)
         this.page += 1
         this.lastPage = res.data.result.data['last_page']
         if (this.lastPage + 1 >= this.page) {
