@@ -8,8 +8,11 @@
         <img :src="userInfo.head_img" v-lazyload="{ placeholder: require('../imgs/avatar_defult_big.png') }"/>
       </div>
       <p class="user-nick">{{userInfo.nickname}}</p>
-      <div class="user-remind">
-        <p v-if="userInfo.restAward > 0">还有{{userInfo.restAward}}元体验金未领取 |</p><router-link :to="{name: 'personTask'}" tag="span"> 去领取</router-link>
+      <div v-if="userInfo.restAward > 0" class="user-remind">
+        <p>还有{{userInfo.restAward}}元体验金未领取 |</p><router-link :to="{name: 'personTask'}" tag="span"> 去领取</router-link>
+      </div>
+      <div v-else class="user-remind">
+        <p>您的体验金已领完</p>
       </div>
     </router-link>
     <div v-else class="user bg-color-white">
