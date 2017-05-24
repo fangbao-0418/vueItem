@@ -12,7 +12,7 @@
         <no-more :visible="nomore"></no-more>
       </loadmore>
       <div v-if="!postItems.length" class="empty">
-        <div class="text">还没有发帖纪录哦</div>
+        <div class="text">还没有发帖记录哦</div>
       </div>
     </scroll-wrapper>
   </div>
