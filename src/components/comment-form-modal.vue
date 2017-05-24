@@ -24,6 +24,7 @@
 <script>
   import bus from '../bus'
   import { Toast } from 'mint-ui'
+  import { wlb, api } from '../util'
   export default {
     props: {
       id: {
@@ -95,6 +96,16 @@
               message: '用户未登录，请登陆后进行评论',
               duration: 1500
             })
+            setTimeout(() => {
+              wlb.ready({
+                app: function (mixins) {
+                  mixins.loginApp({ refresh: 1, url: '' })
+                },
+                other: function () {
+                  window.location.href = api.host + '/wechat/verify'
+                }
+              })
+            }, 1000)
             // this.$rulemodal.show({ content: '用户未登录，请登陆后进行评论', style: 'text-align: center' })
           } else {
             var msg = res.data.error.message

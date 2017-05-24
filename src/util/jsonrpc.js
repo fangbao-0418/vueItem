@@ -13,9 +13,7 @@ import axios from 'axios'
 // import { Http } from 'vue-resource'
 
 import { ruleModal, loading } from '../plugins'
-import wlb from './webview'
-import api from './api'
-import router from '../router'
+// import router from '../router'
 import * as Fn from './global.func'
 var pass = 'wlh5_H5~h5#H5'
 var clientMask = '7005'
@@ -37,23 +35,24 @@ axios.interceptors.response.use(function (response) {
     var message = response.data.error.message
     console.log(code, 'code')
     if (code === 4004) {
-      ruleModal.show(false)
-      console.log(router, 'router')
-      setTimeout(() => {
-        wlb.ready({
-          app: function (mixins) {
-            mixins.loginApp({ refresh: 1, url: '' })
-          },
-          other: function () {
-            // router.replace({
-            //   name: 'index'
-            // })
-            if (router.app.$route.name !== 'index') {
-              window.location.href = api.host + '/wechat/verify?next=' + window.location.href + '?source=app'
-            }
-          }
-        })
-      }, 1000)
+      // ruleModal.show(false)
+      // console.log(router, 'router')
+      // setTimeout(() => {
+      //   wlb.ready({
+      //     app: function (mixins) {
+      //       mixins.loginApp({ refresh: 1, url: '' })
+      //     },
+      //     other: function () {
+      //       // router.replace({
+      //       //   name: 'index'
+      //       // })
+      //       if (router.app.$route.name === 'index') {
+      //
+      //       }
+      //       //
+      //     }
+      //   })
+      // }, 1000)
     } else {
       if (message) {
         ruleModal.show({ title: '系统提示', content: message, style: 'text-align: center' })
