@@ -23,7 +23,6 @@
 </template>
 <script>
   import bus from '../bus'
-  import { wlb, api } from '../util'
   import { Toast } from 'mint-ui'
   export default {
     props: {
@@ -97,16 +96,6 @@
               duration: 1500
             })
             // this.$rulemodal.show({ content: '用户未登录，请登陆后进行评论', style: 'text-align: center' })
-            setTimeout(() => {
-              wlb.ready({
-                app: function (mixins) {
-                  mixins.loginApp({ refresh: 1, url: '' })
-                },
-                other: function () {
-                  window.location.href = api.host + '/wechat/verify'
-                }
-              })
-            }, 1000)
           } else {
             var msg = res.data.error.message
             Toast({

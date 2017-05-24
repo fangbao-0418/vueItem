@@ -13,6 +13,8 @@ import axios from 'axios'
 // import { Http } from 'vue-resource'
 
 import { ruleModal, loading } from '../plugins'
+import wlb from './webview'
+import api from './api'
 import router from '../router'
 import * as Fn from './global.func'
 var pass = 'wlh5_H5~h5#H5'
@@ -36,9 +38,18 @@ axios.interceptors.response.use(function (response) {
     console.log(code, 'code')
     if (code === 4004) {
       ruleModal.show(false)
+      console.log(router, 'router')
       setTimeout(() => {
-        console.log(router, 'router')
-        router.replace({ name: 'index' })
+        setTimeout(() => {
+          wlb.ready({
+            app: function (mixins) {
+              mixins.loginApp({ refresh: 1, url: '' })
+            },
+            other: function () {
+              window.location.href = api.host + '/wechat/verify?next=' + window.location.href + '?source=app'
+            }
+          })
+        }, 1000)
       }, 1000)
     } else {
       if (message) {
