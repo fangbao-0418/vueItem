@@ -43,7 +43,7 @@
             mixins.loginApp({ refresh: 1, url: '' })
           },
           other: function () {
-            window.location.href = api.host + '/wechat/verify'
+            window.location.href = api.host + '/wechat/verify?next=/bbs?source=app'
           }
         })
       }
