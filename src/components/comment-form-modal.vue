@@ -80,7 +80,7 @@
           }]
         }).then((res) => {
           this.publicEnd = true
-          // this.content = ''
+          this.content = ''
           if (res.data.result && res.data.result.code === 0) {
             if (res.data.result) {
               Toast({
