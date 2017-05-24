@@ -40,16 +40,19 @@ axios.interceptors.response.use(function (response) {
       ruleModal.show(false)
       console.log(router, 'router')
       setTimeout(() => {
-        setTimeout(() => {
-          wlb.ready({
-            app: function (mixins) {
-              mixins.loginApp({ refresh: 1, url: '' })
-            },
-            other: function () {
+        wlb.ready({
+          app: function (mixins) {
+            mixins.loginApp({ refresh: 1, url: '' })
+          },
+          other: function () {
+            // router.replace({
+            //   name: 'index'
+            // })
+            if (router.app.$route.name !== 'index') {
               window.location.href = api.host + '/wechat/verify?next=' + window.location.href + '?source=app'
             }
-          })
-        }, 1000)
+          }
+        })
       }, 1000)
     } else {
       if (message) {
