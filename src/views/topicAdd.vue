@@ -85,8 +85,7 @@
             setTimeout(() => {
               wlb.ready({
                 app: function (mixins) {
-                  // mixins.loginApp({ refresh: 1, url: window.location.href + '' })
-                  mixins.loginApp({ refresh: 1, url: 'https://php1.wanglibao.com/app/explore' })
+                  mixins.loginApp({ refresh: 1, url: window.location.href + '' })
                 },
                 other: function () {
                   window.location.href = api.host + '/wechat/verify?next=' + window.location.href + '?source=app'
