@@ -188,4 +188,7 @@
             font-size: .3rem
             color: #013047
             line-height: .42rem
+            white-space: pre-wrap
+            word-wrap: break-word
+            overflow: hidden
 </style>
