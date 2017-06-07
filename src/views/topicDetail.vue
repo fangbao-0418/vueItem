@@ -59,14 +59,17 @@
           id: this.id
         }]
       }).then((res) => {
-        if (res.data.result.code === 0 && res.data.result.data) {
+        if (res.data.result && res.data.result.code === 0 && res.data.result.data) {
           this.loaded = true
           this.item = res.data.result.data
           this.options = {
             content: this.$filters.msubstring(this.item.content, 0, 64)
           }
         } else {
-          this.$router.replace({ name: 'index' })
+          setTimeout(() => {
+            this.$rulemodal.show(false)
+            this.$router.replace({ name: 'index' })
+          }, 1000)
         }
         this.$plugin.loading.show(false)
       })
