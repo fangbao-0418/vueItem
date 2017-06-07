@@ -47,6 +47,7 @@
         this.active = val
       },
       active (val) {
+        console.log(val, 'active change')
         var node = this.$refs['tab-container'].$children
         for (var i in node) {
           if (val === node[i]['id']) {

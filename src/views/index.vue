@@ -6,15 +6,15 @@
     <div class="container mt-20">
       <wlb-tab-container :initial-nav-bar-options="initialNavBarOptions" :initial-active="initialActive">
         <tab-container-item :key="index" :id="tabId(index)" :class="'tab-container'+parseInt(parseInt(index)+1)" v-for="(item, index) in initialNavBarOptions">
-          <loadmore v-if="(ThreadTopList[index] && ThreadTopList[index].length) || (ThreadList[index] && ThreadList[index].length)" :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded[index]" :ref="'loadmore_'+index">
+          <loadmore v-if="ThreadList.length > 0 && ThreadList[index].length > 0" :cb-load-top="loadTop" :cb-load-bottom="loadBottom" :all-loaded="allLoaded[index]" :ref="'loadmore_'+index">
             <div v-if="ThreadTopList[index] && ThreadTopList[index].length">
               <title-bar-one :options="{title:item.title, more: ThreadTopList[index].length >= 2 ? '更多' : null, targetUrl: {name: 'activities', params: { id: item.id}}}"></title-bar-one>
               <slider-block-one :data="ThreadTopList[index]"></slider-block-one>
             </div>
-            <topic-item v-if="ThreadList[index] && ThreadList[index].length" :data="ThreadList[index]"></topic-item>
+            <topic-item v-if="ThreadList[index].length > 0" :data="ThreadList[index]"></topic-item>
           </loadmore>
-          <no-more v-if="ThreadList[index].length > 0" :visible="allLoaded[index]"></no-more>
-          <div class="no-topic" v-if="homeDataLoaded[index] && ThreadTopList[index].length === 0 && ThreadList[index].length == 0">
+          <no-more v-if="ThreadList.length > 0 && ThreadList[index].length > 0" :visible="allLoaded[index]"></no-more>
+          <div class="no-topic" v-if="ThreadList.length > 0 && homeDataLoaded[index] && ThreadTopList[index].length === 0 && ThreadList[index].length == 0">
             <img src="../imgs/no-topic-icon.png" alt="">
             <span class="mt-16">还没有内容哦</span>
           </div>
@@ -73,7 +73,7 @@ export default {
     }
   },
   created () {
-    // alert('index created')
+    console.log('fetchBbsHomeData start')
     this.$store.dispatch('fetchBbsHomeData')
   },
   mounted () {
@@ -98,6 +98,7 @@ export default {
     },
     loadBottom () {
       var that = this
+      console.log('loadBottom', this.currentIndex, that.allLoaded[that.currentIndex])
       if (this.$refs['loadmore_' + this.currentIndex]) {
         if (that.allLoaded[that.currentIndex] === false) {
           this.$store.dispatch('bbsHomePageSetLoaded', false)

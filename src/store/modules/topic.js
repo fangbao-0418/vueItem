@@ -26,7 +26,6 @@ const getters = {
       console.log(item, i)
       arr = arr.concat(item)
     }
-    console.log(state.topicBoards, arr, 'arr')
     return arr
   },
   initialActive (state) {
@@ -80,7 +79,7 @@ const actions = {
     // if (state.homeDataLoaded[state.navbar_select_index]) {
     //   return
     // }
-
+    commit(types.FETCH_BBS_HOME_DATA, {ThreadTopList: [], ThreadList: []})
     loading.show(true, 'full')
     dispatch('fetchLoginStatus') // 获取登录状态
     // 获取板块
@@ -116,7 +115,7 @@ const actions = {
         }
         if (res[1].data.result) {
           // 当前页数大于最大页数 设置allLoaded
-
+          console.log(state.bbsHomeCurrentPageInfo[state.navbar_select_index], res[1].data.result.data.last_page, '当前页／总页数')
           if (state.bbsHomeCurrentPageInfo[state.navbar_select_index] >= res[1].data.result.data.last_page) {
             commit(types.SET_BBS_HOME_ALL_LOADED_INFO, { k: state.navbar_select_index, v: true })
           } else {
@@ -139,6 +138,8 @@ const actions = {
   },
   // 更新帖子列表数据
   updateTopicListData ({ state, commit }, params = {}) {
+    console.log('更新帖子列表')
+    console.log(state.ThreadList, 'ThreadList')
     // 已经加载过是否重新加载
     // if (state.homeDataLoaded[state.navbar_select_index]) {
     //   return
@@ -218,6 +219,7 @@ const mutations = {
     state.initial_active = 'tab-container' + (parseInt(index) + 1)
   },
   [types.FETCH_BBS_HOME_DATA] (state, data) {
+    console.log(data, 'FETCH_BBS_HOME_DATA')
     state.ThreadTopList = data['ThreadTopList']
     state.ThreadList = data['ThreadList']
   },
