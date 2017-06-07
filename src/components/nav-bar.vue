@@ -7,12 +7,20 @@
 </template>
 <script>
   import Swiper from 'swiper'
+  import { mapState } from 'vuex'
   export default {
     props: {
       navBarOptions: {
         type: Array,
         required: true
       }
+    },
+    computed: {
+      ...mapState({
+        index (state) {
+          return state.topic['navbar_select_index']
+        }
+      })
     },
     mounted () {
       var swiper = Swiper('.nav-bar', {
@@ -26,6 +34,7 @@
         freeModeMomentum: false, // free模式动量。free模式下，若设置为false则关闭动量，释放slide之后立即停止不会滑动。
         preloadImages: false // 默认为true，Swiper会强制加载所有图片。
       })
+      swiper.slideTo(this.index, 1000, false) // 切换到第一个slide，速度为1秒
       console.log(swiper)
     },
     methods: {

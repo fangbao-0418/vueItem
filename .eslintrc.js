@@ -1,5 +1,5 @@
 // http://eslint.org/docs/user-guide/configuring
-
+var argv = require('yargs').argv;
 module.exports = {
   root: true,
   parser: 'babel-eslint',
@@ -23,7 +23,7 @@ module.exports = {
     // allow async-await
     'generator-star-spacing': 0,
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    'no-debugger': argv.env.trim() === 'production' ? 2 : 0,
     'no-eval': 0
   }
 }
