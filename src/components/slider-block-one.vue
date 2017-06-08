@@ -78,6 +78,8 @@
         position: relative
         overflow: hidden
         margin: auto .1rem
+        background: url('../imgs/banner_defult_big.png') no-repeat
+        background-size: 100% 100%
         .tags
           position: absolute
           left: -.08rem
