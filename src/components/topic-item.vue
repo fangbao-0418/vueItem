@@ -7,7 +7,7 @@
       <div class="topic-avatar"><img :src="item.user.head_img" v-lazyload="{ placeholder: require('../imgs/avatar_defult_big.png') }" /></div>
       <div class="topic-main">
         <p class="topic-tit">{{item.user.nickname}}</p>
-        <p class="topic-ago">{{item.created_at | handleDate}}</p>
+        
         <p class="topic-content">{{item.content | msubstring(0, 320)}}</p>
         <div class="topic-comment">
           <p class="topic-comment-item mt-20" v-if="item.comments" v-for="(comment, index2) in item.comments">
@@ -36,6 +36,9 @@
       type: {
         type: String
       }
+    },
+    created () {
+      console.log(this.data, 'data')
     },
     components: {
       TopicTags
