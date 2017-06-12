@@ -3,12 +3,15 @@
  */
 <template>
   <div class="view">
-    <wlb-header :options="{ title: boardName }">
+    <wlb-header :options="{ title: boardName }" style="position: absolute; top: 0; width: 100%; height: .96rem;">
     </wlb-header>
-    <textarea ref="textarea" class="topic-text-content" v-model="content" placeholder="请输入发帖内容"></textarea>
-    <div class="topic-footer">
-      <span class="residue">你还可以输入{{num}}字</span>
-      <div @click="toPublic" :class="['btn', { disable: !publicEnd || !content }]"><span>{{publicEnd ? '发表' : '发表中...'}}</span></div>
+    <div class="scroll-view">
+      <div style="height: 10  .96rem"></div>
+      <textarea ref="textarea" class="topic-text-content" v-model="content" placeholder="请输入发帖内容"></textarea>
+      <div class="topic-footer">
+        <span class="residue">你还可以输入{{num}}字</span>
+        <div @click="toPublic" :class="['btn', { disable: !publicEnd || !content }]"><span>{{publicEnd ? '发表' : '发表中...'}}</span></div>
+      </div>
     </div>
   </div>
 </template>
@@ -118,12 +121,30 @@
 </script>
 <style lang="sass" scoped>
   .view
+    left: 0
+    top: 0
+    position: absolute
+    z-index: 0
+    display: block
+    width: 100%
+    height: 100%
     background: #fff
-    flex: 1
     .disable
       background-color: #E5E5E5 !important
       span
         color: #ffffff !important
+    .scroll-view
+      margin-top: .96rem
+      position: absolute
+      top: 0
+      bottom: 0
+      left: 0
+      overflow-x: hidden
+      overflow-y: scroll
+      right: 0
+      -webkit-overflow-scrolling: touch
+      will-change: scroll-position
+      contain: size style layout
     .topic-text-title
       width: 6.9rem
       padding: 0 .3rem

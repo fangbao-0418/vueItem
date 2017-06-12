@@ -4,7 +4,7 @@
   "description": "网利社区",
   "main": "src/app.js",
   "scripts": {
-    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --inline --progress --watch --colors --env 'development'",
+    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot --inline --progress --watch --colors --env",
     "lint": "eslint --color --ext .js,.vue src",
     "build": "rimraf dist && webpack --progress --colors --env 'production'"
   },

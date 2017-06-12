@@ -35,6 +35,7 @@ const PersonTopics = resolve => require(['../views/personTopics'], resolve)
 const PersonTask = resolve => require(['../views/personTask'], resolve)
 const Activities = resolve => require(['../views/activityList'], resolve)
 const ActivityDetail = resolve => require(['../views/activityDetail'], resolve)
+const Demo = resolve => require(['../views/demo'], resolve)
 
 Vue.use(VueRouter) // 安装路由
 
@@ -86,6 +87,7 @@ const routerConfig = {
     {path: '/person/topics', name: 'personTopics', component: PersonTopics, beforeEnter: requireAuth},
     {path: '/person/task', name: 'personTask', component: PersonTask, beforeEnter: requireAuth},
     {path: '/person/infoedit', name: 'personInfoEdit', component: PersonInfoEdit, beforeEnter: requireAuth},
+    {path: '/demo', name: 'demo', component: Demo},
     {path: '*', redirect: { name: 'index' }}
   ]
 }

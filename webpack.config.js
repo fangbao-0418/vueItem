@@ -8,7 +8,8 @@ function resolve (dir) {
   return path.resolve(__dirname, dir);
 }
 var isPro = argv.env.trim() === 'production';
-var needHandleDir = [resolve('src'), resolve('node_modules/vuex'), resolve('node_modules/jquery'), resolve('node_modules/vue-resource')]
+var needHandleDir = [resolve('src'), resolve('node_modules/vuex'), resolve('node_modules/jquery'), resolve('node_modules/vue-resource')];
+var cdn_origin = "http://127.0.0.1:3001/";
 var plugins = [
   new webpack.DefinePlugin({
     'process.env': {
@@ -91,8 +92,8 @@ module.exports = {
 	entry: ['babel-polyfill', resolve('src/app.js')],
 	output:{
 		path: isPro ? resolve("dist/assets") : resolve("dist"),
-    publicPath: isPro ? "/bbs/assets/" : "",
-    filename: isPro ? 'js/[name].[chunkhash].js' : '[name].[hash].js',
+    publicPath: isPro ? cdn_origin + 'assets/' : "",
+    filename: isPro ? 'js/[name].[hash].js' : '[name].[hash].js',
     chunkFilename: isPro ? 'js/[name].[chunkhash].js' : '[name].[chunkhash].js'
 	},
 	module:{
@@ -161,7 +162,7 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 10000,
+          limit: 1,
           name: isPro ? 'imgs/[name].[hash:7].[ext]' : '[name].[hash:7].[ext]'
         }
       },
@@ -189,8 +190,8 @@ module.exports = {
 		},
 		// 启用gzip压缩一切服务:
 		// compress: true,
-		host: "0.0.0.0",
-    // host: "192.168.10.75",
+		// host: "0.0.0.0",
+    host: "192.168.11.110",
     port: "3001"
 	},
 	resolve: {
