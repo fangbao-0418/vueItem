@@ -21,6 +21,7 @@ import NoMore from './no-more'
 import ShareIcon from './share-icon'
 import CommentList from './comment-list' // 评论列表
 import ScrollWrapper from './scroll-wrapper'
+import OnlineAirlines from './online-airlines' // 在线客服
 export {
   WlbHeader,
   UserBrieflyShow,
@@ -44,5 +45,6 @@ export {
   NoMore,
   ShareIcon,
   CommentList,
-  ScrollWrapper
+  ScrollWrapper,
+  OnlineAirlines
 }

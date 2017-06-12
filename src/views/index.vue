@@ -24,10 +24,11 @@
     </div>
   </scroll-wrapper>
   <public-comment-icon></public-comment-icon>
+  <online-airlines></online-airlines>
 </div>
 </template>
 <script>
-import { ScrollWrapper, UserBrieflyShow, WlbHeader, WlbTabContainer, TopicItem, PublicCommentIcon, TitleBarOne, SliderBlockOne, Loadmore, NoMore } from '../components'
+import { ScrollWrapper, UserBrieflyShow, WlbHeader, WlbTabContainer, TopicItem, PublicCommentIcon, TitleBarOne, SliderBlockOne, Loadmore, NoMore, OnlineAirlines } from '../components'
 import { TabContainerItem } from 'mint-ui'
 import { mapState, mapGetters } from 'vuex'
 export default {
@@ -42,7 +43,8 @@ export default {
     TitleBarOne,
     SliderBlockOne,
     Loadmore,
-    NoMore
+    NoMore,
+    OnlineAirlines
   },
   computed: {
     ...mapGetters({

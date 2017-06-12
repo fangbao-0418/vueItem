@@ -206,6 +206,12 @@ const wlb = (function () {
       this.bridge.callHandler('touchClose', function (response) {
         callback && callback(response)
       })
+    },
+    /* 跳到在线客服 */
+    jumpToOnLineAirlines: function (callback) {
+      this.bridge.callHandle('jumpToOnLineAirlines', function (response) {
+        callback && callback(response)
+      })
     }
     /* 呼出软键盘 */
     // openKeyboard: function (callback) {
