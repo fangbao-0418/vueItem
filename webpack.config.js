@@ -191,13 +191,14 @@ module.exports = {
 		// 启用gzip压缩一切服务:
 		// compress: true,
 		// host: "0.0.0.0",
-    host: "192.168.11.110",
+    host: "192.168.10.113",
     port: "3001"
 	},
 	resolve: {
 		extensions: ['.vue','.js','.css','.sass','.scss'],
 		alias: {
     	'vue$': 'vue/dist/vue.esm.js',
+      'lib': path.resolve(__dirname, 'lib')
   	}
 	},
 	plugins: plugins,
