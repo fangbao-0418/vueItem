@@ -2,6 +2,7 @@ import * as plugins from '../plugins'
 import { api, http, consts } from '../util'
 import * as filters from '../filters'
 import * as directives from '../directives'
+import axios from 'axios'
 function on (type, fn) {
   const el = this.$el
   if (el.attachEvent) {
@@ -20,6 +21,7 @@ export default {
     Vue.prototype.$plugin = plugins
     Vue.prototype.$http = http
     Vue.prototype.$api = api
+    Vue.prototype.$ajax = axios
     Vue.prototype.$const = consts
     Vue.prototype.$filters = filters
   }

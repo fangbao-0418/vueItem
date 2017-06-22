@@ -23,7 +23,7 @@ module.exports = {
     // allow async-await
     'generator-star-spacing': 0,
     // allow debugger during development
-    'no-debugger': argv.env.trim() === 'production' ? 2 : 0,
+    'no-debugger': typeof argv.env === "string" && argv.env.trim() === 'production' ? 2 : 0,
     'no-eval': 0
   }
 }

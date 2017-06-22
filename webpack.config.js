@@ -4,10 +4,11 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');//html模板插入代码�
 var ExtractTextPlugin = require("extract-text-webpack-plugin");//将组件中的样式提取出来。
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 var argv = require('yargs').argv;
+argv.env = typeof argv.env === "string" ? argv.env.trim() : 'development';
 function resolve (dir) {
   return path.resolve(__dirname, dir);
 }
-var isPro = argv.env.trim() === 'production';
+var isPro = argv.env === 'production';
 var needHandleDir = [resolve('src'), resolve('node_modules/vuex'), resolve('node_modules/jquery'), resolve('node_modules/vue-resource')];
 var cdn_origin = "http://127.0.0.1:3001/";
 var plugins = [
@@ -19,9 +20,9 @@ var plugins = [
   //给输出的文件头部添加注释信息。
   new webpack.BannerPlugin('This file is created by fangbao'),
   new ExtractTextPlugin({
-    filename: isPro ? 'css/[name].[contenthash].css' : '[name].[contenthash].css',
-    //disable: false,
-    allChunks: true
+    filename: isPro ? 'css/[name].[contenthash].css' : '[name].[contenthash].css'
+    // disable: false,
+    // allChunks: true
   }),
   new HtmlWebpackPlugin({
     template: './src/index.html',
@@ -71,11 +72,14 @@ var plugins = [
 
 if(isPro){
   plugins = Array.prototype.concat.call(plugins,[
-    new OptimizeCSSPlugin({
-      cssProcessorOptions: {
-        safe: true
-      }
-    }),
+    // new OptimizeCSSPlugin({
+    //   cssProcessor: require('cssnano'),
+    //   cssProcessorOptions: {
+    //     // discardComments: {removeAll: true},
+    //     safe: true
+    //   },
+    //   canPrint: true
+    // }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
@@ -89,9 +93,9 @@ if(isPro){
 }
 
 module.exports = {
-	entry: ['babel-polyfill', resolve('src/app.js')],
-	output:{
-		path: isPro ? resolve("dist/assets") : resolve("dist"),
+  entry: ['babel-polyfill', resolve('src/app.js')],
+  output:{
+    path: isPro ? resolve("dist/assets") : resolve("dist"),
     publicPath: isPro ? cdn_origin + 'assets/' : "",
     filename: isPro ? 'js/[name].[hash].js' : '[name].[hash].js',
     chunkFilename: isPro ? 'js/[name].[chunkhash].js' : '[name].[chunkhash].js'
@@ -147,14 +151,21 @@ module.exports = {
               }
             }
           ]
-        })
+        }),
+        include: path.resolve(__dirname, 'src')
       },
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
-            'css-loader'
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                // exclude: path.resolve(__dirname, 'lib')
+              }
+            }
           ]
         })
       },
@@ -190,9 +201,32 @@ module.exports = {
 		},
 		// 启用gzip压缩一切服务:
 		// compress: true,
-		// host: "0.0.0.0",
-    host: "192.168.10.113",
-    port: "3001"
+		host: "0.0.0.0",
+    // host: "192.168.10.159",
+    port: "3001",
+    headers: {
+      "X-Custom-Foo": "bar"
+    },
+    historyApiFallback: true,
+    proxy: {
+      '/api': {
+        target: 'http://47.93.144.246/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': '/'
+        },
+        bypass: function(req, res, proxyOptions) {
+          console.log(req)
+          if (req.headers.accept.indexOf("html") !== -1) {
+            console.log("Skipping proxy for browser request.");
+            // return "/index.html";
+          }
+          res.on('finish', function(){
+            console.log(res, 'res finish');
+          })
+        }
+      }
+    }
 	},
 	resolve: {
 		extensions: ['.vue','.js','.css','.sass','.scss'],

@@ -9,10 +9,19 @@
   </div>
 </template>
 <script>
-  import 'lib/mui/js/mui.min.js'
   import { Header } from 'mint-ui'
   export default {
     created () {
+      this.$ajax({
+        url: '../api/psp-web/psp/file/v1/getVCode',
+        method: 'get',
+        params: {
+          w: '100',
+          h: '35'
+        }
+      }).then((res) => {
+        console.log(res)
+      })
       console.log('vue created')
       console.log(window.mui)
       // window.mui.init({
