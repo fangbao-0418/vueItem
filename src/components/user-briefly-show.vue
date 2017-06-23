@@ -9,7 +9,9 @@
       </div>
       <p class="user-nick">{{userInfo.nickname}}</p>
       <div v-if="userInfo.restAward > 0" class="user-remind">
-        <p>还有{{userInfo.restAward}}元体验金未领取 |</p><router-link :to="{name: 'personTask'}" tag="span"> 去领取</router-link>
+
+        <!-- <p>还有{{userInfo.restAward}}元体验金未领取 |</p><router-link :to="{name: 'personTask'}" tag="span"> 去领取</router-link> -->
+
       </div>
       <div v-else class="user-remind">
         <p>您的体验金已领完</p>

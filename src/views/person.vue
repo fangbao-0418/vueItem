@@ -28,6 +28,7 @@ export default {
   },
   data () {
     return {
+      // 紧急bug去掉我的任务
       items: [{
         code: 'MY-NEWS',
         title: '我的消息',
@@ -38,12 +39,24 @@ export default {
         title: '我的帖子',
         flag: 'my-post',
         to: {name: 'personTopics'}
-      }, {
-        code: 'MY-TASK',
-        title: '我的任务',
-        flag: 'my-task',
-        to: {name: 'personTask'}
       }]
+
+      // items: [{
+      //   code: 'MY-NEWS',
+      //   title: '我的消息',
+      //   flag: 'my-message',
+      //   to: {name: 'personNews'}
+      // }, {
+      //   code: 'MY-POST',
+      //   title: '我的帖子',
+      //   flag: 'my-post',
+      //   to: {name: 'personTopics'}
+      // }, {
+      //   code: 'MY-TASK',
+      //   title: '我的任务',
+      //   flag: 'my-task',
+      //   to: {name: 'personTask'}
+      // }]
     }
   },
   created () {

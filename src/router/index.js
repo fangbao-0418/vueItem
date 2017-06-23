@@ -32,7 +32,8 @@ const Person = resolve => require(['../views/person'], resolve)
 const PersonInfoEdit = resolve => require(['../views/personInfoEdit'], resolve)
 const PersonNews = resolve => require(['../views/personNews'], resolve)
 const PersonTopics = resolve => require(['../views/personTopics'], resolve)
-const PersonTask = resolve => require(['../views/personTask'], resolve)
+// 紧急bug去掉我的任务
+// const PersonTask = resolve => require(['../views/personTask'], resolve)
 const Activities = resolve => require(['../views/activityList'], resolve)
 const ActivityDetail = resolve => require(['../views/activityDetail'], resolve)
 
@@ -84,7 +85,8 @@ const routerConfig = {
     {path: '/person', name: 'person', component: Person, beforeEnter: requireAuth},
     {path: '/person/news', name: 'personNews', component: PersonNews, beforeEnter: requireAuth},
     {path: '/person/topics', name: 'personTopics', component: PersonTopics, beforeEnter: requireAuth},
-    {path: '/person/task', name: 'personTask', component: PersonTask, beforeEnter: requireAuth},
+    // 紧急bug去掉我的任务
+    // {path: '/person/task', name: 'personTask', component: PersonTask, beforeEnter: requireAuth},
     {path: '/person/infoedit', name: 'personInfoEdit', component: PersonInfoEdit, beforeEnter: requireAuth},
     {path: '*', redirect: { name: 'index' }}
   ]
