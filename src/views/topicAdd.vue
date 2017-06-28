@@ -27,15 +27,36 @@
         content: '',
         num: 500,
         publicEnd: true,
-        open: false
-      }
-    },
-    computed: {
-      boardName () {
-        return this.$route.params.name
+        open: false,
+        ThreadSectionList: [],
+        boardName: ''
       }
     },
     created () {
+      this.$plugin.loading.show(true, 'full')
+      this.$http({
+        url: this.$api.api_list,
+        method: 'getBbsThreadSectionList',
+        params: [{}]
+      }).then((res) => {
+        this.$plugin.loading.show(false)
+        if (res.data.result.data) {
+          for (let i in res.data.result.data) {
+            this.ThreadSectionList[res.data.result.data[i]['id']] = res.data.result.data[i]
+          }
+          if (!this.ThreadSectionList[this.$route.params.id] || !this.ThreadSectionList[this.$route.params.id].name) {
+            this.$router.replace({
+              name: 'index'
+            })
+          } else {
+            this.boardName = this.ThreadSectionList[this.$route.params.id].name
+          }
+        } else {
+          this.$router.replace({
+            name: 'index'
+          })
+        }
+      })
       if (!this.$route.params.id) {
         this.$router.replace({
           name: 'index'
@@ -136,6 +157,7 @@
       border-bottom: 1px solid #E5E5E5
     .topic-text-content
       background-attachment: fixed
+      background-color: #FFFFFF
       resize: none
       outline: none
       display: block

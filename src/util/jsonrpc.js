@@ -13,6 +13,7 @@ import axios from 'axios'
 // import { Http } from 'vue-resource'
 
 import { ruleModal, loading } from '../plugins'
+
 // import router from '../router'
 import * as Fn from './global.func'
 var pass = 'wlh5_H5~h5#H5'
@@ -55,7 +56,11 @@ axios.interceptors.response.use(function (response) {
       // }, 1000)
     } else {
       if (message) {
-        ruleModal.show({ title: '系统提示', content: message, style: 'text-align: center' })
+        // Toast({
+        //   message: message,
+        //   duration: 1500
+        // })
+        // ruleModal.show({ title: '系统提示', content: message, style: 'text-align: center' })
       } else {
         ruleModal.show({ title: '系统提示', content: '请求服务异常，错误未知', style: 'text-align: center' })
       }
