@@ -156,7 +156,8 @@
     .line
       border-bottom: 1px solid #E5E5E5
     .topic-text-content
-      // background-attachment: fixed
+      background-attachment: fixed
+      background-color: #FFFFFF
       resize: none
       outline: none
       display: block
