@@ -93,7 +93,7 @@
 .box
   width: 100%
   height: .96rem
-  background: -webkit-linear-gradient(top, #005CCC, #0083FF)
+  background: #10a6e2
   overflow: hidden
   position: absolute
   z-index: 999
