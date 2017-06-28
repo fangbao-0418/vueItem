@@ -106,7 +106,8 @@
             setTimeout(() => {
               wlb.ready({
                 app: function (mixins) {
-                  mixins.loginApp({ refresh: 1, url: window.location.href + '' })
+                  var time = new Date().getTime()
+                  mixins.loginApp({ refresh: 1, url: window.location.href + '?t=' + time })
                 },
                 other: function () {
                   window.location.href = api.host + '/wechat/verify?next=' + window.location.href + '?source=app'
