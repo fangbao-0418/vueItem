@@ -84,7 +84,7 @@
           if (res.data.result && res.data.result.code === 0) {
             if (res.data.result) {
               Toast({
-                message: '评论提交成功，请等待后台审核',
+                message: res.data.result.message,
                 duration: 1500
               })
               // this.$rulemodal.show({ content: '评论提交成功，请等待后台审核', style: 'text-align: center' })

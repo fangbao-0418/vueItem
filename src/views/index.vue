@@ -11,7 +11,7 @@
               <title-bar-one :options="{title:item.title, more: ThreadTopList[index].length >= 2 ? '更多' : null, targetUrl: {name: 'activities', params: { id: item.id}}}"></title-bar-one>
               <slider-block-one :data="ThreadTopList[index]"></slider-block-one>
             </div>
-            <topic-item v-if="ThreadList[index].length > 0" :data="ThreadList[index]"></topic-item>
+            <topic-item v-if="ThreadList[index] && ThreadList[index].length > 0" :data="ThreadList[index]"></topic-item>
           </loadmore>
           <no-more v-if="ThreadList.length > 0 && ThreadList[index].length > 0" :visible="allLoaded[index]"></no-more>
           <div class="no-topic" v-if="ThreadList.length > 0 && homeDataLoaded[index] && ThreadTopList[index].length === 0 && ThreadList[index].length === 0">
