@@ -5,6 +5,7 @@ import cookie from 'js-cookie'
 import router from './router' // 路由配置文件
 import store from './store'
 import plugins from './plugins/install' // 全局插件
+import { ruleModal } from './plugins'
 import './util/common' // 执行全局方法
 import { wlb } from './util'
 
@@ -28,6 +29,9 @@ router.beforeEach((to, from, next) => {
       next()
     }
   })
+})
+router.afterEach(route => {
+  ruleModal.show(false)
 })
 new Vue({
   router,
