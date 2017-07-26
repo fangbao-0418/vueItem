@@ -91,7 +91,7 @@ module.exports = {
 	entry: ['babel-polyfill', resolve('src/app.js')],
 	output:{
 		path: isPro ? resolve("dist/assets") : resolve("dist"),
-    publicPath: isPro ? "/bbs/assets/" : "",
+    publicPath: isPro ? "/" : "",
     filename: isPro ? 'js/[name].[chunkhash].js' : '[name].[hash].js',
     chunkFilename: isPro ? 'js/[name].[chunkhash].js' : '[name].[chunkhash].js'
 	},

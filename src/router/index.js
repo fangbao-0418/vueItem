@@ -13,7 +13,7 @@ function requireAuth (to, from, next) {
 const isPro = process.env.NODE_ENV.trim() === 'production'
 const routerConfig = {
   mode: isPro ? 'history' : 'hash',
-  base: '/bbs/',
+  base: '/',
   scrollBehavior (to, from, savedPosition) {
     return savedPosition || { x: 0, y: 0 }
   },
